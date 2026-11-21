@@ -1,7 +1,7 @@
 {
-  "name": "kemt-backend",
+  "name": "paog-backend",
   "version": "1.0.0",
-  "description": "Backend API for Kingdom Enlightenment Missions Team (KEMT) — handles events, contact forms, ministry teams, Bible study groups, and admin authentication.",
+  "description": "Backend API for Pentecostal Assemblies of God - Ngungo Assembly (Mbeere District Headquarters) — handles events, church leadership, members, attendance, and administration.",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -9,9 +9,10 @@
     "dev": "node --watch server.js"
   },
   "keywords": [
-    "kemt",
-    "kingdom-enlightenment",
-    "missions",
+    "paog",
+    "pentecostal-assemblies-of-god",
+    "ngungo-assembly",
+    "mbeere-district",
     "express",
     "nodejs",
     "api"

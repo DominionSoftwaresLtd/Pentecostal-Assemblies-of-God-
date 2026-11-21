@@ -336,7 +336,7 @@ app.post('/api/auth/login', (req, res) => {
   }
 
   // 1. Check Admin Credentials
-  const isAdminEmail = cleanEmail === 'info@kingdomenlightenment.org' || cleanEmail.endsWith('@kingdomenlightenment.org');
+  const isAdminEmail = cleanEmail === 'info@paogngungo.org' || cleanEmail.endsWith('@paogngungo.org') || cleanEmail === 'admin@paogngungo.org';
   if (isAdminEmail && bcrypt.compareSync(cleanPassword, ADMIN_PASSWORD_HASH)) {
     return res.json({
       success: true,
@@ -441,7 +441,7 @@ app.post('/api/members/signup', handleMemberSignup);
 app.get('/api/profile', (req, res) => {
   res.json({
     name: 'KEMT Administrator',
-    email: 'info@kingdomenlightenment.org',
+    email: 'info@paogngungo.org',
     role: 'Super Admin',
     profileImageUrl: '/kemt-favicon.jpg'
   });
@@ -509,7 +509,7 @@ app.post('/api/contact', async (req, res) => {
   messages.unshift(newMessage);
   saveMessages(messages);
 
-  const destinationEmail = process.env.CONTACT_EMAIL || 'info@kingdomenlightenment.org';
+  const destinationEmail = process.env.CONTACT_EMAIL || 'info@paogngungo.org';
   console.log(`[Contact Form - ${newMessage.category}] Received message from "${name}" <${email}>: "${newMessage.subject}"`);
 
   // 2. Dispatch email to team
@@ -1112,7 +1112,7 @@ app.put('/api/members/:id', async (req, res) => {
               </div>
               ${statusChanged && existing.status === 'Inactive' ? '<div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; color: #dc2626; font-size: 0.88rem;"><strong>⚠️ Account Deactivated:</strong> Your account has been set to Inactive. Contact the administrator at info@kingdomenlightenment.org for assistance.</div>' : ''}
               ${statusChanged && existing.status === 'Active' ? '<div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; color: #166534; font-size: 0.88rem;"><strong>✅ Account Activated:</strong> Your account is now active. You can log in and access your member portal.</div>' : ''}
-              <p style="color: #64748b; font-size: 0.85rem; line-height: 1.6; margin: 0;">If you believe this change was made in error or have any questions, please contact us at <a href="mailto:info@kingdomenlightenment.org" style="color: #E87D1E; font-weight: 600; text-decoration: none;">info@kingdomenlightenment.org</a> or call <strong>+254 714 476 295</strong>.</p>
+              <p style="color: #64748b; font-size: 0.85rem; line-height: 1.6; margin: 0;">If you believe this change was made in error or have any questions, please contact us at <a href="mailto:info@paogngungo.org" style="color: #E87D1E; font-weight: 600; text-decoration: none;">info@paogngungo.org</a> or call <strong>+254 720 140 213</strong>.</p>
             </div>
             <div style="background: #f8fafc; padding: 18px 36px; text-align: center; border-top: 1px solid #e2e8f0;">
               <p style="color: #94a3b8; font-size: 0.78rem; margin: 0;">© ${new Date().getFullYear()} Kingdom Enlightenment Missions Team • Nairobi, Kenya</p>
@@ -1831,15 +1831,13 @@ app.get('/api/attendance/reports', (req, res) => {
 // ── LEADERSHIP COUNCIL & GIVING MODULE ─────────────────────────────────────
 
 const INITIAL_LEADERSHIP = [
-  { _id: 'ldr-1', name: 'Vincent Mwendwa', role: 'Director', department: 'Executive Directorate', email: 'director@kingdomenlightenment.org', phone: '+254 714 476 295', initials: 'VM', color: '#e67e22', image: '/assets/Vincent Mwenda.jpeg', order: 1, status: 'Active Leadership' },
-  { _id: 'ldr-2', name: 'Morice Mutharimi', role: 'Chairperson', department: 'Executive Board', email: 'chair@kingdomenlightenment.org', phone: '+254 714 476 295', initials: 'MM', color: '#2980b9', image: '/assets/Mutharimi.jpg', order: 2, status: 'Active Leadership' },
-  { _id: 'ldr-3', name: 'Mwanzia David', role: 'Outreach Incharge', department: 'Outreach & Missions', email: 'outreach@kingdomenlightenment.org', phone: '+254 714 476 295', initials: 'MD', color: '#27ae60', image: '/assets/Mwanzia.jpg', order: 3, status: 'Active Leadership' },
-  { _id: 'ldr-4', name: 'Kennedy Mutuku', role: 'Digital Infrastructure Director', department: 'Digital Infrastructure', email: 'mutuku@gmail.com', phone: '+254 798 398 350', initials: 'KM', color: '#8e44ad', image: '/assets/Kennedy Mutuku.JPG', order: 4, status: 'Active Leadership' },
-  { _id: 'ldr-5', name: 'Evaline Mukami', role: 'Secretary', department: 'Secretariat', email: 'secretary@kingdomenlightenment.org', phone: '+254 714 476 295', initials: 'EM', color: '#16a085', image: '/assets/mukami.jpg', order: 5, status: 'Active Leadership' },
-  { _id: 'ldr-6', name: 'Grace Odina Kambaga', role: 'Treasurer', department: 'Finance & Treasury', email: 'treasury@kingdomenlightenment.org', phone: '+254 714 476 295', initials: 'GK', color: '#e74c3c', image: '/assets/odina.jpg', order: 6, status: 'Active Leadership' },
-  { _id: 'ldr-7', name: 'George William', role: 'Welfare Incharge', department: 'Welfare & Compassion', email: 'welfare@kingdomenlightenment.org', phone: '+254 714 476 295', initials: 'GW', color: '#2c3e50', image: '/assets/george.jpg', order: 7, status: 'Active Leadership' },
-  { _id: 'ldr-8', name: 'Raymond Ewoi', role: 'Prayer Coordinator', department: 'Prayer Department', email: 'prayer@kingdomenlightenment.org', phone: '+254 714 476 295', initials: 'RE', color: '#c0392b', image: '/assets/ray.jpg', order: 8, status: 'Active Leadership' },
-  { _id: 'ldr-9', name: 'Victor Muriungi', role: 'Worship Coordinator', department: 'Praise and Worship', email: 'worship@kingdomenlightenment.org', phone: '+254 714 476 295', initials: 'VM', color: '#d4ac0d', image: '', order: 9, status: 'Active Leadership' }
+  { _id: 'ldr-1', name: 'Bishop Rev Clement Simba', role: 'Bishop & District Overseer', department: 'District Leadership / Overseer', email: 'bishop@paogngungo.org', phone: '+254 720 140 213', initials: 'CS', color: '#e67e22', image: '', bio: 'Bishop Rev Clement Simba serves as the Bishop and District Overseer for Mbeere District, presiding over Ngungo Assembly Headquarters, Ngangari Assembly, and Muumoni Assembly.', order: 1, status: 'Active Leadership' },
+  { _id: 'ldr-2', name: 'Rev John Ngochi', role: 'District Secretary', department: 'District Executive', email: 'secretary@paogngungo.org', phone: '+254 720 140 213', initials: 'JN', color: '#2980b9', image: '', bio: 'Rev John Ngochi serves as District Secretary for Mbeere District and Minister in charge of Kathera Assembly.', order: 2, status: 'Active Leadership' },
+  { _id: 'ldr-3', name: 'Rev Shem Mugo', role: 'District Treasurer', department: 'District Executive', email: 'treasurer@paogngungo.org', phone: '+254 720 140 213', initials: 'SM', color: '#27ae60', image: '', bio: 'Rev Shem Mugo serves as District Treasurer for Mbeere District, overseeing financial stewardship.', order: 3, status: 'Active Leadership' },
+  { _id: 'ldr-4', name: 'John Matu', role: 'District Layman', department: 'District Committee', email: 'layman@paogngungo.org', phone: '+254 720 140 213', initials: 'JM', color: '#8e44ad', image: '', bio: 'John Matu serves as District Layman representing lay members across all Mbeere District assemblies.', order: 4, status: 'Active Leadership' },
+  { _id: 'ldr-5', name: 'Charles Njagi', role: 'District Clerk', department: 'District Secretariat', email: 'clerk@paogngungo.org', phone: '+254 720 140 213', initials: 'CN', color: '#16a085', image: '', bio: 'Charles Njagi serves as the District Clerk, managing official district records and documentation.', order: 5, status: 'Active Leadership' },
+  { _id: 'ldr-6', name: 'David Robert', role: 'Church Deacon', department: 'Ngungo Assembly Leadership', email: 'deacon@paogngungo.org', phone: '+254 720 140 213', initials: 'DR', color: '#e74c3c', image: '', bio: 'David Robert serves as Church Deacon at Pentecostal Assemblies of God - Ngungo Assembly Headquarters.', order: 6, status: 'Active Leadership' },
+  { _id: 'ldr-7', name: 'Michael Robert', role: 'Church Treasurer', department: 'Ngungo Assembly Leadership', email: 'treasury@paogngungo.org', phone: '+254 720 140 213', initials: 'MR', color: '#2c3e50', image: '', bio: 'Michael Robert serves as Church Treasurer at Ngungo Assembly Headquarters.', order: 7, status: 'Active Leadership' }
 ];
 
 const getLeadership = () => {
