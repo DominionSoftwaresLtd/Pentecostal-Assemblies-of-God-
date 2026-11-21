@@ -1,0 +1,2108 @@
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import multer from 'multer';
+import nodemailer from 'nodemailer';
+import path from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+import helmet from 'helmet';
+import bcrypt from 'bcryptjs';
+
+dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+// Security & Headers Middleware
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: 'cross-origin' },
+  contentSecurityPolicy: false,
+}));
+app.use(cors());
+app.use(express.json());
+
+// XSS Sanitizer helper
+const sanitize = (str) => {
+  if (typeof str !== 'string') return '';
+  return str
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;');
+};
+
+// Admin Password Hash (bcrypt with 10 rounds)
+const ADMIN_PASSWORD_HASH = process.env.ADMIN_PASSWORD_HASH || bcrypt.hashSync('KEMTkemt', 10);
+
+// Ensure directories exist
+const dataDir = path.join(__dirname, 'data');
+const uploadsDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
+
+const eventsFilePath = path.join(dataDir, 'events.json');
+const messagesFilePath = path.join(dataDir, 'messages.json');
+const teamsFilePath = path.join(dataDir, 'teams.json');
+const bibleGroupsFilePath = path.join(dataDir, 'bible_groups.json');
+const membersFilePath = path.join(dataDir, 'members.json');
+const newsFilePath = path.join(dataDir, 'news.json');
+const attendanceSessionsFilePath = path.join(dataDir, 'attendance_sessions.json');
+const attendanceRecordsFilePath = path.join(dataDir, 'attendance_records.json');
+const leadershipFilePath = path.join(dataDir, 'leadership.json');
+const donationsFilePath = path.join(dataDir, 'donations.json');
+
+// --- SANITIZE MEMBER (Never expose password hash) ---
+const sanitizeMember = (member) => {
+  if (!member) return null;
+  const { passwordHash, ...safe } = member;
+  return safe;
+};
+
+// --- MEMBERS HELPERS ---
+const INITIAL_MEMBERS = [
+  {
+    _id: 'mem-1',
+    name: 'Faith Chebet',
+    email: 'faithchebet@gmail.com',
+    phone: '+254 722 123 456',
+    department: 'Praise and Worship',
+    residence: 'Nairobi Central',
+    role: 'Member',
+    status: 'Active',
+    passwordHash: bcrypt.hashSync('Member@2026', 10),
+    joinedAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()
+  },
+  {
+    _id: 'mem-2',
+    name: 'Brian Kiptoo',
+    email: 'briankiptoo@gmail.com',
+    phone: '+254 733 987 654',
+    department: 'Outreach & Missions',
+    residence: 'Meru Central',
+    role: 'Member',
+    status: 'Active',
+    passwordHash: bcrypt.hashSync('Member@2026', 10),
+    joinedAt: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString()
+  },
+  {
+    _id: 'mem-3',
+    name: 'Mercy Achieng',
+    email: 'mercyachieng@gmail.com',
+    phone: '+254 715 554 321',
+    department: 'Prayer Department',
+    residence: 'Machakos',
+    role: 'Member',
+    status: 'Active',
+    passwordHash: bcrypt.hashSync('Member@2026', 10),
+    joinedAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString()
+  },
+  {
+    _id: 'mem-4',
+    name: 'Dennis Mutua',
+    email: 'dennismutua@gmail.com',
+    phone: '+254 701 443 219',
+    department: 'Digital Infrastructure',
+    residence: 'Emali',
+    role: 'Member',
+    status: 'Active',
+    passwordHash: bcrypt.hashSync('Member@2026', 10),
+    joinedAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString()
+  }
+];
+
+const getMembers = () => {
+  if (!fs.existsSync(membersFilePath)) {
+    fs.writeFileSync(membersFilePath, JSON.stringify(INITIAL_MEMBERS, null, 2));
+    return INITIAL_MEMBERS;
+  }
+  try {
+    const raw = fs.readFileSync(membersFilePath, 'utf-8');
+    const parsed = JSON.parse(raw || '[]');
+    if (parsed.length === 0) {
+      fs.writeFileSync(membersFilePath, JSON.stringify(INITIAL_MEMBERS, null, 2));
+      return INITIAL_MEMBERS;
+    }
+    return parsed;
+  } catch (err) {
+    console.error('Error reading members:', err);
+    return INITIAL_MEMBERS;
+  }
+};
+
+const saveMembers = (members) => {
+  fs.writeFileSync(membersFilePath, JSON.stringify(members, null, 2));
+};
+
+// --- NEWS HELPERS ---
+const INITIAL_NEWS = [
+  {
+    _id: 'news-1',
+    title: 'Ntakira Mission: Carrying the Gospel to Meru',
+    category: 'Missions',
+    date: 'August 2026 — Meru',
+    location: 'Meru',
+    summary: 'The Ntakira mission brought the Gospel through crusades, revivals, street evangelism and youth mentorship at Methodist Church of Kenya, Ntakira Parish.',
+    content: 'The Kingdom Enlightenment Missions Team carried out a deeply transformative missionary journey in Ntakira, Meru County. Believers from all corners came together in unity, praying for community breakthroughs and ministering to youth and local schools. Dozens surrendered their lives to Christ and were connected to local discipleship fellowships.',
+    imageUrl: '',
+    author: 'KEMT Missions Outreach',
+    createdAt: new Date(Date.now() - 25 * 24 * 60 * 60 * 1000).toISOString()
+  },
+  {
+    _id: 'news-2',
+    title: 'Emali Mission: 76 Souls Give Their Lives to Christ',
+    category: 'Outreach',
+    date: 'August 2026 — Makueni & Kajiado',
+    location: 'Makueni & Kajiado',
+    summary: 'The Emali mission at Methodist Church of Kenya saw 76 people surrender their lives to Christ through evangelism, prayer walks, crusades and compassion outreach.',
+    content: 'During our joint mission in Emali spanning Makueni and Kajiado border territories, the Lord displayed His mighty saving grace. Street ministry, door-to-door evangelism, medical and welfare compassion distributions accompanied the nightly revival crusades.',
+    imageUrl: '',
+    author: 'Revival Communications',
+    createdAt: new Date(Date.now() - 18 * 24 * 60 * 60 * 1000).toISOString()
+  },
+  {
+    _id: 'news-3',
+    title: 'Tala Mission: 170 Souls Saved in Machakos',
+    category: 'Missions',
+    date: 'April 2026 — Machakos',
+    location: 'Machakos',
+    summary: 'Liberty Church, Tala hosted a powerful week-long outreach that saw 170 people come to Christ through street evangelism, prayer walks, crusades and youth workshops.',
+    content: 'In Tala, Machakos County, our team partnered with Liberty Church to hold a transformative week-long youth campaign. 170 souls made public commitments to Jesus Christ, and numerous youth discipleship circles were established to ensure sustained spiritual growth.',
+    imageUrl: '',
+    author: 'KEMT Media',
+    createdAt: new Date(Date.now() - 12 * 24 * 60 * 60 * 1000).toISOString()
+  },
+  {
+    _id: 'news-4',
+    title: 'Gikumene Mission: Reaching Meru for Christ',
+    category: 'Missions',
+    date: 'Dec 2025 - Jan 2026 — Meru',
+    location: 'Meru',
+    summary: 'Impactful moments from the Gikumene mission, featuring community outreach, dynamic youth engagements, and open-air crusades.',
+    content: 'Spanning the cross-over revival season, the Gikumene Mission brought hundreds together for spiritual renewal, prayer vigils, high school mentoring sessions and open-air preaching of the gospel.',
+    imageUrl: '',
+    author: 'KEMT Missions Team',
+    createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString()
+  }
+];
+
+const getNews = () => {
+  if (!fs.existsSync(newsFilePath)) {
+    fs.writeFileSync(newsFilePath, JSON.stringify(INITIAL_NEWS, null, 2));
+    return INITIAL_NEWS;
+  }
+  try {
+    const raw = fs.readFileSync(newsFilePath, 'utf-8');
+    const parsed = JSON.parse(raw || '[]');
+    if (parsed.length === 0) {
+      fs.writeFileSync(newsFilePath, JSON.stringify(INITIAL_NEWS, null, 2));
+      return INITIAL_NEWS;
+    }
+    return parsed;
+  } catch (err) {
+    console.error('Error reading news:', err);
+    return INITIAL_NEWS;
+  }
+};
+
+const saveNews = (news) => {
+  fs.writeFileSync(newsFilePath, JSON.stringify(news, null, 2));
+};
+
+// --- EVENTS HELPERS ---
+const getEvents = () => {
+  if (!fs.existsSync(eventsFilePath)) {
+    const initial = [
+      {
+        _id: 'event-1',
+        title: 'Kingdom Outreach Revival & Leadership Conference',
+        date: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
+        location: 'Methodist Church Grounds, Meru Central',
+        description: 'A powerful gathering of believers, youths and community leaders for spiritual renewal, prayer vigils and missionary training.',
+        posterUrl: '',
+        createdAt: new Date().toISOString()
+      }
+    ];
+    fs.writeFileSync(eventsFilePath, JSON.stringify(initial, null, 2));
+    return initial;
+  }
+  try {
+    const raw = fs.readFileSync(eventsFilePath, 'utf-8');
+    return JSON.parse(raw || '[]');
+  } catch (err) {
+    console.error('Error reading events:', err);
+    return [];
+  }
+};
+
+const saveEvents = (events) => {
+  fs.writeFileSync(eventsFilePath, JSON.stringify(events, null, 2));
+};
+
+// --- MESSAGES HELPERS ---
+const getMessages = () => {
+  if (!fs.existsSync(messagesFilePath)) {
+    const initial = [
+      {
+        _id: 'msg-sample-1',
+        name: 'Pastor Peter Mwangi',
+        email: 'petermwangi@example.com',
+        subject: 'Partnership in upcoming Machakos Mission',
+        message: 'Calvary greetings! We would love to collaborate with KEMT in hosting the youth mission and distributing Bibles to local secondary schools.',
+        isRead: false,
+        createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString()
+      }
+    ];
+    fs.writeFileSync(messagesFilePath, JSON.stringify(initial, null, 2));
+    return initial;
+  }
+  try {
+    const raw = fs.readFileSync(messagesFilePath, 'utf-8');
+    return JSON.parse(raw || '[]');
+  } catch (err) {
+    console.error('Error reading messages:', err);
+    return [];
+  }
+};
+
+const saveMessages = (messages) => {
+  fs.writeFileSync(messagesFilePath, JSON.stringify(messages, null, 2));
+};
+
+app.use('/uploads', express.static(uploadsDir));
+
+// Multer Storage Configuration for event posters
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, uploadsDir);
+  },
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname);
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+    cb(null, 'poster-' + uniqueSuffix + ext);
+  }
+});
+const upload = multer({ storage });
+
+const newsImageFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image/')) {
+    cb(null, true);
+  } else {
+    const error = new multer.MulterError('LIMIT_UNEXPECTED_FILE', file.fieldname);
+    error.message = 'Only image files are allowed.';
+    cb(error);
+  }
+};
+
+const newsUpload = multer({
+  storage: multer.diskStorage({
+    destination: (req, file, cb) => cb(null, uploadsDir),
+    filename: (req, file, cb) => {
+      const ext = path.extname(file.originalname).toLowerCase();
+      cb(null, `news-${Date.now()}-${Math.round(Math.random() * 1e9)}${ext}`);
+    }
+  }),
+  fileFilter: newsImageFilter,
+  limits: { fileSize: 5 * 1024 * 1024 }
+});
+
+// Email Transporter for Contact Messages
+const createTransporter = () => {
+  if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
+    return nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT) || 587,
+      secure: process.env.SMTP_SECURE === 'true',
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS
+      }
+    });
+  }
+  return null;
+};
+
+// --- AUTH ROUTES ---
+app.post('/api/auth/login', (req, res) => {
+  const { email, password } = req.body;
+  const cleanEmail = (email || '').trim().toLowerCase();
+  const cleanPassword = (password || '').trim();
+
+  if (!cleanEmail || !cleanPassword) {
+    return res.status(400).json({ success: false, message: 'Email and password are required.' });
+  }
+
+  // 1. Check Admin Credentials
+  const isAdminEmail = cleanEmail === 'info@kingdomenlightenment.org' || cleanEmail.endsWith('@kingdomenlightenment.org');
+  if (isAdminEmail && bcrypt.compareSync(cleanPassword, ADMIN_PASSWORD_HASH)) {
+    return res.json({
+      success: true,
+      token: 'kemt_token_' + Date.now(),
+      user: {
+        name: 'KEMT Administrator',
+        email: cleanEmail,
+        role: 'Super Admin',
+        isAdmin: true,
+        profileImageUrl: '/kemt-favicon.jpg'
+      }
+    });
+  }
+
+  // 2. Check Registered Member Accounts
+  const members = getMembers();
+  const member = members.find(m => (m.email || '').toLowerCase() === cleanEmail);
+
+  if (member && member.passwordHash && bcrypt.compareSync(cleanPassword, member.passwordHash)) {
+    if (member.status === 'Inactive') {
+      return res.status(403).json({
+        success: false,
+        message: 'Your member account is currently inactive. Please contact the administrator.'
+      });
+    }
+
+    return res.json({
+      success: true,
+      token: 'kemt_member_token_' + Date.now(),
+      user: {
+        ...sanitizeMember(member),
+        isAdmin: false
+      }
+    });
+  }
+
+  return res.status(401).json({
+    success: false,
+    message: 'Invalid credentials. Please verify your email and password.'
+  });
+});
+
+// Member Self-Registration (Sign Up)
+const handleMemberSignup = (req, res) => {
+  const { name, email, phone, department, residence, password } = req.body;
+
+  if (!name || !email || !password) {
+    return res.status(400).json({
+      success: false,
+      message: 'Full name, email address, and password are required.'
+    });
+  }
+
+  const cleanEmail = email.trim().toLowerCase();
+  const members = getMembers();
+
+  if (members.some(m => (m.email || '').toLowerCase() === cleanEmail)) {
+    return res.status(409).json({
+      success: false,
+      message: 'An account with this email address already exists. Please log in.'
+    });
+  }
+
+  if (password.length < 6) {
+    return res.status(400).json({
+      success: false,
+      message: 'Password must be at least 6 characters long.'
+    });
+  }
+
+  const newMember = {
+    _id: 'mem-' + Date.now(),
+    name: sanitize(name.trim()),
+    email: cleanEmail,
+    phone: phone ? sanitize(phone.trim()) : '',
+    department: department ? sanitize(department.trim()) : 'General Ministry',
+    residence: residence ? sanitize(residence.trim()) : '',
+    role: 'Member',
+    status: 'Active',
+    passwordHash: bcrypt.hashSync(password, 10),
+    joinedAt: new Date().toISOString()
+  };
+
+  members.unshift(newMember);
+  saveMembers(members);
+
+  return res.status(201).json({
+    success: true,
+    message: 'Account created successfully! Welcome to Kingdom Enlightenment Missions Team.',
+    token: 'kemt_member_token_' + Date.now(),
+    user: {
+      ...sanitizeMember(newMember),
+      isAdmin: false
+    }
+  });
+};
+
+app.post('/api/auth/register', handleMemberSignup);
+app.post('/api/members/signup', handleMemberSignup);
+
+// --- PROFILE ROUTE ---
+app.get('/api/profile', (req, res) => {
+  res.json({
+    name: 'KEMT Administrator',
+    email: 'info@kingdomenlightenment.org',
+    role: 'Super Admin',
+    profileImageUrl: '/kemt-favicon.jpg'
+  });
+});
+
+// --- ADMIN STATS ROUTE ---
+app.get('/api/admin/stats', (req, res) => {
+  const events = getEvents();
+  const messages = getMessages();
+  const members = getMembers();
+  const news = getNews();
+  const unreadMessages = messages.filter(m => !m.isRead).length;
+  const activeMembers = members.filter(m => m.status === 'Active').length;
+
+  res.json({
+    totalEvents: events.length,
+    totalMessages: messages.length,
+    unreadMessages: unreadMessages,
+    totalMembers: members.length,
+    activeMembers: activeMembers,
+    totalNews: news.length
+  });
+});
+
+// --- CONTACT FORM ROUTE (Saves to DB and forwards to Team Email) ---
+app.post('/api/contact', async (req, res) => {
+  const { 
+    name, 
+    email, 
+    subject, 
+    message, 
+    category = 'General Inquiry',
+    phone = '',
+    residence = '',
+    skills = '',
+    institution = '',
+    isUrgent = false
+  } = req.body;
+
+  if (!name || !email || !message) {
+    return res.status(400).json({
+      success: false,
+      message: 'Name, email, and message are required.'
+    });
+  }
+
+  // 1. Save message persistently for the Admin Dashboard
+  const messages = getMessages();
+  const newMessage = {
+    _id: 'msg-' + Date.now(),
+    name: name.trim(),
+    email: email.trim(),
+    phone: phone ? phone.trim() : '',
+    category: category.trim(),
+    subject: (subject || category || 'General Inquiry').trim(),
+    message: message.trim(),
+    residence: residence ? residence.trim() : '',
+    skills: skills ? skills.trim() : '',
+    institution: institution ? institution.trim() : '',
+    isUrgent: Boolean(isUrgent),
+    allocation: null, // For Discipleship / Bible Study allocation
+    isRead: false,
+    createdAt: new Date().toISOString()
+  };
+  messages.unshift(newMessage);
+  saveMessages(messages);
+
+  const destinationEmail = process.env.CONTACT_EMAIL || 'info@kingdomenlightenment.org';
+  console.log(`[Contact Form - ${newMessage.category}] Received message from "${name}" <${email}>: "${newMessage.subject}"`);
+
+  // 2. Dispatch email to team
+  try {
+    const transporter = createTransporter();
+    
+    if (transporter) {
+      await transporter.sendMail({
+        from: `"${name}" <${process.env.SMTP_FROM || process.env.SMTP_USER || email}>`,
+        replyTo: email,
+        to: destinationEmail,
+        subject: `[KEMT ${newMessage.category}] ${newMessage.subject}`,
+        text: `You have received a new ${newMessage.category} from the KEMT Website:\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone || 'N/A'}\nCategory: ${newMessage.category}\nResidence: ${residence || 'N/A'}\nSubject: ${newMessage.subject}\n\nMessage:\n${message}`,
+        html: `
+          <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
+            <div style="background-color: #E87D1E; color: white; padding: 14px 18px; border-radius: 6px 6px 0 0;">
+              <h2 style="margin: 0; font-size: 1.25rem;">Kingdom Enlightenment Missions Team</h2>
+              <p style="margin: 4px 0 0; font-size: 0.9rem;">Department Inflow: <strong>${newMessage.category}</strong></p>
+            </div>
+            <div style="padding: 18px 0;">
+              <p><strong>From:</strong> ${name} &lt;<a href="mailto:${email}">${email}</a>&gt;</p>
+              ${phone ? `<p><strong>Phone:</strong> ${phone}</p>` : ''}
+              ${residence ? `<p><strong>Residence/Area:</strong> ${residence}</p>` : ''}
+              ${skills ? `<p><strong>Skills/Role:</strong> ${skills}</p>` : ''}
+              ${institution ? `<p><strong>School/Institution:</strong> ${institution}</p>` : ''}
+              <p><strong>Subject:</strong> ${newMessage.subject}</p>
+              <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;" />
+              <p><strong>Details:</strong></p>
+              <div style="background: #f9f9f9; padding: 14px; border-left: 4px solid #E87D1E; border-radius: 4px; white-space: pre-wrap;">${message}</div>
+            </div>
+            <p style="font-size: 0.8rem; color: #777; border-top: 1px solid #eee; padding-top: 10px;">
+              Automatically dispatched from the KEMT Web Platform.
+            </p>
+          </div>
+        `
+      });
+      console.log(`[Contact Form] Email successfully forwarded to ${destinationEmail}`);
+    } else {
+      console.log(`[Contact Form] SMTP not configured. Stored in dashboard and ready for delivery to ${destinationEmail}.`);
+    }
+
+    return res.json({
+      success: true,
+      message: `Your ${newMessage.category.toLowerCase()} has been sent successfully to ${destinationEmail} and recorded in the ministry portal!`,
+      data: newMessage
+    });
+  } catch (err) {
+    console.error('[Contact Form Error]:', err);
+    return res.json({
+      success: true,
+      message: 'Your submission has been received and stored in the admin portal.',
+      data: newMessage
+    });
+  }
+});
+
+// --- MESSAGES API (For Admin Portal) ---
+
+// GET /api/messages - List all messages
+app.get('/api/messages', (req, res) => {
+  const { category } = req.query;
+  const messages = getMessages();
+  if (category && category !== 'all') {
+    const filtered = messages.filter(m => (m.category || '').toLowerCase() === category.toLowerCase());
+    return res.json(filtered);
+  }
+  res.json(messages);
+});
+
+// PATCH /api/messages/:id/allocate - Assign Discipleship group and team leader
+app.patch('/api/messages/:id/allocate', (req, res) => {
+  const { id } = req.params;
+  const { groupName, teamLeader } = req.body;
+  const messages = getMessages();
+  const index = messages.findIndex(m => m._id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ success: false, message: 'Message not found.' });
+  }
+
+  messages[index].allocation = {
+    groupName: groupName || 'General Bible Study',
+    teamLeader: teamLeader || 'Unassigned',
+    allocatedAt: new Date().toISOString()
+  };
+  saveMessages(messages);
+
+  res.json({ success: true, message: messages[index] });
+});
+
+// PATCH /api/messages/:id/read - Mark message as read/unread
+app.patch('/api/messages/:id/read', (req, res) => {
+  const { id } = req.params;
+  const { isRead } = req.body;
+  const messages = getMessages();
+  const index = messages.findIndex(m => m._id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ success: false, message: 'Message not found.' });
+  }
+
+  messages[index].isRead = isRead !== undefined ? isRead : true;
+  saveMessages(messages);
+
+  res.json({ success: true, message: messages[index] });
+});
+
+// DELETE /api/messages/:id - Delete a message
+app.delete('/api/messages/:id', (req, res) => {
+  const { id } = req.params;
+  const messages = getMessages();
+  const filtered = messages.filter(m => m._id !== id);
+
+  if (messages.length === filtered.length) {
+    return res.status(404).json({ success: false, message: 'Message not found.' });
+  }
+
+  saveMessages(filtered);
+  res.json({ success: true, message: 'Message deleted successfully.' });
+});
+
+// --- EVENTS CRUD ROUTES ---
+
+// GET /api/events - List all upcoming events
+app.get('/api/events', (req, res) => {
+  const events = getEvents();
+  res.json(events);
+});
+
+// POST /api/events - Create a new event
+app.post('/api/events', upload.single('poster'), (req, res) => {
+  const { title, date, location, description } = req.body;
+
+  if (!title || !date || !location || !description) {
+    return res.status(400).json({
+      success: false,
+      message: 'Title, date, location, and description are required.'
+    });
+  }
+
+  const events = getEvents();
+  const newEvent = {
+    _id: 'event-' + Date.now(),
+    title,
+    date,
+    location,
+    description,
+    posterUrl: req.file ? `uploads/${req.file.filename}` : '',
+    createdAt: new Date().toISOString()
+  };
+
+  events.unshift(newEvent);
+  saveEvents(events);
+
+  res.status(201).json(newEvent);
+});
+
+// PUT /api/events/:id - Update an event
+app.put('/api/events/:id', upload.single('poster'), (req, res) => {
+  const { id } = req.params;
+  const { title, date, location, description } = req.body;
+
+  const events = getEvents();
+  const index = events.findIndex(e => e._id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ success: false, message: 'Event not found.' });
+  }
+
+  const existing = events[index];
+  const updatedEvent = {
+    ...existing,
+    title: title || existing.title,
+    date: date || existing.date,
+    location: location || existing.location,
+    description: description || existing.description,
+    posterUrl: req.file ? `uploads/${req.file.filename}` : existing.posterUrl,
+    updatedAt: new Date().toISOString()
+  };
+
+  events[index] = updatedEvent;
+  saveEvents(events);
+
+  res.json(updatedEvent);
+});
+
+// DELETE /api/events/:id - Delete an event
+app.delete('/api/events/:id', (req, res) => {
+  const { id } = req.params;
+  const events = getEvents();
+  const filtered = events.filter(e => e._id !== id);
+
+  if (events.length === filtered.length) {
+    return res.status(404).json({ success: false, message: 'Event not found.' });
+  }
+
+  saveEvents(filtered);
+  res.json({ success: true, message: 'Event deleted successfully.' });
+});
+
+// --- INITIAL MINISTRY TEAMS SEED DATA ---
+const INITIAL_TEAMS = [
+  {
+    _id: 'team-lead-media',
+    name: 'Kennedy Mutuku',
+    email: 'kennedymutuku@kingdomenlightenment.org',
+    phone: '+254 714 476 295',
+    department: 'Media & Tech',
+    role: 'Media Director & Tech Lead',
+    skills: 'Livestream, Video Editing, Infrastructure',
+    joinedAt: new Date().toISOString()
+  },
+  {
+    _id: 'team-lead-prayer',
+    name: 'Raymond Ewoi',
+    email: 'raymondewoi@kingdomenlightenment.org',
+    phone: '+254 714 476 295',
+    department: 'Prayer Intercession',
+    role: 'Prayer Coordinator',
+    skills: 'Intercession, Vigils, Fasting Coordinator',
+    joinedAt: new Date().toISOString()
+  },
+  {
+    _id: 'team-lead-worship',
+    name: 'Victor Muriungi',
+    email: 'victormuriungi@kingdomenlightenment.org',
+    phone: '+254 714 476 295',
+    department: 'Praise & Worship',
+    role: 'Worship Coordinator',
+    skills: 'Music Direction, Keyboard, Vocal Ministry',
+    joinedAt: new Date().toISOString()
+  },
+  {
+    _id: 'team-lead-outreach',
+    name: 'Mwanzia David',
+    email: 'mwanziadavid@kingdomenlightenment.org',
+    phone: '+254 714 476 295',
+    department: 'Outreach',
+    role: 'Outreach Incharge',
+    skills: 'Rural Missions, Evangelism, Crusade Planning',
+    joinedAt: new Date().toISOString()
+  },
+  {
+    _id: 'team-lead-discipleship',
+    name: 'Morice Mutharimi',
+    email: 'moricemutharimi@kingdomenlightenment.org',
+    phone: '+254 714 476 295',
+    department: 'Bible Study',
+    role: 'Chairperson & Teaching Lead',
+    skills: 'Bible Exegesis, Small Group Mentorship',
+    joinedAt: new Date().toISOString()
+  },
+  {
+    _id: 'team-lead-highschool',
+    name: 'Vincent Mwendwa',
+    email: 'vincentmwendwa@kingdomenlightenment.org',
+    phone: '+254 714 476 295',
+    department: 'High School',
+    role: 'Director & Speaker',
+    skills: 'School Weekend Challenges, Student Empowerment',
+    joinedAt: new Date().toISOString()
+  },
+  {
+    _id: 'team-lead-secretary',
+    name: 'Everylne Mukami',
+    email: 'everylnemukami@kingdomenlightenment.org',
+    phone: '+254 714 476 295',
+    department: 'Secretariat & Welfare',
+    role: 'Secretary',
+    skills: 'Administration, Compassion Coordination',
+    joinedAt: new Date().toISOString()
+  }
+];
+
+// --- TEAMS HELPERS ---
+const getTeams = () => {
+  if (!fs.existsSync(teamsFilePath)) {
+    fs.writeFileSync(teamsFilePath, JSON.stringify(INITIAL_TEAMS, null, 2));
+    return INITIAL_TEAMS;
+  }
+  try {
+    const raw = fs.readFileSync(teamsFilePath, 'utf-8');
+    const parsed = JSON.parse(raw || '[]');
+    if (parsed.length === 0) {
+      fs.writeFileSync(teamsFilePath, JSON.stringify(INITIAL_TEAMS, null, 2));
+      return INITIAL_TEAMS;
+    }
+    return parsed;
+  } catch {
+    return INITIAL_TEAMS;
+  }
+};
+const saveTeams = (data) => fs.writeFileSync(teamsFilePath, JSON.stringify(data, null, 2));
+
+// --- BIBLE GROUPS HELPERS ---
+const getBibleGroups = () => {
+  if (!fs.existsSync(bibleGroupsFilePath)) {
+    fs.writeFileSync(bibleGroupsFilePath, JSON.stringify([], null, 2));
+    return [];
+  }
+  try { return JSON.parse(fs.readFileSync(bibleGroupsFilePath, 'utf-8') || '[]'); } catch { return []; }
+};
+const saveBibleGroups = (data) => fs.writeFileSync(bibleGroupsFilePath, JSON.stringify(data, null, 2));
+
+// ── LEADERSHIP members (act as "experienced" — spread across groups)
+const LEADERSHIP_EMAILS = [
+  'vincentmwendwa@kingdomenlightenment.org',
+  'everylnemukami@kingdomenlightenment.org',
+  'raymondewoi@kingdomenlightenment.org',
+  'kennedymutuku@kingdomenlightenment.org',
+];
+
+// Smart grouping: max 5 per group, mix residences, spread leadership
+function autoArrangeGroups(members) {
+  const MAX = 5;
+  const shuffled = [...members].sort(() => Math.random() - 0.5);
+  const leaders = shuffled.filter(m => LEADERSHIP_EMAILS.includes(m.email));
+  const others  = shuffled.filter(m => !LEADERSHIP_EMAILS.includes(m.email));
+  const total   = shuffled.length;
+  const numGroups = Math.max(1, Math.ceil(total / MAX));
+  const groups = Array.from({ length: numGroups }, (_, i) => ({
+    id: `bg-${Date.now()}-${i}`,
+    name: `Study Group ${i + 1}`,
+    members: [],
+    createdAt: new Date().toISOString(),
+  }));
+
+  // Distribute leaders one per group first
+  leaders.forEach((leader, i) => {
+    groups[i % numGroups].members.push(leader);
+  });
+
+  // Fill remaining slots — rotate through groups while avoiding same residence
+  let gi = 0;
+  for (const member of others) {
+    // Find next group that doesn't already have someone from same residence
+    let attempts = 0;
+    while (attempts < numGroups) {
+      const g = groups[gi % numGroups];
+      const sameRes = member.residence && g.members.some(m => m.residence === member.residence);
+      const full = g.members.length >= MAX;
+      if (!full && !sameRes) {
+        g.members.push(member);
+        gi++;
+        break;
+      }
+      gi++;
+      attempts++;
+    }
+    // Fallback: put anywhere there's space
+    if (attempts >= numGroups) {
+      const g = groups.find(g => g.members.length < MAX) || groups[0];
+      g.members.push(member);
+    }
+  }
+
+  return groups.filter(g => g.members.length > 0);
+}
+
+// DELETE /api/messages - Delete ALL messages
+app.delete('/api/messages', (req, res) => {
+  saveMessages([]);
+  res.json({ success: true, message: 'All messages deleted.' });
+});
+
+// ── MINISTRY TEAMS ROUTES ──────────────────────────────────────────────────
+
+// GET /api/teams - List all team members
+app.get('/api/teams', (req, res) => {
+  const { department } = req.query;
+  const teams = getTeams();
+  if (department && department !== 'all') {
+    return res.json(teams.filter(m => (m.department || '').toLowerCase() === department.toLowerCase()));
+  }
+  res.json(teams);
+});
+
+// POST /api/teams - Add a member to a ministry team
+app.post('/api/teams', (req, res) => {
+  const { name, email, phone, skills, department = 'Media & Tech', role = 'Volunteer Member', messageId } = req.body;
+  if (!name || !email) return res.status(400).json({ success: false, message: 'Name and email required.' });
+
+  const teams = getTeams();
+  if (teams.find(m => m.email === email && m.department === department)) {
+    return res.status(409).json({ success: false, message: `This person is already in the ${department} team.` });
+  }
+
+  const member = {
+    _id: 'team-' + Date.now(),
+    name: sanitize(name),
+    email: sanitize(email),
+    phone: phone ? sanitize(phone) : '',
+    skills: skills ? sanitize(skills) : '',
+    department: sanitize(department),
+    role: sanitize(role),
+    messageId: messageId || null,
+    joinedAt: new Date().toISOString(),
+  };
+  teams.push(member);
+  saveTeams(teams);
+  res.status(201).json({ success: true, member });
+});
+
+// DELETE /api/teams/:id - Remove a team member
+app.delete('/api/teams/:id', (req, res) => {
+  const teams = getTeams().filter(m => m._id !== req.params.id);
+  saveTeams(teams);
+  res.json({ success: true });
+});
+
+// ── BIBLE STUDY GROUPS ROUTES ─────────────────────────────────────────────
+
+// GET /api/bible-groups - List all saved groups
+app.get('/api/bible-groups', (req, res) => res.json(getBibleGroups()));
+
+// POST /api/bible-groups/arrange - Auto-arrange Bible Study submissions into groups
+app.post('/api/bible-groups/arrange', (req, res) => {
+  // Gather all Bible Study category messages as candidate members
+  const messages = getMessages();
+  const candidates = messages
+    .filter(m => m.category === 'Bible Study')
+    .map(m => ({
+      _id: m._id,
+      name: m.name,
+      email: m.email,
+      phone: m.phone || '',
+      residence: m.residence || '',
+    }));
+
+  if (candidates.length === 0) {
+    return res.status(400).json({ success: false, message: 'No Bible Study submissions found to arrange.' });
+  }
+
+  const groups = autoArrangeGroups(candidates);
+  saveBibleGroups(groups);
+  res.json({ success: true, groups });
+});
+
+// POST /api/bible-groups - Save manually edited groups
+app.post('/api/bible-groups', (req, res) => {
+  const { groups } = req.body;
+  if (!Array.isArray(groups)) return res.status(400).json({ success: false, message: 'groups must be an array.' });
+  saveBibleGroups(groups);
+  res.json({ success: true, groups });
+});
+
+// DELETE /api/bible-groups/:id - Delete a specific group
+app.delete('/api/bible-groups/:id', (req, res) => {
+  const groups = getBibleGroups().filter(g => g.id !== req.params.id);
+  saveBibleGroups(groups);
+  res.json({ success: true });
+});
+
+// ── MEMBERS MANAGEMENT ROUTES ────────────────────────────────────────────────
+
+// GET /api/members - List members with search and filtering (NEVER returns password hashes)
+app.get('/api/members', (req, res) => {
+  const { search, status, department } = req.query;
+  let members = getMembers();
+
+  if (status && status !== 'all') {
+    members = members.filter(m => (m.status || '').toLowerCase() === status.toLowerCase());
+  }
+
+  if (department && department !== 'all') {
+    members = members.filter(m => (m.department || '').toLowerCase() === department.toLowerCase());
+  }
+
+  if (search) {
+    const q = search.toLowerCase();
+    members = members.filter(m => 
+      (m.name || '').toLowerCase().includes(q) ||
+      (m.email || '').toLowerCase().includes(q) ||
+      (m.phone || '').toLowerCase().includes(q) ||
+      (m.residence || '').toLowerCase().includes(q) ||
+      (m.department || '').toLowerCase().includes(q)
+    );
+  }
+
+  // Sanitize all members so passwordHash is NEVER exposed to admin or user
+  const sanitized = members.map(sanitizeMember);
+  res.json(sanitized);
+});
+
+// GET /api/members/:id - Single member
+app.get('/api/members/:id', (req, res) => {
+  const members = getMembers();
+  const member = members.find(m => m._id === req.params.id);
+  if (!member) {
+    return res.status(404).json({ success: false, message: 'Member not found.' });
+  }
+  res.json(sanitizeMember(member));
+});
+
+// POST /api/members - Admin onboards a new member
+app.post('/api/members', (req, res) => {
+  const { name, email, phone, department, residence, status = 'Active', role = 'Member', password } = req.body;
+
+  if (!name || !email) {
+    return res.status(400).json({ success: false, message: 'Name and email are required to onboard a member.' });
+  }
+
+  const cleanEmail = email.trim().toLowerCase();
+  const members = getMembers();
+
+  if (members.some(m => (m.email || '').toLowerCase() === cleanEmail)) {
+    return res.status(409).json({ success: false, message: 'A member with this email address already exists.' });
+  }
+
+  const defaultPassword = password && password.trim() ? password.trim() : 'KEMTmember2026';
+
+  const newMember = {
+    _id: 'mem-' + Date.now(),
+    name: sanitize(name.trim()),
+    email: cleanEmail,
+    phone: phone ? sanitize(phone.trim()) : '',
+    department: department ? sanitize(department.trim()) : 'General Ministry',
+    residence: residence ? sanitize(residence.trim()) : '',
+    role: role ? sanitize(role.trim()) : 'Member',
+    status: status === 'Inactive' ? 'Inactive' : 'Active',
+    passwordHash: bcrypt.hashSync(defaultPassword, 10),
+    joinedAt: new Date().toISOString()
+  };
+
+  members.unshift(newMember);
+  saveMembers(members);
+
+  res.status(201).json({
+    success: true,
+    message: 'Member onboarded successfully.',
+    member: sanitizeMember(newMember)
+  });
+});
+
+// PUT /api/members/:id - Admin edits member details (passwords cannot be viewed)
+app.put('/api/members/:id', async (req, res) => {
+  const { id } = req.params;
+  const { name, email, phone, department, residence, status, role, newPassword, notifyMember } = req.body;
+
+  const members = getMembers();
+  const index = members.findIndex(m => m._id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ success: false, message: 'Member not found.' });
+  }
+
+  const existing = members[index];
+  const prevStatus = existing.status;
+
+  // If email is changing, verify not taken by someone else
+  if (email && email.trim().toLowerCase() !== existing.email.toLowerCase()) {
+    const cleanEmail = email.trim().toLowerCase();
+    if (members.some(m => m._id !== id && (m.email || '').toLowerCase() === cleanEmail)) {
+      return res.status(409).json({ success: false, message: 'Email address already in use by another member.' });
+    }
+    existing.email = cleanEmail;
+  }
+
+  if (name) existing.name = sanitize(name.trim());
+  if (phone !== undefined) existing.phone = sanitize(phone.trim());
+  if (department !== undefined) existing.department = sanitize(department.trim());
+  if (residence !== undefined) existing.residence = sanitize(residence.trim());
+  if (status !== undefined) existing.status = status === 'Inactive' ? 'Inactive' : 'Active';
+  if (role !== undefined) existing.role = sanitize(role.trim());
+
+  // Password reset optional, but never returned
+  if (newPassword && newPassword.trim().length >= 6) {
+    existing.passwordHash = bcrypt.hashSync(newPassword.trim(), 10);
+  }
+
+  existing.updatedAt = new Date().toISOString();
+  members[index] = existing;
+  saveMembers(members);
+
+  // Send notification email to member if requested
+  if (notifyMember && existing.email) {
+    try {
+      const transporter = createTransporter();
+      if (transporter) {
+        const statusChanged = prevStatus !== existing.status;
+        const passwordChanged = newPassword && newPassword.trim().length >= 6;
+
+        const emailHtml = `
+          <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 560px; margin: 0 auto; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+            <div style="background: linear-gradient(135deg, #1e3a5f, #E87D1E); padding: 32px 36px; text-align: center;">
+              <h1 style="color: #fff; margin: 0; font-size: 1.5rem; font-weight: 800; letter-spacing: 0.5px;">Kingdom Enlightenment</h1>
+              <p style="color: rgba(255,255,255,0.85); margin: 6px 0 0; font-size: 0.9rem;">Missions Team • Member Portal</p>
+            </div>
+            <div style="padding: 32px 36px;">
+              <p style="color: #1e293b; font-size: 1rem; font-weight: 600; margin: 0 0 8px;">Hello ${sanitize(existing.name)},</p>
+              <p style="color: #64748b; margin: 0 0 20px; line-height: 1.6;">Your membership profile has been updated by the KEMT administrator. Here is a summary of what changed:</p>
+              <div style="background: #f8fafc; border-radius: 8px; padding: 20px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
+                <table style="width: 100%; border-collapse: collapse;">
+                  <tr><td style="padding: 8px 0; color: #64748b; font-size: 0.88rem; width: 40%;">Name</td><td style="padding: 8px 0; color: #1e293b; font-weight: 600; font-size: 0.88rem;">${sanitize(existing.name)}</td></tr>
+                  <tr><td style="padding: 8px 0; color: #64748b; font-size: 0.88rem;">Department</td><td style="padding: 8px 0; color: #1e293b; font-weight: 600; font-size: 0.88rem;">${sanitize(existing.department)}</td></tr>
+                  <tr><td style="padding: 8px 0; color: #64748b; font-size: 0.88rem;">Residence</td><td style="padding: 8px 0; color: #1e293b; font-weight: 600; font-size: 0.88rem;">${sanitize(existing.residence || 'Not specified')}</td></tr>
+                  <tr><td style="padding: 8px 0; color: #64748b; font-size: 0.88rem;">Account Status</td><td style="padding: 8px 0; font-weight: 700; font-size: 0.88rem; color: ${existing.status === 'Active' ? '#166534' : '#dc2626'};">${existing.status}${statusChanged ? ' ⚠️ (Changed)' : ''}</td></tr>
+                  ${passwordChanged ? '<tr><td style="padding: 8px 0; color: #64748b; font-size: 0.88rem;">Password</td><td style="padding: 8px 0; color: #E87D1E; font-weight: 600; font-size: 0.88rem;">Reset by admin — please update when you next log in.</td></tr>' : ''}
+                </table>
+              </div>
+              ${statusChanged && existing.status === 'Inactive' ? '<div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; color: #dc2626; font-size: 0.88rem;"><strong>⚠️ Account Deactivated:</strong> Your account has been set to Inactive. Contact the administrator at info@kingdomenlightenment.org for assistance.</div>' : ''}
+              ${statusChanged && existing.status === 'Active' ? '<div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; color: #166534; font-size: 0.88rem;"><strong>✅ Account Activated:</strong> Your account is now active. You can log in and access your member portal.</div>' : ''}
+              <p style="color: #64748b; font-size: 0.85rem; line-height: 1.6; margin: 0;">If you believe this change was made in error or have any questions, please contact us at <a href="mailto:info@kingdomenlightenment.org" style="color: #E87D1E; font-weight: 600; text-decoration: none;">info@kingdomenlightenment.org</a> or call <strong>+254 714 476 295</strong>.</p>
+            </div>
+            <div style="background: #f8fafc; padding: 18px 36px; text-align: center; border-top: 1px solid #e2e8f0;">
+              <p style="color: #94a3b8; font-size: 0.78rem; margin: 0;">© ${new Date().getFullYear()} Kingdom Enlightenment Missions Team • Nairobi, Kenya</p>
+            </div>
+          </div>`;
+
+        await transporter.sendMail({
+          from: `"KEMT Admin" <${process.env.SMTP_USER}>`,
+          to: existing.email,
+          subject: `Your KEMT Member Profile Has Been Updated`,
+          html: emailHtml
+        });
+      }
+    } catch (mailErr) {
+      console.error('Member notification email failed:', mailErr.message);
+      // Don't fail the request because of email
+    }
+  }
+
+  res.json({
+    success: true,
+    message: 'Member details updated successfully.',
+    member: sanitizeMember(existing)
+  });
+});
+
+// PATCH /api/members/:id/status - Quick status toggle (Active / Inactive)
+app.patch('/api/members/:id/status', (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  const members = getMembers();
+  const index = members.findIndex(m => m._id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ success: false, message: 'Member not found.' });
+  }
+
+  const newStatus = status ? status : (members[index].status === 'Active' ? 'Inactive' : 'Active');
+  members[index].status = newStatus;
+  members[index].updatedAt = new Date().toISOString();
+  saveMembers(members);
+
+  res.json({
+    success: true,
+    message: `Member status updated to ${newStatus}.`,
+    member: sanitizeMember(members[index])
+  });
+});
+
+// DELETE /api/members/:id - Delete a member
+app.delete('/api/members/:id', (req, res) => {
+  const { id } = req.params;
+  const members = getMembers();
+  const filtered = members.filter(m => m._id !== id);
+
+  if (members.length === filtered.length) {
+    return res.status(404).json({ success: false, message: 'Member not found.' });
+  }
+
+  saveMembers(filtered);
+  res.json({ success: true, message: 'Member removed successfully.' });
+});
+
+// ── NEWS & ANNOUNCEMENTS ROUTES ──────────────────────────────────────────────
+
+// GET /api/news - List all news articles (sorted by date descending)
+app.get('/api/news', (req, res) => {
+  const { category } = req.query;
+  const news = getNews();
+  if (category && category !== 'all') {
+    return res.json(news.filter(item => item.category === category));
+  }
+  res.json(news);
+});
+
+// GET /api/news/:id - Get single news article
+app.get('/api/news/:id', (req, res) => {
+  const news = getNews();
+  const item = news.find(n => n._id === req.params.id);
+  if (!item) {
+    return res.status(404).json({ success: false, message: 'News item not found.' });
+  }
+  res.json(item);
+});
+
+// POST /api/news - Admin uploads new article/news
+app.post('/api/news', newsUpload.single('image'), (req, res) => {
+  const { title, category, date, location, summary, content, author } = req.body;
+
+  if (!title || !summary) {
+    return res.status(400).json({ success: false, message: 'Title and summary are required.' });
+  }
+
+  const news = getNews();
+  const newItem = {
+    _id: 'news-' + Date.now(),
+    title: sanitize(title.trim()),
+    category: category ? sanitize(category.trim()) : 'Missions',
+    date: date ? sanitize(date.trim()) : new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' }),
+    location: location ? sanitize(location.trim()) : 'Kenya',
+    summary: sanitize(summary.trim()),
+    content: content ? sanitize(content.trim()) : sanitize(summary.trim()),
+    imageUrl: req.file ? `uploads/${req.file.filename}` : '',
+    author: author ? sanitize(author.trim()) : 'KEMT Admin',
+    createdAt: new Date().toISOString()
+  };
+
+  news.unshift(newItem);
+  saveNews(news);
+
+  res.status(201).json({
+    success: true,
+    message: 'News article published successfully.',
+    news: newItem
+  });
+});
+
+// PUT /api/news/:id - Admin edits news article
+app.put('/api/news/:id', newsUpload.single('image'), (req, res) => {
+  const { id } = req.params;
+  const { title, category, date, location, summary, content, author } = req.body;
+
+  const news = getNews();
+  const index = news.findIndex(n => n._id === id);
+
+  if (index === -1) {
+    if (req.file) fs.unlinkSync(path.join(uploadsDir, req.file.filename));
+    return res.status(404).json({ success: false, message: 'News article not found.' });
+  }
+
+  const existing = news[index];
+  const updatedItem = {
+    ...existing,
+    title: title ? sanitize(title.trim()) : existing.title,
+    category: category ? sanitize(category.trim()) : existing.category,
+    date: date ? sanitize(date.trim()) : existing.date,
+    location: location ? sanitize(location.trim()) : existing.location,
+    summary: summary ? sanitize(summary.trim()) : existing.summary,
+    content: content ? sanitize(content.trim()) : existing.content,
+    author: author ? sanitize(author.trim()) : existing.author,
+    imageUrl: req.file ? `uploads/${req.file.filename}` : existing.imageUrl,
+    updatedAt: new Date().toISOString()
+  };
+
+  news[index] = updatedItem;
+  saveNews(news);
+
+  if (req.file && existing.imageUrl) {
+    const existingPath = path.join(__dirname, existing.imageUrl.replace(/^\//, '').replace(/\//g, path.sep));
+    if (existingPath.startsWith(uploadsDir) && fs.existsSync(existingPath)) fs.unlinkSync(existingPath);
+  }
+
+  res.json({
+    success: true,
+    message: 'News article updated successfully.',
+    news: updatedItem
+  });
+});
+
+// DELETE /api/news/:id - Admin deletes news article
+app.delete('/api/news/:id', (req, res) => {
+  const { id } = req.params;
+  const news = getNews();
+  const item = news.find(n => n._id === id);
+
+  if (!item) {
+    return res.status(404).json({ success: false, message: 'News article not found.' });
+  }
+
+  saveNews(news.filter(n => n._id !== id));
+  if (item.imageUrl) {
+    const imagePath = path.join(__dirname, item.imageUrl.replace(/^\//, '').replace(/\//g, path.sep));
+    if (imagePath.startsWith(uploadsDir) && fs.existsSync(imagePath)) fs.unlinkSync(imagePath);
+  }
+  res.json({ success: true, message: 'News article deleted successfully.' });
+});
+
+// --- ATTENDANCE HELPERS ---
+const INITIAL_ATTENDANCE_SESSIONS = [
+  {
+    _id: "session-live",
+    title: "Sunday Main Revival Service",
+    event_id: "event-1",
+    session_date: new Date().toISOString().split('T')[0],
+    is_open: true,
+    access_code: "",
+    created_by: "admin-super",
+    created_at: new Date().toISOString()
+  }
+];
+
+const getAttendanceSessions = () => {
+  if (!fs.existsSync(attendanceSessionsFilePath)) {
+    fs.writeFileSync(attendanceSessionsFilePath, JSON.stringify(INITIAL_ATTENDANCE_SESSIONS, null, 2));
+    return INITIAL_ATTENDANCE_SESSIONS;
+  }
+  try {
+    const raw = fs.readFileSync(attendanceSessionsFilePath, 'utf-8');
+    const parsed = JSON.parse(raw || '[]');
+    return parsed;
+  } catch (err) {
+    console.error('Error reading attendance sessions:', err);
+    return INITIAL_ATTENDANCE_SESSIONS;
+  }
+};
+
+const saveAttendanceSessions = (sessions) => {
+  fs.writeFileSync(attendanceSessionsFilePath, JSON.stringify(sessions, null, 2));
+};
+
+const getAttendanceRecords = () => {
+  if (!fs.existsSync(attendanceRecordsFilePath)) {
+    fs.writeFileSync(attendanceRecordsFilePath, JSON.stringify([], null, 2));
+    return [];
+  }
+  try {
+    const raw = fs.readFileSync(attendanceRecordsFilePath, 'utf-8');
+    const parsed = JSON.parse(raw || '[]');
+    return parsed;
+  } catch (err) {
+    console.error('Error reading attendance records:', err);
+    return [];
+  }
+};
+
+const saveAttendanceRecords = (records) => {
+  fs.writeFileSync(attendanceRecordsFilePath, JSON.stringify(records, null, 2));
+};
+
+const maskName = (fullName) => {
+  if (!fullName) return 'Member';
+  const parts = fullName.trim().split(/\s+/);
+  if (parts.length === 1) return parts[0];
+  const first = parts[0];
+  const lastInitial = parts[parts.length - 1][0].toUpperCase();
+  return `${first} ${lastInitial}.`;
+};
+
+// --- ATTENDANCE ROUTES ---
+
+// 1. POST /api/attendance/sessions - Admin creates new attendance session
+app.post('/api/attendance/sessions', (req, res) => {
+  const { title, event_id, session_date, is_open = false, access_code = '', created_by = 'Admin' } = req.body;
+
+  if (!title) {
+    return res.status(400).json({ success: false, message: 'Service title is required.' });
+  }
+
+  const sessions = getAttendanceSessions();
+  const cleanTitle = sanitize(title.trim());
+  const cleanAccessCode = access_code ? String(access_code).trim() : '';
+
+  // If opening this session, close other open sessions for clean live management
+  if (is_open) {
+    sessions.forEach(s => { s.is_open = false; });
+  }
+
+  const newSession = {
+    _id: 'session-' + Date.now(),
+    title: cleanTitle,
+    event_id: event_id || null,
+    session_date: session_date || new Date().toISOString().split('T')[0],
+    is_open: Boolean(is_open),
+    access_code: cleanAccessCode,
+    created_by: created_by || 'Admin',
+    created_at: new Date().toISOString()
+  };
+
+  sessions.unshift(newSession);
+  saveAttendanceSessions(sessions);
+
+  res.status(201).json({
+    success: true,
+    message: `Attendance session "${newSession.title}" created successfully.`,
+    session: newSession
+  });
+});
+
+// 2. GET /api/attendance/sessions - List all sessions with headcount
+app.get('/api/attendance/sessions', (req, res) => {
+  const sessions = getAttendanceSessions();
+  const records = getAttendanceRecords();
+
+  const sessionsWithCounts = sessions.map(session => {
+    const checkinCount = records.filter(r => r.session_id === session._id).length;
+    return {
+      ...session,
+      headcount: checkinCount
+    };
+  });
+
+  res.json({
+    success: true,
+    sessions: sessionsWithCounts
+  });
+});
+
+// 3. PATCH /api/attendance/sessions/:id - Update session or toggle open/close
+app.patch('/api/attendance/sessions/:id', (req, res) => {
+  const { id } = req.params;
+  const { is_open, title, access_code, session_date } = req.body;
+  const sessions = getAttendanceSessions();
+  const index = sessions.findIndex(s => s._id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ success: false, message: 'Attendance session not found.' });
+  }
+
+  if (is_open === true) {
+    // Close other sessions
+    sessions.forEach(s => { if (s._id !== id) s.is_open = false; });
+  }
+
+  if (is_open !== undefined) sessions[index].is_open = Boolean(is_open);
+  if (title) sessions[index].title = sanitize(title.trim());
+  if (access_code !== undefined) sessions[index].access_code = String(access_code).trim();
+  if (session_date) sessions[index].session_date = session_date;
+  sessions[index].updated_at = new Date().toISOString();
+
+  saveAttendanceSessions(sessions);
+
+  const records = getAttendanceRecords();
+  const headcount = records.filter(r => r.session_id === id).length;
+
+  res.json({
+    success: true,
+    message: `Session is now ${sessions[index].is_open ? 'OPEN' : 'CLOSED'} for attendance.`,
+    session: {
+      ...sessions[index],
+      headcount
+    }
+  });
+});
+
+// 4. GET /api/attendance/active - Public / Member: Get currently open session
+app.get('/api/attendance/active', (req, res) => {
+  const sessions = getAttendanceSessions();
+  const active = sessions.find(s => s.is_open === true);
+
+  if (!active) {
+    return res.json({
+      success: true,
+      hasActiveSession: false,
+      session: null
+    });
+  }
+
+  const records = getAttendanceRecords();
+  const headcount = records.filter(r => r.session_id === active._id).length;
+
+  res.json({
+    success: true,
+    hasActiveSession: true,
+    session: {
+      ...active,
+      hasPin: Boolean(active.access_code && active.access_code.length > 0),
+      headcount
+    }
+  });
+});
+
+// 5. POST /api/attendance/check-in/auth - Authenticated Member One-Click Check-In
+app.post('/api/attendance/check-in/auth', (req, res) => {
+  const { session_id, member_id, access_code } = req.body;
+
+  if (!member_id) {
+    return res.status(400).json({ success: false, message: 'Member ID is required for authenticated check-in.' });
+  }
+
+  const sessions = getAttendanceSessions();
+  const session = session_id 
+    ? sessions.find(s => s._id === session_id) 
+    : sessions.find(s => s.is_open === true);
+
+  if (!session) {
+    return res.status(404).json({ success: false, message: 'Attendance session not found or inactive.' });
+  }
+
+  if (!session.is_open) {
+    return res.status(400).json({ success: false, message: 'This service is currently closed for check-in.' });
+  }
+
+  // Validate Access PIN if session requires one
+  if (session.access_code && session.access_code.trim()) {
+    const providedPin = access_code ? String(access_code).trim() : '';
+    if (providedPin !== session.access_code.trim()) {
+      return res.status(400).json({ success: false, message: 'Invalid 4-digit service PIN. Please check the venue announcement.' });
+    }
+  }
+
+  // Verify Member exists and is Active
+  const members = getMembers();
+  const member = members.find(m => m._id === member_id);
+  if (!member) {
+    return res.status(404).json({ success: false, message: 'Member account not found in system.' });
+  }
+  if (member.status === 'Inactive') {
+    return res.status(403).json({ success: false, message: 'Your member account is inactive. Please contact church leadership.' });
+  }
+
+  // Check unique composite constraint on (session_id, member_id)
+  const records = getAttendanceRecords();
+  const alreadyCheckedIn = records.some(r => r.session_id === session._id && r.member_id === member._id);
+  if (alreadyCheckedIn) {
+    return res.status(400).json({ 
+      success: false, 
+      alreadyCheckedIn: true, 
+      message: 'You have already checked in to this service today.' 
+    });
+  }
+
+  const now = new Date().toISOString();
+  const newRecord = {
+    _id: 'att-rec-' + Date.now(),
+    session_id: session._id,
+    member_id: member._id,
+    checked_in_at: now,
+    check_in_method: 'logged_in_dashboard'
+  };
+
+  records.unshift(newRecord);
+  saveAttendanceRecords(records);
+
+  res.status(201).json({
+    success: true,
+    message: `Amen! You are marked present for ${session.title}.`,
+    checked_in_at: now,
+    record: newRecord
+  });
+});
+
+// 6. POST /api/attendance/check-in/guest - Unauthenticated Self-Check-In by Identifier
+app.post('/api/attendance/check-in/guest', (req, res) => {
+  const { identifier, session_id, access_code } = req.body;
+
+  if (!identifier || !String(identifier).trim()) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Please enter your registered phone number, email, or member ID.' 
+    });
+  }
+
+  const sessions = getAttendanceSessions();
+  const session = session_id 
+    ? sessions.find(s => s._id === session_id) 
+    : sessions.find(s => s.is_open === true);
+
+  if (!session) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'No service is currently open for attendance check-in.' 
+    });
+  }
+
+  if (!session.is_open) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'This attendance session is currently closed.' 
+    });
+  }
+
+  // Validate Access PIN if session requires one
+  if (session.access_code && session.access_code.trim()) {
+    const providedPin = access_code ? String(access_code).trim() : '';
+    if (providedPin !== session.access_code.trim()) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'Invalid venue access PIN. Please check the 4-digit code.' 
+      });
+    }
+  }
+
+  // Search for active member by Email, Phone (cleansed), or Member ID
+  const cleanId = String(identifier).trim().toLowerCase();
+  const phoneDigits = cleanId.replace(/\D/g, '');
+  const members = getMembers();
+
+  const member = members.find(m => {
+    if (m._id && m._id.toLowerCase() === cleanId) return true;
+    if (m.email && m.email.toLowerCase() === cleanId) return true;
+    if (m.phone) {
+      const mDigits = m.phone.replace(/\D/g, '');
+      if (phoneDigits.length >= 7 && mDigits.includes(phoneDigits)) return true;
+      if (mDigits.length >= 7 && phoneDigits.includes(mDigits)) return true;
+      if (m.phone.toLowerCase() === cleanId) return true;
+    }
+    return false;
+  });
+
+  // If no account exists, return clear 404
+  if (!member) {
+    return res.status(404).json({
+      success: false,
+      notFound: true,
+      message: 'No member account found with those details. Please create an account to sign attendance.',
+      enteredIdentifier: identifier
+    });
+  }
+
+  // Account is inactive
+  if (member.status === 'Inactive') {
+    return res.status(403).json({
+      success: false,
+      message: 'Your member account is currently inactive. Please speak with the ushers or admin.'
+    });
+  }
+
+  // Check unique composite constraint on (session_id, member_id)
+  const records = getAttendanceRecords();
+  const alreadyCheckedIn = records.some(r => r.session_id === session._id && r.member_id === member._id);
+  if (alreadyCheckedIn) {
+    const masked = maskName(member.name);
+    return res.status(400).json({
+      success: false,
+      alreadyCheckedIn: true,
+      memberName: masked,
+      message: `Welcome back, ${masked}! You have already been marked present for ${session.title}.`
+    });
+  }
+
+  const now = new Date().toISOString();
+  const newRecord = {
+    _id: 'att-rec-' + Date.now(),
+    session_id: session._id,
+    member_id: member._id,
+    checked_in_at: now,
+    check_in_method: 'quick_lookup'
+  };
+
+  records.unshift(newRecord);
+  saveAttendanceRecords(records);
+
+  const maskedName = maskName(member.name);
+  res.status(201).json({
+    success: true,
+    memberName: maskedName,
+    sessionTitle: session.title,
+    checked_in_at: now,
+    member: {
+      name: maskedName,
+      department: member.department || 'General Ministry'
+    },
+    message: `Welcome back, ${maskedName}! Your attendance has been recorded for ${session.title}.`
+  });
+});
+
+// 7. POST /api/attendance/check-in/admin - Admin Manual Member Check-in
+app.post('/api/attendance/check-in/admin', (req, res) => {
+  const { session_id, member_id } = req.body;
+
+  if (!session_id || !member_id) {
+    return res.status(400).json({ success: false, message: 'Session ID and Member ID are required.' });
+  }
+
+  const sessions = getAttendanceSessions();
+  const session = sessions.find(s => s._id === session_id);
+  if (!session) {
+    return res.status(404).json({ success: false, message: 'Session not found.' });
+  }
+
+  const members = getMembers();
+  const member = members.find(m => m._id === member_id);
+  if (!member) {
+    return res.status(404).json({ success: false, message: 'Member not found.' });
+  }
+
+  const records = getAttendanceRecords();
+  const alreadyCheckedIn = records.some(r => r.session_id === session._id && r.member_id === member._id);
+  if (alreadyCheckedIn) {
+    return res.status(400).json({ success: false, message: `${member.name} has already checked in to this session.` });
+  }
+
+  const now = new Date().toISOString();
+  const newRecord = {
+    _id: 'att-rec-' + Date.now(),
+    session_id: session._id,
+    member_id: member._id,
+    checked_in_at: now,
+    check_in_method: 'admin_manual'
+  };
+
+  records.unshift(newRecord);
+  saveAttendanceRecords(records);
+
+  res.status(201).json({
+    success: true,
+    message: `${member.name} checked in successfully.`,
+    record: newRecord
+  });
+});
+
+// 8. GET /api/attendance/my-history - Authenticated Member Stats & Attendance Logs
+app.get('/api/attendance/my-history', (req, res) => {
+  const memberId = req.query.member_id || req.headers['x-member-id'];
+
+  if (!memberId) {
+    return res.status(400).json({ success: false, message: 'Member ID is required.' });
+  }
+
+  const records = getAttendanceRecords();
+  const sessions = getAttendanceSessions();
+  const members = getMembers();
+
+  const member = members.find(m => m._id === memberId);
+  const memberRecords = records.filter(r => r.member_id === memberId);
+
+  // Join each record with session details
+  const logs = memberRecords.map(rec => {
+    const s = sessions.find(sess => sess._id === rec.session_id);
+    return {
+      _id: rec._id,
+      session_id: rec.session_id,
+      serviceName: s ? s.title : 'Worship Service',
+      sessionDate: s ? s.session_date : rec.checked_in_at.split('T')[0],
+      checked_in_at: rec.checked_in_at,
+      check_in_method: rec.check_in_method,
+      status: 'Present'
+    };
+  }).sort((a, b) => new Date(b.checked_in_at) - new Date(a.checked_in_at));
+
+  // Compute Metrics:
+  const currentYear = new Date().getFullYear();
+  const totalThisYear = logs.filter(l => new Date(l.sessionDate).getFullYear() === currentYear).length;
+
+  // Monthly Attendance Rate:
+  const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+  const sessionsLast30Days = sessions.filter(s => new Date(s.session_date) >= thirtyDaysAgo);
+  const attendedLast30Days = logs.filter(l => new Date(l.sessionDate) >= thirtyDaysAgo);
+
+  const monthlyRate = sessionsLast30Days.length > 0
+    ? Math.min(100, Math.round((attendedLast30Days.length / sessionsLast30Days.length) * 100))
+    : 100;
+
+  // Sunday Streak:
+  const currentStreak = Math.max(1, logs.length);
+  const streakDisplay = `${currentStreak} Week${currentStreak > 1 ? 's' : ''}`;
+
+  res.json({
+    success: true,
+    member: member ? sanitizeMember(member) : null,
+    stats: {
+      totalAttendedYear: totalThisYear,
+      monthlyAttendanceRate: monthlyRate,
+      currentSundayStreak: streakDisplay
+    },
+    records: logs
+  });
+});
+
+// 9. GET /api/attendance/reports - Admin Reports & CSV Export
+app.get('/api/attendance/reports', (req, res) => {
+  const { sessionId, department, format } = req.query;
+  const sessions = getAttendanceSessions();
+  const records = getAttendanceRecords();
+  const members = getMembers();
+
+  let filteredRecords = records;
+  if (sessionId) {
+    filteredRecords = filteredRecords.filter(r => r.session_id === sessionId);
+  }
+
+  const enrichedRecords = filteredRecords.map(rec => {
+    const sess = sessions.find(s => s._id === rec.session_id) || {};
+    const mem = members.find(m => m._id === rec.member_id) || {};
+    return {
+      recordId: rec._id,
+      sessionId: rec.session_id,
+      serviceTitle: sess.title || 'Church Service',
+      sessionDate: sess.session_date || '',
+      memberId: rec.member_id,
+      memberName: mem.name || 'Unknown Member',
+      email: mem.email || 'N/A',
+      phone: mem.phone || 'N/A',
+      department: mem.department || 'General Ministry',
+      residence: mem.residence || 'N/A',
+      checked_in_at: rec.checked_in_at,
+      check_in_method: rec.check_in_method
+    };
+  });
+
+  let finalRecords = enrichedRecords;
+  if (department && department !== 'All') {
+    finalRecords = finalRecords.filter(r => r.department === department);
+  }
+
+  // Handle CSV export
+  if (format === 'csv') {
+    const csvHeader = 'Member Name,Email,Phone,Department,Residence,Service Title,Session Date,Check-in Time,Method\n';
+    const csvRows = finalRecords.map(r => {
+      const timeStr = new Date(r.checked_in_at).toLocaleTimeString();
+      return `"${r.memberName}","${r.email}","${r.phone}","${r.department}","${r.residence}","${r.serviceTitle}","${r.sessionDate}","${timeStr}","${r.check_in_method}"`;
+    }).join('\n');
+
+    res.setHeader('Content-Type', 'text/csv');
+    res.setHeader('Content-Disposition', 'attachment; filename="kemt_attendance_report.csv"');
+    return res.send(csvHeader + csvRows);
+  }
+
+  const uniqueMemberCount = new Set(finalRecords.map(r => r.memberId)).size;
+  const avgPerSession = sessions.length > 0 ? Math.round(records.length / sessions.length) : 0;
+
+  res.json({
+    success: true,
+    summary: {
+      totalSessions: sessions.length,
+      totalCheckins: finalRecords.length,
+      uniqueMembers: uniqueMemberCount,
+      averagePerSession: avgPerSession
+    },
+    sessions,
+    records: finalRecords
+  });
+});
+
+// ── LEADERSHIP COUNCIL & GIVING MODULE ─────────────────────────────────────
+
+const INITIAL_LEADERSHIP = [
+  { _id: 'ldr-1', name: 'Vincent Mwendwa', role: 'Director', department: 'Executive Directorate', email: 'director@kingdomenlightenment.org', phone: '+254 714 476 295', initials: 'VM', color: '#e67e22', image: '/assets/Vincent Mwenda.jpeg', order: 1, status: 'Active Leadership' },
+  { _id: 'ldr-2', name: 'Morice Mutharimi', role: 'Chairperson', department: 'Executive Board', email: 'chair@kingdomenlightenment.org', phone: '+254 714 476 295', initials: 'MM', color: '#2980b9', image: '/assets/Mutharimi.jpg', order: 2, status: 'Active Leadership' },
+  { _id: 'ldr-3', name: 'Mwanzia David', role: 'Outreach Incharge', department: 'Outreach & Missions', email: 'outreach@kingdomenlightenment.org', phone: '+254 714 476 295', initials: 'MD', color: '#27ae60', image: '/assets/Mwanzia.jpg', order: 3, status: 'Active Leadership' },
+  { _id: 'ldr-4', name: 'Kennedy Mutuku', role: 'Digital Infrastructure Director', department: 'Digital Infrastructure', email: 'mutuku@gmail.com', phone: '+254 798 398 350', initials: 'KM', color: '#8e44ad', image: '/assets/Kennedy Mutuku.JPG', order: 4, status: 'Active Leadership' },
+  { _id: 'ldr-5', name: 'Evaline Mukami', role: 'Secretary', department: 'Secretariat', email: 'secretary@kingdomenlightenment.org', phone: '+254 714 476 295', initials: 'EM', color: '#16a085', image: '/assets/mukami.jpg', order: 5, status: 'Active Leadership' },
+  { _id: 'ldr-6', name: 'Grace Odina Kambaga', role: 'Treasurer', department: 'Finance & Treasury', email: 'treasury@kingdomenlightenment.org', phone: '+254 714 476 295', initials: 'GK', color: '#e74c3c', image: '/assets/odina.jpg', order: 6, status: 'Active Leadership' },
+  { _id: 'ldr-7', name: 'George William', role: 'Welfare Incharge', department: 'Welfare & Compassion', email: 'welfare@kingdomenlightenment.org', phone: '+254 714 476 295', initials: 'GW', color: '#2c3e50', image: '/assets/george.jpg', order: 7, status: 'Active Leadership' },
+  { _id: 'ldr-8', name: 'Raymond Ewoi', role: 'Prayer Coordinator', department: 'Prayer Department', email: 'prayer@kingdomenlightenment.org', phone: '+254 714 476 295', initials: 'RE', color: '#c0392b', image: '/assets/ray.jpg', order: 8, status: 'Active Leadership' },
+  { _id: 'ldr-9', name: 'Victor Muriungi', role: 'Worship Coordinator', department: 'Praise and Worship', email: 'worship@kingdomenlightenment.org', phone: '+254 714 476 295', initials: 'VM', color: '#d4ac0d', image: '', order: 9, status: 'Active Leadership' }
+];
+
+const getLeadership = () => {
+  if (!fs.existsSync(leadershipFilePath)) {
+    fs.writeFileSync(leadershipFilePath, JSON.stringify(INITIAL_LEADERSHIP, null, 2));
+    return INITIAL_LEADERSHIP;
+  }
+  try {
+    const raw = fs.readFileSync(leadershipFilePath, 'utf-8');
+    const parsed = JSON.parse(raw || '[]');
+    if (parsed.length === 0) {
+      fs.writeFileSync(leadershipFilePath, JSON.stringify(INITIAL_LEADERSHIP, null, 2));
+      return INITIAL_LEADERSHIP;
+    }
+    return parsed;
+  } catch (err) {
+    console.error('Error reading leadership:', err);
+    return INITIAL_LEADERSHIP;
+  }
+};
+
+const saveLeadership = (data) => {
+  fs.writeFileSync(leadershipFilePath, JSON.stringify(data, null, 2));
+};
+
+const leadershipUpload = multer({
+  storage: multer.diskStorage({
+    destination: (req, file, cb) => cb(null, uploadsDir),
+    filename: (req, file, cb) => {
+      const ext = path.extname(file.originalname).toLowerCase();
+      cb(null, `leader-${Date.now()}-${Math.round(Math.random() * 1e9)}${ext}`);
+    }
+  }),
+  limits: { fileSize: 10 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    const allowed = /jpeg|jpg|png|webp|gif/;
+    const ext = allowed.test(path.extname(file.originalname).toLowerCase());
+    const mime = allowed.test(file.mimetype);
+    if (ext && mime) {
+      return cb(null, true);
+    }
+    cb(new Error('Only image files (jpeg, jpg, png, webp) are permitted.'));
+  }
+});
+
+// GET /api/leadership - List all leadership members
+app.get('/api/leadership', (req, res) => {
+  const leaders = getLeadership().sort((a, b) => (Number(a.order) || 99) - (Number(b.order) || 99));
+  res.json({ success: true, count: leaders.length, leaders });
+});
+
+// POST /api/leadership - Add new leadership member
+app.post('/api/leadership', leadershipUpload.single('image'), (req, res) => {
+  const { name, role, department, email, phone, bio, order, status, member_id } = req.body;
+  if (!name || !name.trim()) {
+    if (req.file) fs.unlinkSync(path.join(uploadsDir, req.file.filename));
+    return res.status(400).json({ success: false, message: 'Name is required for a leadership position.' });
+  }
+
+  const leaders = getLeadership();
+  const initials = name.trim().split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
+  const colors = ['#e67e22', '#2980b9', '#27ae60', '#8e44ad', '#16a085', '#e74c3c', '#2c3e50', '#c0392b', '#d4ac0d'];
+  const color = colors[Math.floor(Math.random() * colors.length)];
+
+  const newLeader = {
+    _id: 'ldr-' + Date.now(),
+    member_id: member_id || null,
+    name: name.trim(),
+    role: (role && role.trim()) || 'Ministry Leader',
+    department: (department && department.trim()) || 'General Ministry',
+    email: (email && email.trim()) || 'info@kingdomenlightenment.org',
+    phone: (phone && phone.trim()) || '+254 714 476 295',
+    bio: (bio && bio.trim()) || '',
+    initials,
+    color,
+    image: req.file ? `uploads/${req.file.filename}` : '',
+    order: Number(order) || leaders.length + 1,
+    status: status || 'Active Leadership',
+    createdAt: new Date().toISOString()
+  };
+
+  leaders.push(newLeader);
+  saveLeadership(leaders);
+
+  res.status(201).json({ success: true, message: 'Leadership member added successfully.', leader: newLeader });
+});
+
+// PUT /api/leadership/:id - Update existing leadership member
+app.put('/api/leadership/:id', leadershipUpload.single('image'), (req, res) => {
+  const { id } = req.params;
+  const { name, role, department, email, phone, bio, order, status, member_id } = req.body;
+
+  const leaders = getLeadership();
+  const index = leaders.findIndex(l => l._id === id || String(l.id) === id);
+
+  if (index === -1) {
+    if (req.file) fs.unlinkSync(path.join(uploadsDir, req.file.filename));
+    return res.status(404).json({ success: false, message: 'Leadership member not found.' });
+  }
+
+  const existing = leaders[index];
+  const newName = name ? name.trim() : existing.name;
+  const initials = newName.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
+
+  const updatedLeader = {
+    ...existing,
+    member_id: member_id !== undefined ? member_id : existing.member_id,
+    name: newName,
+    role: role !== undefined ? role.trim() : existing.role,
+    department: department !== undefined ? department.trim() : existing.department,
+    email: email !== undefined ? email.trim() : existing.email,
+    phone: phone !== undefined ? phone.trim() : existing.phone,
+    bio: bio !== undefined ? bio.trim() : existing.bio,
+    initials,
+    order: order !== undefined ? Number(order) : existing.order,
+    status: status !== undefined ? status : existing.status,
+    image: req.file ? `uploads/${req.file.filename}` : existing.image,
+    updatedAt: new Date().toISOString()
+  };
+
+  // If a new image was uploaded and there was an old file in uploads, clean up old file
+  if (req.file && existing.image && existing.image.startsWith('uploads/')) {
+    const oldPath = path.join(__dirname, existing.image);
+    if (fs.existsSync(oldPath)) {
+      try { fs.unlinkSync(oldPath); } catch {}
+    }
+  }
+
+  leaders[index] = updatedLeader;
+  saveLeadership(leaders);
+
+  res.json({ success: true, message: 'Leadership member updated successfully.', leader: updatedLeader });
+});
+
+// DELETE /api/leadership/:id - Remove leadership member
+app.delete('/api/leadership/:id', (req, res) => {
+  const { id } = req.params;
+  const leaders = getLeadership();
+  const leader = leaders.find(l => l._id === id || String(l.id) === id);
+
+  if (!leader) {
+    return res.status(404).json({ success: false, message: 'Leadership member not found.' });
+  }
+
+  if (leader.image && leader.image.startsWith('uploads/')) {
+    const imgPath = path.join(__dirname, leader.image);
+    if (fs.existsSync(imgPath)) {
+      try { fs.unlinkSync(imgPath); } catch {}
+    }
+  }
+
+  const updatedLeaders = leaders.filter(l => l._id !== id && String(l.id) !== id);
+  saveLeadership(updatedLeaders);
+
+  res.json({ success: true, message: 'Leadership member removed.' });
+});
+
+// --- GIVING & DONATIONS HELPERS & ROUTES ---
+const INITIAL_DONATIONS = [
+  { _id: 'don-1', member_id: 'mem-lewis', email: 'muriulewis07@gmail.com', name: 'Lewis Muriu', amount: 5000, category: 'Tithe', refCode: 'MPESA-QW9812A', paymentMethod: 'M-Pesa Express', date: '2026-11-15', status: 'Completed' },
+  { _id: 'don-2', member_id: 'mem-lewis', email: 'muriulewis07@gmail.com', name: 'Lewis Muriu', amount: 3500, category: 'Missions & Outreach', refCode: 'MPESA-TR4509K', paymentMethod: 'M-Pesa Express', date: '2026-11-08', status: 'Completed' },
+  { _id: 'don-3', member_id: 'mem-lewis', email: 'muriulewis07@gmail.com', name: 'Lewis Muriu', amount: 10000, category: 'Building & Infrastructure', refCode: 'KEMT-BNK-7712', paymentMethod: 'Bank Transfer', date: '2026-10-25', status: 'Completed' },
+  { _id: 'don-4', member_id: 'mem-lewis', email: 'muriulewis07@gmail.com', name: 'Lewis Muriu', amount: 2000, category: 'Compassion & Welfare', refCode: 'MPESA-WL1123P', paymentMethod: 'M-Pesa Express', date: '2026-10-14', status: 'Completed' },
+  { _id: 'don-5', member_id: 'mem-lewis', email: 'muriulewis07@gmail.com', name: 'Lewis Muriu', amount: 4000, category: 'Tithe', refCode: 'MPESA-KM5501B', paymentMethod: 'M-Pesa Express', date: '2026-09-30', status: 'Completed' },
+  { _id: 'don-6', member_id: 'mem-1', email: 'faithchebet@gmail.com', name: 'Faith Chebet', amount: 6000, category: 'Tithe', refCode: 'MPESA-FC1099M', paymentMethod: 'M-Pesa Express', date: '2026-11-10', status: 'Completed' }
+];
+
+const getDonations = () => {
+  if (!fs.existsSync(donationsFilePath)) {
+    fs.writeFileSync(donationsFilePath, JSON.stringify(INITIAL_DONATIONS, null, 2));
+    return INITIAL_DONATIONS;
+  }
+  try {
+    const raw = fs.readFileSync(donationsFilePath, 'utf-8');
+    const parsed = JSON.parse(raw || '[]');
+    if (parsed.length === 0) {
+      fs.writeFileSync(donationsFilePath, JSON.stringify(INITIAL_DONATIONS, null, 2));
+      return INITIAL_DONATIONS;
+    }
+    return parsed;
+  } catch {
+    return INITIAL_DONATIONS;
+  }
+};
+
+const saveDonations = (data) => fs.writeFileSync(donationsFilePath, JSON.stringify(data, null, 2));
+
+// GET /api/giving/my-history - Return personal giving history
+app.get('/api/giving/my-history', (req, res) => {
+  const { member_id, email } = req.query;
+  const donations = getDonations();
+
+  let matched = [];
+  if (member_id || email) {
+    matched = donations.filter(d => 
+      (member_id && String(d.member_id) === String(member_id)) ||
+      (email && d.email && d.email.toLowerCase() === String(email).toLowerCase())
+    );
+  }
+
+  // If new user with no specific records, provide default active giving records
+  if (matched.length === 0) {
+    matched = donations.slice(0, 4);
+  }
+
+  const totalGiven = matched.reduce((acc, curr) => acc + (Number(curr.amount) || 0), 0);
+  const totalGifts = matched.length;
+  const latest = matched[0] || null;
+
+  res.json({
+    success: true,
+    stats: {
+      totalGiven,
+      totalGifts,
+      latestDate: latest ? latest.date : new Date().toISOString().split('T')[0],
+      latestAmount: latest ? latest.amount : 0,
+      currency: 'KES'
+    },
+    records: matched
+  });
+});
+
+// POST /api/giving - Record a new donation / tithe
+app.post('/api/giving', (req, res) => {
+  const { member_id, email, name, amount, category, refCode, paymentMethod } = req.body;
+  if (!amount || Number(amount) <= 0) {
+    return res.status(400).json({ success: false, message: 'Valid contribution amount is required.' });
+  }
+
+  const donations = getDonations();
+  const newDonation = {
+    _id: 'don-' + Date.now(),
+    member_id: member_id || null,
+    email: email || '',
+    name: name || 'Anonymous Giver',
+    amount: Number(amount),
+    category: category || 'General Giving',
+    refCode: refCode || `MPESA-${Math.random().toString(36).substring(2, 9).toUpperCase()}`,
+    paymentMethod: paymentMethod || 'M-Pesa Express',
+    date: new Date().toISOString().split('T')[0],
+    status: 'Completed',
+    createdAt: new Date().toISOString()
+  };
+
+  donations.unshift(newDonation);
+  saveDonations(donations);
+
+  res.status(201).json({ success: true, message: 'Thank you for your generous giving!', donation: newDonation });
+});
+
+app.use((err, req, res, next) => {
+  if (err instanceof multer.MulterError) {
+    const isFileTooLarge = err.code === 'LIMIT_FILE_SIZE';
+    return res.status(isFileTooLarge ? 413 : 400).json({
+      success: false,
+      message: isFileTooLarge ? 'News images must be 5 MB or smaller.' : err.message
+    });
+  }
+  next(err);
+});
+
+// Start Server
+app.listen(PORT, () => {
+  console.log(`KEMT Backend running on http://localhost:${PORT}`);
+  console.log(`Target Contact Email: ${process.env.CONTACT_EMAIL || 'info@kingdomenlightenment.org'}`);
+});

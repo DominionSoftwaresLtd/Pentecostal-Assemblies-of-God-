@@ -1,0 +1,515 @@
+.creative-hero {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.creative-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* Shrink the container to only cover the left side, so the photo fits end-to-end */
+  width: 61%; 
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  z-index: 0;
+  overflow: hidden; /* For Ken Burns */
+  /* Re-calculated clip path for the new 61% width container */
+  clip-path: polygon(0 0, 100% 0, 81.96% 100%, 0 100%);
+}
+
+.creative-bg-image.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* Static Right Half Image */
+.creative-bg-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 3; /* Fixed: Must be higher than creative-bg-image.active (which is 2) */
+  /* Slant border leaning the other way (inclining to the right) */
+  clip-path: polygon(22% 0, 100% 0, 100% 100%, 0 100%);
+  border-left: 2px solid var(--primary-color);
+}
+
+.bg-right-img {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-right-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(230, 126, 34, 0.9) 0%, rgba(211, 84, 0, 0.9) 100%); /* Bright vibrant theme orange */
+}
+
+/* Ken Burns Effect */
+.ken-burns-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Use cover so the photo completely fills the background area without blank space */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: scale(1);
+}
+
+.creative-bg-image.active .ken-burns-img {
+  animation: kenBurns 6s linear forwards;
+}
+
+/* Pause the animation if hovered */
+.creative-hero.is-paused .creative-bg-image.active .ken-burns-img {
+  animation-play-state: paused;
+}
+
+@keyframes kenBurns {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.08); /* Subtle zoom */
+  }
+}
+
+.bg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Lighter gradient so the background photos are clear and visible */
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.2) 50%, transparent 100%);
+  z-index: 2;
+}
+
+.creative-container {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 100%;
+}
+
+/* --- Left Side: Text --- */
+.creative-text-col {
+  width: 55%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.text-wrapper {
+  position: relative;
+  height: 220px; 
+}
+
+.text-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  pointer-events: none;
+}
+
+.text-slide.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition-delay: 0.3s;
+}
+
+/* Clean Floating Text without cards or pill badges */
+.text-content-clean {
+  max-width: 500px;
+}
+
+.slide-title {
+  font-size: 2.7rem;
+  font-weight: 900;
+  line-height: 1.15;
+  color: #ffffff;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-family: var(--font-secondary, sans-serif);
+  letter-spacing: 0.5px;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.9), 0 1px 4px rgba(0, 0, 0, 0.8);
+  -webkit-text-stroke: 0;
+}
+
+.slide-desc {
+  font-size: 1.15rem;
+  line-height: 1.4;
+  color: #ffffff;
+  margin-bottom: 0;
+  font-weight: 700;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+  max-width: 92%;
+}
+
+/* Action Buttons: Positioned fixed at the bottom left of hero, right above the KEMT Impact bar */
+.hero-fixed-bottom-actions {
+  position: absolute;
+  bottom: 25px;
+  left: 0;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  z-index: 20;
+}
+
+.btn-modern-primary {
+  background-color: #e67e22;
+  color: white;
+  width: 150px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  line-height: 1.2;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(230, 126, 34, 0.35);
+  border: 2px solid #e67e22;
+  box-sizing: border-box;
+}
+
+.btn-modern-primary:hover {
+  background-color: #d35400;
+  border-color: #d35400;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(230, 126, 34, 0.5);
+  color: white;
+}
+
+.btn-modern-outline {
+  width: 150px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  line-height: 1.2;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(6px);
+  box-sizing: border-box;
+}
+
+.btn-modern-outline:hover {
+  background-color: #ffffff;
+  color: #111111;
+  border-color: #ffffff;
+}
+
+/* --- Controls --- */
+.slider-controls-modern {
+  display: none !important;
+}
+
+.ctrl-btn {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ctrl-btn:hover {
+  background: #e67e22;
+}
+
+.dots-modern {
+  display: flex;
+  gap: 10px;
+}
+
+.dot-m {
+  width: 30px; /* Wider for progress bar */
+  height: 6px;
+  border-radius: 3px;
+  background-color: rgba(255,255,255,0.2);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.dot-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background-color: #e67e22;
+}
+
+/* Animated Progress Indicator */
+.dot-m.active .dot-progress {
+  animation: progressFill 6s linear forwards;
+}
+
+.creative-hero.is-paused .dot-m.active .dot-progress {
+  animation-play-state: paused;
+}
+
+@keyframes progressFill {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* --- Right Side: The Visual "Fingers" Queue --- */
+.creative-visual-col {
+  width: 45%;
+  height: 100%;
+  position: relative;
+  transform: translateX(5%);
+}
+
+.fingers-container {
+  position: absolute;
+  left: 75%; /* Center of the right 50% of the screen */
+  top: 50%;
+  width: auto;
+  transform: translate(-50%, -50%) rotate(25deg);
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.finger {
+  width: 110px;
+  height: 520px; 
+  border-radius: 100px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: none; /* removed red shadow */
+  border: none; /* removed red border */
+}
+
+.finger-img {
+  position: absolute;
+  /* Reduced size so the photos aren't overly zoomed in */
+  width: 350px;
+  height: 650px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-25deg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  animation: slideInThumb 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes slideInThumb {
+  0% {
+    transform: translate(-30%, -50%) rotate(-25deg);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-25deg);
+    opacity: 1;
+  }
+}
+
+.finger-1 {
+  height: 420px;
+  transform: translateY(20px);
+  background: #ffdd00; /* bright neon yellow */
+}
+.finger-2 {
+  height: 520px;
+  transform: translateY(-30px);
+  background: #00bfff; /* bright cyan */
+}
+.finger-3 {
+  height: 420px;
+  transform: translateY(20px);
+  background: #ffdd00; /* bright neon yellow */
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 1024px) {
+  .slide-title {
+    font-size: 2.5rem;
+  }
+  .finger {
+    width: 100px;
+  }
+  .creative-text-col {
+    width: 60%;
+  }
+}
+
+@media (max-width: 768px) {
+  .creative-hero {
+    height: 340px;
+    min-height: unset;
+    overflow: hidden;
+  }
+
+  .creative-bg-image {
+    width: 100%;
+    clip-path: none;
+  }
+
+  .creative-bg-right {
+    display: none;
+  }
+
+  /* Hide the full text block on mobile — fingers carry the branding */
+  .creative-container {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    height: auto;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 15;
+  }
+
+  .creative-text-col {
+    width: auto;
+    text-align: center;
+  }
+
+  /* Hide all text content; only show the nav dots */
+  .text-wrapper {
+    display: none;
+  }
+
+  /* Hide nav controls on mobile — swipe handles navigation */
+  .slider-controls-modern {
+    display: none;
+  }
+
+  /* Full-opacity fingers centred in the hero */
+  .fingers-container {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(25deg);
+    gap: 10px;
+    z-index: 8;
+    opacity: 1;
+  }
+
+  .finger {
+    width: 52px;
+    box-shadow: none;
+    border: none;
+  }
+
+  .finger-1 {
+    height: 240px;
+    transform: translateY(20px);
+    background: #ffdd00; /* bright neon yellow */
+  }
+  .finger-2 {
+    height: 300px;
+    transform: translateY(-30px);
+    background: #00bfff; /* bright cyan */
+  }
+  .finger-3 {
+    height: 240px;
+    transform: translateY(20px);
+    background: #ffdd00; /* bright neon yellow */
+  }
+
+  .hero-fixed-bottom-actions {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    justify-content: center;
+    width: 100%;
+    margin-top: 15px;
+  }
+}
+
+/* Hide photos inside fingers on desktop & mobile so solid colors and typewriter words display */
+.finger-img {
+  display: none;
+}
+
+/* ============================
+   FINGER WORD LABELS (Desktop & Mobile)
+   ============================ */
+.finger-word {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* 180deg flips writing-mode so word reads upward (bottom→top) slanting with the finger */
+  transform: translate(-50%, -50%) rotate(180deg);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  color: #000000;
+  text-transform: uppercase;
+  text-shadow: none;
+  -webkit-text-stroke: 0;
+  white-space: nowrap;
+  z-index: 10;
+  background: none;
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .finger-word {
+    font-size: 1.25rem;
+  }
+}
