@@ -87,8 +87,8 @@ const Ministries = () => {
         <div className="container">
           <div className="banner-content">
             <span className="banner-tag">Serving Christ Together</span>
-            <h1>Departments &amp; Ministries</h1>
-            <p>Pentecostal Assemblies of God - Ngungo Assembly &bull; Headquarter Church for Mbeere District</p>
+            <h1>Our Departments</h1>
+            <p>Pentecostal Assemblies of God - Ngungo Assembly</p>
           </div>
         </div>
       </section>
@@ -123,11 +123,11 @@ const Ministries = () => {
       </div>
 
       {/* Order of Services Quick Glance */}
-      <section style={{ background: '#fdf2e9', borderBottom: '1px solid #fed7aa', padding: '24px 0' }}>
+      <section style={{ background: '#eff6ff', borderBottom: '1px solid #bfdbfe', padding: '24px 0' }}>
         <div className="container">
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
             <div>
-              <span style={{ color: '#E87D1E', fontWeight: 800, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              <span style={{ color: '#2563EB', fontWeight: 800, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                 <i className="fas fa-calendar-check"></i> Order of Services at Ngungo Sanctuary
               </span>
               <div style={{ color: '#1e293b', fontWeight: 700, fontSize: '1rem', marginTop: '2px' }}>
@@ -154,7 +154,7 @@ const Ministries = () => {
             </div>
             
             <div className="dept-content-sleek">
-              <span style={{ color: '#E87D1E', fontWeight: 800, textTransform: 'uppercase', fontSize: '0.75rem', letterSpacing: '0.5px' }}>Department #1</span>
+              <span style={{ color: '#2563EB', fontWeight: 800, textTransform: 'uppercase', fontSize: '0.75rem', letterSpacing: '0.5px' }}>Department #1</span>
               <h2 className="section-title">Women Department</h2>
               <p className="lead">
                 The Women Department unites mothers, sisters, and young women in faith, fervent intercessory prayer, and compassionate support. We foster godly homes and mentor women to thrive spiritually, socially, and economically.
@@ -162,7 +162,7 @@ const Ministries = () => {
               
               <blockquote className="sleek-quote">
                 "Charm is deceptive, and beauty is fleeting; but a woman who fears the LORD is to be praised."
-                <div style={{ fontSize: '0.85rem', color: '#E87D1E', fontWeight: 700, marginTop: '6px' }}>— Proverbs 31:30 (NIV)</div>
+                <div style={{ fontSize: '0.85rem', color: '#2563EB', fontWeight: 700, marginTop: '6px' }}>— Proverbs 31:30 (NIV)</div>
               </blockquote>
 
               <div className="sleek-prayer-box">
@@ -191,7 +191,7 @@ const Ministries = () => {
               
               <blockquote className="sleek-quote">
                 "Be on your guard; stand firm in the faith; be courageous; be strong. Do everything in love."
-                <div style={{ fontSize: '0.85rem', color: '#E87D1E', fontWeight: 700, marginTop: '6px' }}>— 1 Corinthians 16:13-14 (NIV)</div>
+                <div style={{ fontSize: '0.85rem', color: '#2563EB', fontWeight: 700, marginTop: '6px' }}>— 1 Corinthians 16:13-14 (NIV)</div>
               </blockquote>
 
               <div className="sleek-prayer-box">
@@ -230,7 +230,7 @@ const Ministries = () => {
               
               <blockquote className="sleek-quote">
                 "Don't let anyone look down on you because you are young, but set an example for the believers in speech, in conduct, in love, in faith and in purity."
-                <div style={{ fontSize: '0.85rem', color: '#E87D1E', fontWeight: 700, marginTop: '6px' }}>— 1 Timothy 4:12 (NIV)</div>
+                <div style={{ fontSize: '0.85rem', color: '#2563EB', fontWeight: 700, marginTop: '6px' }}>— 1 Timothy 4:12 (NIV)</div>
               </blockquote>
 
               <div className="sleek-prayer-box">
@@ -259,7 +259,7 @@ const Ministries = () => {
               
               <blockquote className="sleek-quote">
                 "Start children off on the way they should go, and even when they are old they will not turn from it."
-                <div style={{ fontSize: '0.85rem', color: '#E87D1E', fontWeight: 700, marginTop: '6px' }}>— Proverbs 22:6 (NIV)</div>
+                <div style={{ fontSize: '0.85rem', color: '#2563EB', fontWeight: 700, marginTop: '6px' }}>— Proverbs 22:6 (NIV)</div>
               </blockquote>
 
               <div className="sleek-prayer-box">
@@ -298,7 +298,7 @@ const Ministries = () => {
               
               <blockquote className="sleek-quote">
                 "God is spirit, and his worshipers must worship in the Spirit and in truth."
-                <div style={{ fontSize: '0.85rem', color: '#E87D1E', fontWeight: 700, marginTop: '6px' }}>— John 4:24 (NIV)</div>
+                <div style={{ fontSize: '0.85rem', color: '#2563EB', fontWeight: 700, marginTop: '6px' }}>— John 4:24 (NIV)</div>
               </blockquote>
 
               <div className="sleek-prayer-box">
@@ -327,7 +327,7 @@ const Ministries = () => {
               
               <blockquote className="sleek-quote">
                 "Praise him with the sounding of the trumpet, praise him with the harp and lyre, praise him with timbrel and dancing, praise him with the strings and pipe."
-                <div style={{ fontSize: '0.85rem', color: '#E87D1E', fontWeight: 700, marginTop: '6px' }}>— Psalm 150:3-4 (NIV)</div>
+                <div style={{ fontSize: '0.85rem', color: '#2563EB', fontWeight: 700, marginTop: '6px' }}>— Psalm 150:3-4 (NIV)</div>
               </blockquote>
 
               <div className="sleek-prayer-box">
@@ -366,7 +366,7 @@ const Ministries = () => {
               
               <blockquote className="sleek-quote">
                 "Let the message of Christ dwell among you richly as you teach and admonish one another with all wisdom through psalms, hymns, and songs from the Spirit, singing to God with gratitude in your hearts."
-                <div style={{ fontSize: '0.85rem', color: '#E87D1E', fontWeight: 700, marginTop: '6px' }}>— Colossians 3:16 (NIV)</div>
+                <div style={{ fontSize: '0.85rem', color: '#2563EB', fontWeight: 700, marginTop: '6px' }}>— Colossians 3:16 (NIV)</div>
               </blockquote>
 
               <div className="sleek-prayer-box">
@@ -395,7 +395,7 @@ const Ministries = () => {
               
               <blockquote className="sleek-quote">
                 "Better is one day in your courts than a thousand elsewhere; I would rather be a doorkeeper in the house of my God than dwell in the tents of the wicked."
-                <div style={{ fontSize: '0.85rem', color: '#E87D1E', fontWeight: 700, marginTop: '6px' }}>— Psalm 84:10 (NIV)</div>
+                <div style={{ fontSize: '0.85rem', color: '#2563EB', fontWeight: 700, marginTop: '6px' }}>— Psalm 84:10 (NIV)</div>
               </blockquote>
 
               <div className="sleek-prayer-box">

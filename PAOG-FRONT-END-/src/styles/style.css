@@ -5,18 +5,18 @@
 
 /* CSS Variables */
 :root {
-    --primary-color: #e67e22;
-    --primary-dark: #d35400;
-    --secondary-color: #f39c12;
-    --secondary-light: #f1c40f;
-    --accent-color: #c0392b;
+    --primary-color: #2563EB;
+    --primary-dark: #1E3A8A;
+    --secondary-color: #3B82F6;
+    --secondary-light: #60A5FA;
+    --accent-color: #0284C7;
     --text-color: #333333;
     --text-light: #666666;
     --text-white: #ffffff;
-    --bg-light: #fff9f0;
+    --bg-light: #EFF6FF;
     --bg-white: #ffffff;
-    --bg-dark: #2c2c2c;
-    --border-color: #e0e0e0;
+    --bg-dark: #1E293B;
+    --border-color: #E2E8F0;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
     --transition: all 0.3s ease;
@@ -5793,17 +5793,17 @@ p {
 }
 
 .gallery-filter-btn:hover {
-    background: #fff3e6;
-    color: #E87D1E;
-    border-color: #E87D1E;
+    background: #eff6ff;
+    color: #2563EB;
+    border-color: #2563EB;
     transform: translateY(-1px);
 }
 
 .gallery-filter-btn--active {
-    background: #E87D1E !important;
+    background: #2563EB !important;
     color: #ffffff !important;
-    border-color: #E87D1E !important;
-    box-shadow: 0 4px 14px rgba(232, 125, 30, 0.35);
+    border-color: #2563EB !important;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
 }
 
 .gallery-filter-btn__label {
@@ -6100,7 +6100,7 @@ p {
     font-size: 0.8rem;
     font-weight: 600;
     color: #ffffff;
-    background: rgba(232, 125, 30, 0.85);
+    background: rgba(37, 99, 235, 0.85);
     padding: 0.35rem 0.85rem;
     border-radius: 6px;
     backdrop-filter: blur(4px);
@@ -6190,9 +6190,9 @@ p {
 
 .gallery-lightbox__badge {
     display: inline-block;
-    background: rgba(232, 125, 30, 0.2);
-    color: #ffaa5b;
-    border: 1px solid rgba(232, 125, 30, 0.4);
+    background: rgba(37, 99, 235, 0.2);
+    color: #60a5fa;
+    border: 1px solid rgba(37, 99, 235, 0.4);
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
     font-size: 0.75rem;
@@ -6242,8 +6242,8 @@ p {
 }
 
 .gallery-lightbox__close:hover {
-    background: rgba(232, 125, 30, 0.9);
-    border-color: #E87D1E;
+    background: rgba(37, 99, 235, 0.9);
+    border-color: #2563EB;
     transform: scale(1.05);
 }
 
@@ -6275,8 +6275,8 @@ p {
 }
 
 .gallery-lightbox__nav:hover {
-    background: rgba(232, 125, 30, 0.9);
-    border-color: #E87D1E;
+    background: rgba(37, 99, 235, 0.9);
+    border-color: #2563EB;
     transform: translateY(-50%) scale(1.08);
 }
 

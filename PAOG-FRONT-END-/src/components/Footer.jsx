@@ -13,13 +13,13 @@ const Footer = () => {
                                 <h3 style={{ color: '#fff', fontSize: '1.25rem', fontWeight: 800, margin: '0 0 6px 0', letterSpacing: '-0.3px' }}>
                                     PENTECOSTAL ASSEMBLIES OF GOD
                                 </h3>
-                                <div style={{ color: '#E87D1E', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '12px' }}>
-                                    Ngungo Assembly • Mbeere District HQ
+                                <div style={{ color: '#60A5FA', fontSize: '0.9rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '12px' }}>
+                                    NGUNGO ASSEMBLY
                                 </div>
                             </div>
-                            <p>Headquarter church for Mbeere District under the spiritual leadership of Bishop Rev Clement Simba. Worshiping God in Spirit and Truth, and serving assemblies across Mbeere District and Kyuso, Kitui County.</p>
-                            <div style={{ marginTop: '14px', padding: '10px 14px', background: 'rgba(232, 125, 30, 0.12)', border: '1px solid rgba(232, 125, 30, 0.3)', borderRadius: '8px' }}>
-                                <div style={{ color: '#E87D1E', fontWeight: 700, fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Giving via M-Pesa</div>
+                            <p>Worshiping God in Spirit and Truth, advancing the Gospel of Jesus Christ, and serving as the fellowship center for assemblies across Mbeere District and Kyuso, Kitui County under Bishop Rev Clement Simba.</p>
+                            <div style={{ marginTop: '14px', padding: '10px 14px', background: 'rgba(37, 99, 235, 0.15)', border: '1px solid rgba(59, 130, 246, 0.35)', borderRadius: '8px' }}>
+                                <div style={{ color: '#60A5FA', fontWeight: 700, fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Giving via M-Pesa</div>
                                 <div style={{ color: '#fff', fontSize: '0.88rem', marginTop: '2px' }}><strong>Paybill:</strong> 4136387 &bull; <strong>Acc:</strong> YOUR NAME</div>
                             </div>
                         </div>
@@ -36,7 +36,7 @@ const Footer = () => {
                             </ul>
                         </div>
                         <div className="footer-col">
-                            <h4>Our Departments</h4>
+                            <h4>Departments</h4>
                             <ul>
                                 <li><Link to="/ministries#women">Women Department</Link></li>
                                 <li><Link to="/ministries#men">Men Department</Link></li>
@@ -84,7 +84,7 @@ const Footer = () => {
                                 target="_blank" 
                                 rel="noopener noreferrer"
                                 style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.875rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '5px', transition: 'color 0.3s ease' }}
-                                onMouseEnter={e => e.currentTarget.style.color = '#E87D1E'}
+                                onMouseEnter={e => e.currentTarget.style.color = '#3B82F6'}
                                 onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.6)'}
                                 title="Dominion Softwares Ltd - Custom Software & Web Engineering"
                             >

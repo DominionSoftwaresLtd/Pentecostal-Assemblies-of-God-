@@ -1,21 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Satoshi:wght@400;500;700;900&display=swap');
 
 :root {
-  /* KEMT Brand-Aligned Admin Colors */
+  /* PAOG Brand Admin Colors */
   --admin-bg-primary: #F8FAFC;
-  --admin-sidebar-bg: #1E293B;
+  --admin-sidebar-bg: #0F172A;
   --admin-sidebar-text: #94A3B8;
   --admin-sidebar-text-active: #FFFFFF;
-  --admin-sidebar-active-bg: #334155;
+  --admin-sidebar-active-bg: #1E3A8A;
   
   --admin-card-bg: #FFFFFF;
   --admin-text-main: #1E293B;
   --admin-text-muted: #64748B;
   --admin-border-color: #E2E8F0;
   
-  --admin-primary: #E87D1E;
-  --admin-primary-hover: #D46B10;
-  --admin-secondary: #F59E0B;
+  --admin-primary: #2563EB;
+  --admin-primary-hover: #1D4ED8;
+  --admin-secondary: #3B82F6;
   --admin-success: #10B981;
   --admin-danger: #EF4444;
   

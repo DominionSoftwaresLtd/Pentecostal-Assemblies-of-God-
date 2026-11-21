@@ -16,7 +16,7 @@ const slides = [
     image: carousel1,
     subtitle: "Welcome to",
     title: "P.A.O.G NGUNGO ASSEMBLY",
-    text: "Mbeere District Headquarter Church — Bishop Clement Simba, Overseer",
+    text: "Pentecostal Assemblies of God - Ngungo Assembly — Bishop Clement Simba, Overseer",
     btn1: { text: "About Our Church", link: "/about" },
     btn2: { text: "Order of Services", link: "/about#order-of-services" }
   },
@@ -46,18 +46,18 @@ const slides = [
   },
   {
     image: carousel5,
-    subtitle: "Active Departments",
-    title: "WOMEN, MEN & YOUTH",
-    text: "Equipping Every Believer for Kingdom Impact & Family Growth",
+    subtitle: "Church Community",
+    title: "OUR DEPARTMENTS",
+    text: "Women, Men, Youth, Sunday School, Praise, Instrumentalists, Choir & Ushering",
     btn1: { text: "Our Departments", link: "/ministries" },
-    btn2: { text: "Join a Ministry", link: "/contact" }
+    btn2: { text: "Join a Department", link: "/contact" }
   },
   {
     image: carousel6,
     subtitle: "Anointed Music",
-    title: "PRAISE & INSTRUMENTS",
+    title: "MUSIC & PRAISE",
     text: "Praise & Worship, Dedicated Instrumentalists, Church Choir & Ushering",
-    btn1: { text: "Ministries", link: "/ministries#worship" },
+    btn1: { text: "Our Departments", link: "/ministries#worship" },
     btn2: { text: "Gallery", link: "/gallery" }
   },
   {

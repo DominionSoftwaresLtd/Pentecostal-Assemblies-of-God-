@@ -142,7 +142,7 @@ const Navbar = () => {
                                 <img src={logoImg} alt="Pentecostal Assemblies of God - Ngungo Assembly" className="logo-img" />
                                 <div className="logo-name">
                                     <span className="logo-name-top">Pentecostal Assemblies of God</span>
-                                    <span className="logo-name-bottom">NGUNGO ASSEMBLY • MBEERE DISTRICT HQ</span>
+                                    <span className="logo-name-bottom">NGUNGO ASSEMBLY</span>
                                 </div>
                             </Link>
                         </div>
@@ -161,14 +161,12 @@ const Navbar = () => {
                                     </ul>
                                 </li>
                                 <li className={`dropdown ${openDropdown === 'ministries' ? 'active' : ''}`}>
-                                    <NavLink to="/ministries" onClick={() => toggleDropdown('ministries')}>Departments &amp; Ministries <i className="fas fa-chevron-down"></i></NavLink>
+                                    <NavLink to="/ministries" onClick={() => toggleDropdown('ministries')}>Departments <i className="fas fa-chevron-down"></i></NavLink>
                                     <ul className="dropdown-menu">
-                                        <li className="dropdown-header-item" style={{ padding: '6px 14px', fontSize: '0.72rem', textTransform: 'uppercase', color: '#94a3b8', fontWeight: 700, letterSpacing: '0.5px' }}>Departments</li>
                                         <li><Link to="/ministries#women" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Women Department</Link></li>
                                         <li><Link to="/ministries#men" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Men Department</Link></li>
                                         <li><Link to="/ministries#youth" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Youth Department</Link></li>
                                         <li><Link to="/ministries#sundayschool" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Sunday School Department</Link></li>
-                                        <li className="dropdown-header-item" style={{ padding: '6px 14px', fontSize: '0.72rem', textTransform: 'uppercase', color: '#94a3b8', fontWeight: 700, letterSpacing: '0.5px', borderTop: '1px solid #f1f5f9', marginTop: '4px' }}>Ministries</li>
                                         <li><Link to="/ministries#worship" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Praise and Worship</Link></li>
                                         <li><Link to="/ministries#instrumentalists" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Instrumentalist Ministry</Link></li>
                                         <li><Link to="/ministries#choir" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Church Choir</Link></li>
@@ -215,7 +213,7 @@ const Navbar = () => {
                                     <>
                                         {isAdmin && (
                                             <li className="mobile-only-nav-item">
-                                                <Link to="/admin" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }} className="mobile-nav-btn" style={{ color: '#E87D1E' }}>
+                                                <Link to="/admin" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }} className="mobile-nav-btn" style={{ color: '#2563EB' }}>
                                                     <i className="fas fa-tachometer-alt"></i> Admin Panel
                                                 </Link>
                                             </li>
@@ -248,18 +246,18 @@ const Navbar = () => {
                                             gap: '8px',
                                             padding: '5px 14px 5px 5px',
                                             borderRadius: '50px',
-                                            border: '2px solid #E87D1E',
-                                            background: 'rgba(232,125,30,0.07)',
+                                            border: '2px solid #2563EB',
+                                            background: 'rgba(37,99,235,0.07)',
                                             cursor: 'pointer',
                                             fontFamily: 'inherit',
                                             transition: 'all 0.2s ease'
                                         }}
-                                        onMouseEnter={e => e.currentTarget.style.background = 'rgba(232,125,30,0.14)'}
-                                        onMouseLeave={e => e.currentTarget.style.background = 'rgba(232,125,30,0.07)'}
+                                        onMouseEnter={e => e.currentTarget.style.background = 'rgba(37,99,235,0.14)'}
+                                        onMouseLeave={e => e.currentTarget.style.background = 'rgba(37,99,235,0.07)'}
                                     >
                                         <span style={{
                                             width: '32px', height: '32px', borderRadius: '50%',
-                                            background: '#E87D1E', color: '#fff', fontWeight: 800,
+                                            background: '#2563EB', color: '#fff', fontWeight: 800,
                                             fontSize: '0.8rem', display: 'flex', alignItems: 'center',
                                             justifyContent: 'center', flexShrink: 0
                                         }}>
@@ -268,7 +266,7 @@ const Navbar = () => {
                                         <span style={{ color: '#1e293b', fontWeight: 700, fontSize: '0.88rem', maxWidth: '110px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                                             {currentUser.name?.split(' ')[0]}
                                         </span>
-                                        <i className={`fas fa-chevron-${userMenuOpen ? 'up' : 'down'}`} style={{ color: '#E87D1E', fontSize: '0.7rem' }}></i>
+                                        <i className={`fas fa-chevron-${userMenuOpen ? 'up' : 'down'}`} style={{ color: '#2563EB', fontSize: '0.7rem' }}></i>
                                     </button>
 
                                     {/* Dropdown Menu */}
@@ -287,8 +285,8 @@ const Navbar = () => {
                                                 <span style={{
                                                     display: 'inline-block', marginTop: '6px',
                                                     padding: '2px 10px', borderRadius: '20px',
-                                                    background: isAdmin ? 'rgba(232,125,30,0.12)' : '#f0fdf4',
-                                                    color: isAdmin ? '#E87D1E' : '#166534',
+                                                    background: isAdmin ? 'rgba(37,99,235,0.12)' : '#f0fdf4',
+                                                    color: isAdmin ? '#2563EB' : '#166534',
                                                     fontSize: '0.72rem', fontWeight: 700
                                                 }}>
                                                     {isAdmin ? '⚡ Administrator' : '✅ Member'}
@@ -300,7 +298,7 @@ const Navbar = () => {
                                                 style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '9px 12px', borderRadius: '8px', color: '#1e293b', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 600, transition: 'background 0.15s' }}
                                                 onMouseEnter={e => e.currentTarget.style.background = '#f8fafc'}
                                                 onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
-                                                <i className="fas fa-users" style={{ color: '#3b82f6', width: '16px', textAlign: 'center' }}></i>
+                                                <i className="fas fa-users" style={{ color: '#2563EB', width: '16px', textAlign: 'center' }}></i>
                                                 My Departments
                                             </Link>
 
@@ -310,7 +308,7 @@ const Navbar = () => {
                                                     style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '9px 12px', borderRadius: '8px', color: '#334155', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 600 }}
                                                     onMouseEnter={e => e.currentTarget.style.background = '#f8fafc'}
                                                     onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
-                                                    <i className="fas fa-tachometer-alt" style={{ color: '#E87D1E', width: '16px', textAlign: 'center' }}></i>
+                                                    <i className="fas fa-tachometer-alt" style={{ color: '#2563EB', width: '16px', textAlign: 'center' }}></i>
                                                     Admin Panel
                                                 </Link>
                                             )}
