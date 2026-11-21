@@ -17,59 +17,86 @@ import {
 import bannerPhoto from '../assets/Emali mission4.jpg';
 
 const deptConfig = {
-  prayer: {
-    tag: 'Prayer Intercession',
-    title: 'Submit a Prayer Request',
-    subtitle: 'Our dedicated prayer team intercedes every Thursday. Share your prayer burdens with us in confidence.',
-    category: 'Prayer Request',
-    subjectPlaceholder: 'e.g. Healing, Family Breakthrough, Guidance',
-    messagePlaceholder: 'Detail your prayer points or thanksgiving testimony...',
+  women: {
+    tag: 'Women Department',
+    title: 'Women Department',
+    subtitle: 'Connecting women in prayer, family life, mutual fellowship, and welfare.',
+    category: 'Women Department',
+    subjectPlaceholder: 'e.g. Women Fellowship / Welfare / Prayer Inquiry',
+    messagePlaceholder: 'Share how we can connect with you or support you in prayer...',
     icon: Heart
   },
-  discipleship: {
-    tag: 'Spiritual Growth',
-    title: 'Join a Bible Study Group',
-    subtitle: 'Grow deeper in the Word of God through our discipleship and Bible study fellowships.',
-    category: 'Bible Study',
-    subjectPlaceholder: 'e.g. Request to join weekly Bible study group',
-    messagePlaceholder: 'Tell us a bit about yourself and any specific Bible study topics you are eager to explore...',
+  men: {
+    tag: 'Men Department',
+    title: 'Men Department',
+    subtitle: 'Building men of integrity and spiritual leadership in home and church.',
+    category: 'Men Department',
+    subjectPlaceholder: 'e.g. Men Fellowship / Discipleship / Project Inquiry',
+    messagePlaceholder: 'Share your background or how you would like to participate...',
     icon: BookOpen
   },
-  digital: {
-    tag: 'Media & Technology',
-    title: 'Volunteer with Media & Digital Team',
-    subtitle: 'Join the tech and media ministry amplifying the Gospel through digital platforms and creative production.',
-    category: 'Media & Tech',
-    subjectPlaceholder: 'e.g. Volunteer for Video Editing / Social Media / Sound',
-    messagePlaceholder: 'Share your background, tools you use, or your passion for digital ministry...',
-    icon: Tv
+  youth: {
+    tag: 'Youth Fellowship',
+    title: 'Youth Department',
+    subtitle: 'Youth Fellowship every Saturday 4:00 PM – 6:00 PM at Ngungo Sanctuary.',
+    category: 'Youth Department',
+    subjectPlaceholder: 'e.g. Youth Fellowship / Music / Youth Activities',
+    messagePlaceholder: 'Tell us a bit about yourself and your questions for the youth leadership...',
+    icon: Heart
+  },
+  sundayschool: {
+    tag: 'Children Ministry',
+    title: 'Sunday School Department',
+    subtitle: 'Nurturing children in scripture and praise every Sunday (8:00 AM – 10:00 AM).',
+    category: 'Sunday School Department',
+    subjectPlaceholder: 'e.g. Child Enrollment / Teacher Volunteer Inquiry',
+    messagePlaceholder: 'Tell us about your children or interest in children ministry...',
+    icon: GraduationCap
   },
   worship: {
     tag: 'Praise & Worship',
-    title: 'Join the Praise & Worship Team',
-    subtitle: 'Serve the Lord through anointed music, vocal ministry, and instruments.',
-    category: 'Praise & Worship',
-    subjectPlaceholder: 'e.g. Vocalist / Keyboardist / Instrumentalist Application',
-    messagePlaceholder: 'Share your musical experience, vocal part or instrument, and spiritual journey...',
+    title: 'Praise & Worship Team',
+    subtitle: 'Leading the congregation in anointed praise and authentic adoration.',
+    category: 'Praise and Worship',
+    subjectPlaceholder: 'e.g. Praise Team / Vocalist Application',
+    messagePlaceholder: 'Share your vocal experience and spiritual journey...',
     icon: Music
   },
-  outreach: {
-    tag: 'Evangelism & Missions',
-    title: 'Join Mission Outreach Team',
-    subtitle: 'Step into the harvest field with us in upcoming crusades, door-to-door evangelism, and revival missions.',
-    category: 'Outreach',
-    subjectPlaceholder: 'e.g. Volunteer for upcoming rural mission outreach',
-    messagePlaceholder: 'Tell us about your mission experience or willingness to participate...',
+  instrumentalists: {
+    tag: 'Instrumentalists',
+    title: 'Instrumentalist Ministry',
+    subtitle: 'Keyboards, drums, guitars, and sound management for worship services.',
+    category: 'Instrumentalist',
+    subjectPlaceholder: 'e.g. Keyboardist / Drummer / Sound Tech Application',
+    messagePlaceholder: 'Tell us about the instruments you play or sound skills...',
+    icon: Tv
+  },
+  choir: {
+    tag: 'Church Choir',
+    title: 'Church Choir Ministry',
+    subtitle: 'Harmonious choral anthems and spiritual hymns for divine worship.',
+    category: 'Choir',
+    subjectPlaceholder: 'e.g. Choir Membership Inquiry',
+    messagePlaceholder: 'Share your singing background or interest in joining the choir...',
+    icon: Music
+  },
+  ushering: {
+    tag: 'Ushering',
+    title: 'Ushering Ministry',
+    subtitle: 'Warm Christian hospitality, welcoming worshippers, and sanctuary decorum.',
+    category: 'Ushering',
+    subjectPlaceholder: 'e.g. Ushering Volunteer Application',
+    messagePlaceholder: 'Share your heart and willingness to serve as an usher...',
     icon: Compass
   },
-  highschool: {
-    tag: 'School Ministry',
-    title: 'Invite KEMT to Your School',
-    subtitle: 'Partner with KEMT for Weekend Challenges, academic motivation, and spiritual empowerment in secondary schools.',
-    category: 'High School',
-    subjectPlaceholder: 'e.g. Invitation for Weekend Challenge / Student Mentorship',
-    messagePlaceholder: 'Please specify the school name, proposed dates, and topics you would like covered...',
-    icon: GraduationCap
+  prayer: {
+    tag: 'Prayer Burdens',
+    title: 'Submit a Prayer Request',
+    subtitle: 'Our pastorate and intercessors stand with you in faith and prayer.',
+    category: 'Prayer Request',
+    subjectPlaceholder: 'e.g. Healing, Family Breakthrough, Spiritual Guidance',
+    messagePlaceholder: 'Detail your prayer points or thanksgiving testimony...',
+    icon: Heart
   }
 };
 
@@ -173,12 +200,12 @@ const Contact = () => {
             {/* Info Column */}
             <div className="contact-info-col">
               <h2 className="section-title">
-                {currentDept ? currentDept.title : 'Get in Touch'}
+                {currentDept ? currentDept.title : 'Connect With Us'}
               </h2>
               <p className="lead">
                 {currentDept 
-                  ? `Your submission will be immediately routed to the ${currentDept.category} coordinator and the KEMT ministry administration.`
-                  : 'Have a question, want to get involved, or need to reach our team? We are happy to connect with you.'}
+                  ? `Your message will be directed to the ${currentDept.category} leadership and pastoral council at Ngungo Assembly.`
+                  : 'Have a question, need pastoral support, or want to connect with Pentecostal Assemblies of God - Ngungo Assembly (Mbeere District HQ)? We welcome you.'}
               </p>
 
               <div className="contact-details">
@@ -188,61 +215,82 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4>Phone &amp; WhatsApp</h4>
-                    <a href="tel:+254714476295">+254 714 476 295</a>
+                    <a href="tel:0720140213">+254 720 140 213 / 0720140213</a>
                   </div>
                 </div>
+
                 <div className="contact-detail-item">
                   <div className="contact-detail-icon">
                     <i className="fas fa-envelope"></i>
                   </div>
                   <div>
-                    <h4>Ministry Email</h4>
-                    <a href="mailto:info@kingdomenlightenment.org">info@kingdomenlightenment.org</a>
+                    <h4>Church Email</h4>
+                    <a href="mailto:info@paogngungo.org">info@paogngungo.org</a>
+                  </div>
+                </div>
+
+                <div className="contact-detail-item">
+                  <div className="contact-detail-icon">
+                    <i className="fas fa-map-marker-alt"></i>
+                  </div>
+                  <div>
+                    <h4>Postal &amp; Sanctuary Address</h4>
+                    <span style={{ color: '#475569', fontSize: '0.92rem' }}>P.O. Box 213-60113 Kiritiri Mbeere, Kenya<br />Ngungo Assembly (District Headquarters)</span>
+                  </div>
+                </div>
+
+                <div className="contact-detail-item">
+                  <div className="contact-detail-icon">
+                    <i className="fas fa-user-tie"></i>
+                  </div>
+                  <div>
+                    <h4>District Overseer</h4>
+                    <span style={{ color: '#1e293b', fontWeight: 700, fontSize: '0.95rem' }}>Bishop Rev Clement Simba</span>
+                  </div>
+                </div>
+
+                <div className="contact-detail-item">
+                  <div className="contact-detail-icon">
+                    <i className="fas fa-hand-holding-dollar"></i>
+                  </div>
+                  <div>
+                    <h4>Giving &amp; Support</h4>
+                    <span style={{ color: '#1e293b', fontWeight: 700, fontSize: '0.95rem' }}>Paybill: 4136387 &bull; Acc: YOUR NAME</span>
                   </div>
                 </div>
               </div>
 
-              {/* Department Shortcut Chips if on General Contact */}
+              {/* Order of Services Box */}
+              <div style={{ marginTop: '22px', padding: '16px 18px', background: '#f8fafc', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+                <h4 style={{ margin: '0 0 8px', color: '#1e293b', fontSize: '0.95rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <i className="fas fa-clock" style={{ color: '#E87D1E' }}></i> Order of Services
+                </h4>
+                <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.84rem', color: '#475569', lineHeight: '1.7' }}>
+                  <li><strong>Sunday English Service:</strong> 8:00 AM – 10:00 AM</li>
+                  <li><strong>Sunday Main Service:</strong> 10:30 AM – 1:30 PM</li>
+                  <li><strong>Sunday School:</strong> 8:00 AM – 10:00 AM</li>
+                  <li><strong>Friday Fellowship:</strong> 7:00 PM – 9:00 PM</li>
+                  <li><strong>Youth Fellowship:</strong> Saturday 4:00 PM – 6:00 PM</li>
+                </ul>
+              </div>
+
+              {/* Department Shortcut Chips */}
               {!currentDept && (
-                <div style={{ marginTop: '28px', padding: '18px', background: '#fff9f0', borderRadius: '12px', border: '1px solid #fed7aa' }}>
-                  <h4 style={{ margin: '0 0 10px', color: '#1e293b', fontSize: '0.95rem', fontWeight: 700 }}>Looking for a specific department?</h4>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                    <Link to="/contact?dept=prayer" style={{ fontSize: '0.8rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>🙏 Prayer Request</Link>
-                    <Link to="/contact?dept=discipleship" style={{ fontSize: '0.8rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>📖 Bible Study</Link>
-                    <Link to="/contact?dept=digital" style={{ fontSize: '0.8rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>💻 Tech &amp; Media</Link>
-                    <Link to="/contact?dept=worship" style={{ fontSize: '0.8rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>🎵 Worship Team</Link>
-                    <Link to="/contact?dept=outreach" style={{ fontSize: '0.8rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>🔥 Mission Outreach</Link>
+                <div style={{ marginTop: '20px', padding: '16px', background: '#fff9f0', borderRadius: '12px', border: '1px solid #fed7aa' }}>
+                  <h4 style={{ margin: '0 0 10px', color: '#1e293b', fontSize: '0.9rem', fontWeight: 700 }}>Select a Department or Ministry:</h4>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                    <Link to="/contact?dept=prayer" style={{ fontSize: '0.78rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>🙏 Prayer Request</Link>
+                    <Link to="/contact?dept=women" style={{ fontSize: '0.78rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>👩 Women Dept</Link>
+                    <Link to="/contact?dept=men" style={{ fontSize: '0.78rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>👨 Men Dept</Link>
+                    <Link to="/contact?dept=youth" style={{ fontSize: '0.78rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>⚡ Youth Dept</Link>
+                    <Link to="/contact?dept=sundayschool" style={{ fontSize: '0.78rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>🧒 Sunday School</Link>
+                    <Link to="/contact?dept=worship" style={{ fontSize: '0.78rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>🎵 Praise &amp; Worship</Link>
+                    <Link to="/contact?dept=instrumentalists" style={{ fontSize: '0.78rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>🎸 Instrumentalists</Link>
+                    <Link to="/contact?dept=choir" style={{ fontSize: '0.78rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>🎤 Choir</Link>
+                    <Link to="/contact?dept=ushering" style={{ fontSize: '0.78rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>🤝 Ushering</Link>
                   </div>
                 </div>
               )}
-
-              <div className="contact-social" style={{ marginTop: '24px' }}>
-                <h4>Follow Our Ministries</h4>
-                <div className="contact-social-links">
-                  <a
-                    href="https://www.youtube.com/@KingdomEnlightenmentMinistries"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="social-btn youtube"
-                  >
-                    <i className="fab fa-youtube"></i> YouTube
-                  </a>
-                  <a
-                    href="https://www.tiktok.com/@kingdom_enlightment"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="social-btn tiktok"
-                  >
-                    <i className="fab fa-tiktok"></i> TikTok
-                  </a>
-                  <a href="https://www.facebook.com/share/1EXQmKx4QE/" target="_blank" rel="noopener noreferrer" className="social-btn facebook">
-                    <i className="fab fa-facebook-f"></i> Facebook
-                  </a>
-                  <a href="#" className="social-btn instagram">
-                    <i className="fab fa-instagram"></i> Instagram
-                  </a>
-                </div>
-              </div>
             </div>
 
             {/* Form Column */}
@@ -544,63 +592,6 @@ const Contact = () => {
                     </button>
                   </form>
                 )}
-              </div>
-            </div>
-
-            {/* Info */}
-            <div className="contact-info-col">
-              <h2 className="section-title">Get in Touch</h2>
-              <p className="lead">
-                Have a question, want to get involved, or need to reach our team? We are happy to connect with you.
-              </p>
-
-              <div className="contact-details">
-                <div className="contact-detail-item">
-                  <div className="contact-detail-icon">
-                    <i className="fas fa-phone"></i>
-                  </div>
-                  <div>
-                    <h4>Phone</h4>
-                    <a href="tel:+254714476295">+254 714 476 295</a>
-                  </div>
-                </div>
-                <div className="contact-detail-item">
-                  <div className="contact-detail-icon">
-                    <i className="fas fa-envelope"></i>
-                  </div>
-                  <div>
-                    <h4>Email</h4>
-                    <a href="mailto:info@kingdomenlightenment.org">info@kingdomenlightenment.org</a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="contact-social">
-                <h4>Follow Us</h4>
-                <div className="contact-social-links">
-                  <a
-                    href="https://www.youtube.com/@KingdomEnlightenmentMinistries"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="social-btn youtube"
-                  >
-                    <i className="fab fa-youtube"></i> YouTube
-                  </a>
-                  <a
-                    href="https://www.tiktok.com/@kingdom_enlightment"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="social-btn tiktok"
-                  >
-                    <i className="fab fa-tiktok"></i> TikTok
-                  </a>
-                  <a href="https://www.facebook.com/share/1EXQmKx4QE/" target="_blank" rel="noopener noreferrer" className="social-btn facebook">
-                    <i className="fab fa-facebook-f"></i> Facebook
-                  </a>
-                  <a href="#" className="social-btn instagram">
-                    <i className="fab fa-instagram"></i> Instagram
-                  </a>
-                </div>
               </div>
             </div>
           </div>

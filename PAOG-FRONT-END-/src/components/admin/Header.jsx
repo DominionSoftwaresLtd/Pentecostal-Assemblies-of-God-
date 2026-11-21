@@ -55,7 +55,7 @@ const Header = () => {
         <div className="admin-header-logo-icon">
           <img src={logoImg} alt="KEMT" />
         </div>
-        <span>KEMT Admin</span>
+        <span>PAOG Admin</span>
       </div>
 
       <div className="admin-header-center">

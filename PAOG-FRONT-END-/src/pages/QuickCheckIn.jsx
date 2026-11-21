@@ -536,7 +536,7 @@ const QuickCheckIn = () => {
                 />
               </div>
               <span style={{ fontSize: '0.76rem', color: '#94a3b8', marginTop: '4px', display: 'block' }}>
-                Enter the phone number or email you registered with at KEMT.
+                Enter the phone number or email you registered with at church.
               </span>
             </div>
 

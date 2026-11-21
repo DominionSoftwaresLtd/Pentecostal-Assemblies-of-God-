@@ -46,7 +46,7 @@ const Sidebar = () => {
         <div className="admin-sidebar-logo-icon">
           <img src={logoImg} alt="KEMT" />
         </div>
-        <span>KEMT Admin</span>
+        <span>PAOG Admin</span>
       </div>
       
       <div className="admin-nav">

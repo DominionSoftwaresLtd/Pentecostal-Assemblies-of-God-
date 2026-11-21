@@ -15,63 +15,63 @@ const slides = [
   {
     image: carousel1,
     subtitle: "Welcome to",
-    title: "KINGDOM ENLIGHTENMENT",
-    text: "Spreading the Gospel & Transforming Lives",
-    btn1: { text: "Learn More", link: "/about" },
-    btn2: { text: "Join Us", link: "/login" }
-  },
-  {
-    image: carousel2,
-    subtitle: "Mark 16:15",
-    title: "GO INTO ALL THE WORLD",
-    text: "Preaching the Gospel to Every Creature",
-    btn1: { text: "Our Departments", link: "/ministries" },
-    btn2: { text: "Support Us", link: "/donate" }
-  },
-  {
-    image: carousel3,
-    subtitle: "Community Focus",
-    title: "TRANSFORMING REGIONS",
-    text: "Bringing Hope and Healing to Local Communities",
-    btn1: { text: "Our Work", link: "/ministries" },
-    btn2: { text: "Donate", link: "/donate" }
+    title: "P.A.O.G NGUNGO ASSEMBLY",
+    text: "Mbeere District Headquarter Church — Bishop Clement Simba, Overseer",
+    btn1: { text: "About Our Church", link: "/about" },
+    btn2: { text: "Order of Services", link: "/about#order-of-services" }
   },
   {
     image: carousel4,
-    subtitle: "Our Passion",
-    title: "AUTHENTIC WORSHIP",
-    text: "Awakening a Generation to Worship in Spirit and Truth",
-    btn1: { text: "Events", link: "/events" },
-    btn2: { text: "Gallery", link: "/gallery" }
+    subtitle: "Worship With Us",
+    title: "ORDER OF SERVICES",
+    text: "Sunday English: 8:00 AM–10:00 AM | Main Service: 10:30 AM–1:30 PM",
+    btn1: { text: "Service Schedule", link: "/about#order-of-services" },
+    btn2: { text: "Sunday School", link: "/ministries#sundayschool" }
+  },
+  {
+    image: carousel3,
+    subtitle: "Weekly Fellowships",
+    title: "PRAYER & YOUTH FELLOWSHIP",
+    text: "Friday Fellowship: 7:00 PM–9:00 PM | Youth: Saturday 4:00 PM–6:00 PM",
+    btn1: { text: "Youth Department", link: "/ministries#youth" },
+    btn2: { text: "Contact Pastor", link: "/contact" }
+  },
+  {
+    image: carousel2,
+    subtitle: "Mbeere District HQ",
+    title: "DISTRICT ASSEMBLIES",
+    text: "Kiamachang'a, Rwika, Kathera, Ngangari, Mugaari, Muumoni, Gikuru & Kyuso Kitui",
+    btn1: { text: "View Assemblies", link: "/about#assemblies" },
+    btn2: { text: "District Leadership", link: "/leadership" }
   },
   {
     image: carousel5,
-    subtitle: "Equipping the Saints",
-    title: "DISCIPLESHIP",
-    text: "Raising Leaders Rooted Firmly in the Word of God",
-    btn1: { text: "Leadership", link: "/leadership" },
-    btn2: { text: "Join Us", link: "/login" }
+    subtitle: "Active Departments",
+    title: "WOMEN, MEN & YOUTH",
+    text: "Equipping Every Believer for Kingdom Impact & Family Growth",
+    btn1: { text: "Our Departments", link: "/ministries" },
+    btn2: { text: "Join a Ministry", link: "/contact" }
   },
   {
     image: carousel6,
-    subtitle: "Student Impact (KESIP)",
-    title: "YOUTH OUTREACH",
-    text: "Inspiring High School Students with Moral Leadership",
-    btn1: { text: "Ministries", link: "/ministries" },
+    subtitle: "Anointed Music",
+    title: "PRAISE & INSTRUMENTS",
+    text: "Praise & Worship, Dedicated Instrumentalists, Church Choir & Ushering",
+    btn1: { text: "Ministries", link: "/ministries#worship" },
     btn2: { text: "Gallery", link: "/gallery" }
   },
   {
     image: carousel7,
-    subtitle: "Join the Vision",
-    title: "PARTNER WITH US",
-    text: "Together, We Can Effectively Reach the Unreached",
-    btn1: { text: "Support Us", link: "/donate" },
+    subtitle: "Giving & Stewardship",
+    title: "PAYBILL: 4136387",
+    text: "Support God's Work — Account: YOUR NAME | Overseer Bishop Clement Simba",
+    btn1: { text: "Give via M-Pesa", link: "/donate" },
     btn2: { text: "Contact Us", link: "/contact" }
   }
 ];
 
 // Words that rotate across fingers
-const FINGER_WORDS = ['KINGDOM', 'ENLIGHTENMENT', 'MINISTRIES'];
+const FINGER_WORDS = ['PENTECOSTAL', 'ASSEMBLIES', 'OF GOD'];
 const CHAR_SPEED = 110; // ms per character typed
 
 const CreativeSlider = () => {

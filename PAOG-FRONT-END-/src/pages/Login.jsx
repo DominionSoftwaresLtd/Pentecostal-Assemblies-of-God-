@@ -44,12 +44,12 @@ const Login = () => {
       } catch {
         // Offline fallback for admin
         if (
-          (trimmedEmail === 'info@kingdomenlightenment.org' || trimmedEmail.endsWith('@kingdomenlightenment.org')) &&
-          trimmedPassword === 'KEMTkemt'
+          (trimmedEmail === 'info@paogngungo.org' || trimmedEmail === 'admin@paogngungo.org' || trimmedEmail === 'info@kingdomenlightenment.org') &&
+          (trimmedPassword === 'PAOGpaog' || trimmedPassword === 'KEMTkemt')
         ) {
           success = true;
           userData = {
-            name: 'KEMT Administrator',
+            name: 'PAOG Church Administrator',
             email: trimmedEmail,
             role: 'Super Admin',
             isAdmin: true,
@@ -117,7 +117,7 @@ const Login = () => {
             Welcome Back
           </h2>
           <p style={{ color: '#64748b', margin: 0, fontSize: '0.88rem' }}>
-            Sign in to your KEMT account
+            Sign in to PAOG Ngungo Assembly portal
           </p>
         </div>
 

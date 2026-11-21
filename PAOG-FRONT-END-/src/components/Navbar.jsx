@@ -99,12 +99,13 @@ const Navbar = () => {
                 <div className="container">
                     <div className="top-bar-content">
                         <div className="top-bar-left">
-                            <span title="info@kingdomenlightenment.org">
+                            <span title="info@paogngungo.org">
                                 <i className="fas fa-envelope"></i>
-                                <span className="top-bar-email-full">info@kingdomenlightenment.org</span>
-                                <span className="top-bar-email-short">info@kemt.org</span>
+                                <span className="top-bar-email-full">info@paogngungo.org</span>
+                                <span className="top-bar-email-short">info@paogngungo.org</span>
                             </span>
-                            <span><i className="fas fa-phone"></i> +254 714 476 295</span>
+                            <span><i className="fas fa-phone"></i> +254 720 140 213</span>
+                            <span className="top-bar-location"><i className="fas fa-map-marker-alt"></i> P.O. Box 213-60113 Kiritiri, Mbeere</span>
                         </div>
 
                         {/* Live Check-In Trigger in Top Orange Utility Bar */}
@@ -138,10 +139,10 @@ const Navbar = () => {
                     <div className="header-content">
                         <div className="logo">
                             <Link to="/">
-                                <img src={logoImg} alt="Kingdom Enlightenment Missions Team" className="logo-img" />
+                                <img src={logoImg} alt="Pentecostal Assemblies of God - Ngungo Assembly" className="logo-img" />
                                 <div className="logo-name">
-                                    <span className="logo-name-top">Kingdom Enlightenment</span>
-                                    <span className="logo-name-bottom">MINISTRIES</span>
+                                    <span className="logo-name-top">Pentecostal Assemblies of God</span>
+                                    <span className="logo-name-bottom">NGUNGO ASSEMBLY • MBEERE DISTRICT HQ</span>
                                 </div>
                             </Link>
                         </div>
@@ -153,23 +154,28 @@ const Navbar = () => {
                                     <NavLink to="/about" onClick={() => toggleDropdown('about')}>About Us <i className="fas fa-chevron-down"></i></NavLink>
                                     <ul className="dropdown-menu">
                                         <li><Link to="/about#who-we-are" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Who We Are</Link></li>
-                                        <li><Link to="/about#our-history" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Our History</Link></li>
+                                        <li><Link to="/about#order-of-services" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Order of Services</Link></li>
+                                        <li><Link to="/about#assemblies" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>District Assemblies</Link></li>
                                         <li><Link to="/about#vision-mission" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Vision &amp; Mission</Link></li>
                                         <li><Link to="/about#statement-of-faith" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Statement of Faith</Link></li>
                                     </ul>
                                 </li>
                                 <li className={`dropdown ${openDropdown === 'ministries' ? 'active' : ''}`}>
-                                    <NavLink to="/ministries" onClick={() => toggleDropdown('ministries')}>Departments <i className="fas fa-chevron-down"></i></NavLink>
+                                    <NavLink to="/ministries" onClick={() => toggleDropdown('ministries')}>Departments &amp; Ministries <i className="fas fa-chevron-down"></i></NavLink>
                                     <ul className="dropdown-menu">
-                                        <li><Link to="/ministries#prayer" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>01 Prayer Department</Link></li>
-                                        <li><Link to="/ministries#worship" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>02 Praise and Worship</Link></li>
-                                        <li><Link to="/ministries#welfare" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>03 Welfare/Compassion</Link></li>
-                                        <li><Link to="/ministries#outreach" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>04 Outreach</Link></li>
-                                        <li><Link to="/ministries#discipleship" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>05 Discipleship</Link></li>
-                                        <li><Link to="/ministries#highschool" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>06 High School</Link></li>
-                                        <li><Link to="/ministries#digital" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>07 Digital Infrastructure</Link></li>
+                                        <li className="dropdown-header-item" style={{ padding: '6px 14px', fontSize: '0.72rem', textTransform: 'uppercase', color: '#94a3b8', fontWeight: 700, letterSpacing: '0.5px' }}>Departments</li>
+                                        <li><Link to="/ministries#women" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Women Department</Link></li>
+                                        <li><Link to="/ministries#men" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Men Department</Link></li>
+                                        <li><Link to="/ministries#youth" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Youth Department</Link></li>
+                                        <li><Link to="/ministries#sundayschool" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Sunday School Department</Link></li>
+                                        <li className="dropdown-header-item" style={{ padding: '6px 14px', fontSize: '0.72rem', textTransform: 'uppercase', color: '#94a3b8', fontWeight: 700, letterSpacing: '0.5px', borderTop: '1px solid #f1f5f9', marginTop: '4px' }}>Ministries</li>
+                                        <li><Link to="/ministries#worship" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Praise and Worship</Link></li>
+                                        <li><Link to="/ministries#instrumentalists" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Instrumentalist Ministry</Link></li>
+                                        <li><Link to="/ministries#choir" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Church Choir</Link></li>
+                                        <li><Link to="/ministries#ushering" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Ushering Ministry</Link></li>
                                     </ul>
                                 </li>
+                                <li><Link to="/about#assemblies" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Assemblies</Link></li>
                                 <li><NavLink to="/leadership" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Leadership</NavLink></li>
                                 <li><NavLink to="/events" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Events</NavLink></li>
                                 <li><NavLink to="/gallery" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Gallery</NavLink></li>
@@ -224,7 +230,7 @@ const Navbar = () => {
                                 )}
                                 <li className="mobile-only-nav-item">
                                     <Link to="/donate" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }} className="mobile-nav-btn donate-btn">
-                                        <i className="fas fa-heart"></i> Donate
+                                        <i className="fas fa-heart"></i> Give / Paybill: 4136387
                                     </Link>
                                 </li>
                             </ul>
@@ -335,7 +341,9 @@ const Navbar = () => {
                                 <Link to="/login" className="btn btn-login">Log In</Link>
                             )}
 
-                            <Link to="/donate" className="btn btn-primary">Donate</Link>
+                            <Link to="/donate" className="btn btn-primary" title="Paybill: 4136387, Acc: YOUR NAME">
+                                <i className="fas fa-heart"></i> Paybill: 4136387
+                            </Link>
                         </div>
 
                         <div className="mobile-menu-toggle" onClick={toggleMobileMenu}>

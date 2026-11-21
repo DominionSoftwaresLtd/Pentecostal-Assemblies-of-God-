@@ -308,7 +308,7 @@ const MemberDashboard = () => {
                     fontWeight: 700 
                   }}
                 >
-                  {currentUser?.role || 'KEMT Member'}
+                  {currentUser?.role || 'PAOG Church Member'}
                 </span>
               </div>
 

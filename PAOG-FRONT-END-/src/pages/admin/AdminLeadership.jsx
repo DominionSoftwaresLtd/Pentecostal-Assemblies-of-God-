@@ -169,7 +169,7 @@ const AdminLeadership = () => {
         <div>
           <h1 className="admin-page-title" style={{ margin: 0 }}>Leadership Council</h1>
           <p style={{ color: '#64748b', margin: '4px 0 0', fontSize: '0.9rem' }}>
-            Manage the KEMT leadership team. Changes reflect immediately on the public Leadership page.
+            Manage the PAOG Ngungo Assembly and Mbeere District leadership team. Changes reflect immediately on the public Leadership page.
           </p>
         </div>
         <button

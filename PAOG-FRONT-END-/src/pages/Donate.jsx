@@ -105,9 +105,48 @@ const Donate = () => {
       <div className="donate-centered">
         <div className="donate-form-card">
           <div className="donate-form-header">
-            <i className="fas fa-mobile-screen-button"></i>
-            <h3>Give via M-Pesa</h3>
-            <p>Support KEMT Ministries — account name: <strong>KEMT Ministries</strong></p>
+            <i className="fas fa-hand-holding-dollar" style={{ fontSize: '2.4rem', color: '#E87D1E', marginBottom: '8px' }}></i>
+            <h2 style={{ fontSize: '1.45rem', margin: '4px 0 6px', color: '#1e293b' }}>Give via M-Pesa</h2>
+            <p style={{ margin: 0, color: '#64748b', fontSize: '0.92rem' }}>
+              Pentecostal Assemblies of God &bull; Ngungo Assembly (Mbeere District HQ)
+            </p>
+          </div>
+
+          {/* Paybill Showcase Banner */}
+          <div style={{ background: '#fff7ed', border: '2px solid #fed7aa', borderRadius: '12px', padding: '18px 20px', marginBottom: '22px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px' }}>
+              <div>
+                <span style={{ fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.5px', color: '#c2410c', fontWeight: 800 }}>M-Pesa Paybill Number</span>
+                <div style={{ fontSize: '1.8rem', fontWeight: 900, color: '#c2410c', letterSpacing: '1px' }}>4136387</div>
+              </div>
+              <div style={{ textAlign: 'right' }}>
+                <span style={{ fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.5px', color: '#64748b', fontWeight: 800 }}>Account Name</span>
+                <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#1e293b' }}>YOUR NAME</div>
+              </div>
+            </div>
+            <div style={{ marginTop: '10px', paddingTop: '10px', borderTop: '1px solid #fed7aa', fontSize: '0.82rem', color: '#9a3412', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '6px' }}>
+              <span><i className="fas fa-user-tie"></i> Bishop Clement Simba (Overseer)</span>
+              <span><i className="fas fa-map-marker-alt"></i> P.O. Box 213-60113 Kiritiri Mbeere</span>
+            </div>
+          </div>
+
+          {/* Manual Paybill Instructions Collapsible / Visible */}
+          <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '10px', padding: '14px 16px', marginBottom: '20px', fontSize: '0.85rem' }}>
+            <strong style={{ color: '#1e293b', display: 'block', marginBottom: '8px' }}>
+              <i className="fas fa-list-ol" style={{ color: '#E87D1E' }}></i> Manual Paybill Steps:
+            </strong>
+            <ol style={{ margin: 0, paddingLeft: '18px', color: '#475569', lineHeight: '1.6' }}>
+              <li>Go to <strong>M-PESA</strong> on your phone &rarr; <strong>Lipa na M-PESA</strong> &rarr; <strong>Paybill</strong></li>
+              <li>Enter Business Number: <strong>4136387</strong></li>
+              <li>Enter Account Number: <strong>YOUR NAME</strong> (or e.g. <em>Tithe / Your Name</em>)</li>
+              <li>Enter the Amount and your <strong>M-PESA PIN</strong> to confirm</li>
+            </ol>
+          </div>
+
+          <div style={{ textAlign: 'center', marginBottom: '16px' }}>
+            <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.6px' }}>
+              — OR Send Instant STK Push to Phone —
+            </span>
           </div>
 
           {status === 'success' ? (

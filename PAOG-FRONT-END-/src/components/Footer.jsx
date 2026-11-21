@@ -10,15 +10,17 @@ const Footer = () => {
                     <div className="footer-grid">
                         <div className="footer-col">
                             <div className="footer-logo">
-                                <img src="/images/logo.png" alt="Kingdom Enlightenment Missions Team" className="footer-logo-img" />
+                                <h3 style={{ color: '#fff', fontSize: '1.25rem', fontWeight: 800, margin: '0 0 6px 0', letterSpacing: '-0.3px' }}>
+                                    PENTECOSTAL ASSEMBLIES OF GOD
+                                </h3>
+                                <div style={{ color: '#E87D1E', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '12px' }}>
+                                    Ngungo Assembly • Mbeere District HQ
+                                </div>
                             </div>
-                            <p>Spreading the Gospel, Transforming Lives, Building God's Kingdom across Kenya and beyond.</p>
-                            <div className="footer-social">
-                                <a href="https://www.facebook.com/share/1EXQmKx4QE/" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f"></i></a>
-                                <a href="https://www.tiktok.com/@kingdom_enlightment" target="_blank" rel="noopener noreferrer"><i className="fab fa-tiktok"></i></a>
-                                <a href="https://www.youtube.com/@KingdomEnlightenmentMinistries" target="_blank" rel="noopener noreferrer"><i className="fab fa-youtube"></i></a>
-                                <a href="#"><i className="fa-brands fa-x-twitter"></i></a>
-                                <a href="#"><i className="fab fa-instagram"></i></a>
+                            <p>Headquarter church for Mbeere District under the spiritual leadership of Bishop Rev Clement Simba. Worshiping God in Spirit and Truth, and serving assemblies across Mbeere District and Kyuso, Kitui County.</p>
+                            <div style={{ marginTop: '14px', padding: '10px 14px', background: 'rgba(232, 125, 30, 0.12)', border: '1px solid rgba(232, 125, 30, 0.3)', borderRadius: '8px' }}>
+                                <div style={{ color: '#E87D1E', fontWeight: 700, fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Giving via M-Pesa</div>
+                                <div style={{ color: '#fff', fontSize: '0.88rem', marginTop: '2px' }}><strong>Paybill:</strong> 4136387 &bull; <strong>Acc:</strong> YOUR NAME</div>
                             </div>
                         </div>
                         <div className="footer-col">
@@ -36,11 +38,13 @@ const Footer = () => {
                         <div className="footer-col">
                             <h4>Our Departments</h4>
                             <ul>
-                                <li><Link to="/ministries#evangelism">Evangelism &amp; Missions</Link></li>
-                                <li><Link to="/ministries#prayer">Prayer Department</Link></li>
-                                <li><Link to="/ministries#compassion">Compassion Ministry</Link></li>
-                                <li><Link to="/ministries#highschool">High School Ministry</Link></li>
-                                <li><Link to="/programs">Outreach</Link></li>
+                                <li><Link to="/ministries#women">Women Department</Link></li>
+                                <li><Link to="/ministries#men">Men Department</Link></li>
+                                <li><Link to="/ministries#youth">Youth Department</Link></li>
+                                <li><Link to="/ministries#sundayschool">Sunday School Department</Link></li>
+                                <li><Link to="/ministries#worship">Praise and Worship</Link></li>
+                                <li><Link to="/ministries#instrumentalists">Instrumentalists &amp; Choir</Link></li>
+                                <li><Link to="/ministries#ushering">Ushering Ministry</Link></li>
                             </ul>
                         </div>
                         <div className="footer-col">
@@ -48,15 +52,19 @@ const Footer = () => {
                             <ul className="contact-info">
                                 <li>
                                     <i className="fas fa-map-marker-alt"></i>
-                                    <span>P.O. Box 00000-00100<br />Nairobi, Kenya</span>
+                                    <span>P.O. Box 213-60113<br />Kiritiri, Mbeere, Kenya</span>
                                 </li>
                                 <li>
                                     <i className="fas fa-phone"></i>
-                                    <span>+254 714 476 295</span>
+                                    <span>+254 720 140 213</span>
                                 </li>
                                 <li>
                                     <i className="fas fa-envelope"></i>
-                                    <span>info@kingdomenlightenment.org</span>
+                                    <span>info@paogngungo.org</span>
+                                </li>
+                                <li>
+                                    <i className="fas fa-user-tie"></i>
+                                    <span>Bishop Clement Simba<br />District Overseer</span>
                                 </li>
                             </ul>
                         </div>
@@ -66,7 +74,7 @@ const Footer = () => {
             <div className="footer-bottom">
                 <div className="container">
                     <div className="footer-bottom-content">
-                        <p>&copy; {new Date().getFullYear()} Kingdom Enlightenment Missions Team. All Rights Reserved.</p>
+                        <p>&copy; {new Date().getFullYear()} Pentecostal Assemblies of God - Ngungo Assembly. All Rights Reserved.</p>
                         <div className="footer-links">
                             <a href="#">Privacy Policy</a>
                             <a href="#">Terms of Service</a>
