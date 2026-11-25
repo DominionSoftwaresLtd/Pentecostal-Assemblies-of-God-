@@ -328,34 +328,62 @@
   padding-left: 14px;
 }
 
-/* Action Buttons in One Seamless Line */
-.hero-cta-group {
-  display: flex;
-  gap: 8px;
-  flex-wrap: nowrap;
-  align-items: center;
+/* Rotating Action Buttons Carousel */
+.hero-cta-wrapper {
+  position: relative;
   width: 100%;
+  max-width: 680px;
+  overflow: hidden;
+  padding: 4px 0;
 }
 
-.hero-btn-primary {
+.hero-cta-track {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  will-change: transform;
+}
+
+.hero-cta-track.shifting {
+  transform: translateX(calc(-1 * (100% + 10px) / 3));
+  transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.hero-cta-track:not(.shifting) {
+  transform: translateX(0);
+  transition: none;
+}
+
+.hero-cta-item {
+  flex: 0 0 calc((100% - 20px) / 3);
+  min-width: 0;
+  display: flex;
+}
+
+.hero-btn-primary,
+.hero-btn-outline {
+  width: 100%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 7px;
-  padding: 11px clamp(11px, 1.1vw, 18px);
-  background: linear-gradient(135deg, #000066 0%, #001f7a 100%);
-  color: #ffffff;
-  border: 1.5px solid #000066;
+  padding: 12px 10px;
   border-radius: 8px;
-  font-size: clamp(0.74rem, 0.78vw, 0.79rem);
-  font-weight: 800;
+  font-size: clamp(0.74rem, 0.78vw, 0.8rem);
+  font-weight: 750;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
-  flex-shrink: 0;
-  transition: all 0.28s ease;
+  transition: background 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease, transform 0.28s ease;
   font-family: 'Poppins', sans-serif;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.hero-btn-primary {
+  background: linear-gradient(135deg, #000066 0%, #001f7a 100%);
+  color: #ffffff;
+  border: 1.5px solid #000066;
   box-shadow: 0 4px 14px rgba(0, 0, 102, 0.22);
 }
 
@@ -368,24 +396,9 @@
 }
 
 .hero-btn-outline {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  padding: 11px clamp(10px, 1vw, 15px);
   background: #ffffff;
   color: #000066;
   border: 1.5px solid rgba(0, 0, 102, 0.3);
-  border-radius: 8px;
-  font-size: clamp(0.74rem, 0.78vw, 0.79rem);
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  text-decoration: none;
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: all 0.28s ease;
-  font-family: 'Poppins', sans-serif;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
 }
 
@@ -393,6 +406,9 @@
   background: #000066;
   border-color: #000066;
   color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 102, 0.2);
+}
   transform: translateY(-2px);
   box-shadow: 0 4px 14px rgba(0, 0, 102, 0.2);
 }
