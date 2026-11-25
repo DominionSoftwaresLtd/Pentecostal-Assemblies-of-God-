@@ -1729,7 +1729,7 @@ p {
 @media (max-width: 1024px) {
     .header {
         overflow: visible;
-        border-bottom: 2px solid var(--primary-color);
+        border-bottom: none;
     }
 
     .header-content {
