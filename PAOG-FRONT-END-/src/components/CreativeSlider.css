@@ -328,7 +328,7 @@
   padding-left: 14px;
 }
 
-/* Rotating Action Cards Carousel with Continuous Slow-Motion Reel */
+/* Rotating Action Cards Carousel with Synchronized Slow-Motion Roll */
 .hero-cta-wrapper {
   position: relative;
   width: 100%;
@@ -339,38 +339,23 @@
 
 .hero-cta-track {
   display: flex;
-  width: 200%;
+  width: calc(4 / 3 * 100%);
   will-change: transform;
-  animation: smoothButtonCycle 24s cubic-bezier(0.25, 1, 0.5, 1) infinite;
 }
 
-.hero-cta-wrapper:hover .hero-cta-track,
-.hero-cta-wrapper:hover .hero-card-roll-track {
-  animation-play-state: paused;
+.hero-cta-track.shifting {
+  transform: translateX(-25%);
+  transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-@keyframes smoothButtonCycle {
-  /* Box 1: Holds still for 7.2s while all items roll up in slow motion */
-  0%, 30.0% {
-    transform: translateX(0);
-  }
-  /* Slide 1 -> 2: Shifts sideways over 0.8s */
-  33.333%, 63.333% {
-    transform: translateX(-16.666667%);
-  }
-  /* Slide 2 -> 3: Shifts sideways over 0.8s */
-  66.667%, 96.667% {
-    transform: translateX(-33.333333%);
-  }
-  /* Seamless loop back to origin */
-  100% {
-    transform: translateX(-50%);
-  }
+.hero-cta-track:not(.shifting) {
+  transform: translateX(0);
+  transition: none;
 }
 
 .hero-cta-item {
-  width: 16.666667%;
-  flex: 0 0 16.666667%;
+  width: 25%;
+  flex: 0 0 25%;
   box-sizing: border-box;
   padding: 0 5px;
 }
@@ -439,21 +424,21 @@
 .hero-card-roll-track {
   display: flex;
   flex-direction: column;
-  animation: rollUpItems 8s cubic-bezier(0.35, 0, 0.25, 1) infinite;
+  transform: translateY(0);
 }
 
-@keyframes rollUpItems {
+.hero-card-roll-track.rolling {
+  animation: clockSlowRoll 4.4s cubic-bezier(0.35, 0, 0.25, 1) forwards;
+}
+
+@keyframes clockSlowRoll {
   /* Item 1 visible at start */
-  0%, 15% {
+  0%, 14% {
     transform: translateY(0);
   }
-  /* Continuous, silky slow-motion clock reel rolling through items 2, 3, all the way to 4 */
-  77.5%, 90% {
+  /* Continuous slow-motion clock reel glide from Item 1 to Item 4 */
+  82%, 100% {
     transform: translateY(-75%);
-  }
-  /* Resets back to item 1 during the horizontal shift */
-  98%, 100% {
-    transform: translateY(0);
   }
 }
 

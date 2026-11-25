@@ -107,6 +107,50 @@ const CreativeSlider = () => {
   const touchEndX = useRef(0);
   const autoRef = useRef(null);
 
+  // Synchronized Action Cards Animation
+  const [cardOrder, setCardOrder] = useState(HERO_CARDS);
+  const [isRolling, setIsRolling] = useState(true);
+  const [isShifting, setIsShifting] = useState(false);
+  const isCtaHoveredRef = useRef(false);
+
+  useEffect(() => {
+    let shiftTimer;
+    let cycleInterval;
+
+    const startCycle = () => {
+      if (isCtaHoveredRef.current) return;
+      setIsRolling(true);
+
+      // Once all items roll up and rest on the last item, shift sideways
+      shiftTimer = setTimeout(() => {
+        if (!isCtaHoveredRef.current) {
+          setIsShifting(true);
+        }
+      }, 5000);
+    };
+
+    startCycle();
+    cycleInterval = setInterval(() => {
+      startCycle();
+    }, 5800);
+
+    return () => {
+      clearInterval(cycleInterval);
+      clearTimeout(shiftTimer);
+    };
+  }, []);
+
+  const handleShiftEnd = (e) => {
+    if (e.propertyName === 'transform') {
+      setCardOrder(prev => [prev[1], prev[2], prev[0]]);
+      setIsShifting(false);
+      setIsRolling(false);
+      setTimeout(() => {
+        setIsRolling(true);
+      }, 40);
+    }
+  };
+
   const startAuto = () => {
     clearInterval(autoRef.current);
     autoRef.current = setInterval(() => {
@@ -199,24 +243,34 @@ const CreativeSlider = () => {
             The apostolic headquarters church presiding over 8 Mbeere District assemblies and Kyuso Circuit, Kitui County. Anchored in the Holy Spirit, sound biblical doctrine, transformative worship, and community discipleship under the leadership of Bishop Rev. Clement Simba.
           </p>
 
-          <div className="hero-cta-wrapper">
-            <div className="hero-cta-track">
-              {[...HERO_CARDS, ...HERO_CARDS].map((card, idx) => (
-                <div key={`${card.id}-${idx}`} className="hero-cta-item">
-                  <Link to={card.link} className="hero-creative-card">
-                    <span className="hero-card-title">{card.title}</span>
-                    <div className="hero-card-roller">
-                      <div className="hero-card-roll-track">
-                        {card.items.map((subItem, sIdx) => (
-                          <div key={sIdx} className="hero-card-roll-item">
-                            {subItem}
-                          </div>
-                        ))}
+          <div 
+            className="hero-cta-wrapper"
+            onMouseEnter={() => { isCtaHoveredRef.current = true; }}
+            onMouseLeave={() => { isCtaHoveredRef.current = false; }}
+          >
+            <div 
+              className={`hero-cta-track ${isShifting ? 'shifting' : ''}`}
+              onTransitionEnd={handleShiftEnd}
+            >
+              {[0, 1, 2, 3].map((slotIdx) => {
+                const card = slotIdx === 3 ? cardOrder[0] : cardOrder[slotIdx];
+                return (
+                  <div key={`cta-slot-${slotIdx}`} className="hero-cta-item">
+                    <Link to={card.link} className="hero-creative-card">
+                      <span className="hero-card-title">{card.title}</span>
+                      <div className="hero-card-roller">
+                        <div className={`hero-card-roll-track ${isRolling ? 'rolling' : ''}`}>
+                          {card.items.map((subItem, sIdx) => (
+                            <div key={sIdx} className="hero-card-roll-item">
+                              {subItem}
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  </Link>
-                </div>
-              ))}
+                    </Link>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
