@@ -157,97 +157,38 @@ const CreativeSlider = () => {
         </div>
       ))}
 
-      {/* LEFT: Bishop Clement Simba (Full-Bleed Space Filling, Untouched by Fade) */}
+      {/* LEFT: Bishop Clement Simba (Full, Clear, No Side Fade) */}
       <div className="hero-bishop-full-presence">
         <img 
           src={bishopPhoto} 
           alt="Bishop Rev. Clement Simba - Presiding Bishop & District Overseer"
           className="hero-bishop-full-img"
         />
-        <div className="hero-bishop-edge-fade"></div>
-
-        {/* Floating Episcopal Badge Pill on Left */}
-        <div className="hero-bishop-badge-pill">
-          <div className="hero-bishop-badge-icon">
-            <i className="fas fa-crown"></i>
-          </div>
-          <div className="hero-bishop-badge-text">
-            <strong>Bishop Rev. Clement Simba</strong>
-            <span>Presiding Bishop &amp; District Overseer</span>
-          </div>
-        </div>
       </div>
 
-      {/* Seamless Transition to White on Right (Doesn't touch Bishop on Left) */}
-      <div className="hero-white-fade-overlay" />
-
-      {/* FAR RIGHT: Dynamic Wording on Crisp White Background */}
+      {/* FAR RIGHT: Permanent Flagship Headquarters Identity */}
       <div className="hero-wording-showcase">
-        {slides.map((slide, i) => {
-          const isActive = i === currentSlide;
-          return (
-            <div key={i} className={`hero-text-card ${isActive ? 'active' : ''}`}>
-              {i === 0 && (
-                <div className="hero-logo-badge">
-                  <img 
-                    src={logoImg} 
-                    alt="PAG Ngungo Assembly" 
-                    className="hero-logo-badge-img"
-                  />
-                  <span className="hero-logo-badge-label">Mbeere District Headquarters</span>
-                </div>
-              )}
+        <div className="hero-text-card active">
+          <h1 className="hero-title">
+            Pentecostal Assemblies of God
+            <span className="hero-title-sub">Ngungo Assembly — Mbeere Headquarters</span>
+          </h1>
+          
+          <p className="hero-desc">
+            The apostolic headquarters church presiding over 8 Mbeere District assemblies and Kyuso Circuit, Kitui County. Anchored in the Holy Spirit, sound biblical doctrine, transformative worship, and community discipleship under the leadership of Bishop Rev. Clement Simba.
+          </p>
 
-              <div className="hero-eyebrow">
-                <span className="hero-eyebrow-line" style={{ background: slide.accentColor }}></span>
-                <span className="hero-eyebrow-text" style={{ color: slide.accentColor }}>{slide.eyebrow}</span>
-              </div>
-
-              <h1 className="hero-title">{slide.title}</h1>
-              
-              <p className="hero-desc">{slide.text}</p>
-              
-              <div className="hero-cta-group">
-                <Link to={slide.btn1.link} className="hero-btn-primary">
-                  {slide.btn1.text} <i className="fas fa-arrow-right" style={{ fontSize: '0.72rem', marginLeft: '6px' }}></i>
-                </Link>
-                <Link to={slide.btn2.link} className="hero-btn-outline">
-                  {slide.btn2.text}
-                </Link>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Bottom navigation bar */}
-      <div className="hero-nav-bar">
-        <div className="hero-dots">
-          {slides.map((_, i) => (
-            <div
-              key={i}
-              className={`hero-dot ${i === currentSlide ? 'active' : ''}`}
-              onClick={() => goToSlide(i)}
-              aria-label={`Go to slide ${i + 1}`}
-            >
-              <div className="hero-dot-fill" />
-            </div>
-          ))}
-        </div>
-
-        <div className="hero-slide-counter">
-          <strong>{String(currentSlide + 1).padStart(2, '0')}</strong>
-          {' / '}
-          {String(slides.length).padStart(2, '0')}
-        </div>
-
-        <div className="hero-arrows">
-          <button className="hero-arrow-btn" onClick={prevSlide} aria-label="Previous slide">
-            <i className="fas fa-chevron-left"></i>
-          </button>
-          <button className="hero-arrow-btn" onClick={nextSlide} aria-label="Next slide">
-            <i className="fas fa-chevron-right"></i>
-          </button>
+          <div className="hero-cta-group">
+            <Link to="/about" className="hero-btn-primary">
+              About Our Church <i className="fas fa-arrow-right" style={{ fontSize: '0.72rem', marginLeft: '6px' }}></i>
+            </Link>
+            <Link to="/assemblies" className="hero-btn-outline">
+              District Assemblies Circuit
+            </Link>
+            <Link to="/departments" className="hero-btn-outline">
+              Church Departments
+            </Link>
+          </div>
         </div>
       </div>
     </section>
