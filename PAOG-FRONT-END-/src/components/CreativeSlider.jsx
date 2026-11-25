@@ -238,8 +238,14 @@ const CreativeSlider = () => {
       <div className="hero-wording-showcase">
         <div className="hero-text-card active">
           <h1 className="hero-title">
-            <span className={`hero-title-main ${isShifting ? 'shimmer-pass' : ''}`}>
+            <span className="hero-title-main">
               PENTECOSTAL ASSEMBLIES OF GOD
+              <span 
+                className={`hero-title-wave ${isShifting ? 'active' : ''}`}
+                aria-hidden="true"
+              >
+                PENTECOSTAL ASSEMBLIES OF GOD
+              </span>
             </span>
             <span className="hero-title-sub">Ngungo Assembly — Mbeere Headquarters</span>
           </h1>
