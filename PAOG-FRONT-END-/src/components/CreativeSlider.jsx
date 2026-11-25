@@ -91,10 +91,10 @@ const HERO_CARDS = [
     items: ['Youth Fellowship', 'Women of Faith', 'Men of Honor']
   },
   {
-    id: 'about',
-    title: 'About Our Church',
-    link: '/about',
-    items: ['Bishop Clement Simba', 'Mbeere District Seat', 'Holy Spirit Revival']
+    id: 'ministries',
+    title: 'Church Ministries',
+    link: '/ministries',
+    items: ['Praise & Worship', 'Instrumentalist Band', 'Sanctuary Choir']
   },
 ];
 
