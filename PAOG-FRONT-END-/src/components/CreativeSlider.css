@@ -409,9 +409,6 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 14px rgba(0, 0, 102, 0.2);
 }
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(0, 0, 102, 0.2);
-}
 
 /* ── Bottom Navigation Controls ── */
 .hero-nav-bar {
