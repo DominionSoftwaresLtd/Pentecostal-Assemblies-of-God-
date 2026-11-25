@@ -66,8 +66,8 @@
   background: linear-gradient(
     to right,
     rgba(0, 0, 45, 0.25) 0%,
-    transparent 35%,
-    #ffffff calc(50% - 1cm),
+    transparent 28%,
+    #ffffff calc(50% - 110px),
     #ffffff 100%
   );
   z-index: 2;
@@ -77,13 +77,13 @@
   display: none;
 }
 
-/* ── Bishop Full Image (50% horizontal presence with 1cm symmetrical soft fade to white) ── */
+/* ── Bishop Full Image (Wide, borderless organic fade to white) ── */
 .hero-bishop-full-presence {
   position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
-  width: calc(50% + 1cm);
+  width: calc(50% + 75px);
   height: 100%;
   z-index: 4;
   overflow: hidden;
@@ -91,23 +91,25 @@
   -webkit-mask-image: linear-gradient(
     to right,
     #000 0%,
-    #000 calc(100% - 2cm),
-    rgba(0, 0, 0, 0.88) calc(100% - 1.6cm),
-    rgba(0, 0, 0, 0.65) calc(100% - 1.2cm),
-    rgba(0, 0, 0, 0.45) calc(100% - 1cm),
-    rgba(0, 0, 0, 0.25) calc(100% - 0.7cm),
-    rgba(0, 0, 0, 0.08) calc(100% - 0.3cm),
+    #000 calc(100% - 180px),
+    rgba(0, 0, 0, 0.95) calc(100% - 150px),
+    rgba(0, 0, 0, 0.82) calc(100% - 120px),
+    rgba(0, 0, 0, 0.62) calc(100% - 90px),
+    rgba(0, 0, 0, 0.38) calc(100% - 60px),
+    rgba(0, 0, 0, 0.16) calc(100% - 30px),
+    rgba(0, 0, 0, 0.04) calc(100% - 10px),
     transparent 100%
   );
   mask-image: linear-gradient(
     to right,
     #000 0%,
-    #000 calc(100% - 2cm),
-    rgba(0, 0, 0, 0.88) calc(100% - 1.6cm),
-    rgba(0, 0, 0, 0.65) calc(100% - 1.2cm),
-    rgba(0, 0, 0, 0.45) calc(100% - 1cm),
-    rgba(0, 0, 0, 0.25) calc(100% - 0.7cm),
-    rgba(0, 0, 0, 0.08) calc(100% - 0.3cm),
+    #000 calc(100% - 180px),
+    rgba(0, 0, 0, 0.95) calc(100% - 150px),
+    rgba(0, 0, 0, 0.82) calc(100% - 120px),
+    rgba(0, 0, 0, 0.62) calc(100% - 90px),
+    rgba(0, 0, 0, 0.38) calc(100% - 60px),
+    rgba(0, 0, 0, 0.16) calc(100% - 30px),
+    rgba(0, 0, 0, 0.04) calc(100% - 10px),
     transparent 100%
   );
 }
