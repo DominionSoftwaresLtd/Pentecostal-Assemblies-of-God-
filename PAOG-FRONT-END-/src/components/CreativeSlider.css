@@ -428,17 +428,17 @@
 }
 
 .hero-card-roll-track.rolling {
-  animation: clockSlowRoll 4.4s cubic-bezier(0.35, 0, 0.25, 1) forwards;
+  animation: clockSlowRoll 4.6s cubic-bezier(0.35, 0, 0.25, 1) forwards;
 }
 
 @keyframes clockSlowRoll {
   /* Item 1 visible at start */
-  0%, 14% {
+  0%, 12% {
     transform: translateY(0);
   }
-  /* Continuous slow-motion clock reel glide from Item 1 to Item 4 */
-  82%, 100% {
-    transform: translateY(-75%);
+  /* Continuous slow-motion clock reel glide through all items to Item 1 clone */
+  88%, 100% {
+    transform: translateY(-80%);
   }
 }
 

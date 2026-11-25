@@ -121,18 +121,19 @@ const CreativeSlider = () => {
       if (isCtaHoveredRef.current) return;
       setIsRolling(true);
 
-      // Once all items roll up and rest on the last item, shift sideways
+      // Roll takes 4.6s through all items to return seamlessly to Item 1
+      // At 5.1s, trigger smooth sideways shift
       shiftTimer = setTimeout(() => {
         if (!isCtaHoveredRef.current) {
           setIsShifting(true);
         }
-      }, 5000);
+      }, 5100);
     };
 
     startCycle();
     cycleInterval = setInterval(() => {
       startCycle();
-    }, 5800);
+    }, 5850);
 
     return () => {
       clearInterval(cycleInterval);
@@ -145,9 +146,11 @@ const CreativeSlider = () => {
       setCardOrder(prev => [prev[1], prev[2], prev[0]]);
       setIsShifting(false);
       setIsRolling(false);
-      setTimeout(() => {
-        setIsRolling(true);
-      }, 40);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setIsRolling(true);
+        });
+      });
     }
   };
 
@@ -260,7 +263,7 @@ const CreativeSlider = () => {
                       <span className="hero-card-title">{card.title}</span>
                       <div className="hero-card-roller">
                         <div className={`hero-card-roll-track ${isRolling ? 'rolling' : ''}`}>
-                          {card.items.map((subItem, sIdx) => (
+                          {[...card.items, card.items[0]].map((subItem, sIdx) => (
                             <div key={sIdx} className="hero-card-roll-item">
                               {subItem}
                             </div>
