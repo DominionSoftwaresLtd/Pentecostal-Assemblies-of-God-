@@ -1,515 +1,595 @@
+/* ============================================================
+   PAG NGUNGO ASSEMBLY — EPISCOPAL HERO SLIDER
+   Bishop Clement Simba on Left (Untouched, Sharp & Clear)
+   Seamless Fade to Pure White on Right with Elegant Wording
+   ============================================================ */
+
 .creative-hero {
   position: relative;
   width: 100%;
-  height: 600px;
+  margin-top: calc(-1 * var(--header-total, 116px));
+  height: 100vh;
+  min-height: 100vh;
+  height: 100svh;
   overflow: hidden;
-  display: flex;
-  align-items: center;
+  background: #ffffff;
 }
 
-.creative-bg-image {
+/* ── Background Ken Burns Slides ── */
+.hero-bg-slide {
   position: absolute;
-  top: 0;
-  left: 0;
-  /* Shrink the container to only cover the left side, so the photo fits end-to-end */
-  width: 61%; 
-  height: 100%;
+  inset: 0;
   opacity: 0;
-  transition: opacity 1s ease-in-out;
+  transition: opacity 1.4s ease;
   z-index: 0;
-  overflow: hidden; /* For Ken Burns */
-  /* Re-calculated clip path for the new 61% width container */
-  clip-path: polygon(0 0, 100% 0, 81.96% 100%, 0 100%);
 }
-
-.creative-bg-image.active {
+.hero-bg-slide.active {
   opacity: 1;
   z-index: 1;
 }
 
-/* Static Right Half Image */
-.creative-bg-right {
+.hero-bg-img {
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 50%;
-  height: 100%;
-  z-index: 3; /* Fixed: Must be higher than creative-bg-image.active (which is 2) */
-  /* Slant border leaning the other way (inclining to the right) */
-  clip-path: polygon(22% 0, 100% 0, 100% 100%, 0 100%);
-  border-left: 2px solid var(--primary-color);
-}
-
-.bg-right-img {
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background-size: cover;
-  background-position: center;
-}
-
-.bg-right-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(230, 126, 34, 0.9) 0%, rgba(211, 84, 0, 0.9) 100%); /* Bright vibrant theme orange */
-}
-
-/* Ken Burns Effect */
-.ken-burns-img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* Use cover so the photo completely fills the background area without blank space */
-  background-size: cover;
-  background-repeat: no-repeat;
   background-position: center;
   transform: scale(1);
 }
-
-.creative-bg-image.active .ken-burns-img {
-  animation: kenBurns 6s linear forwards;
+.hero-bg-slide.active .hero-bg-img {
+  animation: heroKenBurns 10s linear forwards;
+}
+@keyframes heroKenBurns {
+  from { transform: scale(1); }
+  to   { transform: scale(1.06); }
 }
 
-/* Pause the animation if hovered */
-.creative-hero.is-paused .creative-bg-image.active .ken-burns-img {
-  animation-play-state: paused;
-}
-
-@keyframes kenBurns {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(1.08); /* Subtle zoom */
-  }
-}
-
-.bg-overlay {
+.hero-watermark-icon {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* Lighter gradient so the background photos are clear and visible */
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.2) 50%, transparent 100%);
-  z-index: 2;
-}
-
-.creative-container {
-  position: relative;
-  z-index: 5;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  height: 100%;
-}
-
-/* --- Left Side: Text --- */
-.creative-text-col {
-  width: 55%;
-  height: 100%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.text-wrapper {
-  position: relative;
-  height: 220px; 
-}
-
-.text-slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  right: 6%;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.04;
+  font-size: min(44vw, 420px);
+  color: #000066;
   pointer-events: none;
 }
 
-.text-slide.active {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-  transition-delay: 0.3s;
-}
-
-/* Clean Floating Text without cards or pill badges */
-.text-content-clean {
-  max-width: 500px;
-}
-
-.slide-title {
-  font-size: 2.7rem;
-  font-weight: 900;
-  line-height: 1.15;
-  color: #ffffff;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  font-family: var(--font-secondary, sans-serif);
-  letter-spacing: 0.5px;
-  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.9), 0 1px 4px rgba(0, 0, 0, 0.8);
-  -webkit-text-stroke: 0;
-}
-
-.slide-desc {
-  font-size: 1.15rem;
-  line-height: 1.4;
-  color: #ffffff;
-  margin-bottom: 0;
-  font-weight: 700;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
-  max-width: 92%;
-}
-
-/* Action Buttons: Positioned fixed at the bottom left of hero, right above the KEMT Impact bar */
-.hero-fixed-bottom-actions {
+/* Soft Left Atmospheric Tint */
+.hero-overlay {
   position: absolute;
-  bottom: 25px;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 45, 0.25) 0%,
+    transparent 35%,
+    #ffffff 75%,
+    #ffffff 100%
+  );
+  z-index: 2;
+}
+
+.hero-bottom-fade {
+  display: none;
+}
+
+/* ── Bishop Full-Bleed Space Filling (Untouched by Fade) ── */
+.hero-bishop-full-presence {
+  position: absolute;
   left: 0;
+  top: 0;
+  bottom: 0;
+  width: min(62vw, 960px);
+  height: 100%;
+  z-index: 4;
+  pointer-events: none;
+  overflow: visible;
+  animation: bishopFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes bishopFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.hero-bishop-full-img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left 14%;
+  display: block;
+  /* Mask keeps Bishop (0% - 45%) 100% solid & sharp; tapers foliage (45% - 94%) into pure white */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 45%,
+    rgba(0, 0, 0, 0.85) 58%,
+    rgba(0, 0, 0, 0.42) 74%,
+    rgba(0, 0, 0, 0.08) 88%,
+    transparent 96%
+  );
+  mask-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 45%,
+    rgba(0, 0, 0, 0.85) 58%,
+    rgba(0, 0, 0, 0.42) 74%,
+    rgba(0, 0, 0, 0.08) 88%,
+    transparent 96%
+  );
+}
+
+/* Atmospheric vertical top & bottom blend */
+.hero-bishop-edge-fade {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  pointer-events: none;
+  background: 
+    linear-gradient(to bottom, rgba(0, 0, 34, 0.4) 0%, transparent 12%),
+    linear-gradient(to top, rgba(0, 0, 34, 0.5) 0%, transparent 16%);
+}
+
+/* Pure White Seamless Gradient Overlay (Leaves Bishop 100% Untouched on Left) */
+.hero-white-fade-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    transparent 38%,
+    rgba(255, 255, 255, 0.22) 48%,
+    rgba(255, 255, 255, 0.72) 60%,
+    rgba(255, 255, 255, 0.98) 72%,
+    #ffffff 80%,
+    #ffffff 100%
+  );
+}
+
+/* Floating Episcopal Badge Pill on Left */
+.hero-bishop-badge-pill {
+  position: absolute;
+  bottom: 40px;
+  left: clamp(24px, 4vw, 60px);
+  z-index: 6;
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(0, 0, 102, 0.94);
+  border: 1.5px solid #fbbf24;
+  padding: 8px 20px;
+  border-radius: 50px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 20px rgba(251, 191, 36, 0.25);
+  white-space: nowrap;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.hero-bishop-badge-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(251, 191, 36, 0.2);
+  color: #fbbf24;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+  border: 1px solid rgba(251, 191, 36, 0.4);
+}
+
+.hero-bishop-badge-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.hero-bishop-badge-text strong {
+  color: #ffffff;
+  font-size: 0.86rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.hero-bishop-badge-text span {
+  color: #fbbf24;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+/* ── FAR RIGHT: Dynamic Wording Showcase ── */
+.hero-wording-showcase {
+  position: absolute;
+  right: clamp(24px, 5vw, 90px);
+  top: calc(50% + var(--header-total, 116px) / 2);
+  transform: translateY(-50%);
+  width: clamp(480px, 48vw, 750px);
+  max-width: 90vw;
+  min-height: 400px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  pointer-events: none;
+}
+
+/* Each slide card fades in smoothly */
+.hero-text-card {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%) translateX(40px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.85s ease, transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 100%;
+  max-width: clamp(520px, 48vw, 760px);
+  z-index: 5;
+  text-align: left;
+}
+
+.hero-text-card.active {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+  pointer-events: auto;
+  transition-delay: 0.15s;
+}
+
+/* Headquarters Logo Badge on First Slide */
+.hero-logo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #ffffff;
+  border: 1.5px solid rgba(0, 0, 102, 0.16);
+  padding: 5px 16px 5px 6px;
+  border-radius: 50px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 14px rgba(0, 0, 102, 0.08);
+}
+
+.hero-logo-badge-img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  border-radius: 50%;
+  background: #ffffff;
+  padding: 3px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  border: 1.5px solid #000066;
+}
+
+.hero-logo-badge-label {
+  color: #000066;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Eyebrow badge */
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.hero-eyebrow-line {
+  display: block;
+  width: 28px;
+  height: 3px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.hero-eyebrow-text {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Grand Hero Headline in Deep Church Navy */
+.hero-title {
+  font-size: clamp(2rem, 3.6vw, 3.4rem);
+  font-weight: 850;
+  line-height: 1.14;
+  color: #000066;
+  margin-bottom: 18px;
+  font-family: 'Playfair Display', serif;
+  text-shadow: none;
+  white-space: pre-line;
+}
+
+/* Description in Rich Readable Charcoal */
+.hero-desc {
+  font-size: 1.05rem;
+  color: #334155;
+  line-height: 1.74;
+  margin-bottom: 34px;
+  font-weight: 500;
+  max-width: 580px;
+  font-family: 'Poppins', sans-serif;
+  text-shadow: none;
+}
+
+/* Action Buttons */
+.hero-cta-group {
   display: flex;
   gap: 14px;
+  flex-wrap: wrap;
   align-items: center;
-  z-index: 20;
 }
 
-.btn-modern-primary {
-  background-color: #e67e22;
-  color: white;
-  width: 150px;
-  height: 48px;
-  display: flex;
-  justify-content: center;
+.hero-btn-primary {
+  display: inline-flex;
   align-items: center;
-  text-align: center;
-  line-height: 1.2;
-  border-radius: 6px;
-  font-weight: 700;
-  font-size: 0.95rem;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 14px rgba(230, 126, 34, 0.35);
-  border: 2px solid #e67e22;
-  box-sizing: border-box;
-}
-
-.btn-modern-primary:hover {
-  background-color: #d35400;
-  border-color: #d35400;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(230, 126, 34, 0.5);
-  color: white;
-}
-
-.btn-modern-outline {
-  width: 150px;
-  height: 48px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  line-height: 1.2;
-  background-color: rgba(0, 0, 0, 0.6);
+  padding: 13px 28px;
+  background: linear-gradient(135deg, #000066 0%, #001f7a 100%);
   color: #ffffff;
-  border: 2px solid #ffffff;
+  border: 1.5px solid #000066;
   border-radius: 6px;
-  font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   text-decoration: none;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(6px);
-  box-sizing: border-box;
+  transition: all 0.28s ease;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 6px 20px rgba(0, 0, 102, 0.28);
 }
 
-.btn-modern-outline:hover {
-  background-color: #ffffff;
-  color: #111111;
-  border-color: #ffffff;
+.hero-btn-primary:hover {
+  background: linear-gradient(135deg, #b45309 0%, #d97706 100%);
+  color: #ffffff;
+  border-color: #b45309;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(180, 83, 9, 0.35);
 }
 
-/* --- Controls --- */
-.slider-controls-modern {
-  display: none !important;
+.hero-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  padding: 13px 26px;
+  background: #ffffff;
+  color: #000066;
+  border: 2px solid #000066;
+  border-radius: 6px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.28s ease;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-.ctrl-btn {
-  background: rgba(255,255,255,0.2);
-  border: none;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  color: white;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.hero-btn-outline:hover {
+  background: #000066;
+  border-color: #000066;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 102, 0.22);
+}
+
+/* ── Bottom Navigation Controls ── */
+.hero-nav-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0 clamp(24px, 5vw, 90px) 28px;
 }
 
-.ctrl-btn:hover {
-  background: #e67e22;
+.hero-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
 
-.dots-modern {
+.hero-dot {
+  width: 36px;
+  height: 4px;
+  background: #cbd5e1;
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+
+.hero-dot-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: #000066;
+  border-radius: 2px;
+}
+
+.hero-dot.active .hero-dot-fill {
+  animation: heroDotFill 8s linear forwards;
+}
+
+@keyframes heroDotFill {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+.hero-slide-counter {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #64748b;
+  letter-spacing: 0.12em;
+  font-family: 'Poppins', sans-serif;
+}
+
+.hero-slide-counter strong {
+  color: #000066;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.hero-arrows {
   display: flex;
   gap: 10px;
 }
 
-.dot-m {
-  width: 30px; /* Wider for progress bar */
-  height: 6px;
-  border-radius: 3px;
-  background-color: rgba(255,255,255,0.2);
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-.dot-progress {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 0%;
-  background-color: #e67e22;
-}
-
-/* Animated Progress Indicator */
-.dot-m.active .dot-progress {
-  animation: progressFill 6s linear forwards;
-}
-
-.creative-hero.is-paused .dot-m.active .dot-progress {
-  animation-play-state: paused;
-}
-
-@keyframes progressFill {
-  0% {
-    width: 0%;
-  }
-  100% {
-    width: 100%;
-  }
-}
-
-/* --- Right Side: The Visual "Fingers" Queue --- */
-.creative-visual-col {
-  width: 45%;
-  height: 100%;
-  position: relative;
-  transform: translateX(5%);
-}
-
-.fingers-container {
-  position: absolute;
-  left: 75%; /* Center of the right 50% of the screen */
-  top: 50%;
-  width: auto;
-  transform: translate(-50%, -50%) rotate(25deg);
+.hero-arrow-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid #cbd5e1;
+  background: #ffffff;
+  color: #000066;
   display: flex;
-  gap: 15px;
-  justify-content: center;
   align-items: center;
-  z-index: 10;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.28s ease;
+  font-size: 0.85rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
-.finger {
-  width: 110px;
-  height: 520px; 
-  border-radius: 100px;
-  overflow: hidden;
-  position: relative;
-  box-shadow: none; /* removed red shadow */
-  border: none; /* removed red border */
+.hero-arrow-btn:hover {
+  background: #000066;
+  border-color: #000066;
+  color: #ffffff;
+  transform: scale(1.08);
+  box-shadow: 0 4px 14px rgba(0, 0, 102, 0.25);
 }
 
-.finger-img {
-  position: absolute;
-  /* Reduced size so the photos aren't overly zoomed in */
-  width: 350px;
-  height: 650px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-25deg);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  animation: slideInThumb 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-}
-
-@keyframes slideInThumb {
-  0% {
-    transform: translate(-30%, -50%) rotate(-25deg);
-    opacity: 0.2;
+/* ── Responsive Adaptations ── */
+@media (max-width: 1200px) {
+  .hero-bishop-full-presence {
+    width: 48vw;
+    min-width: 380px;
   }
-  100% {
-    transform: translate(-50%, -50%) rotate(-25deg);
-    opacity: 1;
+  .hero-wording-showcase {
+    right: clamp(20px, 4vw, 50px);
+    width: clamp(400px, 46vw, 580px);
+  }
+  .hero-title {
+    font-size: clamp(1.85rem, 3.2vw, 2.7rem);
   }
 }
 
-.finger-1 {
-  height: 420px;
-  transform: translateY(20px);
-  background: #ffdd00; /* bright neon yellow */
-}
-.finger-2 {
-  height: 520px;
-  transform: translateY(-30px);
-  background: #00bfff; /* bright cyan */
-}
-.finger-3 {
-  height: 420px;
-  transform: translateY(20px);
-  background: #ffdd00; /* bright neon yellow */
-}
-
-/* --- Responsive Design --- */
-@media (max-width: 1024px) {
-  .slide-title {
-    font-size: 2.5rem;
-  }
-  .finger {
-    width: 100px;
-  }
-  .creative-text-col {
-    width: 60%;
-  }
-}
-
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .creative-hero {
-    height: 340px;
-    min-height: unset;
-    overflow: hidden;
+    height: 100vh;
+    min-height: 720px;
   }
-
-  .creative-bg-image {
+  /* On mobile/tablet, Bishop becomes a subtle atmospheric presence */
+  .hero-bishop-full-presence {
     width: 100%;
-    clip-path: none;
+    max-width: 100%;
+    opacity: 0.35;
+    z-index: 2;
   }
-
-  .creative-bg-right {
-    display: none;
+  .hero-bishop-full-img {
+    object-position: center 15%;
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 60%, transparent 100%);
   }
-
-  /* Hide the full text block on mobile — fingers carry the branding */
-  .creative-container {
-    position: absolute;
-    bottom: 10px;
+  .hero-bishop-badge-pill {
+    bottom: 80px;
     left: 50%;
     transform: translateX(-50%);
-    width: auto;
-    height: auto;
-    padding: 0;
+    padding: 6px 16px;
+  }
+  .hero-wording-showcase {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    max-width: 100%;
+    right: 0;
+    top: 0;
+    transform: none;
+    padding: calc(var(--header-total, 116px) + 20px) 24px 90px;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 15;
+    z-index: 10;
   }
-
-  .creative-text-col {
-    width: auto;
+  .hero-text-card {
     text-align: center;
-  }
-
-  /* Hide all text content; only show the nav dots */
-  .text-wrapper {
-    display: none;
-  }
-
-  /* Hide nav controls on mobile — swipe handles navigation */
-  .slider-controls-modern {
-    display: none;
-  }
-
-  /* Full-opacity fingers centred in the hero */
-  .fingers-container {
+    max-width: 580px;
+    right: auto;
     left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%) rotate(25deg);
-    gap: 10px;
-    z-index: 8;
-    opacity: 1;
+    transform: translate(-50%, -50%) translateY(20px);
   }
-
-  .finger {
-    width: 52px;
-    box-shadow: none;
-    border: none;
+  .hero-text-card.active {
+    transform: translate(-50%, -50%) translateY(0);
   }
-
-  .finger-1 {
-    height: 240px;
-    transform: translateY(20px);
-    background: #ffdd00; /* bright neon yellow */
+  .hero-logo-badge {
+    margin: 0 auto 14px;
   }
-  .finger-2 {
-    height: 300px;
-    transform: translateY(-30px);
-    background: #00bfff; /* bright cyan */
-  }
-  .finger-3 {
-    height: 240px;
-    transform: translateY(20px);
-    background: #ffdd00; /* bright neon yellow */
-  }
-
-  .hero-fixed-bottom-actions {
-    position: relative;
-    bottom: auto;
-    left: auto;
+  .hero-eyebrow {
     justify-content: center;
-    width: 100%;
-    margin-top: 15px;
+  }
+  .hero-desc {
+    margin: 0 auto 24px;
+  }
+  .hero-cta-group {
+    justify-content: center;
+  }
+  .hero-title {
+    font-size: 1.85rem;
+  }
+  .hero-nav-bar {
+    padding: 0 24px 20px;
   }
 }
 
-/* Hide photos inside fingers on desktop & mobile so solid colors and typewriter words display */
-.finger-img {
-  display: none;
-}
-
-/* ============================
-   FINGER WORD LABELS (Desktop & Mobile)
-   ============================ */
-.finger-word {
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  /* 180deg flips writing-mode so word reads upward (bottom→top) slanting with the finger */
-  transform: translate(-50%, -50%) rotate(180deg);
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  font-size: 2.2rem;
-  font-weight: 900;
-  letter-spacing: 0.18em;
-  color: #000000;
-  text-transform: uppercase;
-  text-shadow: none;
-  -webkit-text-stroke: 0;
-  white-space: nowrap;
-  z-index: 10;
-  background: none;
-  padding: 0;
-}
-
-@media (max-width: 768px) {
-  .finger-word {
-    font-size: 1.25rem;
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.55rem;
+  }
+  .hero-desc {
+    font-size: 0.88rem;
+  }
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+  }
+  .hero-btn-primary,
+  .hero-btn-outline {
+    width: 100%;
+    justify-content: center;
+  }
+  .hero-bishop-badge-pill {
+    display: none;
+  }
+  .hero-slide-counter {
+    display: none;
+  }
+  .hero-dot {
+    width: 20px;
   }
 }

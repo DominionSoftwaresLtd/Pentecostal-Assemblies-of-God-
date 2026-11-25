@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { 
-  CheckCircle2, 
-  AlertCircle, 
-  ArrowRight, 
-  Clock, 
-  MapPin, 
-  Calendar, 
-  ShieldCheck, 
-  KeyRound, 
-  UserPlus, 
-  LogIn, 
-  Radio, 
-  User, 
-  Phone, 
-  Mail, 
+import {
+  CheckCircle2,
+  AlertCircle,
+  ArrowRight,
+  Clock,
+  MapPin,
+  Calendar,
+  ShieldCheck,
+  KeyRound,
+  UserPlus,
+  LogIn,
+  Radio,
+  User,
+  Phone,
+  Mail,
   Sparkles,
   RefreshCw
 } from 'lucide-react';
-import logoImg from '../assets/logo Kingdom enightement.jpg';
+import logoImg from '../assets/logo ngungo.png';
 
 const QuickCheckIn = () => {
   const [activeSession, setActiveSession] = useState(null);
@@ -47,7 +47,7 @@ const QuickCheckIn = () => {
       // Fallback demo active session if offline
       setActiveSession({
         _id: 'session-live',
-        title: 'Sunday Main Revival Service',
+        title: 'Sunday Main Celebration Service — PAG Ngungo Assembly',
         session_date: new Date().toISOString().split('T')[0],
         is_open: true,
         hasPin: false,
@@ -123,57 +123,58 @@ const QuickCheckIn = () => {
   };
 
   return (
-    <div 
-      className="container section" 
-      style={{ 
-        minHeight: '85vh', 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center', 
-        padding: '2.5rem 1rem' 
+    <div
+      className="container section"
+      style={{
+        minHeight: '85vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '2.5rem 1rem'
       }}
     >
-      <div 
-        style={{ 
-          background: '#ffffff', 
-          padding: '36px 32px', 
-          borderRadius: '16px', 
-          boxShadow: '0 16px 40px rgba(232, 125, 30, 0.09), 0 2px 10px rgba(0,0,0,0.04)', 
-          width: '100%', 
-          maxWidth: '500px', 
+      <div
+        style={{
+          background: '#ffffff',
+          padding: '36px 32px',
+          borderRadius: '16px',
+          boxShadow: '0 16px 40px rgba(232, 125, 30, 0.09), 0 2px 10px rgba(0,0,0,0.04)',
+          width: '100%',
+          maxWidth: '500px',
           border: '1.5px solid #fed7aa',
           position: 'relative'
         }}
       >
         {/* Top Church Branding Header */}
         <div style={{ textAlign: 'center', marginBottom: '22px' }}>
-          <div 
-            style={{ 
-              width: '64px', 
-              height: '64px', 
-              borderRadius: '50%', 
-              background: '#fff7ed', 
-              border: '2px solid #fed7aa', 
-              display: 'flex', 
-              alignItems: 'center', 
-              justifyContent: 'center', 
-              margin: '0 auto 12px', 
-              overflow: 'hidden', 
-              padding: '6px' 
+          <div
+            style={{
+              width: '68px',
+              height: '68px',
+              borderRadius: '50%',
+              background: '#ffffff',
+              border: '2px solid #fed7aa',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto 12px',
+              overflow: 'hidden',
+              padding: '5px',
+              boxShadow: '0 4px 14px rgba(0,0,0,0.08)'
             }}
           >
-            <img 
-              src={logoImg} 
-              alt="KEMT Logo" 
-              style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
+            <img
+              src={logoImg}
+              alt="PAG Ngungo Logo"
+              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
             />
           </div>
 
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '4px 12px', borderRadius: '20px', background: activeSession ? '#f0fdf4' : '#f8fafc', border: `1px solid ${activeSession ? '#bbf7d0' : '#e2e8f0'}`, marginBottom: '10px' }}>
-            <span style={{ 
-              width: '8px', 
-              height: '8px', 
-              borderRadius: '50%', 
+            <span style={{
+              width: '8px',
+              height: '8px',
+              borderRadius: '50%',
               backgroundColor: activeSession ? '#10B981' : '#94a3b8',
               boxShadow: activeSession ? '0 0 0 3px rgba(16, 185, 129, 0.25)' : 'none',
               animation: activeSession ? 'pulse 2s infinite' : 'none'
@@ -187,7 +188,7 @@ const QuickCheckIn = () => {
             Church Attendance
           </h1>
           <p style={{ color: '#64748b', margin: 0, fontSize: '0.88rem' }}>
-            Kingdom Enlightenment Ministries Member Check-In
+            Pentecostal Assemblies of God - Ngungo Assembly Member Check-In
           </p>
         </div>
 
@@ -198,8 +199,8 @@ const QuickCheckIn = () => {
             Detecting live service session...
           </div>
         ) : activeSession ? (
-          <div 
-            style={{ 
+          <div
+            style={{
               background: 'linear-gradient(135deg, rgba(30, 58, 95, 0.05) 0%, rgba(232, 125, 30, 0.08) 100%)',
               border: '1.5px solid rgba(232, 125, 30, 0.3)',
               borderRadius: '12px',
@@ -227,15 +228,15 @@ const QuickCheckIn = () => {
                 </div>
               </div>
 
-              <button 
+              <button
                 onClick={fetchActiveSession}
                 title="Refresh Status"
-                style={{ 
-                  background: 'none', 
-                  border: 'none', 
-                  cursor: 'pointer', 
-                  color: '#94a3b8', 
-                  padding: '4px' 
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  color: '#94a3b8',
+                  padding: '4px'
                 }}
               >
                 <RefreshCw size={15} />
@@ -243,8 +244,8 @@ const QuickCheckIn = () => {
             </div>
           </div>
         ) : (
-          <div 
-            style={{ 
+          <div
+            style={{
               background: '#f8fafc',
               border: '1px solid #e2e8f0',
               borderRadius: '12px',
@@ -261,34 +262,34 @@ const QuickCheckIn = () => {
               Service check-in opens automatically during Sunday Main Services, Midweek Fellowships, and Youth Outreaches.
             </p>
             <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
-              <Link 
-                to="/events" 
-                style={{ 
-                  display: 'inline-flex', 
-                  alignItems: 'center', 
-                  gap: '6px', 
-                  padding: '8px 16px', 
-                  borderRadius: '6px', 
-                  background: '#E87D1E', 
-                  color: '#fff', 
-                  textDecoration: 'none', 
-                  fontWeight: 600, 
-                  fontSize: '0.85rem' 
+              <Link
+                to="/events"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  padding: '8px 16px',
+                  borderRadius: '6px',
+                  background: '#E87D1E',
+                  color: '#fff',
+                  textDecoration: 'none',
+                  fontWeight: 600,
+                  fontSize: '0.85rem'
                 }}
               >
                 View Service Times
               </Link>
-              <button 
+              <button
                 onClick={fetchActiveSession}
-                style={{ 
-                  padding: '8px 14px', 
-                  borderRadius: '6px', 
-                  background: '#ffffff', 
-                  border: '1px solid #cbd5e1', 
-                  color: '#475569', 
-                  fontWeight: 600, 
-                  fontSize: '0.85rem', 
-                  cursor: 'pointer' 
+                style={{
+                  padding: '8px 14px',
+                  borderRadius: '6px',
+                  background: '#ffffff',
+                  border: '1px solid #cbd5e1',
+                  color: '#475569',
+                  fontWeight: 600,
+                  fontSize: '0.85rem',
+                  cursor: 'pointer'
                 }}
               >
                 Check Again
@@ -299,27 +300,27 @@ const QuickCheckIn = () => {
 
         {/* Success Confirmation Card */}
         {result?.success && (
-          <div 
-            style={{ 
-              background: '#f0fdf4', 
-              border: '1.5px solid #bbf7d0', 
-              borderRadius: '12px', 
-              padding: '24px 20px', 
+          <div
+            style={{
+              background: '#f0fdf4',
+              border: '1.5px solid #bbf7d0',
+              borderRadius: '12px',
+              padding: '24px 20px',
               textAlign: 'center',
               marginBottom: '22px'
             }}
           >
-            <div 
-              style={{ 
-                width: '52px', 
-                height: '52px', 
-                borderRadius: '50%', 
-                background: '#dcfce7', 
-                color: '#16a34a', 
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center', 
-                margin: '0 auto 12px' 
+            <div
+              style={{
+                width: '52px',
+                height: '52px',
+                borderRadius: '50%',
+                background: '#dcfce7',
+                color: '#16a34a',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 12px'
               }}
             >
               <CheckCircle2 size={28} />
@@ -334,35 +335,35 @@ const QuickCheckIn = () => {
               Your attendance for <strong>{result.sessionTitle}</strong> has been successfully recorded on {new Date(result.checked_in_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <Link 
-                to="/login" 
-                style={{ 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center', 
-                  gap: '8px', 
-                  padding: '11px', 
-                  borderRadius: '8px', 
-                  background: '#16a34a', 
-                  color: '#fff', 
-                  textDecoration: 'none', 
-                  fontWeight: 700, 
-                  fontSize: '0.9rem' 
+              <Link
+                to="/login"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  padding: '11px',
+                  borderRadius: '8px',
+                  background: '#16a34a',
+                  color: '#fff',
+                  textDecoration: 'none',
+                  fontWeight: 700,
+                  fontSize: '0.9rem'
                 }}
               >
                 <LogIn size={16} /> Log In to View Full Dashboard &amp; Streak
               </Link>
-              <button 
+              <button
                 onClick={() => { setResult(null); setIdentifier(''); setAccessCode(''); }}
-                style={{ 
-                  background: 'none', 
-                  border: '1px solid #cbd5e1', 
-                  padding: '9px', 
-                  borderRadius: '8px', 
-                  color: '#64748b', 
-                  fontSize: '0.85rem', 
-                  fontWeight: 600, 
-                  cursor: 'pointer' 
+                style={{
+                  background: 'none',
+                  border: '1px solid #cbd5e1',
+                  padding: '9px',
+                  borderRadius: '8px',
+                  color: '#64748b',
+                  fontSize: '0.85rem',
+                  fontWeight: 600,
+                  cursor: 'pointer'
                 }}
               >
                 Sign In Another Member
@@ -373,12 +374,12 @@ const QuickCheckIn = () => {
 
         {/* Already Checked In Card */}
         {result?.alreadyCheckedIn && (
-          <div 
-            style={{ 
-              background: '#eff6ff', 
-              border: '1.5px solid #bfdbfe', 
-              borderRadius: '12px', 
-              padding: '20px', 
+          <div
+            style={{
+              background: '#eff6ff',
+              border: '1.5px solid #bfdbfe',
+              borderRadius: '12px',
+              padding: '20px',
               textAlign: 'center',
               marginBottom: '22px'
             }}
@@ -390,19 +391,19 @@ const QuickCheckIn = () => {
             <p style={{ margin: '0 0 14px', color: '#1e3a8a', fontSize: '0.88rem' }}>
               {result.message}
             </p>
-            <Link 
-              to="/login" 
-              style={{ 
-                display: 'inline-flex', 
-                alignItems: 'center', 
-                gap: '6px', 
-                padding: '9px 18px', 
-                borderRadius: '8px', 
-                background: '#3b82f6', 
-                color: '#fff', 
-                textDecoration: 'none', 
-                fontWeight: 600, 
-                fontSize: '0.86rem' 
+            <Link
+              to="/login"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '9px 18px',
+                borderRadius: '8px',
+                background: '#3b82f6',
+                color: '#fff',
+                textDecoration: 'none',
+                fontWeight: 600,
+                fontSize: '0.86rem'
               }}
             >
               Sign In to Your Dashboard <ArrowRight size={15} />
@@ -412,13 +413,13 @@ const QuickCheckIn = () => {
 
         {/* Not Found Alert (Unregistered User) */}
         {result?.notFound && (
-          <div 
-            style={{ 
-              background: '#fffbeb', 
-              border: '1.5px solid #fde68a', 
-              borderRadius: '12px', 
-              padding: '20px', 
-              marginBottom: '22px' 
+          <div
+            style={{
+              background: '#fffbeb',
+              border: '1.5px solid #fde68a',
+              borderRadius: '12px',
+              padding: '20px',
+              marginBottom: '22px'
             }}
           >
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
@@ -431,35 +432,35 @@ const QuickCheckIn = () => {
                   No registered church account was found matching <strong>"{identifier}"</strong>. Please create an account to record your attendance and join ministry groups.
                 </p>
                 <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                  <Link 
+                  <Link
                     to={`/signup?prefill=${encodeURIComponent(identifier)}`}
-                    style={{ 
-                      display: 'inline-flex', 
-                      alignItems: 'center', 
-                      gap: '6px', 
-                      padding: '9px 16px', 
-                      borderRadius: '8px', 
-                      background: '#E87D1E', 
-                      color: '#fff', 
-                      textDecoration: 'none', 
-                      fontWeight: 700, 
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      padding: '9px 16px',
+                      borderRadius: '8px',
+                      background: '#E87D1E',
+                      color: '#fff',
+                      textDecoration: 'none',
+                      fontWeight: 700,
                       fontSize: '0.88rem',
                       boxShadow: '0 2px 8px rgba(232, 125, 30, 0.3)'
                     }}
                   >
                     <UserPlus size={16} /> Create Free Account Now
                   </Link>
-                  <button 
+                  <button
                     onClick={() => { setResult(null); }}
-                    style={{ 
-                      background: '#fff', 
-                      border: '1px solid #d1d5db', 
-                      padding: '9px 14px', 
-                      borderRadius: '8px', 
-                      color: '#475569', 
-                      fontSize: '0.85rem', 
-                      fontWeight: 600, 
-                      cursor: 'pointer' 
+                    style={{
+                      background: '#fff',
+                      border: '1px solid #d1d5db',
+                      padding: '9px 14px',
+                      borderRadius: '8px',
+                      color: '#475569',
+                      fontSize: '0.85rem',
+                      fontWeight: 600,
+                      cursor: 'pointer'
                     }}
                   >
                     Try Different Phone/Email
@@ -472,19 +473,19 @@ const QuickCheckIn = () => {
 
         {/* General Error Notice */}
         {error && (
-          <div 
-            style={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: '10px', 
-              padding: '12px 14px', 
-              marginBottom: '20px', 
-              borderRadius: '8px', 
-              backgroundColor: '#fef2f2', 
-              border: '1px solid #fecaca', 
-              color: '#dc2626', 
-              fontSize: '0.86rem', 
-              fontWeight: 500 
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              padding: '12px 14px',
+              marginBottom: '20px',
+              borderRadius: '8px',
+              backgroundColor: '#fef2f2',
+              border: '1px solid #fecaca',
+              color: '#dc2626',
+              fontSize: '0.86rem',
+              fontWeight: 500
             }}
           >
             <AlertCircle size={18} style={{ flexShrink: 0 }} />
@@ -496,13 +497,13 @@ const QuickCheckIn = () => {
         {(!result?.success && activeSession) && (
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div>
-              <label 
-                style={{ 
-                  display: 'block', 
-                  marginBottom: '6px', 
-                  color: '#334155', 
-                  fontWeight: 600, 
-                  fontSize: '0.88rem' 
+              <label
+                style={{
+                  display: 'block',
+                  marginBottom: '6px',
+                  color: '#334155',
+                  fontWeight: 600,
+                  fontSize: '0.88rem'
                 }}
               >
                 Phone Number, Email, or Member ID *
@@ -529,10 +530,10 @@ const QuickCheckIn = () => {
                   onFocus={e => e.target.style.borderColor = '#E87D1E'}
                   onBlur={e => e.target.style.borderColor = '#cbd5e1'}
                 />
-                <User 
-                  size={18} 
-                  color="#94a3b8" 
-                  style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)' }} 
+                <User
+                  size={18}
+                  color="#94a3b8"
+                  style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)' }}
                 />
               </div>
               <span style={{ fontSize: '0.76rem', color: '#94a3b8', marginTop: '4px', display: 'block' }}>
@@ -543,13 +544,13 @@ const QuickCheckIn = () => {
             {/* Optional Venue PIN */}
             {activeSession?.hasPin && (
               <div>
-                <label 
-                  style={{ 
-                    display: 'block', 
-                    marginBottom: '6px', 
-                    color: '#334155', 
-                    fontWeight: 600, 
-                    fontSize: '0.88rem' 
+                <label
+                  style={{
+                    display: 'block',
+                    marginBottom: '6px',
+                    color: '#334155',
+                    fontWeight: 600,
+                    fontSize: '0.88rem'
                   }}
                 >
                   4-Digit Venue Code *
@@ -576,10 +577,10 @@ const QuickCheckIn = () => {
                       boxSizing: 'border-box'
                     }}
                   />
-                  <KeyRound 
-                    size={18} 
-                    color="#94a3b8" 
-                    style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)' }} 
+                  <KeyRound
+                    size={18}
+                    color="#94a3b8"
+                    style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)' }}
                   />
                 </div>
                 <span style={{ fontSize: '0.76rem', color: '#94a3b8', marginTop: '4px', display: 'block' }}>

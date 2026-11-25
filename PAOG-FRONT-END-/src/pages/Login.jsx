@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Lock, Mail, AlertCircle, ArrowRight, Eye, EyeOff } from 'lucide-react';
-import logoImg from '../assets/logo Kingdom enightement.jpg';
+import logoImg from '../assets/logo ngungo.png';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -44,12 +44,12 @@ const Login = () => {
       } catch {
         // Offline fallback for admin
         if (
-          (trimmedEmail === 'info@kingdomenlightenment.org' || trimmedEmail.endsWith('@kingdomenlightenment.org')) &&
-          trimmedPassword === 'KEMTkemt'
+          (trimmedEmail === 'info@pagngungo.org' || trimmedEmail === 'admin@pagngungo.org' || trimmedEmail.endsWith('@pagngungo.org') || trimmedEmail.endsWith('@kingdomenlightenment.org')) &&
+          (trimmedPassword === 'PAGngungo@2026' || trimmedPassword === 'KEMTkemt')
         ) {
           success = true;
           userData = {
-            name: 'KEMT Administrator',
+            name: 'PAG Ngungo Administrator',
             email: trimmedEmail,
             role: 'Super Admin',
             isAdmin: true,
@@ -105,19 +105,20 @@ const Login = () => {
         <div style={{ textAlign: 'center', marginBottom: '28px' }}>
           <div
             style={{
-              width: '68px', height: '68px', borderRadius: '50%',
-              background: '#fff7ed', border: '2px solid #fed7aa',
+              width: '72px', height: '72px', borderRadius: '50%',
+              background: '#ffffff', border: '2px solid #fed7aa',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              margin: '0 auto 14px', overflow: 'hidden', padding: '6px'
+              margin: '0 auto 14px', overflow: 'hidden', padding: '5px',
+              boxShadow: '0 4px 16px rgba(0,0,0,0.08)'
             }}
           >
-            <img src={logoImg} alt="KEMT Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+            <img src={logoImg} alt="PAG Ngungo Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </div>
           <h2 style={{ color: '#1e293b', margin: '0 0 6px', fontSize: '1.65rem', fontWeight: 800 }}>
             Welcome Back
           </h2>
           <p style={{ color: '#64748b', margin: 0, fontSize: '0.88rem' }}>
-            Sign in to your KEMT account
+            Sign in to Pentecostal Assemblies of God — Ngungo Assembly
           </p>
         </div>
 

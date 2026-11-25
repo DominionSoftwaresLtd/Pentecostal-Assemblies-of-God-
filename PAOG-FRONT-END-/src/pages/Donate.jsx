@@ -107,7 +107,7 @@ const Donate = () => {
           <div className="donate-form-header">
             <i className="fas fa-mobile-screen-button"></i>
             <h3>Give via M-Pesa</h3>
-            <p>Support KEMT Ministries — account name: <strong>KEMT Ministries</strong></p>
+            <p>Support PAG Ngungo Assembly — account name: <strong>PAG Ngungo Assembly (Mbeere District HQ)</strong></p>
           </div>
 
           {status === 'success' ? (

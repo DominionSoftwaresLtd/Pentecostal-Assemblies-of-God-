@@ -266,7 +266,7 @@ const AdminGallery = () => {
             Gallery &amp; Albums Administration
           </h1>
           <p style={{ margin: '4px 0 0', color: '#64748b', fontSize: '0.88rem' }}>
-            Upload event albums, connect Google Photos links, and manage photo galleries across KEMT and KESIP.
+            Upload event albums, connect Google Photos links, and manage photo galleries across Ngungo Assembly and District Circuits.
           </p>
         </div>
 
@@ -885,8 +885,8 @@ const AdminGallery = () => {
                       onChange={handleInputChange}
                       style={{ width: '100%', boxSizing: 'border-box' }}
                     >
-                      <option value="KEMT">Kingdom Enlightenment Missions (KEMT)</option>
-                      <option value="KESIP">Student Impact Program (KESIP)</option>
+                      <option value="KEMT">Ngungo Assembly (HQ)</option>
+                      <option value="KESIP">Mbeere District / Kyuso Circuit</option>
                     </select>
                   </div>
                 </div>

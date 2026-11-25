@@ -21,7 +21,7 @@ const Gallery = () => {
   // Initialize with cached database albums for instant display
   const [dbAlbums, setDbAlbums] = useState(() => {
     try {
-      const cached = localStorage.getItem('kemt_gallery_cache');
+      const cached = localStorage.getItem('pag_gallery_cache');
       return cached ? JSON.parse(cached) : [];
     } catch {
       return [];
@@ -324,31 +324,31 @@ const Gallery = () => {
                         onClick={() => scrollToSection('kemt-section')} 
                         className={`branch-shortcut-btn-compact ${activeShortcut === 'kemt-section' ? 'active-shortcut' : ''}`}
                       >
-                        <i className="fas fa-globe-africa"></i> KEMT
+                        <i className="fas fa-church"></i> Ngungo Assembly
                       </button>
                       <button 
                         onClick={() => scrollToSection('kesip-section')} 
                         className={`branch-shortcut-btn-compact ${activeShortcut === 'kesip-section' ? 'active-shortcut' : ''}`}
                       >
-                        <i className="fas fa-user-graduate"></i> Students (KESIP)
+                        <i className="fas fa-network-wired"></i> District Assemblies
                       </button>
                     </div>
                   )}
                 </div>
               </div>
 
-              {/* Responsive Uniform Image Grid with KEMT vs KESIP Branching */}
+              {/* Responsive Uniform Image Grid with Ngungo HQ vs District Circuit Branching */}
               {!searchQuery ? (
                 <div className="gallery-branches-container">
                   <div className="gallery-branch-section" id="kemt-section">
-                    <h3 className="gallery-branch-title">Kingdom Enlightenment Missions Team (KEMT)</h3>
+                    <h3 className="gallery-branch-title">Pentecostal Assemblies of God - Ngungo Assembly (HQ)</h3>
                     <div className="gallery-grid-uniform">
                       {filteredAlbums.filter(a => a.branch ? a.branch !== 'KESIP' : a.category !== 'Youth & Schools').map(renderAlbumCard)}
                     </div>
                   </div>
 
                   <div className="gallery-branch-section" id="kesip-section">
-                    <h3 className="gallery-branch-title">Kingdom Enlightenment Student Impact Program (KESIP)</h3>
+                    <h3 className="gallery-branch-title">Mbeere District &amp; Kyuso Circuit Assemblies</h3>
                     <div className="gallery-grid-uniform">
                       {filteredAlbums.filter(a => a.branch ? a.branch === 'KESIP' : a.category === 'Youth & Schools').map(renderAlbumCard)}
                     </div>
@@ -361,9 +361,36 @@ const Gallery = () => {
               )}
 
               {filteredAlbums.length === 0 && (
-                <div className="gallery-empty-state">
-                  <i className="fas fa-images gallery-empty-icon" aria-hidden="true"></i>
-                  <p>No event albums found in this category.</p>
+                <div className="gallery-empty-state" style={{ padding: '60px 20px', textAlign: 'center' }}>
+                  <div style={{
+                    width: '80px',
+                    height: '80px',
+                    borderRadius: '50%',
+                    background: '#fff7ed',
+                    color: '#E87D1E',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '2.2rem',
+                    margin: '0 auto 20px',
+                    border: '2px solid #fed7aa'
+                  }}>
+                    <i className="fas fa-camera"></i>
+                  </div>
+                  <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#1e293b', marginBottom: '10px' }}>
+                    Media Gallery Under Curation
+                  </h3>
+                  <p style={{ maxWidth: '520px', margin: '0 auto 24px', color: '#64748b', fontSize: '0.95rem', lineHeight: 1.6 }}>
+                    Official high-resolution photography and service highlights from Pentecostal Assemblies of God - Ngungo Assembly and Mbeere District gatherings are currently being compiled by the Media Team. Albums will be published here directly from church administration.
+                  </p>
+                  <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                    <Link to="/programs" className="btn btn-primary" style={{ padding: '10px 22px', fontSize: '0.9rem' }}>
+                      View Weekly Services
+                    </Link>
+                    <Link to="/assemblies" className="btn btn-secondary" style={{ padding: '10px 22px', fontSize: '0.9rem' }}>
+                      Explore District Assemblies
+                    </Link>
+                  </div>
                 </div>
               )}
             </>

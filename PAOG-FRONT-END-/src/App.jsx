@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
 import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
+import Departments from './pages/Departments';
 import Ministries from './pages/Ministries';
 import Programs from './pages/Programs';
 import Gallery from './pages/Gallery';
@@ -12,6 +13,7 @@ import Events from './pages/Events';
 import Contact from './pages/Contact';
 import Donate from './pages/Donate';
 import Leadership from './pages/Leadership';
+import Assemblies from './pages/Assemblies';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import QuickCheckIn from './pages/QuickCheckIn';
@@ -67,6 +69,7 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/departments" element={<Departments />} />
           <Route path="/ministries" element={<Ministries />} />
           <Route path="/programs" element={<Programs />} />
           <Route path="/events" element={<Events />} />
@@ -74,6 +77,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/donate" element={<Donate />} />
           <Route path="/leadership" element={<Leadership />} />
+          <Route path="/assemblies" element={<Assemblies />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/check-in" element={<QuickCheckIn />} />

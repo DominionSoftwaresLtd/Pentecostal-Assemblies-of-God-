@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import dominionLogo from '../assets/dominion softwares main logo.png';
+import logoImg from '../assets/logo ngungo.png';
 
 const Footer = () => {
     return (
@@ -9,16 +10,35 @@ const Footer = () => {
                 <div className="container">
                     <div className="footer-grid">
                         <div className="footer-col">
-                            <div className="footer-logo">
-                                <img src="/images/logo.png" alt="Kingdom Enlightenment Missions Team" className="footer-logo-img" />
+                            <div className="footer-logo" style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '14px' }}>
+                                <img 
+                                    src={logoImg} 
+                                    alt="PAG Ngungo Assembly" 
+                                    style={{ 
+                                        width: '54px', 
+                                        height: '54px', 
+                                        objectFit: 'contain', 
+                                        borderRadius: '50%', 
+                                        background: '#ffffff', 
+                                        padding: '3px',
+                                        boxShadow: '0 4px 14px rgba(0,0,0,0.25)',
+                                        flexShrink: 0
+                                    }} 
+                                />
+                                <div>
+                                    <h3 style={{ color: '#ffffff', fontWeight: 800, fontSize: '1.18rem', margin: 0 }}>
+                                        Pentecostal Assemblies of God
+                                    </h3>
+                                    <p style={{ color: '#E87D1E', fontWeight: 700, fontSize: '0.86rem', margin: '4px 0 0' }}>
+                                        Ngungo Assembly — Mbeere District HQ
+                                    </p>
+                                </div>
                             </div>
-                            <p>Spreading the Gospel, Transforming Lives, Building God's Kingdom across Kenya and beyond.</p>
+                            <p>Proclaiming the full Gospel of Jesus Christ, making disciples, and coordinating assemblies across Mbeere District and Kyuso Circuit, Kitui County.</p>
                             <div className="footer-social">
-                                <a href="https://www.facebook.com/share/1EXQmKx4QE/" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f"></i></a>
-                                <a href="https://www.tiktok.com/@kingdom_enlightment" target="_blank" rel="noopener noreferrer"><i className="fab fa-tiktok"></i></a>
-                                <a href="https://www.youtube.com/@KingdomEnlightenmentMinistries" target="_blank" rel="noopener noreferrer"><i className="fab fa-youtube"></i></a>
+                                <a href="#" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f"></i></a>
+                                <a href="#" target="_blank" rel="noopener noreferrer"><i className="fab fa-youtube"></i></a>
                                 <a href="#"><i className="fa-brands fa-x-twitter"></i></a>
-                                <a href="#"><i className="fab fa-instagram"></i></a>
                             </div>
                         </div>
                         <div className="footer-col">
@@ -26,37 +46,46 @@ const Footer = () => {
                             <ul>
                                 <li><Link to="/">Home</Link></li>
                                 <li><Link to="/about">About Us</Link></li>
-                                <li><Link to="/ministries">Ministries</Link></li>
-                                <li><Link to="/programs">Programs</Link></li>
-                                <li><Link to="/events">Events</Link></li>
+                                <li><Link to="/departments">Church Departments</Link></li>
+                                <li><Link to="/ministries">Sanctuary Ministries</Link></li>
+                                <li><Link to="/assemblies">District Assemblies</Link></li>
+                                <li><Link to="/leadership">Leadership Team</Link></li>
                                 <li><Link to="/gallery">Gallery</Link></li>
                                 <li><Link to="/contact">Contact</Link></li>
                             </ul>
                         </div>
                         <div className="footer-col">
-                            <h4>Our Departments</h4>
+                            <h4>Departments &amp; Ministries</h4>
                             <ul>
-                                <li><Link to="/ministries#evangelism">Evangelism &amp; Missions</Link></li>
-                                <li><Link to="/ministries#prayer">Prayer Department</Link></li>
-                                <li><Link to="/ministries#compassion">Compassion Ministry</Link></li>
-                                <li><Link to="/ministries#highschool">High School Ministry</Link></li>
-                                <li><Link to="/programs">Outreach</Link></li>
+                                <li><Link to="/departments#women">Women Department</Link></li>
+                                <li><Link to="/departments#men">Men Department</Link></li>
+                                <li><Link to="/departments#youth">Youth Department</Link></li>
+                                <li><Link to="/departments#sundayschool">Sunday School Department</Link></li>
+                                <li><Link to="/ministries#worship">Praise and Worship</Link></li>
+                                <li><Link to="/ministries#instrumentalists">Instrumentalist Ministry</Link></li>
+                                <li><Link to="/ministries#choir">Choir Ministry</Link></li>
+                                <li><Link to="/ministries#ushering">Ushering Ministry</Link></li>
                             </ul>
                         </div>
                         <div className="footer-col">
-                            <h4>Contact Info</h4>
+                            <h4>Service Times &amp; Location</h4>
                             <ul className="contact-info">
                                 <li>
                                     <i className="fas fa-map-marker-alt"></i>
-                                    <span>P.O. Box 00000-00100<br />Nairobi, Kenya</span>
+                                    <span>Ngungo Assembly Sanctuary<br />Mbeere District, Embu County, Kenya</span>
                                 </li>
                                 <li>
-                                    <i className="fas fa-phone"></i>
-                                    <span>+254 714 476 295</span>
+                                    <i className="fas fa-clock"></i>
+                                    <span>
+                                        <strong>Sunday:</strong> 8:00 AM (Sunday School &amp; English)<br />
+                                        <strong>Sunday:</strong> 10:30 AM (Main Service)<br />
+                                        <strong>Friday:</strong> 7:00 PM (Fellowship)<br />
+                                        <strong>Saturday:</strong> 4:00 PM (Youth)
+                                    </span>
                                 </li>
                                 <li>
                                     <i className="fas fa-envelope"></i>
-                                    <span>info@kingdomenlightenment.org</span>
+                                    <span>info@pagngungo.org</span>
                                 </li>
                             </ul>
                         </div>
@@ -66,7 +95,7 @@ const Footer = () => {
             <div className="footer-bottom">
                 <div className="container">
                     <div className="footer-bottom-content">
-                        <p>&copy; {new Date().getFullYear()} Kingdom Enlightenment Missions Team. All Rights Reserved.</p>
+                        <p>&copy; {new Date().getFullYear()} Pentecostal Assemblies of God - Ngungo Assembly (Mbeere District HQ). All Rights Reserved.</p>
                         <div className="footer-links">
                             <a href="#">Privacy Policy</a>
                             <a href="#">Terms of Service</a>

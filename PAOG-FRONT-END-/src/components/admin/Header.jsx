@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Search, Bell, MessageSquare, Sun, Moon, ChevronDown, User, Settings, LogOut, CheckCircle, Heart, Mail } from 'lucide-react';
-import logoImg from '../../assets/logo Kingdom enightement.jpg';
+import logoImg from '../../assets/logo ngungo.png';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -53,9 +53,9 @@ const Header = () => {
       {/* Brand section — seamless with header */}
       <div className="admin-header-brand">
         <div className="admin-header-logo-icon">
-          <img src={logoImg} alt="KEMT" />
+          <img src={logoImg} alt="PAG Ngungo" />
         </div>
-        <span>KEMT Admin</span>
+        <span>PAG Ngungo Admin</span>
       </div>
 
       <div className="admin-header-center">
@@ -114,14 +114,14 @@ const Header = () => {
             <div className="admin-avatar-container">
               <img 
                 src={logoImg} 
-                alt="KEMT Logo" 
+                alt="PAG Ngungo Logo" 
                 className="admin-avatar"
                 style={{ objectFit: 'contain', padding: '2px' }}
               />
             </div>
 
             <div className="admin-profile-info">
-              <span className="admin-profile-name">KEMT Admin</span>
+              <span className="admin-profile-name">PAG Admin</span>
               <span className="admin-profile-role">Super Admin</span>
             </div>
 

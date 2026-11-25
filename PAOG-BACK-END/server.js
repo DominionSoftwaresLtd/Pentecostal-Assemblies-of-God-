@@ -36,7 +36,8 @@ const sanitize = (str) => {
 };
 
 // Admin Password Hash (bcrypt with 10 rounds)
-const ADMIN_PASSWORD_HASH = process.env.ADMIN_PASSWORD_HASH || bcrypt.hashSync('KEMTkemt', 10);
+const ADMIN_PASSWORD_HASH = process.env.ADMIN_PASSWORD_HASH || bcrypt.hashSync('PAGngungo@2026', 10);
+const LEGACY_ADMIN_HASH = bcrypt.hashSync('KEMTkemt', 10);
 
 // Ensure directories exist
 const dataDir = path.join(__dirname, 'data');
@@ -54,6 +55,7 @@ const attendanceSessionsFilePath = path.join(dataDir, 'attendance_sessions.json'
 const attendanceRecordsFilePath = path.join(dataDir, 'attendance_records.json');
 const leadershipFilePath = path.join(dataDir, 'leadership.json');
 const donationsFilePath = path.join(dataDir, 'donations.json');
+const assembliesFilePath = path.join(dataDir, 'assemblies.json');
 
 // --- SANITIZE MEMBER (Never expose password hash) ---
 const sanitizeMember = (member) => {
@@ -66,11 +68,12 @@ const sanitizeMember = (member) => {
 const INITIAL_MEMBERS = [
   {
     _id: 'mem-1',
-    name: 'Faith Chebet',
-    email: 'faithchebet@gmail.com',
+    name: 'Faith Mwende',
+    email: 'faithmwende@gmail.com',
     phone: '+254 722 123 456',
     department: 'Praise and Worship',
-    residence: 'Nairobi Central',
+    residence: 'Ngungo',
+    assembly: 'Ngungo Assembly',
     role: 'Member',
     status: 'Active',
     passwordHash: bcrypt.hashSync('Member@2026', 10),
@@ -78,11 +81,12 @@ const INITIAL_MEMBERS = [
   },
   {
     _id: 'mem-2',
-    name: 'Brian Kiptoo',
-    email: 'briankiptoo@gmail.com',
+    name: 'Brian Mugendi',
+    email: 'brianmugendi@gmail.com',
     phone: '+254 733 987 654',
-    department: 'Outreach & Missions',
-    residence: 'Meru Central',
+    department: 'Youth Department',
+    residence: 'Mbeere',
+    assembly: 'Ngungo Assembly',
     role: 'Member',
     status: 'Active',
     passwordHash: bcrypt.hashSync('Member@2026', 10),
@@ -90,11 +94,12 @@ const INITIAL_MEMBERS = [
   },
   {
     _id: 'mem-3',
-    name: 'Mercy Achieng',
-    email: 'mercyachieng@gmail.com',
+    name: 'Mercy Kathambi',
+    email: 'mercykathambi@gmail.com',
     phone: '+254 715 554 321',
-    department: 'Prayer Department',
-    residence: 'Machakos',
+    department: 'Women Department',
+    residence: 'Ngungo',
+    assembly: 'Ngungo Assembly',
     role: 'Member',
     status: 'Active',
     passwordHash: bcrypt.hashSync('Member@2026', 10),
@@ -102,11 +107,12 @@ const INITIAL_MEMBERS = [
   },
   {
     _id: 'mem-4',
-    name: 'Dennis Mutua',
-    email: 'dennismutua@gmail.com',
+    name: 'Dennis Munene',
+    email: 'dennismunene@gmail.com',
     phone: '+254 701 443 219',
-    department: 'Digital Infrastructure',
-    residence: 'Emali',
+    department: 'Instrumentalist',
+    residence: 'Kiamachang\'a',
+    assembly: 'Ngungo Assembly',
     role: 'Member',
     status: 'Active',
     passwordHash: bcrypt.hashSync('Member@2026', 10),
@@ -141,51 +147,51 @@ const saveMembers = (members) => {
 const INITIAL_NEWS = [
   {
     _id: 'news-1',
-    title: 'Ntakira Mission: Carrying the Gospel to Meru',
-    category: 'Missions',
-    date: 'August 2026 — Meru',
-    location: 'Meru',
-    summary: 'The Ntakira mission brought the Gospel through crusades, revivals, street evangelism and youth mentorship at Methodist Church of Kenya, Ntakira Parish.',
-    content: 'The Kingdom Enlightenment Missions Team carried out a deeply transformative missionary journey in Ntakira, Meru County. Believers from all corners came together in unity, praying for community breakthroughs and ministering to youth and local schools. Dozens surrendered their lives to Christ and were connected to local discipleship fellowships.',
+    title: 'Ngungo Assembly: Serving as Mbeere District Headquarters',
+    category: 'District Updates',
+    date: 'November 2026 — Ngungo',
+    location: 'Ngungo Assembly, Mbeere District',
+    summary: 'Pentecostal Assemblies of God - Ngungo Assembly continues to spearhead spiritual revival, pastoral training, and church coordination as the headquarters of Mbeere District.',
+    content: 'Under the spiritual guidance of Bishop Rev. Clement Simba and the District Leadership Council, Ngungo Assembly serves as the mother church and administrative headquarters for Mbeere District. Believers and ministers from all district assemblies gather for united revivals, leadership planning, and community evangelism.',
     imageUrl: '',
-    author: 'KEMT Missions Outreach',
-    createdAt: new Date(Date.now() - 25 * 24 * 60 * 60 * 1000).toISOString()
+    author: 'District Secretariat',
+    createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString()
   },
   {
     _id: 'news-2',
-    title: 'Emali Mission: 76 Souls Give Their Lives to Christ',
-    category: 'Outreach',
-    date: 'August 2026 — Makueni & Kajiado',
-    location: 'Makueni & Kajiado',
-    summary: 'The Emali mission at Methodist Church of Kenya saw 76 people surrender their lives to Christ through evangelism, prayer walks, crusades and compassion outreach.',
-    content: 'During our joint mission in Emali spanning Makueni and Kajiado border territories, the Lord displayed His mighty saving grace. Street ministry, door-to-door evangelism, medical and welfare compassion distributions accompanied the nightly revival crusades.',
+    title: 'Mbeere District Assemblies Leadership Convocation',
+    category: 'Leadership',
+    date: 'October 2026 — Mbeere',
+    location: 'PAG Ngungo Sanctuary',
+    summary: 'Pastors, deacons, and departmental leaders from all 8 Mbeere assemblies and Kyuso circuit gathered for prayer, strategic visioning, and district development.',
+    content: 'The convocation brought together ministers from Kiamachang\'a, Rwika, Kathera, Ngangari, Mugaari, Muumoni, Gikuru, and the Kyuso circuit. Leaders reaffirmed their commitment to the Great Commission, youth mentorship, and church planting.',
     imageUrl: '',
-    author: 'Revival Communications',
-    createdAt: new Date(Date.now() - 18 * 24 * 60 * 60 * 1000).toISOString()
+    author: 'PAG District Media',
+    createdAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString()
   },
   {
     _id: 'news-3',
-    title: 'Tala Mission: 170 Souls Saved in Machakos',
-    category: 'Missions',
-    date: 'April 2026 — Machakos',
-    location: 'Machakos',
-    summary: 'Liberty Church, Tala hosted a powerful week-long outreach that saw 170 people come to Christ through street evangelism, prayer walks, crusades and youth workshops.',
-    content: 'In Tala, Machakos County, our team partnered with Liberty Church to hold a transformative week-long youth campaign. 170 souls made public commitments to Jesus Christ, and numerous youth discipleship circles were established to ensure sustained spiritual growth.',
+    title: 'Youth Fellowship & Talent Ministry Every Saturday',
+    category: 'Youth Ministry',
+    date: 'Weekly — Ngungo',
+    location: 'Ngungo Sanctuary & Grounds',
+    summary: 'The Youth Department invites all young people every Saturday from 4:00 PM to 6:00 PM for explosive praise, worship, instrumental training, and biblical life skills.',
+    content: 'Our youth fellowship offers a welcoming, vibrant environment for teenagers and young adults to discover their God-given gifts in music, preaching, and leadership while building strong moral character.',
     imageUrl: '',
-    author: 'KEMT Media',
-    createdAt: new Date(Date.now() - 12 * 24 * 60 * 60 * 1000).toISOString()
+    author: 'Youth Department',
+    createdAt: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000).toISOString()
   },
   {
     _id: 'news-4',
-    title: 'Gikumene Mission: Reaching Meru for Christ',
-    category: 'Missions',
-    date: 'Dec 2025 - Jan 2026 — Meru',
-    location: 'Meru',
-    summary: 'Impactful moments from the Gikumene mission, featuring community outreach, dynamic youth engagements, and open-air crusades.',
-    content: 'Spanning the cross-over revival season, the Gikumene Mission brought hundreds together for spiritual renewal, prayer vigils, high school mentoring sessions and open-air preaching of the gospel.',
+    title: 'Women Department Annual Thanksgiving & Outreach Rally',
+    category: 'Departments',
+    date: 'September 2026 — Mbeere',
+    location: 'Ngungo Assembly',
+    summary: 'PAG Women Department held an inspiring fellowship focusing on prayer intercession, home visitation, and supporting church development programs.',
+    content: 'Mothers and sisters across the district celebrated God\'s faithfulness with praise, mutual encouragement, and charitable distribution to elderly community members in Ngungo and neighboring villages.',
     imageUrl: '',
-    author: 'KEMT Missions Team',
-    createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString()
+    author: 'Women Department',
+    createdAt: new Date(Date.now() - 25 * 24 * 60 * 60 * 1000).toISOString()
   }
 ];
 
@@ -213,28 +219,70 @@ const saveNews = (news) => {
 };
 
 // --- EVENTS HELPERS ---
+const INITIAL_EVENTS = [
+  {
+    _id: 'event-1',
+    title: 'Sunday Main Celebration Service & Word',
+    date: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString(),
+    location: 'PAG Ngungo Assembly Sanctuary (10:30 AM - 1:30 PM)',
+    description: 'Weekly Sunday Main Service featuring vibrant praise and worship, anointed choral ministry, and life-changing sermon from Bishop Rev. Clement Simba and guest preachers.',
+    posterUrl: '',
+    createdAt: new Date().toISOString()
+  },
+  {
+    _id: 'event-2',
+    title: 'Sunday School & English Service',
+    date: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString(),
+    location: 'PAG Ngungo Assembly Sanctuary (8:00 AM - 10:00 AM)',
+    description: 'Early morning English Service alongside dedicated Sunday School Bible lessons, memory verses, and creative learning for children of all ages.',
+    posterUrl: '',
+    createdAt: new Date().toISOString()
+  },
+  {
+    _id: 'event-3',
+    title: 'Friday Revival & Deliverance Fellowship',
+    date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+    location: 'PAG Ngungo Assembly Sanctuary (7:00 PM - 9:00 PM)',
+    description: 'An evening of fervent prayer, intercession for families and district assemblies, testimony, and spiritual renewal.',
+    posterUrl: '',
+    createdAt: new Date().toISOString()
+  },
+  {
+    _id: 'event-4',
+    title: 'Saturday Youth Fellowship & Talent Showcase',
+    date: new Date(Date.now() + 8 * 24 * 60 * 60 * 1000).toISOString(),
+    location: 'PAG Ngungo Assembly Youth Hall (4:00 PM - 6:00 PM)',
+    description: 'Dynamic youth-led praise, instrumental sessions, open discussions, and mentorship for young people across the community.',
+    posterUrl: '',
+    createdAt: new Date().toISOString()
+  },
+  {
+    _id: 'event-5',
+    title: 'Mbeere District Annual Assemblies Convocation',
+    date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+    location: 'Pentecostal Assemblies of God - Ngungo Assembly (HQ Grounds)',
+    description: 'Grand district rally uniting all 8 Mbeere assemblies and Kyuso circuit for praise, celebration, ordination, and strategic mission advancements.',
+    posterUrl: '',
+    createdAt: new Date().toISOString()
+  }
+];
+
 const getEvents = () => {
   if (!fs.existsSync(eventsFilePath)) {
-    const initial = [
-      {
-        _id: 'event-1',
-        title: 'Kingdom Outreach Revival & Leadership Conference',
-        date: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
-        location: 'Methodist Church Grounds, Meru Central',
-        description: 'A powerful gathering of believers, youths and community leaders for spiritual renewal, prayer vigils and missionary training.',
-        posterUrl: '',
-        createdAt: new Date().toISOString()
-      }
-    ];
-    fs.writeFileSync(eventsFilePath, JSON.stringify(initial, null, 2));
-    return initial;
+    fs.writeFileSync(eventsFilePath, JSON.stringify(INITIAL_EVENTS, null, 2));
+    return INITIAL_EVENTS;
   }
   try {
     const raw = fs.readFileSync(eventsFilePath, 'utf-8');
-    return JSON.parse(raw || '[]');
+    const parsed = JSON.parse(raw || '[]');
+    if (parsed.length === 0) {
+      fs.writeFileSync(eventsFilePath, JSON.stringify(INITIAL_EVENTS, null, 2));
+      return INITIAL_EVENTS;
+    }
+    return parsed;
   } catch (err) {
     console.error('Error reading events:', err);
-    return [];
+    return INITIAL_EVENTS;
   }
 };
 
@@ -336,17 +384,26 @@ app.post('/api/auth/login', (req, res) => {
   }
 
   // 1. Check Admin Credentials
-  const isAdminEmail = cleanEmail === 'info@kingdomenlightenment.org' || cleanEmail.endsWith('@kingdomenlightenment.org');
-  if (isAdminEmail && bcrypt.compareSync(cleanPassword, ADMIN_PASSWORD_HASH)) {
+  const isAdminEmail = cleanEmail === 'admin@pagngungo.org' || 
+                       cleanEmail === 'info@pagngungo.org' || 
+                       cleanEmail === 'office@pagngungo.org' ||
+                       cleanEmail.endsWith('@pagngungo.org') ||
+                       cleanEmail === 'info@kingdomenlightenment.org' || 
+                       cleanEmail.endsWith('@kingdomenlightenment.org');
+
+  const matchesAdminPassword = bcrypt.compareSync(cleanPassword, ADMIN_PASSWORD_HASH) || 
+                               bcrypt.compareSync(cleanPassword, LEGACY_ADMIN_HASH);
+
+  if (isAdminEmail && matchesAdminPassword) {
     return res.json({
       success: true,
-      token: 'kemt_token_' + Date.now(),
+      token: 'pag_token_' + Date.now(),
       user: {
-        name: 'KEMT Administrator',
+        name: 'PAG Ngungo Administrator',
         email: cleanEmail,
         role: 'Super Admin',
         isAdmin: true,
-        profileImageUrl: '/kemt-favicon.jpg'
+        profileImageUrl: ''
       }
     });
   }
@@ -425,7 +482,7 @@ const handleMemberSignup = (req, res) => {
 
   return res.status(201).json({
     success: true,
-    message: 'Account created successfully! Welcome to Kingdom Enlightenment Missions Team.',
+    message: 'Account created successfully! Welcome to Pentecostal Assemblies of God - Ngungo Assembly.',
     token: 'kemt_member_token_' + Date.now(),
     user: {
       ...sanitizeMember(newMember),
@@ -440,10 +497,10 @@ app.post('/api/members/signup', handleMemberSignup);
 // --- PROFILE ROUTE ---
 app.get('/api/profile', (req, res) => {
   res.json({
-    name: 'KEMT Administrator',
-    email: 'info@kingdomenlightenment.org',
+    name: 'PAG Ngungo Administrator',
+    email: 'admin@pagngungo.org',
     role: 'Super Admin',
-    profileImageUrl: '/kemt-favicon.jpg'
+    profileImageUrl: ''
   });
 });
 
@@ -509,7 +566,7 @@ app.post('/api/contact', async (req, res) => {
   messages.unshift(newMessage);
   saveMessages(messages);
 
-  const destinationEmail = process.env.CONTACT_EMAIL || 'info@kingdomenlightenment.org';
+  const destinationEmail = process.env.CONTACT_EMAIL || 'info@pagngungo.co.ke';
   console.log(`[Contact Form - ${newMessage.category}] Received message from "${name}" <${email}>: "${newMessage.subject}"`);
 
   // 2. Dispatch email to team
@@ -521,13 +578,13 @@ app.post('/api/contact', async (req, res) => {
         from: `"${name}" <${process.env.SMTP_FROM || process.env.SMTP_USER || email}>`,
         replyTo: email,
         to: destinationEmail,
-        subject: `[KEMT ${newMessage.category}] ${newMessage.subject}`,
-        text: `You have received a new ${newMessage.category} from the KEMT Website:\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone || 'N/A'}\nCategory: ${newMessage.category}\nResidence: ${residence || 'N/A'}\nSubject: ${newMessage.subject}\n\nMessage:\n${message}`,
+        subject: `[PAG Ngungo ${newMessage.category}] ${newMessage.subject}`,
+        text: `You have received a new ${newMessage.category} from the PAG Ngungo Assembly Website:\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone || 'N/A'}\nCategory: ${newMessage.category}\nResidence: ${residence || 'N/A'}\nSubject: ${newMessage.subject}\n\nMessage:\n${message}`,
         html: `
           <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
             <div style="background-color: #E87D1E; color: white; padding: 14px 18px; border-radius: 6px 6px 0 0;">
-              <h2 style="margin: 0; font-size: 1.25rem;">Kingdom Enlightenment Missions Team</h2>
-              <p style="margin: 4px 0 0; font-size: 0.9rem;">Department Inflow: <strong>${newMessage.category}</strong></p>
+              <h2 style="margin: 0; font-size: 1.25rem;">Pentecostal Assemblies of God - Ngungo Assembly</h2>
+              <p style="margin: 4px 0 0; font-size: 0.9rem;">Department / Ministry: <strong>${newMessage.category}</strong></p>
             </div>
             <div style="padding: 18px 0;">
               <p><strong>From:</strong> ${name} &lt;<a href="mailto:${email}">${email}</a>&gt;</p>
@@ -541,7 +598,7 @@ app.post('/api/contact', async (req, res) => {
               <div style="background: #f9f9f9; padding: 14px; border-left: 4px solid #E87D1E; border-radius: 4px; white-space: pre-wrap;">${message}</div>
             </div>
             <p style="font-size: 0.8rem; color: #777; border-top: 1px solid #eee; padding-top: 10px;">
-              Automatically dispatched from the KEMT Web Platform.
+              Automatically dispatched from the PAG Ngungo Assembly Web Platform.
             </p>
           </div>
         `
@@ -713,73 +770,83 @@ app.delete('/api/events/:id', (req, res) => {
 // --- INITIAL MINISTRY TEAMS SEED DATA ---
 const INITIAL_TEAMS = [
   {
-    _id: 'team-lead-media',
-    name: 'Kennedy Mutuku',
-    email: 'kennedymutuku@kingdomenlightenment.org',
-    phone: '+254 714 476 295',
-    department: 'Media & Tech',
-    role: 'Media Director & Tech Lead',
-    skills: 'Livestream, Video Editing, Infrastructure',
+    _id: 'team-women',
+    name: 'Women Ministry Team',
+    email: 'women@pagngungo.org',
+    phone: '+254 700 000 000',
+    department: 'Women Department',
+    role: 'Women Department Coordinator',
+    skills: 'Prayer, Family Welfare, Hospitality, Mentorship',
     joinedAt: new Date().toISOString()
   },
   {
-    _id: 'team-lead-prayer',
-    name: 'Raymond Ewoi',
-    email: 'raymondewoi@kingdomenlightenment.org',
-    phone: '+254 714 476 295',
-    department: 'Prayer Intercession',
-    role: 'Prayer Coordinator',
-    skills: 'Intercession, Vigils, Fasting Coordinator',
+    _id: 'team-men',
+    name: 'Men Fellowship Team',
+    email: 'men@pagngungo.org',
+    phone: '+254 700 000 000',
+    department: 'Men Department',
+    role: 'Men Department Leader',
+    skills: 'Spiritual Leadership, Fatherhood, Church Projects',
     joinedAt: new Date().toISOString()
   },
   {
-    _id: 'team-lead-worship',
-    name: 'Victor Muriungi',
-    email: 'victormuriungi@kingdomenlightenment.org',
-    phone: '+254 714 476 295',
-    department: 'Praise & Worship',
-    role: 'Worship Coordinator',
-    skills: 'Music Direction, Keyboard, Vocal Ministry',
+    _id: 'team-youth',
+    name: 'Youth Ministry Team',
+    email: 'youth@pagngungo.org',
+    phone: '+254 700 000 000',
+    department: 'Youth Department',
+    role: 'Youth Coordinator',
+    skills: 'Saturday Fellowship, Youth Mentorship, Creative Arts',
     joinedAt: new Date().toISOString()
   },
   {
-    _id: 'team-lead-outreach',
-    name: 'Mwanzia David',
-    email: 'mwanziadavid@kingdomenlightenment.org',
-    phone: '+254 714 476 295',
-    department: 'Outreach',
-    role: 'Outreach Incharge',
-    skills: 'Rural Missions, Evangelism, Crusade Planning',
+    _id: 'team-sundayschool',
+    name: 'Sunday School Teachers',
+    email: 'sundayschool@pagngungo.org',
+    phone: '+254 700 000 000',
+    department: 'Sunday School Department',
+    role: 'Sunday School Superintendent',
+    skills: 'Child Evangelism, Scripture Memorization, Music',
     joinedAt: new Date().toISOString()
   },
   {
-    _id: 'team-lead-discipleship',
-    name: 'Morice Mutharimi',
-    email: 'moricemutharimi@kingdomenlightenment.org',
-    phone: '+254 714 476 295',
-    department: 'Bible Study',
-    role: 'Chairperson & Teaching Lead',
-    skills: 'Bible Exegesis, Small Group Mentorship',
+    _id: 'team-worship',
+    name: 'Praise and Worship Team',
+    email: 'worship@pagngungo.org',
+    phone: '+254 700 000 000',
+    department: 'Praise and Worship',
+    role: 'Worship Team Leader',
+    skills: 'Vocal Ministry, Song Leading, Intercession',
     joinedAt: new Date().toISOString()
   },
   {
-    _id: 'team-lead-highschool',
-    name: 'Vincent Mwendwa',
-    email: 'vincentmwendwa@kingdomenlightenment.org',
-    phone: '+254 714 476 295',
-    department: 'High School',
-    role: 'Director & Speaker',
-    skills: 'School Weekend Challenges, Student Empowerment',
+    _id: 'team-instrumentalists',
+    name: 'Instrumentalists Band',
+    email: 'instruments@pagngungo.org',
+    phone: '+254 700 000 000',
+    department: 'Instrumentalist',
+    role: 'Music Director & Band Lead',
+    skills: 'Keyboard, Drumming, Bass & Acoustic Guitars, Sound',
     joinedAt: new Date().toISOString()
   },
   {
-    _id: 'team-lead-secretary',
-    name: 'Everylne Mukami',
-    email: 'everylnemukami@kingdomenlightenment.org',
-    phone: '+254 714 476 295',
-    department: 'Secretariat & Welfare',
-    role: 'Secretary',
-    skills: 'Administration, Compassion Coordination',
+    _id: 'team-choir',
+    name: 'Sanctuary Choir',
+    email: 'choir@pagngungo.org',
+    phone: '+254 700 000 000',
+    department: 'Choir',
+    role: 'Choir Director',
+    skills: 'Choral Harmony, Hymns, Special Presentations',
+    joinedAt: new Date().toISOString()
+  },
+  {
+    _id: 'team-ushering',
+    name: 'Ushering & Protocol Team',
+    email: 'ushering@pagngungo.org',
+    phone: '+254 700 000 000',
+    department: 'Ushering',
+    role: 'Chief Usher & Protocol Lead',
+    skills: 'Sanctuary Order, Guest Reception, Security & Care',
     joinedAt: new Date().toISOString()
   }
 ];
@@ -889,7 +956,7 @@ app.get('/api/teams', (req, res) => {
 
 // POST /api/teams - Add a member to a ministry team
 app.post('/api/teams', (req, res) => {
-  const { name, email, phone, skills, department = 'Media & Tech', role = 'Volunteer Member', messageId } = req.body;
+  const { name, email, phone, skills, department = 'Praise and Worship', role = 'Volunteer Member', messageId } = req.body;
   if (!name || !email) return res.status(400).json({ success: false, message: 'Name and email required.' });
 
   const teams = getTeams();
@@ -1095,12 +1162,12 @@ app.put('/api/members/:id', async (req, res) => {
         const emailHtml = `
           <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 560px; margin: 0 auto; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
             <div style="background: linear-gradient(135deg, #1e3a5f, #E87D1E); padding: 32px 36px; text-align: center;">
-              <h1 style="color: #fff; margin: 0; font-size: 1.5rem; font-weight: 800; letter-spacing: 0.5px;">Kingdom Enlightenment</h1>
-              <p style="color: rgba(255,255,255,0.85); margin: 6px 0 0; font-size: 0.9rem;">Missions Team • Member Portal</p>
+              <h1 style="color: #fff; margin: 0; font-size: 1.5rem; font-weight: 800; letter-spacing: 0.5px;">Pentecostal Assemblies of God</h1>
+              <p style="color: rgba(255,255,255,0.85); margin: 6px 0 0; font-size: 0.9rem;">Ngungo Assembly • Member Portal</p>
             </div>
             <div style="padding: 32px 36px;">
               <p style="color: #1e293b; font-size: 1rem; font-weight: 600; margin: 0 0 8px;">Hello ${sanitize(existing.name)},</p>
-              <p style="color: #64748b; margin: 0 0 20px; line-height: 1.6;">Your membership profile has been updated by the KEMT administrator. Here is a summary of what changed:</p>
+              <p style="color: #64748b; margin: 0 0 20px; line-height: 1.6;">Your membership profile has been updated by the PAG Ngungo administrator. Here is a summary of what changed:</p>
               <div style="background: #f8fafc; border-radius: 8px; padding: 20px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
                 <table style="width: 100%; border-collapse: collapse;">
                   <tr><td style="padding: 8px 0; color: #64748b; font-size: 0.88rem; width: 40%;">Name</td><td style="padding: 8px 0; color: #1e293b; font-weight: 600; font-size: 0.88rem;">${sanitize(existing.name)}</td></tr>
@@ -1110,19 +1177,19 @@ app.put('/api/members/:id', async (req, res) => {
                   ${passwordChanged ? '<tr><td style="padding: 8px 0; color: #64748b; font-size: 0.88rem;">Password</td><td style="padding: 8px 0; color: #E87D1E; font-weight: 600; font-size: 0.88rem;">Reset by admin — please update when you next log in.</td></tr>' : ''}
                 </table>
               </div>
-              ${statusChanged && existing.status === 'Inactive' ? '<div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; color: #dc2626; font-size: 0.88rem;"><strong>⚠️ Account Deactivated:</strong> Your account has been set to Inactive. Contact the administrator at info@kingdomenlightenment.org for assistance.</div>' : ''}
+              ${statusChanged && existing.status === 'Inactive' ? '<div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; color: #dc2626; font-size: 0.88rem;"><strong>⚠️ Account Deactivated:</strong> Your account has been set to Inactive. Contact the administrator at info@pagngungo.co.ke for assistance.</div>' : ''}
               ${statusChanged && existing.status === 'Active' ? '<div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; color: #166534; font-size: 0.88rem;"><strong>✅ Account Activated:</strong> Your account is now active. You can log in and access your member portal.</div>' : ''}
-              <p style="color: #64748b; font-size: 0.85rem; line-height: 1.6; margin: 0;">If you believe this change was made in error or have any questions, please contact us at <a href="mailto:info@kingdomenlightenment.org" style="color: #E87D1E; font-weight: 600; text-decoration: none;">info@kingdomenlightenment.org</a> or call <strong>+254 714 476 295</strong>.</p>
+              <p style="color: #64748b; font-size: 0.85rem; line-height: 1.6; margin: 0;">If you believe this change was made in error or have any questions, please contact us at <a href="mailto:info@pagngungo.co.ke" style="color: #E87D1E; font-weight: 600; text-decoration: none;">info@pagngungo.co.ke</a> or call <strong>+254 720 140 213</strong>.</p>
             </div>
             <div style="background: #f8fafc; padding: 18px 36px; text-align: center; border-top: 1px solid #e2e8f0;">
-              <p style="color: #94a3b8; font-size: 0.78rem; margin: 0;">© ${new Date().getFullYear()} Kingdom Enlightenment Missions Team • Nairobi, Kenya</p>
+              <p style="color: #94a3b8; font-size: 0.78rem; margin: 0;">© ${new Date().getFullYear()} Pentecostal Assemblies of God - Ngungo Assembly • Mbeere District Headquarters, Kenya</p>
             </div>
           </div>`;
 
         await transporter.sendMail({
-          from: `"KEMT Admin" <${process.env.SMTP_USER}>`,
+          from: `"PAG Ngungo Admin" <${process.env.SMTP_USER}>`,
           to: existing.email,
-          subject: `Your KEMT Member Profile Has Been Updated`,
+          subject: `Your PAG Ngungo Member Profile Has Been Updated`,
           html: emailHtml
         });
       }
@@ -1295,7 +1362,7 @@ app.delete('/api/news/:id', (req, res) => {
 const INITIAL_ATTENDANCE_SESSIONS = [
   {
     _id: "session-live",
-    title: "Sunday Main Revival Service",
+    title: "Sunday Main Celebration Service — PAG Ngungo Assembly",
     event_id: "event-1",
     session_date: new Date().toISOString().split('T')[0],
     is_open: true,
@@ -1808,7 +1875,7 @@ app.get('/api/attendance/reports', (req, res) => {
     }).join('\n');
 
     res.setHeader('Content-Type', 'text/csv');
-    res.setHeader('Content-Disposition', 'attachment; filename="kemt_attendance_report.csv"');
+    res.setHeader('Content-Disposition', 'attachment; filename="pag_ngungo_attendance_report.csv"');
     return res.send(csvHeader + csvRows);
   }
 
@@ -1831,16 +1898,488 @@ app.get('/api/attendance/reports', (req, res) => {
 // ── LEADERSHIP COUNCIL & GIVING MODULE ─────────────────────────────────────
 
 const INITIAL_LEADERSHIP = [
-  { _id: 'ldr-1', name: 'Vincent Mwendwa', role: 'Director', department: 'Executive Directorate', email: 'director@kingdomenlightenment.org', phone: '+254 714 476 295', initials: 'VM', color: '#e67e22', image: '/assets/Vincent Mwenda.jpeg', order: 1, status: 'Active Leadership' },
-  { _id: 'ldr-2', name: 'Morice Mutharimi', role: 'Chairperson', department: 'Executive Board', email: 'chair@kingdomenlightenment.org', phone: '+254 714 476 295', initials: 'MM', color: '#2980b9', image: '/assets/Mutharimi.jpg', order: 2, status: 'Active Leadership' },
-  { _id: 'ldr-3', name: 'Mwanzia David', role: 'Outreach Incharge', department: 'Outreach & Missions', email: 'outreach@kingdomenlightenment.org', phone: '+254 714 476 295', initials: 'MD', color: '#27ae60', image: '/assets/Mwanzia.jpg', order: 3, status: 'Active Leadership' },
-  { _id: 'ldr-4', name: 'Kennedy Mutuku', role: 'Digital Infrastructure Director', department: 'Digital Infrastructure', email: 'mutuku@gmail.com', phone: '+254 798 398 350', initials: 'KM', color: '#8e44ad', image: '/assets/Kennedy Mutuku.JPG', order: 4, status: 'Active Leadership' },
-  { _id: 'ldr-5', name: 'Evaline Mukami', role: 'Secretary', department: 'Secretariat', email: 'secretary@kingdomenlightenment.org', phone: '+254 714 476 295', initials: 'EM', color: '#16a085', image: '/assets/mukami.jpg', order: 5, status: 'Active Leadership' },
-  { _id: 'ldr-6', name: 'Grace Odina Kambaga', role: 'Treasurer', department: 'Finance & Treasury', email: 'treasury@kingdomenlightenment.org', phone: '+254 714 476 295', initials: 'GK', color: '#e74c3c', image: '/assets/odina.jpg', order: 6, status: 'Active Leadership' },
-  { _id: 'ldr-7', name: 'George William', role: 'Welfare Incharge', department: 'Welfare & Compassion', email: 'welfare@kingdomenlightenment.org', phone: '+254 714 476 295', initials: 'GW', color: '#2c3e50', image: '/assets/george.jpg', order: 7, status: 'Active Leadership' },
-  { _id: 'ldr-8', name: 'Raymond Ewoi', role: 'Prayer Coordinator', department: 'Prayer Department', email: 'prayer@kingdomenlightenment.org', phone: '+254 714 476 295', initials: 'RE', color: '#c0392b', image: '/assets/ray.jpg', order: 8, status: 'Active Leadership' },
-  { _id: 'ldr-9', name: 'Victor Muriungi', role: 'Worship Coordinator', department: 'Praise and Worship', email: 'worship@kingdomenlightenment.org', phone: '+254 714 476 295', initials: 'VM', color: '#d4ac0d', image: '', order: 9, status: 'Active Leadership' }
+  {
+    _id: 'ldr-1',
+    name: 'Rev. Clement Simba',
+    role: 'Bishop & District Overseer',
+    department: 'District Executive',
+    category: 'District Executive',
+    assembly: 'Ngangari & Muumoni Assemblies',
+    email: 'bishop@pagngungo.org',
+    phone: '+254 700 000 000',
+    initials: 'CS',
+    color: '#8e44ad',
+    image: '',
+    order: 1,
+    status: 'Active Leadership',
+    bio: 'Presiding Bishop and Overseer for Mbeere District and Assembly Pastor of Ngangari & Muumoni Assemblies, ministering with visionary guidance, spiritual depth, and apostolic passion.'
+  },
+  {
+    _id: 'ldr-2',
+    name: 'David Robert',
+    role: 'Deacon',
+    department: 'Ngungo Assembly Council',
+    category: 'Assembly Leadership',
+    assembly: 'Ngungo Assembly (HQ)',
+    email: 'deacon@pagngungo.org',
+    phone: '+254 700 000 000',
+    initials: 'DR',
+    color: '#2980b9',
+    image: '',
+    order: 2,
+    status: 'Active Leadership',
+    bio: 'Faithful Deacon at Pentecostal Assemblies of God - Ngungo Assembly, assisting in pastoral care, sanctuary administration, and spiritual order.'
+  },
+  {
+    _id: 'ldr-3',
+    name: 'Michael Robert',
+    role: 'Treasurer',
+    department: 'Ngungo Assembly Council',
+    category: 'Assembly Leadership',
+    assembly: 'Ngungo Assembly (HQ)',
+    email: 'treasurer@pagngungo.org',
+    phone: '+254 700 000 000',
+    initials: 'MR',
+    color: '#27ae60',
+    image: '',
+    order: 3,
+    status: 'Active Leadership',
+    bio: 'Assembly Treasurer stewarding church resources, accountability, and project financial planning at Ngungo Assembly.'
+  },
+  {
+    _id: 'ldr-4',
+    name: 'John Matu',
+    role: 'District Layman',
+    department: 'District Executive',
+    category: 'District Executive',
+    assembly: 'Mbeere District',
+    email: 'layman@pagngungo.org',
+    phone: '+254 700 000 000',
+    initials: 'JM',
+    color: '#e67e22',
+    image: '',
+    order: 4,
+    status: 'Active Leadership',
+    bio: 'District Layman representing and coordinating lay members, community outreach, and grassroots fellowship across Mbeere District.'
+  },
+  {
+    _id: 'ldr-5',
+    name: 'Charles Njagi',
+    role: 'District Clerk',
+    department: 'District Executive',
+    category: 'District Executive',
+    assembly: 'Mbeere District',
+    email: 'clerk@pagngungo.org',
+    phone: '+254 700 000 000',
+    initials: 'CN',
+    color: '#16a085',
+    image: '',
+    order: 5,
+    status: 'Active Leadership',
+    bio: 'District Clerk responsible for district assembly documentation, official registry, and operational records.'
+  },
+  {
+    _id: 'ldr-6',
+    name: 'Rev. John Ngochi',
+    role: 'District Secretary & Pastor',
+    department: 'District Executive',
+    category: 'District Executive',
+    assembly: 'Kathera Assembly',
+    email: 'secretary@pagngungo.org',
+    phone: '+254 700 000 000',
+    initials: 'JN',
+    color: '#e74c3c',
+    image: '',
+    order: 6,
+    status: 'Active Leadership',
+    bio: 'District Secretary for Mbeere District and Assembly Pastor at Kathera Assembly, providing administrative leadership and pastoral ministry.'
+  },
+  {
+    _id: 'ldr-7',
+    name: 'Rev. Shem Mugo',
+    role: 'District Treasurer',
+    department: 'District Executive',
+    category: 'District Executive',
+    assembly: 'Mbeere District',
+    email: 'districttreasurer@pagngungo.org',
+    phone: '+254 700 000 000',
+    initials: 'SM',
+    color: '#d4ac0d',
+    image: '',
+    order: 7,
+    status: 'Active Leadership',
+    bio: 'District Treasurer directing financial administration, mission treasury, and stewardship across all assemblies.'
+  },
+  {
+    _id: 'ldr-8',
+    name: 'Rev. Rose Nyamwaro',
+    role: 'Pastor, Kiamachang\'a Assembly',
+    department: 'District Pastors',
+    category: 'District Pastors',
+    assembly: 'Kiamachang\'a Assembly',
+    email: 'pastor.kiamachanga@pagngungo.org',
+    phone: '+254 700 000 000',
+    initials: 'RN',
+    color: '#9b59b6',
+    image: '',
+    order: 8,
+    status: 'Active Leadership',
+    bio: 'Resident Assembly Pastor guiding Kiamachang\'a Assembly in discipleship, evangelism, and community transformation.'
+  },
+  {
+    _id: 'ldr-9',
+    name: 'Rev. Samuel Nderitu',
+    role: 'Pastor, Rwika Assembly',
+    department: 'District Pastors',
+    category: 'District Pastors',
+    assembly: 'Rwika Assembly',
+    email: 'pastor.rwika@pagngungo.org',
+    phone: '+254 700 000 000',
+    initials: 'SN',
+    color: '#1abc9c',
+    image: '',
+    order: 9,
+    status: 'Active Leadership',
+    bio: 'Resident Assembly Pastor leading Rwika Assembly in dynamic worship, teaching, and church growth.'
+  },
+  {
+    _id: 'ldr-10',
+    name: 'Rev. Paul Nyaga',
+    role: 'Pastor, Mugaari Assembly',
+    department: 'District Pastors',
+    category: 'District Pastors',
+    assembly: 'Mugaari Assembly',
+    email: 'pastor.mugaari@pagngungo.org',
+    phone: '+254 700 000 000',
+    initials: 'PN',
+    color: '#34495e',
+    image: '',
+    order: 10,
+    status: 'Active Leadership',
+    bio: 'Resident Assembly Pastor faithfully ministering to Mugaari Assembly and surrounding neighborhoods.'
+  },
+  {
+    _id: 'ldr-11',
+    name: 'Rev. David Kimanthi',
+    role: 'Pastor, Gikuru Assembly',
+    department: 'District Pastors',
+    category: 'District Pastors',
+    assembly: 'Gikuru Assembly',
+    email: 'pastor.gikuru@pagngungo.org',
+    phone: '+254 700 000 000',
+    initials: 'DK',
+    color: '#e67e22',
+    image: '',
+    order: 11,
+    status: 'Active Leadership',
+    bio: 'Resident Assembly Pastor championing church outreach and spiritual revitalization in Gikuru Assembly.'
+  }
 ];
+
+// --- ASSEMBLIES HELPERS & DATA ---
+const INITIAL_ASSEMBLIES = [
+  // Mbeere District Assemblies
+  {
+    _id: 'asm-ngungo',
+    name: 'Pentecostal Assemblies of God - Ngungo Assembly',
+    shortName: 'Ngungo Assembly',
+    district: 'Mbeere District',
+    county: 'Embu County',
+    isHeadquarter: true,
+    status: 'District Headquarters Assembly',
+    leader: 'Bishop Rev. Clement Simba & Ngungo Ministerial Council',
+    services: [
+      { name: 'Sunday School', time: '8:00 AM - 10:00 AM' },
+      { name: 'English Service', time: '8:00 AM - 10:00 AM' },
+      { name: 'Main Service', time: '10:30 AM - 1:30 PM' },
+      { name: 'Friday Fellowship', time: '7:00 PM - 9:00 PM' },
+      { name: 'Youth Fellowship', time: 'Saturday 4:00 PM - 6:00 PM' }
+    ],
+    contactPhone: '+254 700 000 000',
+    description: 'The Headquarter Church for Mbeere District, serving as the central seat of district administration, pastoral fellowship, and spiritual revivals.',
+    order: 1
+  },
+  {
+    _id: 'asm-kiamachanga',
+    name: 'Kiamachang\'a Assembly',
+    shortName: 'Kiamachang\'a Assembly',
+    district: 'Mbeere District',
+    county: 'Embu County',
+    isHeadquarter: false,
+    status: 'Active Assembly',
+    leader: 'Rev. Rose Nyamwaro',
+    services: [
+      { name: 'Sunday Main Service', time: '10:00 AM - 1:00 PM' },
+      { name: 'Midweek Fellowship', time: 'Wednesday 5:00 PM - 7:00 PM' }
+    ],
+    contactPhone: '+254 700 000 000',
+    description: 'Vibrant local assembly in Mbeere District actively transforming lives through fervent prayer, community discipleship, and evangelism.',
+    order: 2
+  },
+  {
+    _id: 'asm-rwika',
+    name: 'Rwika Assembly',
+    shortName: 'Rwika Assembly',
+    district: 'Mbeere District',
+    county: 'Embu County',
+    isHeadquarter: false,
+    status: 'Active Assembly',
+    leader: 'Rev. Samuel Nderitu',
+    services: [
+      { name: 'Sunday Main Service', time: '10:00 AM - 1:00 PM' },
+      { name: 'Weekly Fellowship', time: 'Thursday 5:30 PM - 7:00 PM' }
+    ],
+    contactPhone: '+254 700 000 000',
+    description: 'A growing and warm Christian family committed to sound biblical doctrine and community fellowship in Rwika area.',
+    order: 3
+  },
+  {
+    _id: 'asm-kathera',
+    name: 'Kathera Assembly',
+    shortName: 'Kathera Assembly',
+    district: 'Mbeere District',
+    county: 'Embu County',
+    isHeadquarter: false,
+    status: 'Active Assembly',
+    leader: 'Rev. John Ngochi (District Secretary)',
+    services: [
+      { name: 'Sunday Main Service', time: '10:00 AM - 1:00 PM' },
+      { name: 'Prayer & Intercession', time: 'Friday 6:00 PM - 8:00 PM' }
+    ],
+    contactPhone: '+254 700 000 000',
+    description: 'Pastored by District Secretary Rev. John Ngochi, Kathera Assembly is dedicated to nurturing disciples and community outreach.',
+    order: 4
+  },
+  {
+    _id: 'asm-ngangari',
+    name: 'Ngangari Assembly',
+    shortName: 'Ngangari Assembly',
+    district: 'Mbeere District',
+    county: 'Embu County',
+    isHeadquarter: false,
+    status: 'Active Assembly',
+    leader: 'Rev. Clement Simba (Bishop & District Overseer)',
+    services: [
+      { name: 'Sunday Main Service', time: '10:00 AM - 1:00 PM' },
+      { name: 'Midweek Revival', time: 'Wednesday 6:00 PM - 8:00 PM' }
+    ],
+    contactPhone: '+254 700 000 000',
+    description: 'Shepherded by Bishop Rev. Clement Simba, this assembly stands as a beacon of holiness, Holy Spirit baptism, and church planting.',
+    order: 5
+  },
+  {
+    _id: 'asm-mugaari',
+    name: 'Mugaari Assembly',
+    shortName: 'Mugaari Assembly',
+    district: 'Mbeere District',
+    county: 'Embu County',
+    isHeadquarter: false,
+    status: 'Active Assembly',
+    leader: 'Rev. Paul Nyaga',
+    services: [
+      { name: 'Sunday Main Service', time: '10:00 AM - 1:00 PM' },
+      { name: 'Home Fellowships', time: 'Tuesday 5:00 PM - 6:30 PM' }
+    ],
+    contactPhone: '+254 700 000 000',
+    description: 'Proclaiming the Gospel with power and compassionate care under Rev. Paul Nyaga in Mugaari locality.',
+    order: 6
+  },
+  {
+    _id: 'asm-muumoni',
+    name: 'Muumoni Assembly',
+    shortName: 'Muumoni Assembly',
+    district: 'Mbeere District',
+    county: 'Embu County',
+    isHeadquarter: false,
+    status: 'Active Assembly',
+    leader: 'Rev. Clement Simba (Bishop & District Overseer)',
+    services: [
+      { name: 'Sunday Main Service', time: '10:00 AM - 1:00 PM' },
+      { name: 'Youth & Bible Study', time: 'Saturday 4:00 PM - 6:00 PM' }
+    ],
+    contactPhone: '+254 700 000 000',
+    description: 'Faithfully overseen by Bishop Clement Simba, nurturing strong Christian families and vibrant youth in Muumoni.',
+    order: 7
+  },
+  {
+    _id: 'asm-gikuru',
+    name: 'Gikuru Assembly',
+    shortName: 'Gikuru Assembly',
+    district: 'Mbeere District',
+    county: 'Embu County',
+    isHeadquarter: false,
+    status: 'Active Assembly',
+    leader: 'Rev. David Kimanthi',
+    services: [
+      { name: 'Sunday Main Service', time: '10:00 AM - 1:00 PM' },
+      { name: 'Prayer Service', time: 'Friday 5:30 PM - 7:30 PM' }
+    ],
+    contactPhone: '+254 700 000 000',
+    description: 'Pastored by Rev. David Kimanthi, carrying the fire of evangelism and passionate praise in Gikuru community.',
+    order: 8
+  },
+  // Kyuso Kitui County Assemblies
+  {
+    _id: 'asm-marisi',
+    name: 'Marisi Assembly',
+    shortName: 'Marisi Assembly',
+    district: 'Kyuso Circuit',
+    county: 'Kitui County',
+    isHeadquarter: false,
+    status: 'Circuit Assembly',
+    leader: 'Circuit Pastoral Team',
+    services: [
+      { name: 'Sunday Worship Service', time: '10:00 AM - 1:00 PM' }
+    ],
+    contactPhone: '+254 700 000 000',
+    description: 'Serving believers in Marisi, Kyuso, Kitui County through passionate gospel outreach and community fellowship.',
+    order: 9
+  },
+  {
+    _id: 'asm-matooni',
+    name: 'Matooni Assembly',
+    shortName: 'Matooni Assembly',
+    district: 'Kyuso Circuit',
+    county: 'Kitui County',
+    isHeadquarter: false,
+    status: 'Circuit Assembly',
+    leader: 'Circuit Pastoral Team',
+    services: [
+      { name: 'Sunday Worship Service', time: '10:00 AM - 1:00 PM' }
+    ],
+    contactPhone: '+254 700 000 000',
+    description: 'Active assembly in Matooni, Kyuso, Kitui County, ministering hope and salvation to the surrounding region.',
+    order: 10
+  },
+  {
+    _id: 'asm-kyuso-placeholder',
+    name: 'Kyuso Assembly (Assembly Name Placeholder)',
+    shortName: 'Kyuso Assembly (Placeholder)',
+    district: 'Kyuso Circuit',
+    county: 'Kitui County',
+    isHeadquarter: false,
+    status: 'Upcoming / Circuit Assembly (To Be Updated)',
+    leader: 'Circuit Pastoral Team (To Be Updated)',
+    services: [
+      { name: 'Sunday Worship Service', time: '10:00 AM - 1:00 PM' }
+    ],
+    contactPhone: '+254 700 000 000',
+    description: 'Assembly location in Kyuso, Kitui County. Dedicated placeholder pending official assembly name confirmation.',
+    order: 11
+  }
+];
+
+const getAssemblies = () => {
+  if (!fs.existsSync(assembliesFilePath)) {
+    fs.writeFileSync(assembliesFilePath, JSON.stringify(INITIAL_ASSEMBLIES, null, 2));
+    return INITIAL_ASSEMBLIES;
+  }
+  try {
+    const raw = fs.readFileSync(assembliesFilePath, 'utf-8');
+    const parsed = JSON.parse(raw || '[]');
+    if (parsed.length === 0) {
+      fs.writeFileSync(assembliesFilePath, JSON.stringify(INITIAL_ASSEMBLIES, null, 2));
+      return INITIAL_ASSEMBLIES;
+    }
+    return parsed;
+  } catch (err) {
+    console.error('Error reading assemblies:', err);
+    return INITIAL_ASSEMBLIES;
+  }
+};
+
+const saveAssemblies = (data) => {
+  fs.writeFileSync(assembliesFilePath, JSON.stringify(data, null, 2));
+};
+
+// ── DISTRICT ASSEMBLIES ROUTES ──────────────────────────────────────────────
+
+// GET /api/assemblies - List all assemblies across Mbeere District & Kyuso Circuit
+app.get('/api/assemblies', (req, res) => {
+  const { district } = req.query;
+  let assemblies = getAssemblies().sort((a, b) => (Number(a.order) || 99) - (Number(b.order) || 99));
+  if (district && district !== 'all') {
+    assemblies = assemblies.filter(a => (a.district || '').toLowerCase().includes(district.toLowerCase()));
+  }
+  res.json({ success: true, count: assemblies.length, assemblies });
+});
+
+// GET /api/assemblies/:id - Get single assembly details
+app.get('/api/assemblies/:id', (req, res) => {
+  const assemblies = getAssemblies();
+  const assembly = assemblies.find(a => a._id === req.params.id);
+  if (!assembly) {
+    return res.status(404).json({ success: false, message: 'Assembly not found.' });
+  }
+  res.json({ success: true, assembly });
+});
+
+// POST /api/assemblies - Add new assembly
+app.post('/api/assemblies', (req, res) => {
+  const { name, shortName, district, county, isHeadquarter, leader, services, contactPhone, description, order, status } = req.body;
+  if (!name || !name.trim()) {
+    return res.status(400).json({ success: false, message: 'Assembly name is required.' });
+  }
+
+  const assemblies = getAssemblies();
+  const newAssembly = {
+    _id: 'asm-' + Date.now(),
+    name: name.trim(),
+    shortName: (shortName && shortName.trim()) || name.trim(),
+    district: (district && district.trim()) || 'Mbeere District',
+    county: (county && county.trim()) || 'Embu County',
+    isHeadquarter: Boolean(isHeadquarter),
+    status: status || 'Active Assembly',
+    leader: (leader && leader.trim()) || 'Assembly Pastor',
+    services: Array.isArray(services) ? services : [{ name: 'Sunday Worship Service', time: '10:00 AM - 1:00 PM' }],
+    contactPhone: (contactPhone && contactPhone.trim()) || '+254 700 000 000',
+    description: (description && description.trim()) || '',
+    order: Number(order) || assemblies.length + 1,
+    createdAt: new Date().toISOString()
+  };
+
+  assemblies.push(newAssembly);
+  saveAssemblies(assemblies);
+
+  res.status(201).json({ success: true, message: 'Assembly created successfully.', assembly: newAssembly });
+});
+
+// PUT /api/assemblies/:id - Update assembly
+app.put('/api/assemblies/:id', (req, res) => {
+  const { id } = req.params;
+  const assemblies = getAssemblies();
+  const index = assemblies.findIndex(a => a._id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ success: false, message: 'Assembly not found.' });
+  }
+
+  const existing = assemblies[index];
+  const updated = {
+    ...existing,
+    ...req.body,
+    updatedAt: new Date().toISOString()
+  };
+
+  assemblies[index] = updated;
+  saveAssemblies(assemblies);
+
+  res.json({ success: true, message: 'Assembly updated successfully.', assembly: updated });
+});
+
+// DELETE /api/assemblies/:id - Delete assembly
+app.delete('/api/assemblies/:id', (req, res) => {
+  const { id } = req.params;
+  const assemblies = getAssemblies();
+  const filtered = assemblies.filter(a => a._id !== id);
+
+  if (assemblies.length === filtered.length) {
+    return res.status(404).json({ success: false, message: 'Assembly not found.' });
+  }
+
+  saveAssemblies(filtered);
+  res.json({ success: true, message: 'Assembly deleted successfully.' });
+});
 
 const getLeadership = () => {
   if (!fs.existsSync(leadershipFilePath)) {
@@ -1910,8 +2449,8 @@ app.post('/api/leadership', leadershipUpload.single('image'), (req, res) => {
     name: name.trim(),
     role: (role && role.trim()) || 'Ministry Leader',
     department: (department && department.trim()) || 'General Ministry',
-    email: (email && email.trim()) || 'info@kingdomenlightenment.org',
-    phone: (phone && phone.trim()) || '+254 714 476 295',
+    email: (email && email.trim()) || 'info@pagngungo.co.ke',
+    phone: (phone && phone.trim()) || '+254 720 140 213',
     bio: (bio && bio.trim()) || '',
     initials,
     color,
@@ -2103,6 +2642,6 @@ app.use((err, req, res, next) => {
 
 // Start Server
 app.listen(PORT, () => {
-  console.log(`KEMT Backend running on http://localhost:${PORT}`);
-  console.log(`Target Contact Email: ${process.env.CONTACT_EMAIL || 'info@kingdomenlightenment.org'}`);
+  console.log(`PAG Ngungo Assembly Backend running on http://localhost:${PORT}`);
+  console.log(`Target Contact Email: ${process.env.CONTACT_EMAIL || 'info@pagngungo.co.ke'}`);
 });

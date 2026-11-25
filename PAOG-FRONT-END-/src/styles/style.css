@@ -5,23 +5,32 @@
 
 /* CSS Variables */
 :root {
-    --primary-color: #e67e22;
-    --primary-dark: #d35400;
-    --secondary-color: #f39c12;
-    --secondary-light: #f1c40f;
-    --accent-color: #c0392b;
-    --text-color: #333333;
-    --text-light: #666666;
+    --primary-color: #000066;
+    --primary-dark: #000045;
+    --primary-light: #0d1b8c;
+    --secondary-color: #1a2a80;
+    --secondary-light: #2563eb;
+    --accent-color: #d97706;
+    --accent-light: #fbbf24;
+    --church-navy: #000066;
+    --church-navy-deep: #000045;
+    --church-gold: #d97706;
+    --text-color: #1e293b;
+    --text-light: #64748b;
     --text-white: #ffffff;
-    --bg-light: #fff9f0;
+    --bg-light: #f4f6fb;
     --bg-white: #ffffff;
-    --bg-dark: #2c2c2c;
-    --border-color: #e0e0e0;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+    --bg-dark: #000033;
+    --border-color: #e2e8f0;
+    --shadow: 0 4px 6px rgba(0, 0, 102, 0.08);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 102, 0.16);
     --transition: all 0.3s ease;
     --font-primary: 'Poppins', sans-serif;
     --font-secondary: 'Playfair Display', serif;
+    /* Header heights — used for fixed positioning offset */
+    --topbar-h: 36px;
+    --header-h: 80px;
+    --header-total: 116px;
 }
 
 /* Reset & Base Styles */
@@ -103,29 +112,29 @@ p {
 }
 
 .btn-primary {
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, #000066 0%, #001f7a 100%);
     color: var(--text-white);
-    border-color: var(--primary-color);
-    box-shadow: 0 4px 14px rgba(230, 126, 34, 0.3);
+    border-color: #000066;
+    box-shadow: 0 4px 14px rgba(0, 0, 102, 0.35);
 }
 
 .btn-primary:hover {
-    background-color: var(--primary-dark);
-    border-color: var(--primary-dark);
+    background: linear-gradient(135deg, #000045 0%, #000066 100%);
+    border-color: #000045;
     transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(230, 126, 34, 0.42);
+    box-shadow: 0 6px 20px rgba(0, 0, 102, 0.48);
 }
 
 .btn-secondary {
     background-color: transparent;
-    color: var(--primary-color);
-    border-color: var(--primary-color);
+    color: #000066;
+    border-color: #000066;
     font-weight: 600;
 }
 
 .btn-secondary:hover {
-    background-color: rgba(230, 126, 34, 0.08);
-    color: var(--primary-color);
+    background-color: rgba(0, 0, 102, 0.08);
+    color: #000066;
 }
 
 /* Section Styles */
@@ -165,53 +174,100 @@ p {
 }
 
 /* ===================================
-   Top Bar
+   Top Bar — Refined
    =================================== */
 .top-bar {
-    background-color: var(--primary-dark);
-    padding: 10px 0;
-    font-size: 0.875rem;
+    background-color: #000045;
+    padding: 7px 0;
+    font-size: 0.78rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
 .top-bar-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 12px;
 }
 
 .top-bar-left {
     display: flex;
-    gap: 25px;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: nowrap;
 }
 
 .top-bar-left span {
-    color: var(--text-white);
+    color: rgba(255,255,255,0.75);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
 }
 
 .top-bar-left i {
-    color: var(--secondary-color);
-    margin-right: 8px;
+    color: #fbbf24;
+    font-size: 0.72rem;
 }
 
-.top-bar-right {
+.top-bar-divider {
+    color: rgba(255,255,255,0.2) !important;
+    font-size: 0.65rem !important;
+}
+
+.top-bar-hide-sm {
+    /* hidden on small screens — see media query */
+}
+
+.top-bar-service-time {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.7) !important;
+    white-space: nowrap;
+    display: flex !important;
+    align-items: center;
+    gap: 5px;
+}
+
+.top-bar-service-time i {
+    color: #E87D1E !important;
+    font-size: 0.7rem;
+}
+
+.top-bar-socials {
     display: flex;
-    gap: 15px;
+    gap: 6px;
+    align-items: center;
+    margin-left: 10px;
 }
 
-.top-bar-right a {
-    color: var(--text-white);
-    width: 30px;
-    height: 30px;
+.top-bar-socials a {
+    color: rgba(255,255,255,0.65);
+    width: 26px;
+    height: 26px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255,255,255,0.12);
+    font-size: 0.7rem;
+    transition: all 0.25s ease;
+    text-decoration: none;
 }
 
-.top-bar-right a:hover {
-    background-color: var(--secondary-color);
+.top-bar-socials a:hover {
+    background: #000066;
+    border-color: #000066;
+    color: #fff;
+    transform: translateY(-1px);
 }
+
+.top-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* top-bar-right links now handled by .top-bar-socials a */
 
 /* Top Bar Center - Live Check-In Link */
 .top-bar-center {
@@ -223,31 +279,34 @@ p {
 .top-bar-checkin-link {
     display: inline-flex;
     align-items: center;
-    gap: 7px;
+    gap: 8px;
     color: #ffffff !important;
     text-decoration: none;
     font-weight: 700;
     font-size: 0.82rem;
-    padding: 3px 12px;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    transition: all 0.2s ease;
+    padding: 3px 14px;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    transition: all 0.22s ease;
     white-space: nowrap;
+    backdrop-filter: blur(6px);
 }
 
 .top-bar-checkin-link:hover {
-    background: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.22);
+    border-color: #ffffff;
     color: #ffffff !important;
     transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
 .top-bar-pulse-dot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: #a7f3d0;
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.8);
+    background-color: #6ee7b7;
+    box-shadow: 0 0 0 0 rgba(110, 231, 183, 0.8);
     animation: topBarPulse 1.8s infinite;
     display: inline-block;
     flex-shrink: 0;
@@ -276,9 +335,33 @@ p {
    Header
    =================================== */
 .site-header-wrapper {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 1000;
+    transition: box-shadow 0.3s ease;
+}
+
+/* ── Scrolled state: solid white + shadow ── */
+.site-header-wrapper.scrolled .header {
+    box-shadow: 0 4px 28px rgba(0, 0, 0, 0.10);
+}
+.site-header-wrapper.scrolled .logo-img {
+    height: 58px;
+    width: 58px;
+}
+
+/* ── Hero-mode: pill is always dark, so just subtle top-bar tweak ── */
+.site-header-wrapper.hero-mode .top-bar {
+    background: rgba(5, 5, 20, 0.5);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+/* ── Spacer: all pages pushed below the fixed header ── */
+.app {
+    padding-top: var(--header-total);
 }
 
 .menu-backdrop {
@@ -295,15 +378,28 @@ p {
 }
 
 .header {
-    background-color: var(--bg-white);
-    box-shadow: var(--shadow);
+    background: transparent;
+    box-shadow: none;
+    padding: 10px 0;
 }
 
 .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2px 0;
+    /* ── THE FLOATING PILL ── */
+    background: rgba(0, 0, 68, 0.94);
+    border-radius: 100px;
+    padding: 7px 14px 7px 7px;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1.5px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 8px 30px rgba(0, 0, 102, 0.35);
+    transition: box-shadow 0.35s ease;
+}
+
+.site-header-wrapper.scrolled .header-content {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.30);
 }
 
 .logo {
@@ -317,12 +413,18 @@ p {
 }
 
 .logo-img {
-    height: 74px;
-    width: 74px;
+    height: 52px;
+    width: 52px;
     object-fit: contain;
     object-position: center;
     flex-shrink: 0;
     display: block;
+    border-radius: 50% !important;
+    background-color: #ffffff !important;
+    padding: 3px !important;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.18) !important;
+    border: 1.5px solid #fed7aa !important;
+    transition: height 0.3s ease, width 0.3s ease;
 }
 
 .logo-name {
@@ -334,25 +436,26 @@ p {
 
 .logo-name-top {
     font-family: 'Arial Black', 'Impact', sans-serif;
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: 900;
-    color: #111111;
+    color: #ffffff;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    line-height: 1.1;
+    letter-spacing: 1.5px;
+    line-height: 1.15;
     white-space: nowrap;
 }
 
 .logo-name-bottom {
     font-family: 'Arial Black', 'Impact', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 900;
-    color: #00bfff;
-    letter-spacing: 3px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #E87D1E;
+    letter-spacing: 2px;
     text-transform: uppercase;
     line-height: 1.1;
-    align-self: center;
+    align-self: flex-start;
     white-space: nowrap;
+    opacity: 1;
 }
 
 .logo-icon {
@@ -395,40 +498,40 @@ p {
 
 .nav-menu {
     display: flex;
-    gap: 0;
+    gap: 2px;
+    align-items: center;
 }
 
 .nav-menu > li > a {
     display: block;
-    padding: 10px 10px;
-    font-weight: 500;
-    color: var(--text-color);
+    padding: 0.45em 1.05em;
+    font-weight: 600;
+    font-size: 0.8rem;
+    /* Always white — pill is always dark */
+    color: rgba(255, 255, 255, 0.85);
     position: relative;
     white-space: nowrap;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-radius: 100px;
+    background: transparent;
+    transition: background 0.28s ease, color 0.28s ease;
 }
 
+/* Hover & active: white semi-transparent oval fills in */
 .nav-menu > li > a:hover,
-.nav-menu > li.active > a,
 .nav-menu > li > a.active {
-    color: var(--secondary-color);
+    background: rgba(255, 255, 255, 0.13);
+    color: #ffffff;
 }
 
+.nav-menu > li > a.active {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+/* No underline needed — the oval fill is the indicator */
 .nav-menu > li > a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background-color: var(--secondary-color);
-    transition: var(--transition);
-    transform: translateX(-50%);
-}
-
-.nav-menu > li > a:hover::after,
-.nav-menu > li.active > a::after,
-.nav-menu > li > a.active::after {
-    width: 80%;
+    display: none;
 }
 
 /* Dropdown Menu */
@@ -436,30 +539,38 @@ p {
     position: relative;
 }
 
+.dropdown > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
 .dropdown > a i {
-    font-size: 0.75rem;
-    margin-left: 5px;
-    transition: var(--transition);
+    font-size: 0.65rem;
+    transition: transform 0.3s ease;
+    opacity: 0.7;
 }
 
 .dropdown:hover > a i {
     transform: rotate(180deg);
+    opacity: 1;
 }
 
 .dropdown-menu {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 4px);
     left: 0;
-    min-width: 220px;
-    background-color: var(--bg-white);
-    box-shadow: var(--shadow-lg);
-    border-radius: 8px;
-    padding: 10px 0;
+    min-width: 230px;
+    background-color: #ffffff;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0,0,0,0.06);
+    border-radius: 10px;
+    padding: 8px 0;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(20px);
-    transition: var(--transition);
+    transform: translateY(14px);
+    transition: opacity 0.22s ease, transform 0.22s cubic-bezier(0.33, 0, 0.19, 1), visibility 0.22s;
     z-index: 100;
+    border-top: 3px solid #000066;
 }
 
 .dropdown:hover .dropdown-menu {
@@ -468,17 +579,37 @@ p {
     transform: translateY(0);
 }
 
-.dropdown-menu li a {
+.dropdown-group-label {
     display: block;
-    padding: 6px 20px;
-    color: var(--text-color);
-    font-size: 0.875rem;
+    padding: 6px 18px 4px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #94a3b8;
+    pointer-events: none;
+}
+
+.dropdown-divider {
+    border-top: 1px solid #f1f5f9;
+    margin: 4px 0;
+}
+
+.dropdown-menu li a {
+    display: flex;
+    align-items: center;
+    padding: 7px 18px;
+    color: #334155;
+    font-size: 0.84rem;
+    font-weight: 500;
+    transition: all 0.18s ease;
+    border-radius: 0;
 }
 
 .dropdown-menu li a:hover {
-    background-color: var(--bg-light);
-    color: var(--secondary-color);
-    padding-left: 25px;
+    background-color: #f4f6fb;
+    color: #000066;
+    padding-left: 24px;
 }
 
 /* Nav Buttons */
@@ -489,9 +620,9 @@ p {
 }
 
 .nav-buttons .btn {
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 0.88rem;
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 0.8rem;
     font-weight: 700;
     white-space: nowrap;
     text-decoration: none;
@@ -499,22 +630,23 @@ p {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    letter-spacing: 0.04em;
 }
 
 .nav-buttons .btn-login {
     background-color: transparent !important;
-    color: var(--primary-color) !important;
-    border: 2px solid var(--primary-color) !important;
+    color: rgba(255,255,255,0.85) !important;
+    border: 1.5px solid rgba(255,255,255,0.35) !important;
     box-shadow: none;
+    border-radius: 100px !important;
     transition: var(--transition);
 }
 
 .nav-buttons .btn-login:hover {
-    background-color: var(--primary-color) !important;
+    background-color: rgba(255,255,255,0.12) !important;
     color: #ffffff !important;
-    border-color: var(--primary-color) !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 14px rgba(230, 126, 34, 0.35);
+    border-color: rgba(255,255,255,0.65) !important;
+    transform: translateY(-1px);
 }
 
 .mobile-only-nav-item {
@@ -555,11 +687,12 @@ p {
 }
 
 .mobile-menu-toggle span {
-    width: 25px;
-    height: 3px;
-    background-color: var(--primary-color);
-    border-radius: 2px;
+    width: 22px;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 100px;
     transition: var(--transition);
+    display: block;
 }
 
 /* ===================================
@@ -5377,6 +5510,12 @@ p {
     .top-bar-email-full {
         display: none !important;
     }
+    .top-bar-hide-sm {
+        display: none !important;
+    }
+    .top-bar-service-time {
+        display: none !important;
+    }
 
     .top-bar-email-short {
         display: inline !important;
@@ -7902,8 +8041,8 @@ p {
     .logo-name-top { font-size: 0.88rem; }
     .logo-name-bottom { font-size: 0.58rem; }
 
-    /* Header */
-    .header-content { padding: 24px 0; }
+    /* Header pill on tablet */
+    .header-content { padding: 6px 12px 6px 6px; }
 
     /* Nav buttons stay visible */
     .nav-buttons .btn { padding: 7px 16px; font-size: 0.85rem; }

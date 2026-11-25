@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { 
-  CheckCircle2, 
-  Calendar, 
-  Award, 
-  Flame, 
-  Clock, 
-  User, 
-  Phone, 
-  Mail, 
-  MapPin, 
-  Sparkles, 
-  KeyRound, 
-  Radio, 
-  ShieldCheck, 
-  ArrowRight, 
+import {
+  CheckCircle2,
+  Calendar,
+  Award,
+  Flame,
+  Clock,
+  User,
+  Phone,
+  Mail,
+  MapPin,
+  Sparkles,
+  KeyRound,
+  Radio,
+  ShieldCheck,
+  ArrowRight,
   RefreshCw,
   LogOut,
   ExternalLink,
@@ -25,7 +25,7 @@ import {
   TrendingUp,
   Gift
 } from 'lucide-react';
-import logoImg from '../assets/logo Kingdom enightement.jpg';
+import logoImg from '../assets/logo ngungo.png';
 
 const MemberDashboard = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -35,7 +35,7 @@ const MemberDashboard = () => {
   const [accessCode, setAccessCode] = useState('');
   const [checkingIn, setCheckingIn] = useState(false);
   const [checkInMsg, setCheckInMsg] = useState(null); // { type, message }
-  
+
   // Attendance stats and records
   const [stats, setStats] = useState({
     totalAttendedYear: 0,
@@ -81,7 +81,7 @@ const MemberDashboard = () => {
           setActiveSession(null);
         }
       }
-    } catch {}
+    } catch { }
 
     // 2. Fetch member attendance history
     setLoadingHistory(true);
@@ -95,8 +95,8 @@ const MemberDashboard = () => {
 
           // Check if user already checked into the live session
           const todayDate = new Date().toISOString().split('T')[0];
-          const todayRecord = (histData.records || []).find(r => 
-            r.sessionDate === todayDate || 
+          const todayRecord = (histData.records || []).find(r =>
+            r.sessionDate === todayDate ||
             (activeSession && r.session_id === activeSession._id)
           );
 
@@ -258,8 +258,8 @@ const MemberDashboard = () => {
       <div className="container" style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 16px' }}>
 
         {/* Top Member Header Card */}
-        <div 
-          style={{ 
+        <div
+          style={{
             background: '#ffffff',
             borderRadius: '16px',
             padding: '24px 28px',
@@ -274,17 +274,17 @@ const MemberDashboard = () => {
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-            <div 
-              style={{ 
-                width: '60px', 
-                height: '60px', 
-                borderRadius: '50%', 
-                background: 'linear-gradient(135deg, #1e3a5f, #E87D1E)', 
-                color: '#ffffff', 
-                fontWeight: 800, 
-                fontSize: '1.25rem', 
-                display: 'flex', 
-                alignItems: 'center', 
+            <div
+              style={{
+                width: '60px',
+                height: '60px',
+                borderRadius: '50%',
+                background: 'linear-gradient(135deg, #1e3a5f, #E87D1E)',
+                color: '#ffffff',
+                fontWeight: 800,
+                fontSize: '1.25rem',
+                display: 'flex',
+                alignItems: 'center',
                 justifyContent: 'center',
                 boxShadow: '0 4px 12px rgba(232, 125, 30, 0.25)',
                 flexShrink: 0
@@ -298,17 +298,17 @@ const MemberDashboard = () => {
                 <h1 style={{ margin: 0, fontSize: '1.45rem', fontWeight: 800, color: '#1e293b' }}>
                   Welcome back, {currentUser?.name || 'Believer'}
                 </h1>
-                <span 
-                  style={{ 
-                    padding: '2px 10px', 
-                    borderRadius: '20px', 
-                    background: 'rgba(232,125,30,0.1)', 
-                    color: '#E87D1E', 
-                    fontSize: '0.74rem', 
-                    fontWeight: 700 
+                <span
+                  style={{
+                    padding: '2px 10px',
+                    borderRadius: '20px',
+                    background: 'rgba(232,125,30,0.1)',
+                    color: '#E87D1E',
+                    fontSize: '0.74rem',
+                    fontWeight: 700
                   }}
                 >
-                  {currentUser?.role || 'KEMT Member'}
+                  {currentUser?.role || 'PAG Church Member'}
                 </span>
               </div>
 
@@ -332,39 +332,54 @@ const MemberDashboard = () => {
             </div>
           </div>
 
-          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
+            <img 
+              src={logoImg} 
+              alt="PAG Ngungo Assembly Logo" 
+              style={{ 
+                width: '54px', 
+                height: '54px', 
+                objectFit: 'contain', 
+                borderRadius: '50%', 
+                background: '#ffffff', 
+                padding: '3px',
+                boxShadow: '0 3px 12px rgba(0,0,0,0.1)',
+                border: '1.5px solid #fed7aa',
+                flexShrink: 0
+              }} 
+            />
             {currentUser?.isAdmin && (
-              <Link 
-                to="/admin" 
-                style={{ 
-                  display: 'inline-flex', 
-                  alignItems: 'center', 
-                  gap: '6px', 
-                  padding: '9px 16px', 
-                  borderRadius: '8px', 
-                  background: '#1e3a5f', 
-                  color: '#fff', 
-                  textDecoration: 'none', 
-                  fontWeight: 600, 
-                  fontSize: '0.85rem' 
+              <Link
+                to="/admin"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  padding: '9px 16px',
+                  borderRadius: '8px',
+                  background: '#1e3a5f',
+                  color: '#fff',
+                  textDecoration: 'none',
+                  fontWeight: 600,
+                  fontSize: '0.85rem'
                 }}
               >
                 Admin Portal
               </Link>
             )}
-            <button 
+            <button
               onClick={handleSignOut}
-              style={{ 
-                display: 'inline-flex', 
-                alignItems: 'center', 
-                gap: '6px', 
-                padding: '9px 16px', 
-                borderRadius: '8px', 
-                border: '1.5px solid #fecaca', 
-                background: '#fef2f2', 
-                color: '#dc2626', 
-                fontWeight: 600, 
-                fontSize: '0.85rem', 
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '9px 16px',
+                borderRadius: '8px',
+                border: '1.5px solid #fecaca',
+                background: '#fef2f2',
+                color: '#dc2626',
+                fontWeight: 600,
+                fontSize: '0.85rem',
                 cursor: 'pointer',
                 transition: 'all 0.2s'
               }}
@@ -378,29 +393,29 @@ const MemberDashboard = () => {
 
         {/* 1. LIVE SERVICE CHECK-IN BANNER (High-Contrast, Prominent Banner) */}
         {activeSession ? (
-          <div 
-            style={{ 
-              background: 'linear-gradient(135deg, #1e3a5f 0%, #2a4b7c 100%)', 
-              color: '#ffffff', 
-              borderRadius: '16px', 
-              padding: '24px 28px', 
-              marginBottom: '26px', 
-              boxShadow: '0 10px 28px rgba(30, 58, 95, 0.25)', 
+          <div
+            style={{
+              background: 'linear-gradient(135deg, #1e3a5f 0%, #2a4b7c 100%)',
+              color: '#ffffff',
+              borderRadius: '16px',
+              padding: '24px 28px',
+              marginBottom: '26px',
+              boxShadow: '0 10px 28px rgba(30, 58, 95, 0.25)',
               border: '2px solid rgba(232, 125, 30, 0.5)',
               position: 'relative',
               overflow: 'hidden'
             }}
           >
             {/* Background subtle watermark icon */}
-            <Radio 
-              size={120} 
-              style={{ 
-                position: 'absolute', 
-                right: '-20px', 
-                bottom: '-20px', 
-                opacity: 0.08, 
-                color: '#fff' 
-              }} 
+            <Radio
+              size={120}
+              style={{
+                position: 'absolute',
+                right: '-20px',
+                bottom: '-20px',
+                opacity: 0.08,
+                color: '#fff'
+              }}
             />
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px', position: 'relative', zIndex: 1 }}>
@@ -424,18 +439,18 @@ const MemberDashboard = () => {
               <div>
                 {hasCheckedInToday ? (
                   /* Instant Green Checked In Badge */
-                  <div 
-                    style={{ 
-                      display: 'inline-flex', 
-                      alignItems: 'center', 
-                      gap: '10px', 
-                      background: '#10B981', 
-                      color: '#ffffff', 
-                      padding: '12px 22px', 
-                      borderRadius: '10px', 
+                  <div
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '10px',
+                      background: '#10B981',
+                      color: '#ffffff',
+                      padding: '12px 22px',
+                      borderRadius: '10px',
                       boxShadow: '0 4px 16px rgba(16, 185, 129, 0.4)',
-                      fontWeight: 800, 
-                      fontSize: '0.98rem' 
+                      fontWeight: 800,
+                      fontSize: '0.98rem'
                     }}
                   >
                     <CheckCircle2 size={22} strokeWidth={2.8} />
@@ -445,43 +460,43 @@ const MemberDashboard = () => {
                   /* One-Click Check-In Form */
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
                     {activeSession.hasPin && (
-                      <input 
-                        type="text" 
-                        maxLength={6} 
-                        value={accessCode} 
-                        onChange={e => setAccessCode(e.target.value)} 
-                        placeholder="4-digit PIN" 
-                        style={{ 
-                          padding: '12px 14px', 
-                          borderRadius: '8px', 
-                          border: '1.5px solid rgba(255,255,255,0.4)', 
-                          background: 'rgba(255,255,255,0.15)', 
-                          color: '#ffffff', 
-                          fontSize: '0.95rem', 
-                          fontWeight: 700, 
-                          letterSpacing: '2px', 
-                          width: '120px', 
+                      <input
+                        type="text"
+                        maxLength={6}
+                        value={accessCode}
+                        onChange={e => setAccessCode(e.target.value)}
+                        placeholder="4-digit PIN"
+                        style={{
+                          padding: '12px 14px',
+                          borderRadius: '8px',
+                          border: '1.5px solid rgba(255,255,255,0.4)',
+                          background: 'rgba(255,255,255,0.15)',
+                          color: '#ffffff',
+                          fontSize: '0.95rem',
+                          fontWeight: 700,
+                          letterSpacing: '2px',
+                          width: '120px',
                           outline: 'none',
                           textAlign: 'center'
-                        }} 
+                        }}
                       />
                     )}
-                    <button 
+                    <button
                       onClick={handleAuthCheckIn}
                       disabled={checkingIn}
-                      style={{ 
-                        backgroundColor: '#E87D1E', 
-                        color: '#ffffff', 
-                        padding: '12px 24px', 
-                        borderRadius: '8px', 
-                        border: 'none', 
-                        fontWeight: 800, 
-                        fontSize: '1rem', 
-                        cursor: checkingIn ? 'not-allowed' : 'pointer', 
-                        display: 'inline-flex', 
-                        alignItems: 'center', 
-                        gap: '8px', 
-                        boxShadow: '0 4px 18px rgba(232, 125, 30, 0.45)', 
+                      style={{
+                        backgroundColor: '#E87D1E',
+                        color: '#ffffff',
+                        padding: '12px 24px',
+                        borderRadius: '8px',
+                        border: 'none',
+                        fontWeight: 800,
+                        fontSize: '1rem',
+                        cursor: checkingIn ? 'not-allowed' : 'pointer',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        boxShadow: '0 4px 18px rgba(232, 125, 30, 0.45)',
                         transition: 'all 0.2s',
                         opacity: checkingIn ? 0.8 : 1
                       }}
@@ -504,12 +519,12 @@ const MemberDashboard = () => {
 
             {/* In-banner Toast Notice */}
             {checkInMsg && (
-              <div 
-                style={{ 
-                  marginTop: '14px', 
-                  padding: '8px 14px', 
-                  borderRadius: '6px', 
-                  background: checkInMsg.type === 'success' ? 'rgba(16, 185, 129, 0.25)' : 'rgba(239, 68, 68, 0.3)', 
+              <div
+                style={{
+                  marginTop: '14px',
+                  padding: '8px 14px',
+                  borderRadius: '6px',
+                  background: checkInMsg.type === 'success' ? 'rgba(16, 185, 129, 0.25)' : 'rgba(239, 68, 68, 0.3)',
                   border: `1px solid ${checkInMsg.type === 'success' ? '#10B981' : '#f87171'}`,
                   fontSize: '0.85rem',
                   fontWeight: 600,
@@ -526,15 +541,15 @@ const MemberDashboard = () => {
         ) : null}
 
         {/* 2. ATTENDANCE & CONSISTENCY CARD WIDGET */}
-        <div 
-          id="attendance" 
-          style={{ 
-            background: '#ffffff', 
-            borderRadius: '16px', 
-            border: '1px solid #e2e8f0', 
-            boxShadow: '0 2px 8px rgba(0,0,0,0.03)', 
-            padding: '24px 28px', 
-            marginBottom: '26px' 
+        <div
+          id="attendance"
+          style={{
+            background: '#ffffff',
+            borderRadius: '16px',
+            border: '1px solid #e2e8f0',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
+            padding: '24px 28px',
+            marginBottom: '26px'
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px', marginBottom: '20px' }}>
@@ -543,7 +558,7 @@ const MemberDashboard = () => {
                 Attendance &amp; Consistency Tracker
               </h2>
               <p style={{ margin: '4px 0 0', fontSize: '0.85rem', color: '#64748b' }}>
-                Your service faithfulness and fellowship record in Kingdom Enlightenment
+                Your service faithfulness and fellowship record in Pentecostal Assemblies of God - Ngungo Assembly
               </p>
             </div>
             <span style={{ fontSize: '0.78rem', fontWeight: 600, color: '#94a3b8', background: '#f1f5f9', padding: '4px 10px', borderRadius: '20px' }}>
@@ -554,28 +569,28 @@ const MemberDashboard = () => {
           {/* 3 Summary KPI Cards */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginBottom: '26px' }}>
             {/* Total Services Attended */}
-            <div 
-              style={{ 
-                background: '#fff7ed', 
-                border: '1.5px solid #fed7aa', 
-                borderRadius: '12px', 
-                padding: '18px 20px', 
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: '14px' 
+            <div
+              style={{
+                background: '#fff7ed',
+                border: '1.5px solid #fed7aa',
+                borderRadius: '12px',
+                padding: '18px 20px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '14px'
               }}
             >
-              <div 
-                style={{ 
-                  width: '46px', 
-                  height: '46px', 
-                  borderRadius: '10px', 
-                  background: '#E87D1E', 
-                  color: '#ffffff', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center', 
-                  flexShrink: 0 
+              <div
+                style={{
+                  width: '46px',
+                  height: '46px',
+                  borderRadius: '10px',
+                  background: '#E87D1E',
+                  color: '#ffffff',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0
                 }}
               >
                 <Calendar size={22} />
@@ -591,28 +606,28 @@ const MemberDashboard = () => {
             </div>
 
             {/* Monthly Attendance Rate */}
-            <div 
-              style={{ 
-                background: '#f0fdf4', 
-                border: '1.5px solid #bbf7d0', 
-                borderRadius: '12px', 
-                padding: '18px 20px', 
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: '14px' 
+            <div
+              style={{
+                background: '#f0fdf4',
+                border: '1.5px solid #bbf7d0',
+                borderRadius: '12px',
+                padding: '18px 20px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '14px'
               }}
             >
-              <div 
-                style={{ 
-                  width: '46px', 
-                  height: '46px', 
-                  borderRadius: '10px', 
-                  background: '#10B981', 
-                  color: '#ffffff', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center', 
-                  flexShrink: 0 
+              <div
+                style={{
+                  width: '46px',
+                  height: '46px',
+                  borderRadius: '10px',
+                  background: '#10B981',
+                  color: '#ffffff',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0
                 }}
               >
                 <Award size={22} />
@@ -628,28 +643,28 @@ const MemberDashboard = () => {
             </div>
 
             {/* Current Sunday Streak */}
-            <div 
-              style={{ 
-                background: '#fef2f2', 
-                border: '1.5px solid #fecaca', 
-                borderRadius: '12px', 
-                padding: '18px 20px', 
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: '14px' 
+            <div
+              style={{
+                background: '#fef2f2',
+                border: '1.5px solid #fecaca',
+                borderRadius: '12px',
+                padding: '18px 20px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '14px'
               }}
             >
-              <div 
-                style={{ 
-                  width: '46px', 
-                  height: '46px', 
-                  borderRadius: '10px', 
-                  background: '#ef4444', 
-                  color: '#ffffff', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center', 
-                  flexShrink: 0 
+              <div
+                style={{
+                  width: '46px',
+                  height: '46px',
+                  borderRadius: '10px',
+                  background: '#ef4444',
+                  color: '#ffffff',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0
                 }}
               >
                 <Flame size={22} />
@@ -708,34 +723,34 @@ const MemberDashboard = () => {
                           {rec.checked_in_at ? new Date(rec.checked_in_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Recorded'}
                         </td>
                         <td style={{ padding: '12px 16px' }}>
-                          <span 
-                            style={{ 
-                              display: 'inline-block', 
-                              padding: '2px 8px', 
-                              borderRadius: '4px', 
-                              background: '#f1f5f9', 
-                              color: '#475569', 
-                              fontSize: '0.75rem', 
+                          <span
+                            style={{
+                              display: 'inline-block',
+                              padding: '2px 8px',
+                              borderRadius: '4px',
+                              background: '#f1f5f9',
+                              color: '#475569',
+                              fontSize: '0.75rem',
                               fontWeight: 600,
-                              textTransform: 'capitalize' 
+                              textTransform: 'capitalize'
                             }}
                           >
                             {rec.check_in_method?.replace(/_/g, ' ') || 'Dashboard'}
                           </span>
                         </td>
                         <td style={{ padding: '12px 16px', textAlign: 'right' }}>
-                          <span 
-                            style={{ 
-                              display: 'inline-flex', 
-                              alignItems: 'center', 
-                              gap: '4px', 
-                              padding: '3px 10px', 
-                              borderRadius: '20px', 
-                              background: '#f0fdf4', 
-                              border: '1px solid #bbf7d0', 
-                              color: '#166534', 
-                              fontSize: '0.78rem', 
-                              fontWeight: 700 
+                          <span
+                            style={{
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '4px',
+                              padding: '3px 10px',
+                              borderRadius: '20px',
+                              background: '#f0fdf4',
+                              border: '1px solid #bbf7d0',
+                              color: '#166534',
+                              fontSize: '0.78rem',
+                              fontWeight: 700
                             }}
                           >
                             <CheckCircle2 size={12} /> Present
@@ -829,13 +844,13 @@ const MemberDashboard = () => {
         {/* 3. MINISTRY & QUICK SHORTCUTS CARD */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
           {/* Department Connection */}
-          <div 
-            style={{ 
-              background: '#ffffff', 
-              borderRadius: '16px', 
-              padding: '22px 24px', 
-              border: '1px solid #e2e8f0', 
-              boxShadow: '0 2px 8px rgba(0,0,0,0.03)' 
+          <div
+            style={{
+              background: '#ffffff',
+              borderRadius: '16px',
+              padding: '22px 24px',
+              border: '1px solid #e2e8f0',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.03)'
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
@@ -853,16 +868,17 @@ const MemberDashboard = () => {
             {(() => {
               const dept = (currentUser?.department || '').toLowerCase();
               const descriptions = {
-                'praise': 'Leading the congregation in heartfelt worship, organizing Sunday rehearsals, and creating an atmosphere for God\'s presence.',
-                'prayer': 'Interceding for the church, community, and nations through dedicated prayer watches, fasting, and spiritual warfare.',
-                'outreach': 'Reaching the lost through evangelism drives, community missions, and spreading the Gospel beyond our walls.',
-                'digital': 'Managing and growing KEMT\'s digital presence including media, website, and online fellowship platforms.',
-                'welfare': 'Extending God\'s love to the vulnerable through food drives, hospital visits, and community support programs.',
-                'compassion': 'Extending God\'s love to the vulnerable through food drives, hospital visits, and community support programs.',
-                'high school': 'Discipling and mentoring high school students through Bible study, youth fellowships, and leadership training.',
+                'women': 'PAG Women\'s Ministries unites women in prayer, spiritual mentorship, family enrichment, and compassionate community care.',
+                'men': 'PAG Men\'s Fellowship builds godly men who lead their homes, church, and society with spiritual conviction and integrity.',
+                'youth': 'Meeting Saturdays 4:00 PM – 6:00 PM for explosive praise, talent discovery, life skills seminars, and biblical mentorship.',
+                'sunday school': 'Sundays 8:00 AM – 10:00 AM: teaching children biblical truths, scripture memorization, and child discipleship.',
+                'praise': 'Leading the congregation in Spirit-led worship, organizing weekly rehearsals, and vocal ministry.',
+                'instrument': 'Serving the Lord on keyboards, guitars, drums, and sound engineering systems with musical excellence.',
+                'choir': 'Ministering through choral anthems, traditional hymns, revival choruses, and festive presentations.',
+                'usher': 'Extending warm hospitality, greeting visitors, and maintaining reverent order in all sanctuary services.',
               };
               const key = Object.keys(descriptions).find(k => dept.includes(k)) || '';
-              const desc = descriptions[key] || 'Serving the Kingdom through dedicated ministry and collaborative teamwork, impacting lives for Christ.';
+              const desc = descriptions[key] || 'Serving the church through dedicated ministry and collaborative teamwork at PAG Ngungo Assembly.';
               return <p style={{ margin: '0 0 14px', fontSize: '0.85rem', color: '#475569', lineHeight: '1.6' }}>{desc}</p>;
             })()}
             {/* Activities */}
@@ -870,13 +886,16 @@ const MemberDashboard = () => {
               <p style={{ margin: '0 0 8px', fontSize: '0.75rem', fontWeight: 700, color: '#1e293b', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Department Activities</p>
               {(() => {
                 const dept = (currentUser?.department || '').toLowerCase();
-                const activities = dept.includes('praise') ? ['Weekly Sunday rehearsals', 'Sunday service worship sets', 'Choir & instrument training', 'Special event performances'] :
-                  dept.includes('prayer') ? ['Monday 5am prayer watch', 'Wednesday intercession', 'Monthly prayer & fasting', 'Crisis prayer support'] :
-                  dept.includes('outreach') || dept.includes('mission') ? ['Weekly street evangelism', 'Village mission trips', 'Community feeding programs', 'Tract distribution'] :
-                  dept.includes('digital') ? ['Website management', 'Social media updates', 'Live stream operations', 'Media archiving'] :
-                  dept.includes('welfare') || dept.includes('compassion') ? ['Hospital visitation', 'Food & clothing drives', 'Widow & orphan support', 'Community needs assessment'] :
-                  dept.includes('high school') ? ['Weekly Bible study', 'Youth fellowship nights', 'Mentorship programs', 'Campus outreach'] :
-                  ['Weekly meetings', 'Ministry training', 'Community service', 'Team discipleship'];
+                const activities =
+                  dept.includes('women') ? ['Weekly women fellowship', 'Home & hospital visitations', 'Annual women rally', 'Prayer intercession chains'] :
+                    dept.includes('men') ? ['Monthly men\'s breakfast', 'Sanctuary building projects', 'Brotherhood mentorship', 'Family leadership workshops'] :
+                      dept.includes('youth') ? ['Saturday youth fellowship (4-6 PM)', 'Music & talent development', 'District youth tournaments', 'Mentorship & seminars'] :
+                        dept.includes('sunday') ? ['Sunday school (8-10 AM)', 'Vacation Bible school', 'Children scripture memorization', 'Teacher prayer meetings'] :
+                          dept.includes('praise') ? ['Sunday service worship sets', 'Midweek vocal rehearsals', 'Intercessory worship', 'Music workshops'] :
+                            dept.includes('instrument') ? ['Band rehearsals', 'Sound system optimization', 'Instrumental training', 'Special event sets'] :
+                              dept.includes('choir') ? ['Weekly choral rehearsals', 'Sunday presentation songs', 'District music festivals', 'Hymn ministry'] :
+                                dept.includes('usher') ? ['Sanctuary guest reception', 'Service protocol & order', 'Offering collection', 'Sanctuary preparation'] :
+                                  ['Weekly meetings', 'Ministry training', 'Community service', 'Sunday service ministry'];
                 return (
                   <ul style={{ margin: 0, paddingLeft: '0', listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '5px' }}>
                     {activities.map((act, i) => (
@@ -891,16 +910,16 @@ const MemberDashboard = () => {
             <p style={{ margin: '0 0 12px', fontSize: '0.78rem', color: '#94a3b8' }}>
               Active member since {currentUser?.joinedAt ? new Date(currentUser.joinedAt).toLocaleDateString([], { month: 'long', year: 'numeric' }) : 'Registration'}
             </p>
-            <Link 
-              to="/ministries" 
-              style={{ 
-                color: '#E87D1E', 
-                textDecoration: 'none', 
-                fontWeight: 700, 
-                fontSize: '0.86rem', 
-                display: 'inline-flex', 
-                alignItems: 'center', 
-                gap: '4px' 
+            <Link
+              to="/ministries"
+              style={{
+                color: '#E87D1E',
+                textDecoration: 'none',
+                fontWeight: 700,
+                fontSize: '0.86rem',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px'
               }}
             >
               Explore Department Rosters &rarr;
@@ -908,13 +927,13 @@ const MemberDashboard = () => {
           </div>
 
           {/* Quick Support & Prayer */}
-          <div 
-            style={{ 
-              background: '#ffffff', 
-              borderRadius: '16px', 
-              padding: '22px 24px', 
-              border: '1px solid #e2e8f0', 
-              boxShadow: '0 2px 8px rgba(0,0,0,0.03)' 
+          <div
+            style={{
+              background: '#ffffff',
+              borderRadius: '16px',
+              padding: '22px 24px',
+              border: '1px solid #e2e8f0',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.03)'
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
@@ -926,16 +945,16 @@ const MemberDashboard = () => {
             <p style={{ margin: '0 0 14px', fontSize: '0.85rem', color: '#64748b', lineHeight: '1.5' }}>
               Need personal ministry, spiritual counseling, or prayer support? Our ministerial council is on standby to lift you up.
             </p>
-            <Link 
-              to="/contact" 
-              style={{ 
-                color: '#E87D1E', 
-                textDecoration: 'none', 
-                fontWeight: 700, 
-                fontSize: '0.86rem', 
-                display: 'inline-flex', 
-                alignItems: 'center', 
-                gap: '4px' 
+            <Link
+              to="/contact"
+              style={{
+                color: '#E87D1E',
+                textDecoration: 'none',
+                fontWeight: 700,
+                fontSize: '0.86rem',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px'
               }}
             >
               Send Prayer Request &rarr;

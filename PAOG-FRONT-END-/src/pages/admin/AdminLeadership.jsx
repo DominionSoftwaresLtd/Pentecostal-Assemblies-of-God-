@@ -4,14 +4,29 @@ import { Plus, Edit2, Trash2, Save, X, Upload, Shield, User, ChevronUp, ChevronD
 const API_BASE = '/api/leadership';
 
 const DEPARTMENTS = [
-  'Executive Directorate', 'Executive Board', 'Outreach & Missions', 'Digital Infrastructure',
-  'Secretariat', 'Finance & Treasury', 'Welfare & Compassion', 'Prayer Department',
-  'Praise and Worship', 'Bible Study', 'High School Ministry', 'General Ministry'
+  'District Executive',
+  'Ngungo Assembly Council',
+  'District Pastors',
+  'Women Department',
+  'Men Department',
+  'Youth Department',
+  'Sunday School Department',
+  'Praise and Worship',
+  'Instrumentalist',
+  'Choir',
+  'Ushering'
 ];
 const ROLES = [
-  'Director', 'Chairperson', 'Secretary', 'Treasurer', 'Outreach Incharge',
-  'Digital Infrastructure Director', 'Prayer Coordinator', 'Worship Coordinator',
-  'Welfare Incharge', 'Media Director', 'Ministry Leader'
+  'Bishop',
+  'Deacon',
+  'Treasurer',
+  'District Layman',
+  'District Clerk',
+  'District Secretary',
+  'District Treasurer',
+  'Pastor',
+  'Department Leader',
+  'Ministry Leader'
 ];
 
 const BLANK_FORM = { name: '', role: '', department: '', email: '', phone: '', bio: '', status: 'Active Leadership', order: '' };
@@ -169,7 +184,7 @@ const AdminLeadership = () => {
         <div>
           <h1 className="admin-page-title" style={{ margin: 0 }}>Leadership Council</h1>
           <p style={{ color: '#64748b', margin: '4px 0 0', fontSize: '0.9rem' }}>
-            Manage the KEMT leadership team. Changes reflect immediately on the public Leadership page.
+            Manage the Pentecostal Assemblies of God - Ngungo Assembly &amp; Mbeere District leadership team. Changes reflect immediately on the public Leadership page.
           </p>
         </div>
         <button

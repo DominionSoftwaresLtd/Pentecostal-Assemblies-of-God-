@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
-import logoImg from '../assets/logo Kingdom enightement.jpg';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import logoImg from '../assets/logo ngungo.png';
 
 const Navbar = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -8,10 +8,21 @@ const Navbar = () => {
     const [currentUser, setCurrentUser] = useState(null);
     const [userMenuOpen, setUserMenuOpen] = useState(false);
     const [hasActiveSession, setHasActiveSession] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
     const userMenuRef = useRef(null);
     const navigate = useNavigate();
+    const location = useLocation();
 
-    // Load logged-in user from localStorage
+    const isHome = location.pathname === '/';
+    const heroMode = isHome && !scrolled;
+
+    // Scroll listener — adds shadow + shrinks header
+    useEffect(() => {
+        const onScroll = () => setScrolled(window.scrollY > 60);
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
+
     const loadUser = () => {
         const adminUser = localStorage.getItem('kemt_admin_user');
         const memberUser = localStorage.getItem('kemt_current_user');
@@ -24,7 +35,6 @@ const Navbar = () => {
         }
     };
 
-    // Check if an attendance session is currently open
     const checkActiveSession = async () => {
         try {
             const res = await fetch('/api/attendance/active');
@@ -40,10 +50,7 @@ const Navbar = () => {
         checkActiveSession();
         window.addEventListener('storage', loadUser);
         window.addEventListener('kemt_auth_change', loadUser);
-        
-        // Poll for live attendance sessions every 20 seconds
         const sessionInterval = setInterval(checkActiveSession, 20000);
-
         return () => {
             window.removeEventListener('storage', loadUser);
             window.removeEventListener('kemt_auth_change', loadUser);
@@ -51,7 +58,6 @@ const Navbar = () => {
         };
     }, []);
 
-    // Close user dropdown when clicking outside
     useEffect(() => {
         const handler = (e) => {
             if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
@@ -82,6 +88,11 @@ const Navbar = () => {
         setOpenDropdown(openDropdown === name ? null : name);
     };
 
+    const closeAll = () => {
+        setMobileMenuOpen(false);
+        setOpenDropdown(null);
+    };
+
     const getInitials = (name) => {
         if (!name) return '?';
         return name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
@@ -90,118 +101,159 @@ const Navbar = () => {
     const isAdmin = currentUser && (currentUser.isAdmin || currentUser.role === 'Super Admin');
 
     return (
-        <div className="site-header-wrapper">
+        <div className={`site-header-wrapper${scrolled ? ' scrolled' : ''}${heroMode ? ' hero-mode' : ''}`}>
             {mobileMenuOpen && (
                 <div className="menu-backdrop" onClick={toggleMobileMenu}></div>
             )}
-            {/* Top Bar */}
+
+            {/* ── Refined Top Bar ── */}
             <div className="top-bar">
                 <div className="container">
                     <div className="top-bar-content">
                         <div className="top-bar-left">
-                            <span title="info@kingdomenlightenment.org">
+                            <span>
                                 <i className="fas fa-envelope"></i>
-                                <span className="top-bar-email-full">info@kingdomenlightenment.org</span>
-                                <span className="top-bar-email-short">info@kemt.org</span>
+                                <span className="top-bar-email-full">info@pagngungo.co.ke</span>
                             </span>
-                            <span><i className="fas fa-phone"></i> +254 714 476 295</span>
+                            <span className="top-bar-divider">|</span>
+                            <span>
+                                <i className="fas fa-phone"></i>
+                                +254 720 140 213
+                            </span>
+                            <span className="top-bar-divider top-bar-hide-sm">|</span>
+                            <span className="top-bar-hide-sm">
+                                <i className="fas fa-map-marker-alt"></i>
+                                P.O. Box 213-60113, Kiritiri, Mbeere
+                            </span>
                         </div>
 
-                        {/* Live Check-In Trigger in Top Orange Utility Bar */}
-                        {hasActiveSession && (
-                            <div className="top-bar-center">
-                                <Link 
-                                    to={currentUser ? "/dashboard" : "/check-in"} 
-                                    className="top-bar-checkin-link"
-                                    title="Active church attendance session is currently open"
-                                >
-                                    <span className="top-bar-pulse-dot"></span>
-                                    <span>Live Check-In Open &rarr;</span>
-                                </Link>
-                            </div>
-                        )}
+                        {/* Top Bar Center - Live Check-In Pill & Service Time */}
+                        <div className="top-bar-center">
+                            <Link 
+                                to={currentUser ? "/dashboard" : "/check-in"} 
+                                className="top-bar-checkin-link"
+                                title="Live church attendance check-in"
+                            >
+                                <span className="top-bar-pulse-dot"></span>
+                                <span>Live Service Check-In Open &rarr;</span>
+                            </Link>
+                            <span className="top-bar-divider top-bar-hide-sm" style={{ margin: '0 10px', opacity: 0.5 }}>|</span>
+                            <span className="top-bar-service-time top-bar-hide-sm" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#ffedd5', fontSize: '0.8rem', fontWeight: 600 }}>
+                                <i className="fas fa-clock" style={{ color: '#fbbf24' }}></i>
+                                Sun: 8:00 AM &amp; 10:30 AM
+                            </span>
+                        </div>
 
                         <div className="top-bar-right">
-                            <a href="https://www.facebook.com/share/1EXQmKx4QE/" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f"></i></a>
-                            <a href="https://www.tiktok.com/@kingdom_enlightment" target="_blank" rel="noopener noreferrer"><i className="fab fa-tiktok"></i></a>
-                            <a href="https://www.youtube.com/@KingdomEnlightenmentMinistries" target="_blank" rel="noopener noreferrer"><i className="fab fa-youtube"></i></a>
-                            <a href="#"><i className="fa-brands fa-x-twitter"></i></a>
-                            <a href="#"><i className="fab fa-instagram"></i></a>
+                            <div className="top-bar-socials">
+                                <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                                    <i className="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                                    <i className="fab fa-youtube"></i>
+                                </a>
+                                <a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                                    <i className="fab fa-tiktok"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {/* Header */}
+            {/* ── Main Header ── */}
             <header className="header">
                 <div className="container">
                     <div className="header-content">
+
+                        {/* Logo */}
                         <div className="logo">
                             <Link to="/">
-                                <img src={logoImg} alt="Kingdom Enlightenment Missions Team" className="logo-img" />
+                                <img src={logoImg} alt="PAG Ngungo Assembly" className="logo-img" />
                                 <div className="logo-name">
-                                    <span className="logo-name-top">Kingdom Enlightenment</span>
-                                    <span className="logo-name-bottom">MINISTRIES</span>
+                                    <span className="logo-name-top">PAG — NGUNGO ASSEMBLY</span>
+                                    <span className="logo-name-bottom">MBEERE DISTRICT HEADQUARTERS</span>
                                 </div>
                             </Link>
                         </div>
 
-                        <nav className={`main-nav ${mobileMenuOpen ? 'active' : ''}`}>
+                        {/* Navigation */}
+                        <nav className={`main-nav ${mobileMenuOpen ? 'active' : ''}`} aria-label="Main navigation">
                             <ul className="nav-menu">
-                                <li><NavLink to="/" className={({ isActive }) => isActive ? "active" : ""} onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Home</NavLink></li>
+                                <li>
+                                    <NavLink to="/" className={({ isActive }) => isActive ? 'active' : ''} onClick={closeAll}>
+                                        Home
+                                    </NavLink>
+                                </li>
                                 <li className={`dropdown ${openDropdown === 'about' ? 'active' : ''}`}>
-                                    <NavLink to="/about" onClick={() => toggleDropdown('about')}>About Us <i className="fas fa-chevron-down"></i></NavLink>
+                                    <NavLink to="/about" onClick={() => toggleDropdown('about')}>
+                                        About Us <i className="fas fa-chevron-down"></i>
+                                    </NavLink>
                                     <ul className="dropdown-menu">
-                                        <li><Link to="/about#who-we-are" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Who We Are</Link></li>
-                                        <li><Link to="/about#our-history" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Our History</Link></li>
-                                        <li><Link to="/about#vision-mission" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Vision &amp; Mission</Link></li>
-                                        <li><Link to="/about#statement-of-faith" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Statement of Faith</Link></li>
+                                        <li><Link to="/about#who-we-are" onClick={closeAll}>Who We Are</Link></li>
+                                        <li><Link to="/about#district-hq" onClick={closeAll}>District Headquarters</Link></li>
+                                        <li><Link to="/about#order-of-services" onClick={closeAll}>Order of Services</Link></li>
+                                        <li><Link to="/about#vision-mission" onClick={closeAll}>Vision &amp; Mission</Link></li>
+                                        <li><Link to="/about#statement-of-faith" onClick={closeAll}>Statement of Faith</Link></li>
+                                    </ul>
+                                </li>
+                                <li className={`dropdown ${openDropdown === 'departments' ? 'active' : ''}`}>
+                                    <NavLink to="/departments" onClick={() => toggleDropdown('departments')}>
+                                        Departments <i className="fas fa-chevron-down"></i>
+                                    </NavLink>
+                                    <ul className="dropdown-menu">
+                                        <li className="dropdown-group-label">Four Pillars</li>
+                                        <li><Link to="/departments#women" onClick={closeAll}>Women Department</Link></li>
+                                        <li><Link to="/departments#men" onClick={closeAll}>Men Department</Link></li>
+                                        <li><Link to="/departments#youth" onClick={closeAll}>Youth Department</Link></li>
+                                        <li><Link to="/departments#sundayschool" onClick={closeAll}>Sunday School</Link></li>
                                     </ul>
                                 </li>
                                 <li className={`dropdown ${openDropdown === 'ministries' ? 'active' : ''}`}>
-                                    <NavLink to="/ministries" onClick={() => toggleDropdown('ministries')}>Departments <i className="fas fa-chevron-down"></i></NavLink>
+                                    <NavLink to="/ministries" onClick={() => toggleDropdown('ministries')}>
+                                        Ministries <i className="fas fa-chevron-down"></i>
+                                    </NavLink>
                                     <ul className="dropdown-menu">
-                                        <li><Link to="/ministries#prayer" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>01 Prayer Department</Link></li>
-                                        <li><Link to="/ministries#worship" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>02 Praise and Worship</Link></li>
-                                        <li><Link to="/ministries#welfare" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>03 Welfare/Compassion</Link></li>
-                                        <li><Link to="/ministries#outreach" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>04 Outreach</Link></li>
-                                        <li><Link to="/ministries#discipleship" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>05 Discipleship</Link></li>
-                                        <li><Link to="/ministries#highschool" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>06 High School</Link></li>
-                                        <li><Link to="/ministries#digital" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>07 Digital Infrastructure</Link></li>
+                                        <li className="dropdown-group-label">Sanctuary Arms</li>
+                                        <li><Link to="/ministries#worship" onClick={closeAll}>Praise &amp; Worship</Link></li>
+                                        <li><Link to="/ministries#instrumentalists" onClick={closeAll}>Instrumentalists</Link></li>
+                                        <li><Link to="/ministries#choir" onClick={closeAll}>Sanctuary Choir</Link></li>
+                                        <li><Link to="/ministries#ushering" onClick={closeAll}>Ushering &amp; Protocol</Link></li>
                                     </ul>
                                 </li>
-                                <li><NavLink to="/leadership" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Leadership</NavLink></li>
-                                <li><NavLink to="/events" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Events</NavLink></li>
-                                <li><NavLink to="/gallery" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Gallery</NavLink></li>
-                                <li><NavLink to="/contact" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }}>Contact Us</NavLink></li>
-                                
-                                {/* Mobile Live Service Check-In Link */}
+                                <li>
+                                    <NavLink to="/assemblies" className={({ isActive }) => isActive ? 'active' : ''} onClick={closeAll}>
+                                        Assemblies
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/leadership" className={({ isActive }) => isActive ? 'active' : ''} onClick={closeAll}>
+                                        Leadership
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/gallery" className={({ isActive }) => isActive ? 'active' : ''} onClick={closeAll}>
+                                        Gallery
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/contact" className={({ isActive }) => isActive ? 'active' : ''} onClick={closeAll}>
+                                        Contact
+                                    </NavLink>
+                                </li>
+
+                                {/* Mobile-only items */}
                                 {hasActiveSession && (
                                     <li className="mobile-only-nav-item">
-                                        <Link 
-                                            to={currentUser ? "/dashboard" : "/check-in"} 
-                                            onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }} 
-                                            className="mobile-nav-btn"
-                                            style={{
-                                                background: '#f0fdf4',
-                                                border: '1.5px solid #10B981',
-                                                color: '#166534',
-                                                fontWeight: 800,
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                gap: '8px'
-                                            }}
-                                        >
+                                        <Link to={currentUser ? "/dashboard" : "/check-in"} onClick={closeAll} className="mobile-nav-btn" style={{ background: '#f0fdf4', border: '1.5px solid #10B981', color: '#166534', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '8px' }}>
                                             <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10B981', animation: 'pulse 1.8s infinite' }}></span>
                                             Service Check-In Open
                                         </Link>
                                     </li>
                                 )}
-
-                                {/* Mobile Auth Options */}
                                 {!currentUser ? (
                                     <li className="mobile-only-nav-item">
-                                        <Link to="/login" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }} className="mobile-nav-btn login-btn">
+                                        <Link to="/login" onClick={closeAll} className="mobile-nav-btn login-btn">
                                             <i className="fas fa-sign-in-alt"></i> Log In / Sign Up
                                         </Link>
                                     </li>
@@ -209,54 +261,37 @@ const Navbar = () => {
                                     <>
                                         {isAdmin && (
                                             <li className="mobile-only-nav-item">
-                                                <Link to="/admin" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }} className="mobile-nav-btn" style={{ color: '#E87D1E' }}>
+                                                <Link to="/admin" onClick={closeAll} className="mobile-nav-btn" style={{ color: '#E87D1E' }}>
                                                     <i className="fas fa-tachometer-alt"></i> Admin Panel
                                                 </Link>
                                             </li>
                                         )}
                                         <li className="mobile-only-nav-item">
-                                            <button onClick={() => { setMobileMenuOpen(false); handleSignOut(); }}
-                                                style={{ background: 'none', border: '2px solid #dc2626', borderRadius: '6px', cursor: 'pointer', width: '100%', textAlign: 'left', padding: '10px 16px', color: '#dc2626', fontWeight: 700, fontSize: '0.95rem', fontFamily: 'inherit' }}>
+                                            <button onClick={() => { closeAll(); handleSignOut(); }} style={{ background: 'none', border: '2px solid #dc2626', borderRadius: '6px', cursor: 'pointer', width: '100%', textAlign: 'left', padding: '10px 16px', color: '#dc2626', fontWeight: 700, fontSize: '0.95rem', fontFamily: 'inherit' }}>
                                                 <i className="fas fa-sign-out-alt"></i> Sign Out
                                             </button>
                                         </li>
                                     </>
                                 )}
                                 <li className="mobile-only-nav-item">
-                                    <Link to="/donate" onClick={() => { setMobileMenuOpen(false); setOpenDropdown(null); }} className="mobile-nav-btn donate-btn">
-                                        <i className="fas fa-heart"></i> Donate
+                                    <Link to="/donate" onClick={closeAll} className="mobile-nav-btn donate-btn">
+                                        <i className="fas fa-heart"></i> Give / Donate
                                     </Link>
                                 </li>
                             </ul>
                         </nav>
 
+                        {/* Desktop right buttons */}
                         <div className="nav-buttons">
                             {currentUser ? (
-                                /* Logged-In User Profile Pill with Avatar + First Name ▾ */
                                 <div ref={userMenuRef} className="user-profile-pill-wrapper" style={{ position: 'relative' }}>
                                     <button
                                         onClick={() => setUserMenuOpen(!userMenuOpen)}
-                                        style={{
-                                            display: 'inline-flex',
-                                            alignItems: 'center',
-                                            gap: '8px',
-                                            padding: '5px 14px 5px 5px',
-                                            borderRadius: '50px',
-                                            border: '2px solid #E87D1E',
-                                            background: 'rgba(232,125,30,0.07)',
-                                            cursor: 'pointer',
-                                            fontFamily: 'inherit',
-                                            transition: 'all 0.2s ease'
-                                        }}
+                                        style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '5px 14px 5px 5px', borderRadius: '50px', border: '2px solid #E87D1E', background: 'rgba(232,125,30,0.07)', cursor: 'pointer', fontFamily: 'inherit', transition: 'all 0.2s ease' }}
                                         onMouseEnter={e => e.currentTarget.style.background = 'rgba(232,125,30,0.14)'}
                                         onMouseLeave={e => e.currentTarget.style.background = 'rgba(232,125,30,0.07)'}
                                     >
-                                        <span style={{
-                                            width: '32px', height: '32px', borderRadius: '50%',
-                                            background: '#E87D1E', color: '#fff', fontWeight: 800,
-                                            fontSize: '0.8rem', display: 'flex', alignItems: 'center',
-                                            justifyContent: 'center', flexShrink: 0
-                                        }}>
+                                        <span style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#E87D1E', color: '#fff', fontWeight: 800, fontSize: '0.8rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                                             {getInitials(currentUser.name)}
                                         </span>
                                         <span style={{ color: '#1e293b', fontWeight: 700, fontSize: '0.88rem', maxWidth: '110px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
@@ -265,65 +300,27 @@ const Navbar = () => {
                                         <i className={`fas fa-chevron-${userMenuOpen ? 'up' : 'down'}`} style={{ color: '#E87D1E', fontSize: '0.7rem' }}></i>
                                     </button>
 
-                                    {/* Dropdown Menu */}
                                     {userMenuOpen && (
-                                        <div style={{
-                                            position: 'absolute', top: 'calc(100% + 10px)', right: 0,
-                                            background: '#fff', borderRadius: '12px',
-                                            boxShadow: '0 12px 32px rgba(0,0,0,0.14)',
-                                            border: '1px solid #e2e8f0', padding: '8px',
-                                            minWidth: '220px', zIndex: 9999
-                                        }}>
-                                            {/* User info */}
+                                        <div style={{ position: 'absolute', top: 'calc(100% + 10px)', right: 0, background: '#fff', borderRadius: '12px', boxShadow: '0 12px 32px rgba(0,0,0,0.14)', border: '1px solid #e2e8f0', padding: '8px', minWidth: '220px', zIndex: 9999 }}>
                                             <div style={{ padding: '10px 12px 12px', borderBottom: '1px solid #f1f5f9', marginBottom: '6px' }}>
                                                 <div style={{ fontWeight: 800, color: '#1e293b', fontSize: '0.92rem' }}>{currentUser.name}</div>
                                                 <div style={{ fontSize: '0.78rem', color: '#94a3b8', marginTop: '2px' }}>{currentUser.email}</div>
-                                                <span style={{
-                                                    display: 'inline-block', marginTop: '6px',
-                                                    padding: '2px 10px', borderRadius: '20px',
-                                                    background: isAdmin ? 'rgba(232,125,30,0.12)' : '#f0fdf4',
-                                                    color: isAdmin ? '#E87D1E' : '#166534',
-                                                    fontSize: '0.72rem', fontWeight: 700
-                                                }}>
+                                                <span style={{ display: 'inline-block', marginTop: '6px', padding: '2px 10px', borderRadius: '20px', background: isAdmin ? 'rgba(232,125,30,0.12)' : '#f0fdf4', color: isAdmin ? '#E87D1E' : '#166534', fontSize: '0.72rem', fontWeight: 700 }}>
                                                     {isAdmin ? '⚡ Administrator' : '✅ Member'}
                                                 </span>
                                             </div>
-
-                                            {/* My Departments */}
-                                            <Link to="/ministries" onClick={() => setUserMenuOpen(false)}
-                                                style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '9px 12px', borderRadius: '8px', color: '#1e293b', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 600, transition: 'background 0.15s' }}
-                                                onMouseEnter={e => e.currentTarget.style.background = '#f8fafc'}
-                                                onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
+                                            <Link to="/ministries" onClick={() => setUserMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '9px 12px', borderRadius: '8px', color: '#1e293b', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 600, transition: 'background 0.15s' }} onMouseEnter={e => e.currentTarget.style.background = '#f8fafc'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
                                                 <i className="fas fa-users" style={{ color: '#3b82f6', width: '16px', textAlign: 'center' }}></i>
                                                 My Departments
                                             </Link>
-
-                                            {/* 4. Admin Dashboard (if admin) */}
                                             {isAdmin && (
-                                                <Link to="/admin" onClick={() => setUserMenuOpen(false)}
-                                                    style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '9px 12px', borderRadius: '8px', color: '#334155', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 600 }}
-                                                    onMouseEnter={e => e.currentTarget.style.background = '#f8fafc'}
-                                                    onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
+                                                <Link to="/admin" onClick={() => setUserMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '9px 12px', borderRadius: '8px', color: '#334155', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 600 }} onMouseEnter={e => e.currentTarget.style.background = '#f8fafc'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
                                                     <i className="fas fa-tachometer-alt" style={{ color: '#E87D1E', width: '16px', textAlign: 'center' }}></i>
                                                     Admin Panel
                                                 </Link>
                                             )}
-
-                                            {/* 5. Logout */}
                                             <div style={{ marginTop: '6px', borderTop: '1px solid #f1f5f9', paddingTop: '6px' }}>
-                                                <button
-                                                    onClick={handleSignOut}
-                                                    style={{
-                                                        width: '100%', display: 'flex', alignItems: 'center',
-                                                        gap: '10px', padding: '10px 12px', borderRadius: '8px',
-                                                        background: '#fef2f2', border: '1px solid #fecaca',
-                                                        color: '#dc2626', fontSize: '0.88rem', fontWeight: 700,
-                                                        cursor: 'pointer', textAlign: 'left', transition: 'all 0.2s',
-                                                        fontFamily: 'inherit'
-                                                    }}
-                                                    onMouseEnter={e => { e.currentTarget.style.background = '#dc2626'; e.currentTarget.style.color = '#fff'; }}
-                                                    onMouseLeave={e => { e.currentTarget.style.background = '#fef2f2'; e.currentTarget.style.color = '#dc2626'; }}
-                                                >
+                                                <button onClick={handleSignOut} style={{ width: '100%', display: 'flex', alignItems: 'center', gap: '10px', padding: '10px 12px', borderRadius: '8px', background: '#fef2f2', border: '1px solid #fecaca', color: '#dc2626', fontSize: '0.88rem', fontWeight: 700, cursor: 'pointer', textAlign: 'left', transition: 'all 0.2s', fontFamily: 'inherit' }} onMouseEnter={e => { e.currentTarget.style.background = '#dc2626'; e.currentTarget.style.color = '#fff'; }} onMouseLeave={e => { e.currentTarget.style.background = '#fef2f2'; e.currentTarget.style.color = '#dc2626'; }}>
                                                     <i className="fas fa-sign-out-alt" style={{ width: '16px', textAlign: 'center' }}></i>
                                                     Sign Out
                                                 </button>
@@ -334,14 +331,12 @@ const Navbar = () => {
                             ) : (
                                 <Link to="/login" className="btn btn-login">Log In</Link>
                             )}
-
-                            <Link to="/donate" className="btn btn-primary">Donate</Link>
                         </div>
 
-                        <div className="mobile-menu-toggle" onClick={toggleMobileMenu}>
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                        <div className="mobile-menu-toggle" onClick={toggleMobileMenu} aria-label="Toggle menu">
+                            <span className={mobileMenuOpen ? 'open' : ''}></span>
+                            <span className={mobileMenuOpen ? 'open' : ''}></span>
+                            <span className={mobileMenuOpen ? 'open' : ''}></span>
                         </div>
                     </div>
                 </div>

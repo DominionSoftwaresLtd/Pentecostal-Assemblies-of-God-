@@ -125,10 +125,10 @@ const AdminDashboard = () => {
       }}>
         <div>
           <h1 className="admin-page-title" style={{ margin: 0, fontSize: '1.6rem' }}>
-            Kingdom Enlightenment Admin Overview
+            PAG Ngungo Assembly — Mbeere District HQ Admin
           </h1>
           <p style={{ margin: '4px 0 0', color: '#64748b', fontSize: '0.88rem' }}>
-            Welcome back to the KEMT Ministry Command Center
+            Welcome to Pentecostal Assemblies of God Church Management System
           </p>
         </div>
 

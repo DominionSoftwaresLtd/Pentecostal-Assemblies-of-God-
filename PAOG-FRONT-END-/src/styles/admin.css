@@ -1,21 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Satoshi:wght@400;500;700;900&display=swap');
 
 :root {
-  /* KEMT Brand-Aligned Admin Colors */
-  --admin-bg-primary: #F8FAFC;
-  --admin-sidebar-bg: #1E293B;
+  /* Brand-Aligned Admin Colors */
+  --admin-bg-primary: #F4F6FB;
+  --admin-sidebar-bg: #000045;
   --admin-sidebar-text: #94A3B8;
   --admin-sidebar-text-active: #FFFFFF;
-  --admin-sidebar-active-bg: #334155;
+  --admin-sidebar-active-bg: #000066;
   
   --admin-card-bg: #FFFFFF;
   --admin-text-main: #1E293B;
   --admin-text-muted: #64748B;
   --admin-border-color: #E2E8F0;
   
-  --admin-primary: #E87D1E;
-  --admin-primary-hover: #D46B10;
-  --admin-secondary: #F59E0B;
+  --admin-primary: #000066;
+  --admin-primary-hover: #001f7a;
+  --admin-secondary: #D97706;
   --admin-success: #10B981;
   --admin-danger: #EF4444;
   
@@ -115,17 +115,18 @@ h1.admin-page-title {
 }
 
 .admin-sidebar-logo-icon {
-  background: var(--admin-primary);
+  background: #ffffff !important;
   color: white;
   width: 38px;
   height: 38px;
-  border-radius: 10px;
+  border-radius: 50% !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 3px 8px rgba(232, 125, 30, 0.35);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  padding: 4px;
+  padding: 3px !important;
+  border: 1.5px solid #fed7aa;
 }
 
 .admin-sidebar-logo-icon img {
@@ -242,16 +243,17 @@ h1.admin-page-title {
 }
 
 .admin-header-logo-icon {
-  background: none;
-  width: 46px;
-  height: 46px;
-  border-radius: 0;
+  background: #ffffff !important;
+  width: 44px;
+  height: 44px;
+  border-radius: 50% !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   overflow: hidden;
-  padding: 0;
+  padding: 3px !important;
+  border: 1.5px solid #fed7aa;
   flex-shrink: 0;
 }
 

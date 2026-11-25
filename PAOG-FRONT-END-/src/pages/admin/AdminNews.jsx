@@ -17,13 +17,17 @@ import {
 } from 'lucide-react';
 
 const CATEGORIES = [
-  'Missions',
-  'Outreach',
-  'Revival & Crusades',
-  'Youth & High School',
-  'Announcements',
-  'Testimonies',
-  'Compassion & Welfare'
+  'District Announcements',
+  'District Convocations',
+  'Praise and Worship',
+  'Instrumentalist',
+  'Choir',
+  'Ushering',
+  'Youth Department',
+  'Women Department',
+  'Men Department',
+  'Sunday School Department',
+  'Testimonies'
 ];
 
 const AdminNews = () => {
@@ -40,7 +44,7 @@ const AdminNews = () => {
     location: '',
     summary: '',
     content: '',
-    author: 'KEMT Missions Team',
+    author: 'PAG Ngungo Media Team',
   });
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState('');
@@ -81,7 +85,7 @@ const AdminNews = () => {
       location: 'Kenya',
       summary: '',
       content: '',
-      author: 'KEMT Missions Team',
+      author: 'PAG Ngungo Media Team',
     });
     setImageFile(null);
     setImagePreview('');
@@ -305,7 +309,7 @@ const AdminNews = () => {
                 ) : (
                   <div style={{ textAlign: 'center', color: '#E87D1E', padding: '16px' }}>
                     <Newspaper size={36} style={{ margin: '0 auto 8px', display: 'block', opacity: 0.7 }} />
-                    <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>KEMT Missions Report</span>
+                    <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>PAG Ngungo News</span>
                   </div>
                 )}
                 <span style={{
@@ -370,7 +374,7 @@ const AdminNews = () => {
                 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.78rem', color: '#94a3b8' }}>
                     <User size={13} />
-                    <span>{item.author || 'KEMT Admin'}</span>
+                    <span>{item.author || 'PAG Admin'}</span>
                   </div>
 
                   <div style={{ display: 'flex', gap: '6px' }}>
@@ -536,7 +540,7 @@ const AdminNews = () => {
                     type="text"
                     value={formData.author}
                     onChange={(e) => setFormData({ ...formData, author: e.target.value })}
-                    placeholder="KEMT Missions Outreach"
+                    placeholder="PAG Ngungo Media Team"
                     style={{ width: '100%', padding: '9px 12px', borderRadius: '8px', border: '1.5px solid #cbd5e1', outline: 'none', boxSizing: 'border-box' }}
                   />
                 </div>

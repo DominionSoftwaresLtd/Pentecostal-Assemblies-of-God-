@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { 
-  LayoutDashboard, 
-  Users, 
+import {
+  LayoutDashboard,
+  Users,
   UserCheck,
-  Calendar, 
+  Calendar,
   Images,
   Heart,
   DollarSign,
@@ -14,7 +14,7 @@ import {
   Newspaper,
   Shield
 } from 'lucide-react';
-import logoImg from '../../assets/logo Kingdom enightement.jpg';
+import logoImg from '../../assets/logo ngungo.png';
 
 const Sidebar = () => {
   const location = useLocation();
@@ -28,7 +28,7 @@ const Sidebar = () => {
           const data = await res.json();
           setUnreadCount(data.unreadMessages || 0);
         }
-      } catch {}
+      } catch { }
     };
     fetchStats();
     const interval = setInterval(fetchStats, 15000);
@@ -44,14 +44,14 @@ const Sidebar = () => {
     <aside className="admin-sidebar">
       <div className="admin-sidebar-header">
         <div className="admin-sidebar-logo-icon">
-          <img src={logoImg} alt="KEMT" />
+          <img src={logoImg} alt="PAG Ngungo" />
         </div>
-        <span>KEMT Admin</span>
+        <span>PAG Ngungo Admin</span>
       </div>
-      
+
       <div className="admin-nav">
         <div className="admin-nav-category">Main Menu</div>
-        
+
         <Link to="/admin" className={`admin-nav-item ${isCurrentPath('/admin') && location.pathname === '/admin' ? 'active' : ''}`}>
           <div className="admin-nav-item-left">
             <LayoutDashboard size={19} />
@@ -79,7 +79,7 @@ const Sidebar = () => {
             News &amp; Updates
           </div>
         </Link>
-        
+
         <Link to="/admin/events" className={`admin-nav-item ${isCurrentPath('/admin/events') ? 'active' : ''}`}>
           <div className="admin-nav-item-left">
             <Calendar size={19} />

@@ -1,673 +1,438 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { 
+  Calendar, 
+  Clock, 
+  MapPin, 
+  Users, 
+  Sparkles, 
+  Heart, 
+  BookOpen, 
+  ShieldCheck, 
+  Music, 
+  Search,
+  Filter,
+  CheckCircle2,
+  ChevronRight
+} from 'lucide-react';
 
-// Rwanyange Mission photos
-import r1 from '../assets/Ruanyage1.jpg';
-import r2 from '../assets/Ruanyage2.jpg';
-import r3 from '../assets/Ruanyage3.jpg';
-import r4 from '../assets/Ruanyage4.jpg';
-
-// Gikumene Mission photos (Gaukene ntakira circuit 1–4)
-import g1 from '../assets/Gaukene ntakira circuit mission1.jpg';
-import g2 from '../assets/Gaukene ntakira circuit mission2.jpg';
-import g3 from '../assets/Gaukene ntakira circuit mission3.jpg';
-import g4 from '../assets/Gaukene ntakira circuit mission4.jpg';
-
-// Tala Mission photos
-import t1 from '../assets/Tala mission1.jpg';
-import t2 from '../assets/Tala mission2.jpg';
-import t3 from '../assets/Tala mission3.jpg';
-import t4 from '../assets/Tala mission4.jpg';
-
-// Emali Mission photos
-import e1 from '../assets/Emali mission1.jpg';
-import e2 from '../assets/Emali mission2.jpg';
-import e3 from '../assets/Emali mission3.jpg';
-import e4 from '../assets/Emali mission4.jpg';
-
-// Ntakira Mission photos (Gaukene ntakira circuit 5–8)
-import n1 from '../assets/Gaukene ntakira circuit mission5.jpg';
-import n2 from '../assets/Gaukene ntakira circuit mission6.jpg';
-import n3 from '../assets/Gaukene ntakira circuit mission7.jpg';
-import n4 from '../assets/Gaukene ntakira circuit mission8.jpg';
-
-const missions = [
+const churchPrograms = [
   {
     id: 1,
-    name: 'Rwanyange Mission',
-    location: 'Meru',
-    county: 'Meru',
-    dates: '19th – 24th August 2025',
-    year: '2025',
-    church: 'East Africa Pentecostal Church, Rwanyange',
-    souls: 145,
-    photos: [r1, r2, r3, r4],
-    description:
-      'Our Rwanyange mission focused on taking the Gospel directly to the people through one-on-one evangelism and street evangelism, while also meeting practical community needs through integral mission and compassion ministry. The mission featured powerful crusades and revival meetings, alongside youth workshops and mentorship, creating opportunities for both salvation and spiritual growth.',
-    activities: [
-      'One-on-One Evangelism',
-      'Street Evangelism',
-      'Crusades & Revivals',
-      'Youth Workshops',
-      'Mentorship',
-      'Compassion Ministry',
-      'Integral Mission',
-    ],
-    highlights: 'Crusades, Street Evangelism, Youth Mentorship & Integral Mission',
+    name: 'Mbeere District Annual Convocation & Revival',
+    category: 'District Gatherings',
+    frequency: 'Annual • August',
+    timing: '5 Days • Morning & Evening Sessions',
+    location: 'Ngungo Assembly Grounds (District Headquarters)',
+    leader: 'Bishop Rev. Clement Simba & District Executive',
+    description: 'The premier annual gathering uniting all 8 Mbeere district assemblies and the Kyuso circuit for apostolic revival, spiritual impartation, powerful crusades, and district-wide fellowship.',
+    highlights: ['All-Assemblies Combined Fellowship', 'Spiritual Revival Crusades', 'Pastoral Empowerment', 'Praise & Thanksgiving Concert'],
+    icon: 'fas fa-church',
+    color: '#E87D1E'
   },
   {
     id: 2,
-    name: 'Gikumene Mission',
-    location: 'Meru',
-    county: 'Meru',
-    dates: '29th December 2025 – 4th January 2026',
-    year: '2025–2026',
-    church: 'Deliverance Church, Gikumene',
-    souls: 130,
-    photos: [g1, g2, g3, g4],
-    description:
-      'The Gikumene mission was a powerful Gospel outreach that combined personal evangelism, street outreach, compassion and integral mission. Through crusades and revival meetings, the Gospel was proclaimed publicly, while youth workshops and mentorship provided a platform to encourage and equip the next generation.',
-    activities: [
-      'One-on-One Evangelism',
-      'Street Evangelism',
-      'Crusades & Revivals',
-      'Youth Workshops',
-      'Mentorship',
-      'Compassion Ministry',
-      'Integral Mission',
-    ],
-    highlights: 'Personal Evangelism, Revival Meetings & Next-Gen Equipping',
+    name: 'Sunday Main Celebration Service',
+    category: 'Sanctuary Services',
+    frequency: 'Every Sunday',
+    timing: '10:30 AM – 1:30 PM',
+    location: 'Ngungo Assembly Sanctuary',
+    leader: 'Pastoral Team, Choir & Praise Team',
+    description: 'Our primary weekly gathering featuring anointed praise and worship, vibrant choir anthems, deep expository preaching of the Word of God, and communal prayer.',
+    highlights: ['Choir & Praise Ministration', 'Biblical Preaching', 'Holy Communion & Baby Dedications', 'Corporate Prayer'],
+    icon: 'fas fa-sun',
+    color: '#10b981'
   },
   {
     id: 3,
-    name: 'Tala Mission',
-    location: 'Machakos',
-    county: 'Machakos',
-    dates: '20th – 26th April 2026',
-    year: '2026',
-    church: 'Liberty Church, Tala',
-    souls: 170,
-    photos: [t1, t2, t3, t4],
-    description:
-      'The Tala mission carried the Gospel into the community through one-on-one and street evangelism, complemented by integral mission and compassion outreach. The team also conducted prayer walks, interceding for the community and preparing the ground spiritually. Crusades, revival meetings, youth workshops and mentorship further strengthened the outreach.',
-    activities: [
-      'One-on-One Evangelism',
-      'Street Evangelism',
-      'Prayer Walks',
-      'Crusades & Revivals',
-      'Youth Workshops',
-      'Mentorship',
-      'Compassion Ministry',
-      'Integral Mission',
-    ],
-    highlights: 'Spiritual Prayer Walks, Mass Crusades & Community Compassion',
+    name: 'Sunday English Service',
+    category: 'Sanctuary Services',
+    frequency: 'Every Sunday',
+    timing: '8:00 AM – 10:00 AM',
+    location: 'Ngungo Assembly Sanctuary',
+    leader: 'Ministerial Team',
+    description: 'An early-morning English worship service designed for professionals, students, and believers desiring an uplifting start to the Lord\'s Day in praise and systematic teaching.',
+    highlights: ['English Preaching & Scripture Exposition', 'Quiet Contemplation & Worship', 'Interactive Discipleship'],
+    icon: 'fas fa-book-bible',
+    color: '#3b82f6'
   },
   {
     id: 4,
-    name: 'Emali Mission',
-    location: 'Makueni & Kajiado',
-    county: 'Makueni & Kajiado',
-    dates: '10th – 16th August 2026',
-    year: '2026',
-    church: 'Methodist Church of Kenya, Emali',
-    souls: 76,
-    photos: [e1, e2, e3, e4],
-    description:
-      'The Emali mission brought together evangelism and practical community transformation. The team engaged people through one-on-one evangelism, street evangelism, compassion ministry and integral mission, while prayer walks helped establish a strong spiritual foundation. Crusades, revival meetings, youth workshops and mentorship created spaces for people to encounter Christ and grow in faith.',
-    activities: [
-      'One-on-One Evangelism',
-      'Street Evangelism',
-      'Prayer Walks',
-      'Crusades & Revivals',
-      'Youth Workshops',
-      'Mentorship',
-      'Compassion Ministry',
-      'Integral Mission',
-    ],
-    highlights: 'Cross-County Outreach, Practical Transformation & Discipleship',
+    name: 'Sunday School Department',
+    category: 'Children & Family',
+    frequency: 'Every Sunday',
+    timing: '8:00 AM – 10:00 AM',
+    location: 'Sunday School Classrooms, Ngungo Sanctuary',
+    leader: 'Sunday School Teachers & Department Leadership',
+    description: 'Graded Bible classes catering to toddlers, children, and young adolescents. Children learn foundational Christian doctrine, memorise Scripture, and build a lasting relationship with Jesus Christ.',
+    highlights: ['Creative Bible Storytelling', 'Scripture Memorisation', 'Children\'s Choir & Drama', 'Loving Teachers'],
+    icon: 'fas fa-child',
+    color: '#f59e0b'
   },
   {
     id: 5,
-    name: 'Ntakira Mission',
-    location: 'Meru',
-    county: 'Meru',
-    dates: '20th – 23rd August 2026',
-    year: '2026',
-    church: 'Methodist Church of Kenya, Ntakira Parish',
-    souls: null,
-    photos: [n1, n2, n3, n4],
-    description:
-      "The Ntakira mission continued the team's commitment to reaching communities with the Gospel. Through one-on-one evangelism, street evangelism, integral mission and compassion, we connected with people at a personal and community level. The mission also featured crusades, revival meetings, youth mentorship and prayer, creating opportunities for people to encounter the transforming power of Jesus Christ.",
-    activities: [
-      'One-on-One Evangelism',
-      'Street Evangelism',
-      'Crusades & Revivals',
-      'Youth Mentorship',
-      'Prayer',
-      'Compassion Ministry',
-      'Integral Mission',
-    ],
-    highlights: 'Parish Revival, Community Connection & Transforming Prayer',
+    name: 'Youth Fellowship Explosion',
+    category: 'Youth & Talents',
+    frequency: 'Every Saturday',
+    timing: '4:00 PM – 6:00 PM',
+    location: 'Ngungo Assembly Main Hall',
+    leader: 'Youth Department Leadership',
+    description: 'An electrifying gathering for teens and young adults featuring contemporary gospel music, instrumental skill development, open discussion on modern life challenges, and spiritual mentorship.',
+    highlights: ['Instrumentalist & Vocal Training', 'Mentorship & Career Advice', 'Sports & District Youth Rallies', 'Evangelistic Outreaches'],
+    icon: 'fas fa-bolt',
+    color: '#ef4444'
   },
+  {
+    id: 6,
+    name: 'Friday Revival & Intercession Fellowship',
+    category: 'Sanctuary Services',
+    frequency: 'Every Friday',
+    timing: '7:00 PM – 9:00 PM',
+    location: 'Ngungo Assembly Sanctuary',
+    leader: 'Intercessory Team & Pastoral Council',
+    description: 'A powerful midweek prayer vigil and revival night dedicated to spiritual warfare, interceding for our community and nation, healing the sick, and seeking God\'s breakthroughs.',
+    highlights: ['Fervent Intercession', 'Deliverance & Healing Prayers', 'Anointing & Testimony Times', 'Personal Prayer Ministry'],
+    icon: 'fas fa-fire',
+    color: '#8b5cf6'
+  },
+  {
+    id: 7,
+    name: 'Mbeere District Pastors & Leadership Summit',
+    category: 'District Gatherings',
+    frequency: 'Bi-Annual',
+    timing: 'Weekend Seminar',
+    location: 'Ngungo Assembly Secretariat',
+    leader: 'Bishop Rev. Clement Simba, District Secretary Rev. John Ngochi',
+    description: 'Strategic leadership alignment for resident reverends, deacons, treasurers, and department coordinators from all 8 Mbeere assemblies and the Kyuso circuit.',
+    highlights: ['Pastoral Accountability', 'Church Governance & Financial Integrity', 'Church Planting Strategies', 'Doctrinal Alignment'],
+    icon: 'fas fa-users-gear',
+    color: '#0284c7'
+  },
+  {
+    id: 8,
+    name: 'Women Department Monthly Fellowship & Outreach',
+    category: 'Women & Men',
+    frequency: 'Monthly & Weekly Prayer',
+    timing: 'Scheduled Weekdays / Saturdays',
+    location: 'Ngungo Assembly & Home Fellowships',
+    leader: 'Women Department Committee',
+    description: 'Connecting Christian women across all walks of life for prayer, marriage enrichment, welfare support, hospital visits, and compassionate aid to the vulnerable.',
+    highlights: ['Mother-to-Mother Mentorship', 'Welfare & Compassion Fund', 'District Women Conferences', 'Hospital Visitation'],
+    icon: 'fas fa-heart',
+    color: '#ec4899'
+  },
+  {
+    id: 9,
+    name: 'Men Department Fellowship & Brotherhood',
+    category: 'Women & Men',
+    frequency: 'Monthly Gathering',
+    timing: 'Saturday Mornings',
+    location: 'Ngungo Assembly Grounds',
+    leader: 'Men Department Committee',
+    description: 'Empowering Christian men, husbands, and fathers to stand firm in faith, mentor younger men, and lead church physical development projects with diligence.',
+    highlights: ['Men\'s Breakfast & Word Session', 'Fatherhood & Integrity Seminars', 'Sanctuary Development Projects'],
+    icon: 'fas fa-shield-alt',
+    color: '#475569'
+  },
+  {
+    id: 10,
+    name: 'Sanctuary Choir & Instrumentalists Rehearsals',
+    category: 'Youth & Talents',
+    frequency: 'Weekly',
+    timing: 'Saturdays 2:00 PM – 4:00 PM',
+    location: 'Sanctuary Choir Gallery',
+    leader: 'Music Director & Band Lead',
+    description: 'Vocal training, harmonization, and band practice for keyboardists, bassists, guitarists, and drummers preparing musical arrangements for Sunday services and district conferences.',
+    highlights: ['Four-Part Choral Harmony', 'Live Band Sound Balance', 'Vocal Coaching', 'New Song Composition'],
+    icon: 'fas fa-music',
+    color: '#d97706'
+  }
 ];
 
-const countyOptions = [
-  { key: 'all', label: 'All Counties', count: 5 },
-  { key: 'Meru', label: 'Meru County', count: 3 },
-  { key: 'Machakos', label: 'Machakos County', count: 1 },
-  { key: 'Makueni & Kajiado', label: 'Makueni & Kajiado', count: 1 },
-];
-
-const activityFilters = [
-  'All Activities',
-  'Crusades & Revivals',
-  'Street Evangelism',
-  'One-on-One Evangelism',
-  'Prayer Walks',
-  'Youth Workshops',
-  'Compassion Ministry',
-  'Integral Mission',
+const categoryOptions = [
+  'All Programs',
+  'Sanctuary Services',
+  'District Gatherings',
+  'Youth & Talents',
+  'Women & Men',
+  'Children & Family'
 ];
 
 const Programs = () => {
-  const [animated, setAnimated] = useState(false);
-  const [selectedCounty, setSelectedCounty] = useState('all');
-  const [selectedActivity, setSelectedActivity] = useState('All Activities');
+  const [selectedCategory, setSelectedCategory] = useState('All Programs');
   const [searchQuery, setSearchQuery] = useState('');
-  const [viewMode, setViewMode] = useState('cards'); // 'cards' | 'timeline'
-  const [lightbox, setLightbox] = useState(null);
 
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setAnimated(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.05 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
-
-  // Filtered Missions Logic
-  const filteredMissions = useMemo(() => {
-    return missions.filter((m) => {
-      // County filter
-      const matchesCounty = selectedCounty === 'all' || m.county === selectedCounty;
-
-      // Activity filter
-      const matchesActivity =
-        selectedActivity === 'All Activities' ||
-        m.activities.some((a) => a.toLowerCase().includes(selectedActivity.toLowerCase()));
-
-      // Search query
+  const filteredPrograms = useMemo(() => {
+    return churchPrograms.filter((p) => {
+      const matchesCategory = selectedCategory === 'All Programs' || p.category === selectedCategory;
       const q = searchQuery.toLowerCase().trim();
-      const matchesSearch =
-        !q ||
-        m.name.toLowerCase().includes(q) ||
-        m.location.toLowerCase().includes(q) ||
-        m.church.toLowerCase().includes(q) ||
-        m.description.toLowerCase().includes(q) ||
-        m.activities.some((act) => act.toLowerCase().includes(q)) ||
-        m.dates.toLowerCase().includes(q);
+      const matchesSearch = 
+        !q || 
+        p.name.toLowerCase().includes(q) || 
+        p.description.toLowerCase().includes(q) || 
+        p.timing.toLowerCase().includes(q) || 
+        p.location.toLowerCase().includes(q);
 
-      return matchesCounty && matchesActivity && matchesSearch;
+      return matchesCategory && matchesSearch;
     });
-  }, [selectedCounty, selectedActivity, searchQuery]);
-
-  const openLightbox = (photos, index = 0, title = '') => {
-    setLightbox({ photos, index, title });
-  };
-
-  const closeLightbox = () => setLightbox(null);
-
-  const prevPhoto = () => {
-    if (!lightbox) return;
-    const prev = (lightbox.index - 1 + lightbox.photos.length) % lightbox.photos.length;
-    setLightbox({ ...lightbox, index: prev });
-  };
-
-  const nextPhoto = () => {
-    if (!lightbox) return;
-    const next = (lightbox.index + 1) % lightbox.photos.length;
-    setLightbox({ ...lightbox, index: next });
-  };
-
-  const resetFilters = () => {
-    setSelectedCounty('all');
-    setSelectedActivity('All Activities');
-    setSearchQuery('');
-  };
+  }, [selectedCategory, searchQuery]);
 
   return (
     <main className="programs-page">
 
       {/* Page Banner */}
-      <section className="page-banner" style={{ backgroundImage: `url(${r1})` }}>
+      <section className="page-banner" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #292524 100%)' }}>
         <div className="banner-overlay"></div>
         <div className="container">
           <div className="banner-content">
-            <span className="banner-tag">2025 — 2026 Outreaches</span>
-            <h1>Mission Outreach</h1>
-            <p>Taking the Gospel to communities across Kenya — one soul and one transformed life at a time.</p>
+            <span className="banner-tag">Weekly Schedule &amp; District Calendar</span>
+            <h1>Church Programs &amp; Gatherings</h1>
+            <p>
+              Pentecostal Assemblies of God - Ngungo Assembly (Mbeere District Headquarters) — Transforming lives through regular worship, Spirit-filled fellowships, and district-wide revivals.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Intro Overview */}
-      <section className="section outreach-intro-section">
+      {/* Official Order of Services Section */}
+      <section style={{ background: '#f8fafc', padding: '48px 0', borderBottom: '1px solid #e2e8f0' }}>
         <div className="container">
-          <div className="section-header">
-            <span className="section-subtitle">Our Outreach Mandate</span>
-            <h2 className="section-title">Lighting Communities With the Gospel</h2>
-            <p className="section-description">
-              Kingdom Enlightenment Missions Team (KEMT) is committed to taking the Gospel of Jesus Christ to
-              communities through evangelism, prayer, compassion, mentorship and integral mission. From 2025 to
-              2026, KEMT conducted several outreach missions across Kenya, witnessing lives transformed and people
-              coming to Christ.
+          <div className="section-header" style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <span className="section-subtitle">Weekly Order of Services</span>
+            <h2 className="section-title">Sanctuary Timetable</h2>
+            <p className="section-description" style={{ maxWidth: '680px', margin: '0 auto' }}>
+              Join us weekly at Ngungo Assembly Sanctuary for life-changing worship, systematic Bible teaching, and fervent prayer.
             </p>
           </div>
 
-          {/* Quick Impact Highlight Ribbon */}
-          <div className="outreach-stats-ribbon">
-            <div className="stat-ribbon-item">
-              <div className="stat-ribbon-icon"><i className="fas fa-heart"></i></div>
-              <div>
-                <span className="stat-ribbon-num">445+</span>
-                <span className="stat-ribbon-label">Souls Received Christ</span>
-              </div>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))',
+            gap: '16px'
+          }}>
+            <div style={{ background: '#ffffff', borderRadius: '14px', padding: '24px 20px', borderTop: '4px solid #f59e0b', boxShadow: '0 4px 16px rgba(0,0,0,0.05)', textAlign: 'center' }}>
+              <div style={{ color: '#b45309', fontWeight: 800, fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Sunday 8:00 AM – 10:00 AM</div>
+              <h3 style={{ fontSize: '1.2rem', color: '#1e293b', margin: '8px 0 6px', fontWeight: 800 }}>Sunday School</h3>
+              <p style={{ fontSize: '0.84rem', color: '#64748b', margin: 0, lineHeight: 1.5 }}>Children &amp; youth classes with solid biblical foundations &amp; memory verses.</p>
             </div>
-            <div className="stat-ribbon-item">
-              <div className="stat-ribbon-icon"><i className="fas fa-map-location-dot"></i></div>
-              <div>
-                <span className="stat-ribbon-num">5</span>
-                <span className="stat-ribbon-label">Missions Conducted</span>
-              </div>
+
+            <div style={{ background: '#ffffff', borderRadius: '14px', padding: '24px 20px', borderTop: '4px solid #3b82f6', boxShadow: '0 4px 16px rgba(0,0,0,0.05)', textAlign: 'center' }}>
+              <div style={{ color: '#1d4ed8', fontWeight: 800, fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Sunday 8:00 AM – 10:00 AM</div>
+              <h3 style={{ fontSize: '1.2rem', color: '#1e293b', margin: '8px 0 6px', fontWeight: 800 }}>English Service</h3>
+              <p style={{ fontSize: '0.84rem', color: '#64748b', margin: 0, lineHeight: 1.5 }}>Early morning worship, Scripture exposition, and spiritual teaching.</p>
             </div>
-            <div className="stat-ribbon-item">
-              <div className="stat-ribbon-icon"><i className="fas fa-church"></i></div>
-              <div>
-                <span className="stat-ribbon-num">4</span>
-                <span className="stat-ribbon-label">Counties Reached</span>
-              </div>
+
+            <div style={{ background: '#ffffff', borderRadius: '14px', padding: '24px 20px', borderTop: '4px solid #10b981', boxShadow: '0 4px 16px rgba(0,0,0,0.05)', textAlign: 'center' }}>
+              <div style={{ color: '#15803d', fontWeight: 800, fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Sunday 10:30 AM – 1:30 PM</div>
+              <h3 style={{ fontSize: '1.2rem', color: '#1e293b', margin: '8px 0 6px', fontWeight: 800 }}>Main Service</h3>
+              <p style={{ fontSize: '0.84rem', color: '#64748b', margin: 0, lineHeight: 1.5 }}>Our main celebration service with Choir, Praise &amp; Worship, and preaching.</p>
             </div>
-            <div className="stat-ribbon-item">
-              <div className="stat-ribbon-icon"><i className="fas fa-hands-praying"></i></div>
-              <div>
-                <span className="stat-ribbon-num">100%</span>
-                <span className="stat-ribbon-label">Gospel-Driven</span>
-              </div>
+
+            <div style={{ background: '#ffffff', borderRadius: '14px', padding: '24px 20px', borderTop: '4px solid #8b5cf6', boxShadow: '0 4px 16px rgba(0,0,0,0.05)', textAlign: 'center' }}>
+              <div style={{ color: '#6d28d9', fontWeight: 800, fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Friday 7:00 PM – 9:00 PM</div>
+              <h3 style={{ fontSize: '1.2rem', color: '#1e293b', margin: '8px 0 6px', fontWeight: 800 }}>Friday Fellowship</h3>
+              <p style={{ fontSize: '0.84rem', color: '#64748b', margin: 0, lineHeight: 1.5 }}>Midweek fervent prayer, intercession, healing, and spiritual renewal.</p>
+            </div>
+
+            <div style={{ background: '#ffffff', borderRadius: '14px', padding: '24px 20px', borderTop: '4px solid #f43f5e', boxShadow: '0 4px 16px rgba(0,0,0,0.05)', textAlign: 'center' }}>
+              <div style={{ color: '#be123c', fontWeight: 800, fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Saturday 4:00 PM – 6:00 PM</div>
+              <h3 style={{ fontSize: '1.2rem', color: '#1e293b', margin: '8px 0 6px', fontWeight: 800 }}>Youth Fellowship</h3>
+              <p style={{ fontSize: '0.84rem', color: '#64748b', margin: 0, lineHeight: 1.5 }}>Youth-led praise, instrumental sessions, discussions &amp; talent mentorship.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Interactive Filter & View Control Bar */}
-      <section className="mission-filter-section">
+      {/* Interactive Programs Directory */}
+      <section className="section" style={{ padding: '60px 0' }}>
         <div className="container">
-          <div className="filter-controls-wrapper">
+          <div className="section-header" style={{ textAlign: 'center', marginBottom: '36px' }}>
+            <span className="section-subtitle">Calendar of Activities</span>
+            <h2 className="section-title">Church &amp; District Programs</h2>
+            <p className="section-description" style={{ maxWidth: '640px', margin: '0 auto' }}>
+              Explore the diverse spiritual and ministerial programs coordinated through Ngungo Assembly across Mbeere District.
+            </p>
+          </div>
 
-            {/* Search Box */}
-            <div className="filter-search-box">
-              <i className="fas fa-search filter-search-icon"></i>
-              <input
-                type="text"
-                placeholder="Search missions by church, county, or keyword..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="filter-search-input"
-              />
-              {searchQuery && (
-                <button className="filter-search-clear" onClick={() => setSearchQuery('')}>
-                  <i className="fas fa-times"></i>
-                </button>
-              )}
-            </div>
-
-            {/* County Pills */}
-            <div className="filter-county-pills">
-              {countyOptions.map((c) => (
+          {/* Search and Category Filter */}
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center', 
+            flexWrap: 'wrap', 
+            gap: '16px', 
+            marginBottom: '32px',
+            background: '#ffffff',
+            padding: '16px 20px',
+            borderRadius: '12px',
+            boxShadow: '0 2px 10px rgba(0,0,0,0.04)',
+            border: '1px solid #e2e8f0'
+          }}>
+            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+              {categoryOptions.map((cat) => (
                 <button
-                  key={c.key}
-                  className={`county-pill ${selectedCounty === c.key ? 'county-pill--active' : ''}`}
-                  onClick={() => setSelectedCounty(c.key)}
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  style={{
+                    padding: '8px 16px',
+                    borderRadius: '20px',
+                    border: selectedCategory === cat ? '1.5px solid #E87D1E' : '1px solid #cbd5e1',
+                    background: selectedCategory === cat ? '#E87D1E' : '#f8fafc',
+                    color: selectedCategory === cat ? '#ffffff' : '#475569',
+                    fontSize: '0.85rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    transition: 'all 0.2s'
+                  }}
                 >
-                  <span>{c.label}</span>
-                  <span className="pill-count">{c.count}</span>
+                  {cat}
                 </button>
               ))}
             </div>
 
-            {/* Activity Select & View Toggle */}
-            <div className="filter-secondary-row">
-              <div className="activity-filter-wrap">
-                <label htmlFor="activity-select"><i className="fas fa-filter"></i> Activity:</label>
-                <select
-                  id="activity-select"
-                  className="activity-select"
-                  value={selectedActivity}
-                  onChange={(e) => setSelectedActivity(e.target.value)}
-                >
-                  {activityFilters.map((act, i) => (
-                    <option key={i} value={act}>{act}</option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="view-mode-toggle">
-                <span className="view-label">View:</span>
-                <button
-                  className={`view-btn ${viewMode === 'cards' ? 'view-btn--active' : ''}`}
-                  onClick={() => setViewMode('cards')}
-                  title="Card View"
-                >
-                  <i className="fas fa-th-large"></i> Cards
-                </button>
-                <button
-                  className={`view-btn ${viewMode === 'timeline' ? 'view-btn--active' : ''}`}
-                  onClick={() => setViewMode('timeline')}
-                  title="Timeline View"
-                >
-                  <i className="fas fa-stream"></i> Timeline
-                </button>
-              </div>
-            </div>
-
-            {/* Results count & reset */}
-            <div className="filter-results-status">
-              <span>Showing <strong>{filteredMissions.length}</strong> of {missions.length} missions</span>
-              {(selectedCounty !== 'all' || selectedActivity !== 'All Activities' || searchQuery) && (
-                <button className="filter-reset-btn" onClick={resetFilters}>
-                  <i className="fas fa-rotate-left"></i> Reset Filters
-                </button>
-              )}
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* No Results State */}
-      {filteredMissions.length === 0 && (
-        <section className="no-results-section section">
-          <div className="container">
-            <div className="no-results-box">
-              <i className="fas fa-magnifying-glass-location"></i>
-              <h3>No missions match your filter</h3>
-              <p>Try searching for a different keyword or reset your filters to see all missions.</p>
-              <button className="btn btn-primary" onClick={resetFilters}>
-                View All Missions
-              </button>
+            <div style={{ position: 'relative', minWidth: '240px' }}>
+              <input
+                type="text"
+                placeholder="Search programs..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '9px 14px 9px 36px',
+                  borderRadius: '20px',
+                  border: '1px solid #cbd5e1',
+                  fontSize: '0.88rem',
+                  outline: 'none',
+                  boxSizing: 'border-box'
+                }}
+              />
+              <Search size={16} color="#94a3b8" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }} />
             </div>
           </div>
-        </section>
-      )}
 
-      {/* Card View Mode */}
-      {viewMode === 'cards' && filteredMissions.length > 0 && (
-        <section className="section missions-list-section" ref={sectionRef}>
-          <div className="container">
-            {filteredMissions.map((mission, index) => (
-              <div
-                key={mission.id}
-                className={`mission-entry ${index % 2 !== 0 ? 'mission-entry--reverse' : ''} ${animated ? 'mission-entry--visible' : ''}`}
-                style={{ transitionDelay: `${index * 0.1}s` }}
+          {/* Programs Grid */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
+            gap: '24px'
+          }}>
+            {filteredPrograms.map((prog) => (
+              <div 
+                key={prog.id}
+                style={{
+                  background: '#ffffff',
+                  borderRadius: '16px',
+                  padding: '28px',
+                  boxShadow: '0 6px 20px rgba(0,0,0,0.04)',
+                  border: '1px solid #e2e8f0',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  transition: 'transform 0.2s, box-shadow 0.2s'
+                }}
               >
-                {/* Photo Panel with Lightbox click */}
-                <div
-                  className="mission-entry__image"
-                  onClick={() => openLightbox(mission.photos, 0, `${mission.name} (${mission.location})`)}
-                  title="Click to view full photo gallery"
-                >
-                  <img src={mission.photos[0]} alt={mission.name} className="mission-cover-img" />
-                  <div className="mission-photo-strip">
-                    <img src={mission.photos[1]} alt="" />
-                    <img src={mission.photos[2]} alt="" />
-                    <img src={mission.photos[3]} alt="" />
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
+                  <div style={{
+                    width: '52px',
+                    height: '52px',
+                    borderRadius: '12px',
+                    background: `${prog.color}15`,
+                    color: prog.color,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '1.4rem'
+                  }}>
+                    <i className={prog.icon}></i>
                   </div>
-                  <div className="mission-entry__number">0{mission.id}</div>
-                  <div className="mission-photo-zoom-hint">
-                    <i className="fas fa-expand-alt"></i> View {mission.photos.length} Photos
+                  <span style={{
+                    fontSize: '0.74rem',
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em',
+                    padding: '4px 10px',
+                    borderRadius: '20px',
+                    background: '#f1f5f9',
+                    color: '#475569'
+                  }}>
+                    {prog.category}
+                  </span>
+                </div>
+
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#1e293b', margin: '0 0 10px', lineHeight: 1.35 }}>
+                  {prog.name}
+                </h3>
+
+                <p style={{ fontSize: '0.88rem', color: '#64748b', lineHeight: 1.6, margin: '0 0 18px', flex: 1 }}>
+                  {prog.description}
+                </p>
+
+                <div style={{ background: '#f8fafc', padding: '12px 14px', borderRadius: '10px', marginBottom: '18px', fontSize: '0.82rem', color: '#334155' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                    <Clock size={15} color={prog.color} />
+                    <strong>{prog.timing}</strong>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <MapPin size={15} color="#64748b" />
+                    <span>{prog.location}</span>
                   </div>
                 </div>
 
-                {/* Content Panel */}
-                <div className="mission-entry__body">
-                  <div className="mission-entry__meta">
-                    <span className="mission-entry__location">
-                      <i className="fas fa-map-marker-alt"></i> {mission.location}
-                    </span>
-                    <span className="mission-entry__dates">
-                      <i className="fas fa-calendar-alt"></i> {mission.dates}
-                    </span>
-                  </div>
-
-                  <h2 className="mission-entry__title">{mission.name}</h2>
-
-                  <p className="mission-entry__church">
-                    <i className="fas fa-church"></i> {mission.church}
-                  </p>
-
-                  <p className="mission-entry__desc">{mission.description}</p>
-
-                  <div className="mission-entry__activities">
-                    <h4>Activities &amp; Focus Areas</h4>
-                    <div className="activity-tags">
-                      {mission.activities.map((act, i) => (
-                        <span
-                          className={`activity-tag ${selectedActivity === act ? 'activity-tag--highlight' : ''}`}
-                          key={i}
-                        >
-                          {act}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="mission-entry__bottom">
-                    {mission.souls ? (
-                      <div className="souls-badge">
-                        <i className="fas fa-heart"></i>
-                        <strong>{mission.souls}</strong>
-                        <span>souls received Christ</span>
-                      </div>
-                    ) : (
-                      <div className="souls-badge souls-badge--pending">
-                        <i className="fas fa-clock"></i>
-                        <span>Impact statistics to be updated</span>
-                      </div>
-                    )}
-
-                    <button
-                      className="mission-gallery-btn"
-                      onClick={() => openLightbox(mission.photos, 0, `${mission.name} Gallery`)}
-                    >
-                      <i className="fas fa-images"></i> Photos
-                    </button>
-                  </div>
+                <div style={{ borderTop: '1px solid #f1f5f9', paddingTop: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600 }}>
+                    {prog.frequency}
+                  </span>
+                  <Link 
+                    to="/contact"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      color: '#E87D1E',
+                      fontWeight: 700,
+                      fontSize: '0.85rem',
+                      textDecoration: 'none'
+                    }}
+                  >
+                    Inquire / Attend <ChevronRight size={15} />
+                  </Link>
                 </div>
               </div>
             ))}
           </div>
-        </section>
-      )}
 
-      {/* Timeline Journey View Mode */}
-      {viewMode === 'timeline' && filteredMissions.length > 0 && (
-        <section className="section mission-timeline-section">
-          <div className="container">
-            <div className="timeline-container">
-              {filteredMissions.map((mission, index) => (
-                <div
-                  key={mission.id}
-                  className={`timeline-item ${index % 2 === 0 ? 'timeline-item--left' : 'timeline-item--right'}`}
-                >
-                  <div className="timeline-marker">
-                    <span>0{mission.id}</span>
-                  </div>
-                  <div className="timeline-content-card">
-                    <div className="timeline-dates">
-                      <i className="fas fa-calendar-check"></i> {mission.dates}
-                    </div>
-                    <h3 className="timeline-title">{mission.name}</h3>
-                    <div className="timeline-location">
-                      <i className="fas fa-map-pin"></i> {mission.location} &bull; <i className="fas fa-church"></i> {mission.church}
-                    </div>
-
-                    <div
-                      className="timeline-photo-preview"
-                      onClick={() => openLightbox(mission.photos, 0, `${mission.name} (${mission.location})`)}
-                    >
-                      <img src={mission.photos[0]} alt={mission.name} />
-                      <div className="timeline-photo-overlay">
-                        <i className="fas fa-expand"></i> View Photos
-                      </div>
-                    </div>
-
-                    <p className="timeline-desc">{mission.description}</p>
-
-                    <div className="timeline-tags">
-                      {mission.activities.slice(0, 4).map((act, i) => (
-                        <span key={i} className="timeline-tag">{act}</span>
-                      ))}
-                      {mission.activities.length > 4 && (
-                        <span className="timeline-tag timeline-tag--more">+{mission.activities.length - 4} more</span>
-                      )}
-                    </div>
-
-                    <div className="timeline-footer">
-                      {mission.souls ? (
-                        <span className="timeline-souls-badge">
-                          <i className="fas fa-heart"></i> <strong>{mission.souls}</strong> Souls Saved
-                        </span>
-                      ) : (
-                        <span className="timeline-souls-badge timeline-souls-badge--pending">
-                          <i className="fas fa-clock"></i> Follow-up in Progress
-                        </span>
-                      )}
-                      <button
-                        className="timeline-view-photos-btn"
-                        onClick={() => openLightbox(mission.photos, 0, `${mission.name} (${mission.location})`)}
-                      >
-                        <i className="fas fa-images"></i> Full Gallery
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
+          {filteredPrograms.length === 0 && (
+            <div style={{ textAlign: 'center', padding: '48px 0', color: '#94a3b8' }}>
+              <p style={{ fontSize: '1.1rem', margin: '0 0 12px' }}>No programs found matching your search.</p>
+              <button 
+                onClick={() => { setSelectedCategory('All Programs'); setSearchQuery(''); }}
+                style={{ padding: '8px 18px', borderRadius: '8px', background: '#E87D1E', color: '#fff', border: 'none', fontWeight: 700, cursor: 'pointer' }}
+              >
+                Reset Filter
+              </button>
             </div>
-          </div>
-        </section>
-      )}
-
-      {/* Global Lightbox Modal */}
-      {lightbox && (
-        <div className="lightbox" onClick={closeLightbox}>
-          <button className="lightbox__close" onClick={closeLightbox} aria-label="Close lightbox">
-            <i className="fas fa-times"></i>
-          </button>
-          <button
-            className="lightbox__prev"
-            onClick={(e) => { e.stopPropagation(); prevPhoto(); }}
-            aria-label="Previous photo"
-          >
-            <i className="fas fa-chevron-left"></i>
-          </button>
-          <div className="lightbox__img-wrap" onClick={(e) => e.stopPropagation()}>
-            <img src={lightbox.photos[lightbox.index]} alt={lightbox.title} />
-            {lightbox.title && (
-              <div className="lightbox__title">{lightbox.title}</div>
-            )}
-          </div>
-          <button
-            className="lightbox__next"
-            onClick={(e) => { e.stopPropagation(); nextPhoto(); }}
-            aria-label="Next photo"
-          >
-            <i className="fas fa-chevron-right"></i>
-          </button>
-          <div className="lightbox__counter">
-            {lightbox.index + 1} / {lightbox.photos.length}
-          </div>
-        </div>
-      )}
-
-      {/* Impact Total Section */}
-      <section className="impact-total-section" style={{ backgroundImage: `url(${t1})` }}>
-        <div className="impact-total-overlay"></div>
-        <div className="container">
-          <div className="impact-total-content">
-            <span className="banner-tag" style={{ background: 'rgba(255,255,255,0.15)', color: '#fff' }}>
-              Transforming Lives
-            </span>
-            <h2>Our Impact So Far</h2>
-            <p>
-              Through these missions, <strong>445 people</strong> have so far made decisions to receive Christ,
-              with many more reached through evangelism, prayer, compassion, mentorship and community outreach.
-            </p>
-
-            <div className="impact-total-stats">
-              <div className="impact-total-stat">
-                <span className="impact-total-num">445+</span>
-                <span className="impact-total-label">Souls Received Christ</span>
-              </div>
-              <div className="impact-total-stat">
-                <span className="impact-total-num">5</span>
-                <span className="impact-total-label">Mission Trips</span>
-              </div>
-              <div className="impact-total-stat">
-                <span className="impact-total-num">4</span>
-                <span className="impact-total-label">Counties Reached</span>
-              </div>
-              <div className="impact-total-stat">
-                <span className="impact-total-num">2025–26</span>
-                <span className="impact-total-label">Active Period</span>
-              </div>
-            </div>
-
-            {/* Geographic Breakdown Cards */}
-            <div className="county-impact-breakdown">
-              <div className="county-breakdown-card">
-                <i className="fas fa-location-dot"></i>
-                <h4>Meru County</h4>
-                <span>275+ Souls</span>
-                <small>Rwanyange, Gikumene &amp; Ntakira</small>
-              </div>
-              <div className="county-breakdown-card">
-                <i className="fas fa-location-dot"></i>
-                <h4>Machakos County</h4>
-                <span>170 Souls</span>
-                <small>Tala Mission</small>
-              </div>
-              <div className="county-breakdown-card">
-                <i className="fas fa-location-dot"></i>
-                <h4>Makueni &amp; Kajiado</h4>
-                <span>76 Souls</span>
-                <small>Emali Mission</small>
-              </div>
-            </div>
-
-            <p className="impact-tagline">
-              Kingdom Enlightenment Missions Team — Lighting the world with the Gospel of Christ.
-            </p>
-          </div>
+          )}
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="cta-section">
-        <div className="container">
-          <div className="cta-content">
-            <h2>Partner With Us In Reaching The Lost</h2>
-            <p>Your prayers and generous giving enable us to continue spreading the Gospel and transforming lives across Kenya.</p>
-            <div className="cta-buttons">
-              <Link to="/donate" className="btn btn-primary">Give Now</Link>
-              <Link to="/contact" className="btn btn-secondary">Get Involved</Link>
-            </div>
+      {/* District Assemblies Link Banner */}
+      <section style={{ background: '#0f172a', padding: '60px 0', color: '#ffffff' }}>
+        <div className="container" style={{ textAlign: 'center' }}>
+          <span style={{ color: '#E87D1E', textTransform: 'uppercase', letterSpacing: '1.5px', fontWeight: 800, fontSize: '0.82rem' }}>
+            Episcopal Network
+          </span>
+          <h2 style={{ fontSize: '2rem', fontWeight: 800, margin: '10px 0 16px', color: '#ffffff' }}>
+            Explore All 8 Mbeere District &amp; Kyuso Circuit Assemblies
+          </h2>
+          <p style={{ maxWidth: '640px', margin: '0 auto 28px', color: '#cbd5e1', fontSize: '0.95rem', lineHeight: 1.6 }}>
+            Connect with your local assembly, reverend pastor, and fellowship timetable across the district.
+          </p>
+          <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link to="/assemblies" className="btn btn-primary">
+              View Assemblies Directory
+            </Link>
+            <Link to="/leadership" className="btn btn-secondary">
+              District Leadership Council
+            </Link>
           </div>
         </div>
       </section>

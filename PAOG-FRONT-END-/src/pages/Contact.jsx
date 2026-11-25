@@ -1,75 +1,101 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { 
-  Mail, 
-  Phone, 
-  Send, 
-  CheckCircle2, 
-  AlertCircle, 
-  RefreshCw, 
-  Heart, 
-  BookOpen, 
-  Tv, 
-  Music, 
-  Compass, 
-  GraduationCap 
+import {
+  Mail,
+  Phone,
+  Send,
+  CheckCircle2,
+  AlertCircle,
+  RefreshCw,
+  Heart,
+  BookOpen,
+  Tv,
+  Music,
+  Compass,
+  GraduationCap
 } from 'lucide-react';
-import bannerPhoto from '../assets/Emali mission4.jpg';
 
 const deptConfig = {
-  prayer: {
-    tag: 'Prayer Intercession',
-    title: 'Submit a Prayer Request',
-    subtitle: 'Our dedicated prayer team intercedes every Thursday. Share your prayer burdens with us in confidence.',
-    category: 'Prayer Request',
-    subjectPlaceholder: 'e.g. Healing, Family Breakthrough, Guidance',
-    messagePlaceholder: 'Detail your prayer points or thanksgiving testimony...',
+  women: {
+    tag: 'Women Department',
+    title: 'Connect with Women Department',
+    subtitle: 'Join the mothers and sisters of PAG Ngungo Assembly for prayer, family fellowship, and community ministry.',
+    category: 'Women Department',
+    subjectPlaceholder: 'e.g. Women Department Membership / Outreach',
+    messagePlaceholder: 'Share your background or how you would love to get involved with the Women Department...',
     icon: Heart
   },
-  discipleship: {
-    tag: 'Spiritual Growth',
-    title: 'Join a Bible Study Group',
-    subtitle: 'Grow deeper in the Word of God through our discipleship and Bible study fellowships.',
-    category: 'Bible Study',
-    subjectPlaceholder: 'e.g. Request to join weekly Bible study group',
-    messagePlaceholder: 'Tell us a bit about yourself and any specific Bible study topics you are eager to explore...',
+  men: {
+    tag: 'Men Department',
+    title: 'Join Men Fellowship',
+    subtitle: 'Connecting Christian men, husbands, and fathers to build spiritual strength, brotherhood, and church development.',
+    category: 'Men Department',
+    subjectPlaceholder: 'e.g. Men Fellowship Enrollment / Projects',
+    messagePlaceholder: 'Tell us a bit about yourself and your desire to fellowship with Christian brothers...',
     icon: BookOpen
   },
-  digital: {
-    tag: 'Media & Technology',
-    title: 'Volunteer with Media & Digital Team',
-    subtitle: 'Join the tech and media ministry amplifying the Gospel through digital platforms and creative production.',
-    category: 'Media & Tech',
-    subjectPlaceholder: 'e.g. Volunteer for Video Editing / Social Media / Sound',
-    messagePlaceholder: 'Share your background, tools you use, or your passion for digital ministry...',
-    icon: Tv
+  youth: {
+    tag: 'Youth Department',
+    title: 'Connect with Youth Fellowship',
+    subtitle: 'Every Saturday 4:00 PM – 6:00 PM. Worship, talent discovery, life skills, and spiritual mentorship for young people.',
+    category: 'Youth Department',
+    subjectPlaceholder: 'e.g. Saturday Youth Fellowship / Talent Ministry',
+    messagePlaceholder: 'Tell us your age, interests (music, preaching, media, sports), or questions...',
+    icon: Compass
+  },
+  sundayschool: {
+    tag: 'Sunday School',
+    title: 'Sunday School Department',
+    subtitle: 'Sundays 8:00 AM – 10:00 AM. Inquire about enrolling your children or volunteering as a Sunday School teacher.',
+    category: 'Sunday School Department',
+    subjectPlaceholder: 'e.g. Child Enrollment / Teacher Volunteer',
+    messagePlaceholder: 'Please specify your child\'s age or your teaching/ministry experience...',
+    icon: GraduationCap
   },
   worship: {
     tag: 'Praise & Worship',
-    title: 'Join the Praise & Worship Team',
-    subtitle: 'Serve the Lord through anointed music, vocal ministry, and instruments.',
-    category: 'Praise & Worship',
-    subjectPlaceholder: 'e.g. Vocalist / Keyboardist / Instrumentalist Application',
-    messagePlaceholder: 'Share your musical experience, vocal part or instrument, and spiritual journey...',
+    title: 'Join Praise & Worship Team',
+    subtitle: 'Serve the Lord through anointed vocals and leading the church family into worship in Spirit and Truth.',
+    category: 'Praise and Worship',
+    subjectPlaceholder: 'e.g. Vocalist Application (Soprano, Alto, Tenor, Bass)',
+    messagePlaceholder: 'Share your singing experience, vocal range, and spiritual journey in worship...',
     icon: Music
   },
-  outreach: {
-    tag: 'Evangelism & Missions',
-    title: 'Join Mission Outreach Team',
-    subtitle: 'Step into the harvest field with us in upcoming crusades, door-to-door evangelism, and revival missions.',
-    category: 'Outreach',
-    subjectPlaceholder: 'e.g. Volunteer for upcoming rural mission outreach',
-    messagePlaceholder: 'Tell us about your mission experience or willingness to participate...',
-    icon: Compass
+  instrumentalists: {
+    tag: 'Instrumentalists Band',
+    title: 'Join Instrumentalist Ministry',
+    subtitle: 'Serve God on keyboards, drums, acoustic or electric guitars, bass, and audio sound engineering.',
+    category: 'Instrumentalist',
+    subjectPlaceholder: 'e.g. Keyboardist / Drummer / Guitarist / Sound Tech',
+    messagePlaceholder: 'Specify the instruments you play, experience level, and availability for rehearsals...',
+    icon: Tv
   },
-  highschool: {
-    tag: 'School Ministry',
-    title: 'Invite KEMT to Your School',
-    subtitle: 'Partner with KEMT for Weekend Challenges, academic motivation, and spiritual empowerment in secondary schools.',
-    category: 'High School',
-    subjectPlaceholder: 'e.g. Invitation for Weekend Challenge / Student Mentorship',
-    messagePlaceholder: 'Please specify the school name, proposed dates, and topics you would like covered...',
-    icon: GraduationCap
+  choir: {
+    tag: 'Sanctuary Choir',
+    title: 'Join Sanctuary Choir',
+    subtitle: 'Lift up the name of Jesus through choral harmonies, anthems, and special ministry presentations.',
+    category: 'Choir',
+    subjectPlaceholder: 'e.g. Choir Member Application',
+    messagePlaceholder: 'Tell us your vocal part and your heart for choral praise ministry...',
+    icon: Music
+  },
+  ushering: {
+    tag: 'Ushering & Protocol',
+    title: 'Volunteer as an Usher',
+    subtitle: 'Serve on the front line with hospitality, guest reception, and maintaining order and reverence in sanctuary services.',
+    category: 'Ushering',
+    subjectPlaceholder: 'e.g. Ushering & Protocol Team Application',
+    messagePlaceholder: 'Tell us about your heart to serve God\'s people with warmth and dignity...',
+    icon: Heart
+  },
+  prayer: {
+    tag: 'Prayer Intercession',
+    title: 'Submit a Prayer Request',
+    subtitle: 'Our pastoral team and intercessors pray for every burden. Share your prayer request with us in confidence.',
+    category: 'Prayer Request',
+    subjectPlaceholder: 'e.g. Healing, Family Breakthrough, Guidance, Thanksgiving',
+    messagePlaceholder: 'Detail your prayer request or praise report so we can stand in faith with you...',
+    icon: Heart
   }
 };
 
@@ -155,7 +181,7 @@ const Contact = () => {
   return (
     <main className="contact-page">
       {/* Banner */}
-      <section className="page-banner" style={{ backgroundImage: `url(${bannerPhoto})` }}>
+      <section className="page-banner" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #292524 100%)' }}>
         <div className="banner-overlay"></div>
         <div className="container">
           <div className="banner-content">
@@ -176,8 +202,8 @@ const Contact = () => {
                 {currentDept ? currentDept.title : 'Get in Touch'}
               </h2>
               <p className="lead">
-                {currentDept 
-                  ? `Your submission will be immediately routed to the ${currentDept.category} coordinator and the KEMT ministry administration.`
+                {currentDept
+                  ? `Your submission will be immediately routed to the ${currentDept.category} coordinator and the PAG Ngungo Assembly administration.`
                   : 'Have a question, want to get involved, or need to reach our team? We are happy to connect with you.'}
               </p>
 
@@ -188,7 +214,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4>Phone &amp; WhatsApp</h4>
-                    <a href="tel:+254714476295">+254 714 476 295</a>
+                    <a href="tel:+254720140213">+254 720 140 213</a>
                   </div>
                 </div>
                 <div className="contact-detail-item">
@@ -197,7 +223,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4>Ministry Email</h4>
-                    <a href="mailto:info@kingdomenlightenment.org">info@kingdomenlightenment.org</a>
+                    <a href="mailto:info@pagngungo.co.ke">info@pagngungo.co.ke</a>
                   </div>
                 </div>
               </div>
@@ -205,13 +231,17 @@ const Contact = () => {
               {/* Department Shortcut Chips if on General Contact */}
               {!currentDept && (
                 <div style={{ marginTop: '28px', padding: '18px', background: '#fff9f0', borderRadius: '12px', border: '1px solid #fed7aa' }}>
-                  <h4 style={{ margin: '0 0 10px', color: '#1e293b', fontSize: '0.95rem', fontWeight: 700 }}>Looking for a specific department?</h4>
+                  <h4 style={{ margin: '0 0 10px', color: '#1e293b', fontSize: '0.95rem', fontWeight: 700 }}>Looking for a specific department or ministry?</h4>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                    <Link to="/contact?dept=women" style={{ fontSize: '0.8rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>👩 Women Dept</Link>
+                    <Link to="/contact?dept=men" style={{ fontSize: '0.8rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>👨 Men Dept</Link>
+                    <Link to="/contact?dept=youth" style={{ fontSize: '0.8rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>⚡ Youth Dept</Link>
+                    <Link to="/contact?dept=sundayschool" style={{ fontSize: '0.8rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>🧒 Sunday School</Link>
+                    <Link to="/contact?dept=worship" style={{ fontSize: '0.8rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>🎵 Praise &amp; Worship</Link>
+                    <Link to="/contact?dept=instrumentalists" style={{ fontSize: '0.8rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>🎸 Instrumentalists</Link>
+                    <Link to="/contact?dept=choir" style={{ fontSize: '0.8rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>👥 Choir</Link>
+                    <Link to="/contact?dept=ushering" style={{ fontSize: '0.8rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>🚪 Ushering</Link>
                     <Link to="/contact?dept=prayer" style={{ fontSize: '0.8rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>🙏 Prayer Request</Link>
-                    <Link to="/contact?dept=discipleship" style={{ fontSize: '0.8rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>📖 Bible Study</Link>
-                    <Link to="/contact?dept=digital" style={{ fontSize: '0.8rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>💻 Tech &amp; Media</Link>
-                    <Link to="/contact?dept=worship" style={{ fontSize: '0.8rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>🎵 Worship Team</Link>
-                    <Link to="/contact?dept=outreach" style={{ fontSize: '0.8rem', padding: '4px 10px', background: 'white', borderRadius: '16px', border: '1px solid #fed7aa', color: '#E87D1E', fontWeight: 600 }}>🔥 Mission Outreach</Link>
                   </div>
                 </div>
               )}
@@ -289,7 +319,7 @@ const Contact = () => {
                     </h4>
                     <p style={{ color: '#4b5563', fontSize: '0.95rem', margin: '0 0 20px' }}>
                       Thank you for reaching out. We have sent your details to{' '}
-                      <strong>info@kingdomenlightenment.org</strong> and recorded them in the ministry dashboard.
+                      <strong>info@pagngungo.co.ke</strong> and recorded them in the ministry dashboard.
                     </p>
                     <button
                       onClick={() => setStatus(null)}
@@ -353,9 +383,9 @@ const Contact = () => {
                         </div>
                       )}
 
-                      {deptParam === 'digital' && (
+                      {deptParam === 'instrumentalists' && (
                         <div className="form-group">
-                          <label>Primary Skill / Interest *</label>
+                          <label>Primary Instrument / Audio Skill *</label>
                           <select
                             name="skills"
                             value={form.skills}
@@ -369,55 +399,78 @@ const Contact = () => {
                               backgroundColor: 'white'
                             }}
                           >
-                            <option value="">Select skill area...</option>
-                            <option value="Video Editing & Livestream">Video Editing &amp; Livestream</option>
-                            <option value="Photography & Graphics">Photography &amp; Graphics</option>
+                            <option value="">Select instrument or technical role...</option>
+                            <option value="Keyboard / Piano">Keyboard / Piano</option>
+                            <option value="Lead Guitar">Lead Guitar</option>
+                            <option value="Bass Guitar">Bass Guitar</option>
+                            <option value="Drums & Percussion">Drums &amp; Percussion</option>
+                            <option value="Acoustic Guitar">Acoustic Guitar</option>
                             <option value="Audio & Sound Engineering">Audio &amp; Sound Engineering</option>
-                            <option value="Social Media & Content">Social Media &amp; Content</option>
-                            <option value="IT, Web & Infrastructure">IT, Web &amp; Infrastructure</option>
                           </select>
                         </div>
                       )}
 
                       {deptParam === 'worship' && (
                         <div className="form-group">
-                          <label>Vocal Part / Instrument *</label>
+                          <label>Vocal Part / Worship Ministry Experience *</label>
                           <input
                             type="text"
                             name="skills"
                             value={form.skills}
                             onChange={handle}
-                            placeholder="e.g. Soprano, Alto, Keyboard, Guitar, Drums"
+                            placeholder="e.g. Soprano, Alto, Tenor, Song Leader"
                             required
                           />
                         </div>
                       )}
 
-                      {deptParam === 'highschool' && (
+                      {deptParam === 'choir' && (
                         <div className="form-group">
-                          <label>School / Institution Name *</label>
-                          <input
-                            type="text"
-                            name="institution"
-                            value={form.institution}
+                          <label>Choir Vocal Part *</label>
+                          <select
+                            name="skills"
+                            value={form.skills}
                             onChange={handle}
-                            placeholder="e.g. St. Kitheo Senior School"
                             required
-                          />
+                            style={{
+                              width: '100%',
+                              padding: '12px 14px',
+                              borderRadius: '8px',
+                              border: '1.5px solid #cbd5e1',
+                              backgroundColor: 'white'
+                            }}
+                          >
+                            <option value="">Select vocal section...</option>
+                            <option value="Soprano">Soprano</option>
+                            <option value="Alto">Alto</option>
+                            <option value="Tenor">Tenor</option>
+                            <option value="Bass">Bass</option>
+                          </select>
                         </div>
                       )}
 
-                      {deptParam === 'outreach' && (
+                      {deptParam === 'ushering' && (
                         <div className="form-group">
-                          <label>Home County / Residence *</label>
-                          <input
-                            type="text"
-                            name="residence"
-                            value={form.residence}
+                          <label>Service Availability *</label>
+                          <select
+                            name="skills"
+                            value={form.skills}
                             onChange={handle}
-                            placeholder="e.g. Meru, Nairobi, Makueni"
                             required
-                          />
+                            style={{
+                              width: '100%',
+                              padding: '12px 14px',
+                              borderRadius: '8px',
+                              border: '1.5px solid #cbd5e1',
+                              backgroundColor: 'white'
+                            }}
+                          >
+                            <option value="">Select service...</option>
+                            <option value="English Service (8:00 AM - 10:00 AM)">English Service (8:00 AM - 10:00 AM)</option>
+                            <option value="Main Service (10:30 AM - 1:30 PM)">Main Service (10:30 AM - 1:30 PM)</option>
+                            <option value="Both Sunday Services">Both Sunday Services</option>
+                            <option value="Special Convocations & District Rallies">Special Convocations &amp; District Rallies</option>
+                          </select>
                         </div>
                       )}
 
@@ -438,11 +491,14 @@ const Contact = () => {
                           >
                             <option value="General Inquiry">General Inquiry</option>
                             <option value="Prayer Request">Prayer Request</option>
-                            <option value="Bible Study">Bible Study Discipleship</option>
-                            <option value="Media & Tech">Media &amp; Tech Volunteer</option>
-                            <option value="Praise & Worship">Praise &amp; Worship</option>
-                            <option value="Outreach">Mission Outreach</option>
-                            <option value="High School">High School Ministry</option>
+                            <option value="Women Department">Women Department</option>
+                            <option value="Men Department">Men Department</option>
+                            <option value="Youth Department">Youth Department</option>
+                            <option value="Sunday School Department">Sunday School Department</option>
+                            <option value="Praise and Worship">Praise and Worship Ministry</option>
+                            <option value="Instrumentalist">Instrumentalist Ministry</option>
+                            <option value="Choir">Choir Ministry</option>
+                            <option value="Ushering">Ushering Ministry</option>
                           </select>
                         </div>
                       )}
@@ -456,13 +512,16 @@ const Contact = () => {
                         value={form.subject}
                         onChange={handle}
                         placeholder={
-                          deptParam === 'prayer'       ? 'e.g. Healing, Family Breakthrough, Guidance' :
-                          deptParam === 'discipleship' ? 'e.g. Request to join weekly Bible study group' :
-                          deptParam === 'digital'      ? 'e.g. Volunteer for Video Editing / Social Media / Sound' :
-                          deptParam === 'worship'      ? 'e.g. Vocalist / Keyboardist / Instrumentalist Application' :
-                          deptParam === 'outreach'     ? 'e.g. Volunteer for upcoming rural mission outreach' :
-                          deptParam === 'highschool'   ? 'e.g. Invitation for Weekend Challenge / Student Mentorship' :
-                          'How can we help?'
+                          deptParam === 'prayer'           ? 'e.g. Healing, Family Breakthrough, Guidance' :
+                          deptParam === 'women'            ? 'e.g. Women Fellowship / Welfare Outreach' :
+                          deptParam === 'men'              ? 'e.g. Men Brotherhood / Sanctuary Projects' :
+                          deptParam === 'youth'            ? 'e.g. Saturday Youth Fellowship (4-6 PM)' :
+                          deptParam === 'sundayschool'     ? 'e.g. Child Enrollment / Teacher Volunteer' :
+                          deptParam === 'worship'          ? 'e.g. Vocalist Application (Soprano, Alto, Tenor, Bass)' :
+                          deptParam === 'instrumentalists' ? 'e.g. Keyboardist / Guitarist / Drummer / Sound Tech' :
+                          deptParam === 'choir'            ? 'e.g. Choir Application / Choral Part' :
+                          deptParam === 'ushering'         ? 'e.g. Sanctuary Ushering & Protocol Team' :
+                          'How can we help you at PAG Ngungo?'
                         }
                         required
                       />
@@ -551,26 +610,46 @@ const Contact = () => {
             <div className="contact-info-col">
               <h2 className="section-title">Get in Touch</h2>
               <p className="lead">
-                Have a question, want to get involved, or need to reach our team? We are happy to connect with you.
+                Have a question, need pastoral guidance, prayer, or want to get involved in our church departments and ministries? Connect with our ministerial team.
               </p>
 
               <div className="contact-details">
                 <div className="contact-detail-item">
                   <div className="contact-detail-icon">
-                    <i className="fas fa-phone"></i>
+                    <i className="fas fa-church"></i>
                   </div>
                   <div>
-                    <h4>Phone</h4>
-                    <a href="tel:+254714476295">+254 714 476 295</a>
+                    <h4>Sanctuary Location</h4>
+                    <p style={{ margin: 0, color: '#475569', fontSize: '0.92rem' }}>
+                      Pentecostal Assemblies of God - Ngungo Assembly<br />
+                      Mbeere District Headquarters, Embu County, Kenya
+                    </p>
                   </div>
                 </div>
+
+                <div className="contact-detail-item">
+                  <div className="contact-detail-icon">
+                    <i className="fas fa-clock"></i>
+                  </div>
+                  <div>
+                    <h4>Order of Services</h4>
+                    <p style={{ margin: 0, color: '#475569', fontSize: '0.86rem', lineHeight: 1.5 }}>
+                      <strong>Sunday School:</strong> 8:00 AM – 10:00 AM<br />
+                      <strong>English Service:</strong> 8:00 AM – 10:00 AM<br />
+                      <strong>Main Service:</strong> 10:30 AM – 1:30 PM<br />
+                      <strong>Friday Fellowship:</strong> 7:00 PM – 9:00 PM<br />
+                      <strong>Youth Fellowship:</strong> Saturday 4:00 PM – 6:00 PM
+                    </p>
+                  </div>
+                </div>
+
                 <div className="contact-detail-item">
                   <div className="contact-detail-icon">
                     <i className="fas fa-envelope"></i>
                   </div>
                   <div>
                     <h4>Email</h4>
-                    <a href="mailto:info@kingdomenlightenment.org">info@kingdomenlightenment.org</a>
+                    <a href="mailto:info@pagngungo.org">info@pagngungo.org</a>
                   </div>
                 </div>
               </div>

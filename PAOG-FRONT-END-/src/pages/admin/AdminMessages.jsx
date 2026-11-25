@@ -689,7 +689,7 @@ const AdminMessages = () => {
                       )}
                     </div>
                     <p style={{ margin: '0 0 10px', fontSize: '0.8rem', color: '#64748b' }}>
-                      Add this volunteer to the official KEMT Media &amp; Digital Infrastructure roster.
+                      Add this volunteer to the official PAG Ngungo Media &amp; Digital Team roster.
                     </p>
                     <button
                       onClick={handleAddToTeam}
@@ -721,7 +721,7 @@ const AdminMessages = () => {
                   marginTop: '4px'
                 }}>
                   <a
-                    href={`mailto:${selectedMessage.email}?subject=${encodeURIComponent('Re: ' + (selectedMessage.subject || 'Your inquiry to KEMT'))}`}
+                    href={`mailto:${selectedMessage.email}?subject=${encodeURIComponent('Re: ' + (selectedMessage.subject || 'Your inquiry to PAG Ngungo Assembly'))}`}
                     style={{
                       flex: 1, backgroundColor: '#E87D1E', color: 'white',
                       textDecoration: 'none', padding: '9px 12px', borderRadius: '7px',
@@ -737,7 +737,7 @@ const AdminMessages = () => {
                   {selectedMessage.phone && (() => {
                     const cleanPhone = selectedMessage.phone.replace(/[^0-9]/g, '');
                     const formattedPhone = cleanPhone.startsWith('0') ? '254' + cleanPhone.slice(1) : cleanPhone;
-                    const waUrl = `https://wa.me/${formattedPhone}?text=${encodeURIComponent('Hello ' + selectedMessage.name + ', greetings from KEMT!')}`;
+                    const waUrl = `https://wa.me/${formattedPhone}?text=${encodeURIComponent('Hello ' + selectedMessage.name + ', greetings from PAG Ngungo Assembly!')}`;
                     return (
                       <a
                         href={waUrl}

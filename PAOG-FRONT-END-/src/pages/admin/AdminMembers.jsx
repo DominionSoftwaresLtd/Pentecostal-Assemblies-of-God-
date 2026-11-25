@@ -22,14 +22,15 @@ import {
 
 const DEPARTMENTS = [
   'All Departments',
+  'Women Department',
+  'Men Department',
+  'Youth Department',
+  'Sunday School Department',
   'Praise and Worship',
-  'Prayer Department',
-  'Welfare/Compassion',
-  'Outreach & Missions',
-  'Discipleship & Bible Study',
-  'High School Ministry',
-  'Digital Infrastructure',
-  'General Ministry Supporter'
+  'Instrumentalist',
+  'Choir',
+  'Ushering',
+  'General Congregation'
 ];
 
 const AdminMembers = () => {
@@ -671,7 +672,7 @@ const AdminMembers = () => {
                   Onboard New Member
                 </h3>
                 <p style={{ margin: '2px 0 0', color: '#64748b', fontSize: '0.82rem' }}>
-                  Register a new active member into the KEMT database.
+                  Register a new active member into the PAG Ngungo database.
                 </p>
               </div>
               <button
@@ -766,7 +767,7 @@ const AdminMembers = () => {
                   type="password"
                   value={onboardForm.password}
                   onChange={(e) => setOnboardForm({ ...onboardForm, password: e.target.value })}
-                  placeholder="Defaults to: KEMTmember2026"
+                  placeholder="Defaults to: PAGmember2026"
                   style={{ width: '100%', padding: '9px 12px', borderRadius: '8px', border: '1.5px solid #cbd5e1', outline: 'none', boxSizing: 'border-box' }}
                 />
               </div>

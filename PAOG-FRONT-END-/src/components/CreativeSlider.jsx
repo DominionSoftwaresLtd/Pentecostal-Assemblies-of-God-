@@ -1,316 +1,253 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './CreativeSlider.css';
-
-import carousel1 from '../assets/carousel1.JPG';
-import carousel2 from '../assets/carousel2.JPG';
-import carousel3 from '../assets/carousel3.JPG'; 
-import carousel4 from '../assets/carousel4.JPG';
-import carousel5 from '../assets/carousel5.JPG';
-import carousel6 from '../assets/carousel6.jpg';
-import carousel7 from '../assets/carousel7.jpg';
-import handsTogether from '../assets/HANDS TOGETHER.jpg';
+import logoImg from '../assets/logo ngungo.png';
+import bishopPhoto from '../assets/Bishop Clement Simba Overseer.jpg';
 
 const slides = [
   {
-    image: carousel1,
-    subtitle: "Welcome to",
-    title: "KINGDOM ENLIGHTENMENT",
-    text: "Spreading the Gospel & Transforming Lives",
-    btn1: { text: "Learn More", link: "/about" },
-    btn2: { text: "Join Us", link: "/login" }
+    bgGradient: "linear-gradient(to right, #000045 0%, #000066 32%, #f8fafc 58%, #ffffff 75%, #ffffff 100%)",
+    accentColor: "#b45309",
+    icon: "fas fa-church",
+    eyebrow: "Welcome to PAG Ngungo Assembly",
+    title: "Mbeere District\nHeadquarters Church",
+    text: "Advancing God's Kingdom through the full gospel of Jesus Christ — Spirit-filled, Bible-based, community-rooted under apostolic episcopal oversight.",
+    btn1: { text: "About Our Church", link: "/about" },
+    btn2: { text: "District Assemblies", link: "/assemblies" },
   },
   {
-    image: carousel2,
-    subtitle: "Mark 16:15",
-    title: "GO INTO ALL THE WORLD",
-    text: "Preaching the Gospel to Every Creature",
-    btn1: { text: "Our Departments", link: "/ministries" },
-    btn2: { text: "Support Us", link: "/donate" }
+    bgGradient: "linear-gradient(to right, #000045 0%, #000066 32%, #f0f9ff 58%, #ffffff 75%, #ffffff 100%)",
+    accentColor: "#0284c7",
+    icon: "fas fa-bible",
+    eyebrow: "Order of Services",
+    title: "Sunday Worship\nCelebration",
+    text: "Sunday School & English Service: 8:00 AM – 10:00 AM  |  Main Service: 10:30 AM – 1:30 PM",
+    btn1: { text: "Our Departments", link: "/departments" },
+    btn2: { text: "Order of Services", link: "/programs" },
   },
   {
-    image: carousel3,
-    subtitle: "Community Focus",
-    title: "TRANSFORMING REGIONS",
-    text: "Bringing Hope and Healing to Local Communities",
-    btn1: { text: "Our Work", link: "/ministries" },
-    btn2: { text: "Donate", link: "/donate" }
+    bgGradient: "linear-gradient(to right, #000045 0%, #000066 32%, #fefce8 58%, #ffffff 75%, #ffffff 100%)",
+    accentColor: "#b45309",
+    icon: "fas fa-sitemap",
+    eyebrow: "Regional Fellowship",
+    title: "Mbeere District\nCircuit",
+    text: "Serving as Headquarter for 8 Mbeere Assemblies and Kyuso Circuit, Kitui County, under Bishop Rev. Clement Simba.",
+    btn1: { text: "View Assemblies", link: "/assemblies" },
+    btn2: { text: "Leadership Team", link: "/leadership" },
   },
   {
-    image: carousel4,
-    subtitle: "Our Passion",
-    title: "AUTHENTIC WORSHIP",
-    text: "Awakening a Generation to Worship in Spirit and Truth",
-    btn1: { text: "Events", link: "/events" },
-    btn2: { text: "Gallery", link: "/gallery" }
+    bgGradient: "linear-gradient(to right, #000045 0%, #000066 32%, #fdf2f8 58%, #ffffff 75%, #ffffff 100%)",
+    accentColor: "#db2777",
+    icon: "fas fa-music",
+    eyebrow: "Sanctuary Ministries",
+    title: "Praise, Choir &\nInstrumentals",
+    text: "Experiencing the Holy Spirit through vibrant worship, choir anthems, and skilled instrumentalist band ministry.",
+    btn1: { text: "Our Ministries", link: "/ministries" },
+    btn2: { text: "Weekly Timetable", link: "/programs" },
   },
   {
-    image: carousel5,
-    subtitle: "Equipping the Saints",
-    title: "DISCIPLESHIP",
-    text: "Raising Leaders Rooted Firmly in the Word of God",
-    btn1: { text: "Leadership", link: "/leadership" },
-    btn2: { text: "Join Us", link: "/login" }
+    bgGradient: "linear-gradient(to right, #000045 0%, #000066 32%, #ecfdf5 58%, #ffffff 75%, #ffffff 100%)",
+    accentColor: "#059669",
+    icon: "fas fa-hands-holding-child",
+    eyebrow: "Spiritual Family",
+    title: "Four Pillar\nDepartments",
+    text: "Women, Men, Youth, and Sunday School — nurturing every believer from childhood to maturity in Christ.",
+    btn1: { text: "Explore Departments", link: "/departments" },
+    btn2: { text: "Join A Department", link: "/contact" },
   },
   {
-    image: carousel6,
-    subtitle: "Student Impact (KESIP)",
-    title: "YOUTH OUTREACH",
-    text: "Inspiring High School Students with Moral Leadership",
-    btn1: { text: "Ministries", link: "/ministries" },
-    btn2: { text: "Gallery", link: "/gallery" }
+    bgGradient: "linear-gradient(to right, #000045 0%, #000066 32%, #fffbeb 58%, #ffffff 75%, #ffffff 100%)",
+    accentColor: "#d97706",
+    icon: "fas fa-fire",
+    eyebrow: "Every Saturday 4:00 PM – 6:00 PM",
+    title: "Youth Fellowship\nExplosion",
+    text: "Dynamic youth gathering featuring worship, talent development, biblical mentorship, and life skills.",
+    btn1: { text: "Youth Department", link: "/departments#youth" },
+    btn2: { text: "Connect With Us", link: "/contact" },
   },
   {
-    image: carousel7,
-    subtitle: "Join the Vision",
-    title: "PARTNER WITH US",
-    text: "Together, We Can Effectively Reach the Unreached",
-    btn1: { text: "Support Us", link: "/donate" },
-    btn2: { text: "Contact Us", link: "/contact" }
-  }
+    bgGradient: "linear-gradient(to right, #000045 0%, #000066 32%, #f0fdf4 58%, #ffffff 75%, #ffffff 100%)",
+    accentColor: "#0284c7",
+    icon: "fas fa-cross",
+    eyebrow: "Every Friday 7:00 PM – 9:00 PM",
+    title: "Friday Revival\nFellowship",
+    text: "Fervent prayer, intercession, deliverance, and divine breakthroughs in the manifest presence of God.",
+    btn1: { text: "Weekly Timetable", link: "/programs" },
+    btn2: { text: "Get in Touch", link: "/contact" },
+  },
 ];
 
-// Words that rotate across fingers
-const FINGER_WORDS = ['KINGDOM', 'ENLIGHTENMENT', 'MINISTRIES'];
-const CHAR_SPEED = 110; // ms per character typed
+const AUTO_INTERVAL = 8000;
 
 const CreativeSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-
-  // Typewriter state — how many chars are visible on each finger
-  const [typed1, setTyped1] = useState(0);
-  const [typed2, setTyped2] = useState(0);
-  const [typed3, setTyped3] = useState(0);
-  
-  // Touch variables
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
+  const autoRef = useRef(null);
 
-  // Authenticated state & active session for hero CTAs
-  const [currentUser, setCurrentUser] = useState(null);
-  const [hasActiveSession, setHasActiveSession] = useState(false);
+  const startAuto = () => {
+    clearInterval(autoRef.current);
+    autoRef.current = setInterval(() => {
+      setCurrentSlide(prev => (prev + 1) % slides.length);
+    }, AUTO_INTERVAL);
+  };
 
   useEffect(() => {
-    const checkAuth = () => {
-      const u = localStorage.getItem('kemt_current_user') || localStorage.getItem('kemt_admin_user');
-      if (u) {
-        try { setCurrentUser(JSON.parse(u)); } catch { setCurrentUser(null); }
-      } else {
-        setCurrentUser(null);
-      }
-    };
-    checkAuth();
-    window.addEventListener('storage', checkAuth);
-    window.addEventListener('kemt_auth_change', checkAuth);
-
-    const checkActiveSession = async () => {
-      try {
-        const res = await fetch('/api/attendance/active');
-        if (res.ok) {
-          const data = await res.json();
-          setHasActiveSession(Boolean(data.hasActiveSession));
-        }
-      } catch {}
-    };
-    checkActiveSession();
-
-    return () => {
-      window.removeEventListener('storage', checkAuth);
-      window.removeEventListener('kemt_auth_change', checkAuth);
-    };
-  }, []);
-
-  // Auto-advance every 8s (gives time for full typing sequence + ~4s view)
-  useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 8000); 
-    return () => clearInterval(interval);
-  }, []); // Run constantly
+    startAuto();
+    return () => clearInterval(autoRef.current);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const nextSlide = () => {
     if (isTransitioning) return;
     setIsTransitioning(true);
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-    setTimeout(() => setIsTransitioning(false), 1000);
+    setCurrentSlide(prev => (prev + 1) % slides.length);
+    setTimeout(() => setIsTransitioning(false), 1400);
+    startAuto();
   };
 
   const prevSlide = () => {
     if (isTransitioning) return;
     setIsTransitioning(true);
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-    setTimeout(() => setIsTransitioning(false), 1000);
+    setCurrentSlide(prev => (prev - 1 + slides.length) % slides.length);
+    setTimeout(() => setIsTransitioning(false), 1400);
+    startAuto();
   };
 
-  // Touch handlers for swipe
-  const handleTouchStart = (e) => {
-    touchStartX.current = e.touches[0].clientX;
+  const goToSlide = (i) => {
+    if (isTransitioning || i === currentSlide) return;
+    setIsTransitioning(true);
+    setCurrentSlide(i);
+    setTimeout(() => setIsTransitioning(false), 1400);
+    startAuto();
   };
 
-  const handleTouchMove = (e) => {
-    touchEndX.current = e.touches[0].clientX;
+  const handleTouchStart = (e) => { touchStartX.current = e.touches[0].clientX; };
+  const handleTouchMove  = (e) => { touchEndX.current  = e.touches[0].clientX; };
+  const handleTouchEnd   = () => {
+    const diff = touchStartX.current - touchEndX.current;
+    if (diff > 60) nextSlide();
+    if (diff < -60) prevSlide();
   };
-
-  const handleTouchEnd = () => {
-    if (touchStartX.current - touchEndX.current > 75) {
-      // Swipe left - next slide
-      nextSlide();
-    }
-    if (touchStartX.current - touchEndX.current < -75) {
-      // Swipe right - prev slide
-      prevSlide();
-    }
-  };
-
-  const safeSlide = currentSlide >= slides.length ? 0 : currentSlide;
-  const finger1Img = slides[safeSlide]?.image;
-  const finger2Img = slides[(safeSlide + 1) % slides.length]?.image;
-  const finger3Img = slides[(safeSlide + 2) % slides.length]?.image;
-
-  // Compute which word goes on which finger for this slide
-  const wordOffset = currentSlide % 3;
-  const word1 = FINGER_WORDS[wordOffset % 3];
-  const word2 = FINGER_WORDS[(wordOffset + 1) % 3];
-  const word3 = FINGER_WORDS[(wordOffset + 2) % 3];
-
-  // Typewriter: chain finger1 → finger2 → finger3 on every slide change
-  useEffect(() => {
-    let i2 = null;
-    let i3 = null;
-
-    // Reset all to empty
-    setTyped1(0);
-    setTyped2(0);
-    setTyped3(0);
-
-    // --- Finger 1 types immediately ---
-    let pos1 = 0;
-    const i1 = setInterval(() => {
-      pos1++;
-      setTyped1(pos1);
-      if (pos1 >= word1.length) clearInterval(i1);
-    }, CHAR_SPEED);
-
-    // --- Finger 2 starts after finger 1 finishes + 250ms pause ---
-    const t2 = setTimeout(() => {
-      let pos2 = 0;
-      i2 = setInterval(() => {
-        pos2++;
-        setTyped2(pos2);
-        if (pos2 >= word2.length) clearInterval(i2);
-      }, CHAR_SPEED);
-    }, word1.length * CHAR_SPEED + 250);
-
-    // --- Finger 3 starts after finger 2 finishes + 250ms pause ---
-    const t3 = setTimeout(() => {
-      let pos3 = 0;
-      i3 = setInterval(() => {
-        pos3++;
-        setTyped3(pos3);
-        if (pos3 >= word3.length) clearInterval(i3);
-      }, CHAR_SPEED);
-    }, (word1.length + word2.length) * CHAR_SPEED + 500);
-
-    return () => {
-      clearInterval(i1);
-      clearTimeout(t2);
-      clearTimeout(t3);
-      if (i2) clearInterval(i2);
-      if (i3) clearInterval(i3);
-    };
-  }, [currentSlide]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <section 
+    <section
       className="creative-hero"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
+      aria-label="PAG Ngungo Assembly Hero Slideshow"
     >
-      {/* Dynamic Background Image (Full screen, but covered on the right) */}
-      {slides.map((slide, index) => (
-        <div 
-          key={index} 
-          className={`creative-bg-image ${index === safeSlide ? 'active' : ''}`}
-        >
+      {/* Background gradients with Ken Burns and watermark motifs */}
+      {slides.map((slide, i) => (
+        <div key={i} className={`hero-bg-slide ${i === currentSlide ? 'active' : ''}`}>
           <div 
-            className="ken-burns-img"
-            style={{ backgroundImage: `url(${slide.image})` }}
-          ></div>
-          <div className="bg-overlay"></div>
+            className="hero-bg-img" 
+            style={{ 
+              background: slide.bgGradient,
+              position: 'relative',
+              overflow: 'hidden'
+            }}
+          >
+            <div className="hero-watermark-icon" style={{ color: slide.accentColor }}>
+              <i className={slide.icon}></i>
+            </div>
+          </div>
+          <div className="hero-overlay" />
         </div>
       ))}
 
-      {/* Static Background Image (Right half with diagonal split) */}
-      <div className="creative-bg-right">
-        <div 
-          className="bg-right-img"
-          style={{ backgroundImage: `url(${handsTogether})` }}
-        ></div>
-        <div className="bg-right-overlay"></div>
+      {/* LEFT: Bishop Clement Simba (Full-Bleed Space Filling, Untouched by Fade) */}
+      <div className="hero-bishop-full-presence">
+        <img 
+          src={bishopPhoto} 
+          alt="Bishop Rev. Clement Simba - Presiding Bishop & District Overseer"
+          className="hero-bishop-full-img"
+        />
+        <div className="hero-bishop-edge-fade"></div>
+
+        {/* Floating Episcopal Badge Pill on Left */}
+        <div className="hero-bishop-badge-pill">
+          <div className="hero-bishop-badge-icon">
+            <i className="fas fa-crown"></i>
+          </div>
+          <div className="hero-bishop-badge-text">
+            <strong>Bishop Rev. Clement Simba</strong>
+            <span>Presiding Bishop &amp; District Overseer</span>
+          </div>
+        </div>
       </div>
 
-      <div className="creative-container">
-        {/* Left Side: Text Content */}
-        <div className="creative-text-col">
-          <div className="text-wrapper">
-            {slides.map((slide, index) => (
-              <div 
-                key={index} 
-                className={`text-slide ${index === safeSlide ? 'active' : ''}`}
-              >
-                <div className="text-content-clean">
-                  <h1 className="slide-title">{slide.title}</h1>
-                  <p className="slide-desc">{slide.text}</p>
+      {/* Seamless Transition to White on Right (Doesn't touch Bishop on Left) */}
+      <div className="hero-white-fade-overlay" />
+
+      {/* FAR RIGHT: Dynamic Wording on Crisp White Background */}
+      <div className="hero-wording-showcase">
+        {slides.map((slide, i) => {
+          const isActive = i === currentSlide;
+          return (
+            <div key={i} className={`hero-text-card ${isActive ? 'active' : ''}`}>
+              {i === 0 && (
+                <div className="hero-logo-badge">
+                  <img 
+                    src={logoImg} 
+                    alt="PAG Ngungo Assembly" 
+                    className="hero-logo-badge-img"
+                  />
+                  <span className="hero-logo-badge-label">Mbeere District Headquarters</span>
                 </div>
+              )}
+
+              <div className="hero-eyebrow">
+                <span className="hero-eyebrow-line" style={{ background: slide.accentColor }}></span>
+                <span className="hero-eyebrow-text" style={{ color: slide.accentColor }}>{slide.eyebrow}</span>
               </div>
-            ))}
-          </div>
 
-          <div className="slider-controls-modern">
-            <button className="ctrl-btn prev" onClick={prevSlide}>
-               <i className="fas fa-chevron-left"></i>
-            </button>
-            <div className="dots-modern">
-              {slides.map((_, i) => (
-                <div 
-                  key={i} 
-                  className={`dot-m ${i === safeSlide ? 'active' : ''}`}
-                  onClick={() => {
-                    if (!isTransitioning) {
-                      setCurrentSlide(i);
-                    }
-                  }}
-                >
-                  <div className="dot-progress"></div>
-                </div>
-              ))}
+              <h1 className="hero-title">{slide.title}</h1>
+              
+              <p className="hero-desc">{slide.text}</p>
+              
+              <div className="hero-cta-group">
+                <Link to={slide.btn1.link} className="hero-btn-primary">
+                  {slide.btn1.text} <i className="fas fa-arrow-right" style={{ fontSize: '0.72rem', marginLeft: '6px' }}></i>
+                </Link>
+                <Link to={slide.btn2.link} className="hero-btn-outline">
+                  {slide.btn2.text}
+                </Link>
+              </div>
             </div>
-            <button className="ctrl-btn next" onClick={nextSlide}>
-              <i className="fas fa-chevron-right"></i>
-            </button>
-          </div>
-        </div>
+          );
+        })}
       </div>
 
-      {/* Right Side: The Visual "Fingers" Queue */}
-      <div className="fingers-container">
-        {/* Finger 1 */}
-        <div className="finger finger-1">
-          <div className="finger-img" key={finger1Img} style={{ backgroundImage: `url(${finger1Img})` }}></div>
-          <div className="finger-word">{word1.slice(0, typed1)}</div>
+      {/* Bottom navigation bar */}
+      <div className="hero-nav-bar">
+        <div className="hero-dots">
+          {slides.map((_, i) => (
+            <div
+              key={i}
+              className={`hero-dot ${i === currentSlide ? 'active' : ''}`}
+              onClick={() => goToSlide(i)}
+              aria-label={`Go to slide ${i + 1}`}
+            >
+              <div className="hero-dot-fill" />
+            </div>
+          ))}
         </div>
-        {/* Finger 2 */}
-        <div className="finger finger-2">
-          <div className="finger-img" key={finger2Img} style={{ backgroundImage: `url(${finger2Img})` }}></div>
-          <div className="finger-word finger-word-center">{word2.slice(0, typed2)}</div>
+
+        <div className="hero-slide-counter">
+          <strong>{String(currentSlide + 1).padStart(2, '0')}</strong>
+          {' / '}
+          {String(slides.length).padStart(2, '0')}
         </div>
-        {/* Finger 3 */}
-        <div className="finger finger-3">
-          <div className="finger-img" key={finger3Img} style={{ backgroundImage: `url(${finger3Img})` }}></div>
-          <div className="finger-word">{word3.slice(0, typed3)}</div>
+
+        <div className="hero-arrows">
+          <button className="hero-arrow-btn" onClick={prevSlide} aria-label="Previous slide">
+            <i className="fas fa-chevron-left"></i>
+          </button>
+          <button className="hero-arrow-btn" onClick={nextSlide} aria-label="Next slide">
+            <i className="fas fa-chevron-right"></i>
+          </button>
         </div>
       </div>
     </section>

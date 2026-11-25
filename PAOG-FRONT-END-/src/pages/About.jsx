@@ -1,18 +1,15 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-
-import bannerPhoto from '../assets/gikumene meru14.JPG';
-import storyPhoto1 from '../assets/Tala mission6.jpg';
-import storyPhoto2 from '../assets/Emali mission6.jpg';
-import storyPhoto3 from '../assets/gikumene meru1.JPG';
+import logoImg from '../assets/logo ngungo.png';
+import bishopPhoto from '../assets/Bishop Clement Simba Overseer.jpg';
 
 const values = [
-  { icon: 'fas fa-bible',          label: 'Biblical Authority',  desc: 'Everything we do is rooted in and guided by the Word of God.' },
-  { icon: 'fas fa-hands-praying',  label: 'Prayer',              desc: 'We seek God in prayer before and throughout every mission.' },
-  { icon: 'fas fa-heart',          label: 'Compassion',          desc: 'We meet people at their point of need with the love of Christ.' },
-  { icon: 'fas fa-star',           label: 'Excellence',          desc: 'We give our best to God in everything we do.' },
-  { icon: 'fas fa-handshake',      label: 'Integrity',           desc: 'We uphold honesty and transparency in all our dealings.' },
-  { icon: 'fas fa-users',          label: 'Unity',               desc: 'We work together as one body, honouring and serving one another.' },
+  { icon: 'fas fa-bible', label: 'Biblical Authority', desc: 'Everything we do is rooted in and guided by the Word of God.' },
+  { icon: 'fas fa-hands-praying', label: 'Prayer', desc: 'We seek God in prayer before and throughout every mission.' },
+  { icon: 'fas fa-heart', label: 'Compassion', desc: 'We meet people at their point of need with the love of Christ.' },
+  { icon: 'fas fa-star', label: 'Excellence', desc: 'We give our best to God in everything we do.' },
+  { icon: 'fas fa-handshake', label: 'Integrity', desc: 'We uphold honesty and transparency in all our dealings.' },
+  { icon: 'fas fa-users', label: 'Unity', desc: 'We work together as one body, honouring and serving one another.' },
 ];
 
 const faith = [
@@ -27,62 +24,34 @@ const faith = [
 
 const timeline = [
   {
-    date: 'Late 2024',
-    icon: 'fas fa-users',
-    title: 'Commission 2024 Conference',
-    text: 'At the Commission 2024 Conference hosted by Focus Kenya at Kabarak University, the burden to reach the unreached and disciple nations was powerfully ignited in our hearts.',
+    date: 'Foundational Years',
+    icon: 'fas fa-landmark',
+    title: 'Establishment of Pentecostal Assemblies of God in Mbeere',
+    text: 'Evangelistic pioneers and missionary pastors planted the Pentecostal faith across Mbeere, establishing local assemblies rooted in prayer, Holy Spirit empowerment, and biblical sound doctrine.',
   },
   {
-    date: 'Early 2025',
-    icon: 'fas fa-video',
-    title: 'Humble Beginnings at Kisii University',
-    text: 'The foundational steps began while Vincent Mwenda (Founder and Director) and Kennedy Mutuku (Digital Infrastructure Director) were students at Kisii University. They started by shooting evangelism clips in Kennedy\'s house, inviting fellow students to discuss different biblical topics, and uploading them to Kingdom Enlightenment platforms.',
+    date: 'Designation of District HQ',
+    icon: 'fas fa-church',
+    title: 'Ngungo Assembly Appointed District Headquarters',
+    text: 'Due to its central position, fervent spiritual life, and mature congregation, Pentecostal Assemblies of God - Ngungo Assembly was ordained as the official Headquarter Church for Mbeere District.',
   },
   {
-    date: '15th March 2025',
-    icon: 'fas fa-mountain',
-    title: 'Vision Confirmed at Karlo Prayer Mountain',
-    text: 'Seeking clearer direction, Vincent and Kennedy dedicated time for prayer and fasting at Karlo Prayer Mountain. Following this profound spiritual encounter, the vision was fully confirmed and Kingdom Enlightenment Ministries was officially started to fulfill the Great Commission.',
+    date: 'District Expansion',
+    icon: 'fas fa-map-marked-alt',
+    title: 'Growth of the 8 Mbeere Assemblies',
+    text: 'Under the oversight of the District Leadership Council and Bishop Rev. Clement Simba, assemblies flourished in Kiamachang\'a, Rwika, Kathera, Ngangari, Mugaari, Muumoni, and Gikuru, each guided by resident reverends.',
   },
   {
-    date: 'Ongoing from 2025',
-    icon: 'fas fa-book-open',
-    title: 'Monday Online Bible Study Fellowships',
-    text: 'Regular Monday online Bible study fellowships nurtured spiritual growth, unity, prayer and a passion for evangelism — becoming a training ground that prepared the team for active mission work.',
-  },
-  {
-    date: '18–24 August 2025',
+    date: 'Missionary Extension',
     icon: 'fas fa-globe-africa',
-    title: 'First Mission — Rwanyange, Meru County',
-    text: 'The team held its very first field mission outreach at East Africa Pentecostal Church in Rwanyange, the home church of our founder, Vincent Mwenda. This milestone confirmed God\'s call upon the team and marked a powerful beginning to our field ministry.',
-    souls: '145 Souls Won',
+    title: 'Outreach to Kyuso Circuit, Kitui County',
+    text: 'Extending beyond Mbeere district borders, missionary teams launched circuit assemblies in Kyuso, Kitui County, establishing Marisi Assembly, Matooni Assembly, and ongoing church plants.',
   },
   {
-    date: '29 Dec 2025 – 4 Jan 2026',
-    icon: 'fas fa-globe-africa',
-    title: 'Second Mission — Gikumene, Meru County',
-    text: 'At Deliverance Church International, Gikumene, we witnessed God\'s faithfulness through transformed lives, renewed faith and the continued advancement of the Gospel.',
-    souls: '130 Souls Won',
-  },
-  {
-    date: '20–26 April 2026',
-    icon: 'fas fa-globe-africa',
-    title: 'Tala Mission — Machakos County',
-    text: 'The team ministered at Liberty Center, Tala, carrying the Gospel through evangelism, outreach, prayer and community engagement.',
-    souls: '170 Souls Won',
-  },
-  {
-    date: '10–16 August 2026',
-    icon: 'fas fa-globe-africa',
-    title: 'Emali Mission — Makueni & Kajiado',
-    text: 'The team held a mission at Methodist Church of Kenya, Emali Town, reaching the community with the Gospel of Christ and demonstrating God\'s love through ministry and compassion.',
-    souls: '76 Souls Won',
-  },
-  {
-    date: '20–23 August 2026',
-    icon: 'fas fa-globe-africa',
-    title: 'Gaukene Mission — MCK Ntakira Circuit',
-    text: 'The team continued its mission journey in Gaukene under the Methodist Church of Kenya Ntakira Circuit, proclaiming Christ, reaching communities and calling people to faith and transformation.',
+    date: 'Present & Future',
+    icon: 'fas fa-fire',
+    title: 'Vibrant Worship & Generation Next',
+    text: 'Today, Ngungo Assembly hosts thriving Sunday English & Main services, Friday night revivals, Saturday Youth fellowships, and four active church departments (Women, Men, Youth, and Sunday School).',
   },
 ];
 
@@ -105,13 +74,13 @@ const About = () => {
     <main className="about-page">
 
       {/* Banner */}
-      <section className="page-banner" style={{ backgroundImage: `url(${bannerPhoto})` }}>
+      <section className="page-banner" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #292524 100%)' }}>
         <div className="banner-overlay"></div>
         <div className="container">
           <div className="banner-content">
             <span className="banner-tag">Who We Are</span>
-            <h1>About KEMT</h1>
-            <p>A Christ-centred team carrying the light of the Gospel to every community we enter.</p>
+            <h1>Pentecostal Assemblies of God</h1>
+            <p>Ngungo Assembly — Proudly serving as the Headquarter Church for Mbeere District.</p>
           </div>
         </div>
       </section>
@@ -119,33 +88,234 @@ const About = () => {
       {/* Who We Are */}
       <section id="who-we-are" className="section about-intro-section">
         <div className="container">
-          <div className="dept-grid">
-            <div className="dept-content">
-              <span className="section-subtitle">Who We Are</span>
-              <h2 className="section-title">Kingdom Enlightenment Missions Team</h2>
-              <p className="lead">
-                Kingdom Enlightenment Missions Team (KEMT) is a Christ-centred missions organisation
-                dedicated to spreading the Gospel of Jesus Christ across Kenya and beyond.
-              </p>
-              <p>
-                Founded on 22nd January 2025 by Vincent Mwenda following a divine calling to obey
-                the Great Commission, KEMT began with fewer than 15 missionaries united by faith and
-                a shared passion for the Gospel. From this small, humble beginning, the Lord has
-                continued to grow and strengthen the ministry.
-              </p>
-              <p>
-                We believe in the power of the Gospel to transform lives and communities. Through
-                our departments and mission outreaches, we bring hope, healing and the light of
-                Christ, reaching schools, churches, towns and villages across Kenya.
-              </p>
-              <div className="about-quick-stats">
-                <div className="aq-stat"><strong>445+</strong><span>Souls Won</span></div>
-                <div className="aq-stat"><strong>5</strong><span>Mission Trips</span></div>
-                <div className="aq-stat"><strong>7</strong><span>Counties in Kenya</span></div>
-                <div className="aq-stat"><strong>8</strong><span>Schools</span></div>
+          <div className="dept-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px', alignItems: 'center' }}>
+              <div className="dept-content">
+                <span className="section-subtitle">Mother Church</span>
+                <h2 className="section-title">Pentecostal Assemblies of God - Ngungo Assembly</h2>
+                <p className="lead">
+                  Pentecostal Assemblies of God - Ngungo Assembly is a thriving, Spirit-filled church family
+                  and the designated <strong>Headquarter Church for Mbeere District</strong>.
+                </p>
+                <p>
+                  As the district headquarters, Ngungo Assembly serves as the central pillar of administrative governance,
+                  pastoral fellowship, spiritual mentorship, and united missionary revivals across Mbeere District and
+                  our expanding circuit in Kyuso, Kitui County.
+                </p>
+                <p>
+                  Led by <strong>Bishop Rev. Clement Simba</strong> and the Ministerial Council, our mission is to glorify God
+                  by preaching the uncompromised Word, nurturing believers through dedicated departments, and winning souls
+                  into God's eternal Kingdom.
+                </p>
+                <div className="about-quick-stats">
+                  <div className="aq-stat"><strong>8</strong><span>Mbeere Assemblies</span></div>
+                  <div className="aq-stat"><strong>3</strong><span>Kyuso Assemblies</span></div>
+                  <div className="aq-stat"><strong>4</strong><span>Church Depts</span></div>
+                  <div className="aq-stat"><strong>4</strong><span>Sanctuary Ministries</span></div>
+                </div>
+              </div>
+
+              <div style={{ textAlign: 'center', padding: '16px' }}>
+                <div style={{
+                  display: 'inline-block',
+                  background: 'linear-gradient(145deg, #0f172a 0%, #1e293b 100%)',
+                  padding: '28px 24px',
+                  borderRadius: '24px',
+                  boxShadow: '0 20px 40px rgba(0,0,0,0.14)',
+                  border: '2px solid rgba(232,125,30,0.35)'
+                }}>
+                  <img
+                    src={logoImg}
+                    alt="Pentecostal Assemblies of God - Ngungo Assembly Official Seal"
+                    style={{
+                      width: 'min(65vw, 200px)',
+                      height: 'min(65vw, 200px)',
+                      objectFit: 'contain',
+                      borderRadius: '50%',
+                      background: '#ffffff',
+                      padding: '8px',
+                      boxShadow: '0 8px 24px rgba(0,0,0,0.2)'
+                    }}
+                  />
+                  <div style={{ marginTop: '16px', color: '#f8fafc', fontWeight: 800, fontSize: '0.98rem', letterSpacing: '0.05em' }}>
+                    OFFICIAL DISTRICT SEAL
+                  </div>
+                  <div style={{ color: '#E87D1E', fontSize: '0.82rem', fontWeight: 700, marginTop: '2px' }}>
+                    Mbeere District Headquarters
+                  </div>
+                </div>
               </div>
             </div>
+          </div>
+      </section>
 
+      {/* District Headquarters & Assemblies Circuit */}
+      <section id="district-hq" className="section" style={{ background: '#f8fafc', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
+        <div className="container">
+          <div className="section-header" style={{ textAlign: 'center', marginBottom: '36px' }}>
+            <span className="section-subtitle">District Jurisdiction</span>
+            <h2 className="section-title">Mbeere District &amp; Kyuso Circuit Assemblies</h2>
+            <p className="section-description" style={{ maxWidth: '720px', margin: '0 auto' }}>
+              Ngungo Assembly provides episcopal oversight, spiritual fellowship, and administrative coordination to all constituent assemblies.
+            </p>
+          </div>
+
+          {/* District Overseer Spotlight */}
+          <div style={{
+            background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
+            borderRadius: '14px',
+            padding: '20px 26px',
+            marginBottom: '28px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '16px',
+            border: '1px solid rgba(255,255,255,0.1)',
+            boxShadow: '0 8px 20px rgba(0,0,0,0.12)'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <img
+                src={bishopPhoto}
+                alt="Bishop Rev. Clement Simba"
+                style={{
+                  width: '60px',
+                  height: '60px',
+                  borderRadius: '50%',
+                  objectFit: 'cover',
+                  objectPosition: 'top',
+                  border: '3px solid #e67e22',
+                  boxShadow: '0 4px 14px rgba(0,0,0,0.4)',
+                  flexShrink: 0
+                }}
+              />
+              <div>
+                <span style={{ fontSize: '0.74rem', textTransform: 'uppercase', letterSpacing: '1px', color: '#e67e22', fontWeight: 800 }}>Episcopal Leadership</span>
+                <h3 style={{ margin: '2px 0', fontSize: '1.2rem', color: '#ffffff', fontWeight: 800 }}>Bishop Rev. Clement Simba</h3>
+                <p style={{ margin: 0, fontSize: '0.86rem', color: '#cbd5e1' }}>Presiding Bishop &amp; District Overseer | Mbeere District &amp; Kyuso Circuit</p>
+              </div>
+            </div>
+            <Link to="/leadership" className="btn btn-primary" style={{ padding: '8px 20px', fontSize: '0.86rem' }}>
+              Leadership Directory &rarr;
+            </Link>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px' }}>
+            {/* Mbeere District Card */}
+            <div style={{ background: '#ffffff', borderRadius: '14px', border: '2px solid #e67e22', padding: '28px', boxShadow: '0 8px 24px rgba(0,0,0,0.06)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#e67e22', marginBottom: '12px' }}>
+                <i className="fas fa-church" style={{ fontSize: '1.3rem' }}></i>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: 0, color: '#1e293b' }}>Mbeere District Assemblies</h3>
+              </div>
+              <p style={{ fontSize: '0.9rem', color: '#64748b', marginBottom: '16px' }}>
+                Headquartered at <strong>Ngungo Assembly</strong> under Bishop Rev. Clement Simba:
+              </p>
+              <ul style={{ padding: 0, margin: 0, listStyle: 'none' }}>
+                {[
+                  { name: "Kiamachang'a Assembly", pastor: 'Rev. Rose Nyamwaro' },
+                  { name: 'Rwika Assembly', pastor: 'Rev. Samuel Nderitu' },
+                  { name: 'Kathera Assembly', pastor: 'Rev. John Ngochi' },
+                  { name: 'Ngangari Assembly', pastor: 'Rev. Clement Simba' },
+                  { name: 'Mugaari Assembly', pastor: 'Rev. Paul Nyaga' },
+                  { name: 'Muumoni Assembly', pastor: 'Rev. Clement Simba' },
+                  { name: 'Gikuru Assembly', pastor: 'Rev. David Kimanthi' },
+                  { name: 'Ngungo Assembly', pastor: 'Bishop Rev. Clement Simba & Ministerial Council (District HQ)' },
+                ].map((item, idx) => (
+                  <li key={idx} style={{ padding: '8px 0', borderBottom: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '6px' }}>
+                    <span style={{ fontWeight: 700, color: '#1e293b', fontSize: '0.92rem' }}>
+                      {idx + 1}. {item.name}
+                    </span>
+                    <span style={{ color: '#e67e22', fontSize: '0.84rem', fontWeight: 600, background: '#fff7ed', padding: '2px 8px', borderRadius: '4px' }}>
+                      {item.pastor}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Kyuso Kitui County Card */}
+            <div style={{ background: '#ffffff', borderRadius: '14px', border: '1px solid #cbd5e1', padding: '28px', boxShadow: '0 8px 24px rgba(0,0,0,0.06)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#2563eb', marginBottom: '12px' }}>
+                <i className="fas fa-map-marker-alt" style={{ fontSize: '1.3rem' }}></i>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: 0, color: '#1e293b' }}>Kyuso Circuit Assemblies (Kitui County)</h3>
+              </div>
+              <p style={{ fontSize: '0.9rem', color: '#64748b', marginBottom: '16px' }}>
+                Missionary and church plants extending to Kyuso in Kitui County:
+              </p>
+              <ul style={{ padding: 0, margin: 0, listStyle: 'none' }}>
+                {[
+                  { name: 'Marisi Assembly', status: 'Active Assembly' },
+                  { name: 'Matooni Assembly', status: 'Active Assembly' },
+                  { name: 'Kyuso Assembly (Placeholder)', status: 'Circuit Plant (Name To Be Updated)' },
+                ].map((item, idx) => (
+                  <li key={idx} style={{ padding: '12px 0', borderBottom: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontWeight: 700, color: '#1e293b', fontSize: '0.95rem' }}>
+                      {idx + 1}. {item.name}
+                    </span>
+                    <span style={{ color: '#2563eb', fontSize: '0.82rem', fontWeight: 600, background: '#eff6ff', padding: '3px 8px', borderRadius: '4px' }}>
+                      {item.status}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              <div style={{ marginTop: '24px', background: '#f8fafc', padding: '14px', borderRadius: '8px', borderLeft: '4px solid #2563eb' }}>
+                <p style={{ margin: 0, fontSize: '0.85rem', color: '#475569', lineHeight: 1.5 }}>
+                  <i className="fas fa-info-circle" style={{ color: '#2563eb', marginRight: '6px' }}></i>
+                  All assemblies participate in combined district general conferences, annual youth rallies, and departmental leadership training hosted at Ngungo HQ.
+                </p>
+              </div>
+
+              <div style={{ marginTop: '20px' }}>
+                <Link to="/assemblies" className="btn btn-secondary" style={{ width: '100%', textAlign: 'center', display: 'block' }}>
+                  Explore Full Assemblies Directory &rarr;
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Order of Services */}
+      <section id="order-of-services" className="section" style={{ padding: '60px 0' }}>
+        <div className="container">
+          <div className="section-header" style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <span className="section-subtitle">Sanctuary Timetable</span>
+            <h2 className="section-title">Official Order of Services</h2>
+            <p className="section-description" style={{ maxWidth: '680px', margin: '0 auto' }}>
+              We welcome all believers and visitors to our regular weekly fellowships at Pentecostal Assemblies of God - Ngungo Assembly Sanctuary.
+            </p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}>
+            <div style={{ background: '#fffbeb', border: '1px solid #fde68a', borderRadius: '12px', padding: '22px 18px', textAlign: 'center' }}>
+              <div style={{ color: '#b45309', fontWeight: 800, fontSize: '0.82rem', textTransform: 'uppercase' }}>Sunday 8:00 AM – 10:00 AM</div>
+              <h3 style={{ fontSize: '1.2rem', color: '#1e293b', margin: '8px 0 4px', fontWeight: 800 }}>Sunday School</h3>
+              <p style={{ fontSize: '0.85rem', color: '#64748b', margin: 0 }}>Dedicated children &amp; youth Bible classes taught by trained teachers.</p>
+            </div>
+
+            <div style={{ background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: '12px', padding: '22px 18px', textAlign: 'center' }}>
+              <div style={{ color: '#1d4ed8', fontWeight: 800, fontSize: '0.82rem', textTransform: 'uppercase' }}>Sunday 8:00 AM – 10:00 AM</div>
+              <h3 style={{ fontSize: '1.2rem', color: '#1e293b', margin: '8px 0 4px', fontWeight: 800 }}>English Service</h3>
+              <p style={{ fontSize: '0.85rem', color: '#64748b', margin: 0 }}>Early morning worship, scripture reading, and practical life application.</p>
+            </div>
+
+            <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: '12px', padding: '22px 18px', textAlign: 'center' }}>
+              <div style={{ color: '#15803d', fontWeight: 800, fontSize: '0.82rem', textTransform: 'uppercase' }}>Sunday 10:30 AM – 1:30 PM</div>
+              <h3 style={{ fontSize: '1.2rem', color: '#1e293b', margin: '8px 0 4px', fontWeight: 800 }}>Main Service</h3>
+              <p style={{ fontSize: '0.85rem', color: '#64748b', margin: 0 }}>Flagship worship celebration with Praise &amp; Worship, Choir, and the Word of God.</p>
+            </div>
+
+            <div style={{ background: '#faf5ff', border: '1px solid #e9d5ff', borderRadius: '12px', padding: '22px 18px', textAlign: 'center' }}>
+              <div style={{ color: '#7e22ce', fontWeight: 800, fontSize: '0.82rem', textTransform: 'uppercase' }}>Friday 7:00 PM – 9:00 PM</div>
+              <h3 style={{ fontSize: '1.2rem', color: '#1e293b', margin: '8px 0 4px', fontWeight: 800 }}>Friday Fellowship</h3>
+              <p style={{ fontSize: '0.85rem', color: '#64748b', margin: 0 }}>Midweek prayer, intercession, deliverance, and divine breakthroughs.</p>
+            </div>
+
+            <div style={{ background: '#fff1f2', border: '1px solid #fecdd3', borderRadius: '12px', padding: '22px 18px', textAlign: 'center' }}>
+              <div style={{ color: '#be123c', fontWeight: 800, fontSize: '0.82rem', textTransform: 'uppercase' }}>Saturday 4:00 PM – 6:00 PM</div>
+              <h3 style={{ fontSize: '1.2rem', color: '#1e293b', margin: '8px 0 4px', fontWeight: 800 }}>Youth Fellowship</h3>
+              <p style={{ fontSize: '0.85rem', color: '#64748b', margin: 0 }}>Empowering youth through worship, musical instruments, seminars &amp; fellowship.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -159,9 +329,8 @@ const About = () => {
               <h2 className="section-title">Our History</h2>
             </div>
             <p>
-              From a divine calling at a university conference to mission fields across Kenya, 
-              this is the story of how God has led Kingdom Enlightenment Missions Team from humble
-              beginnings to a growing movement for His glory.
+              From the early pioneering of Pentecostal Assemblies of God across Mbeere to the vibrant ministry
+              of Ngungo Assembly as the District Headquarters, this is the story of God's faithfulness across generations.
             </p>
           </div>
 
@@ -240,11 +409,11 @@ const About = () => {
       <section className="cta-section">
         <div className="container">
           <div className="cta-content">
-            <h2>Join Us in This Mission</h2>
-            <p>Whether through prayer, giving, or going — there is a place for you in what God is doing through KEMT.</p>
+            <h2>Join Our Church Family</h2>
+            <p>Whether through Sunday worship, prayer fellowship, or serving in our departments — there is a blessed place for you at Pentecostal Assemblies of God - Ngungo Assembly.</p>
             <div className="cta-buttons">
-              <Link to="/contact" className="btn btn-primary">Get in Touch</Link>
-              <Link to="/donate" className="btn btn-secondary">Support Us</Link>
+              <Link to="/contact" className="btn btn-primary">Connect With Pastors</Link>
+              <Link to="/assemblies" className="btn btn-secondary">Find An Assembly</Link>
             </div>
           </div>
         </div>
