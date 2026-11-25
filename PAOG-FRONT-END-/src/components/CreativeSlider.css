@@ -164,7 +164,7 @@
 .hero-text-card {
   position: relative;
   width: 100%;
-  max-width: 640px;
+  max-width: 700px;
   z-index: 5;
   text-align: left;
   pointer-events: auto;
@@ -328,28 +328,32 @@
   padding-left: 14px;
 }
 
-/* Action Buttons */
+/* Action Buttons in One Seamless Line */
 .hero-cta-group {
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  gap: 8px;
+  flex-wrap: nowrap;
   align-items: center;
+  width: 100%;
 }
 
 .hero-btn-primary {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 22px;
+  justify-content: center;
+  gap: 7px;
+  padding: 11px clamp(11px, 1.1vw, 18px);
   background: linear-gradient(135deg, #000066 0%, #001f7a 100%);
   color: #ffffff;
   border: 1.5px solid #000066;
   border-radius: 8px;
-  font-size: 0.8rem;
+  font-size: clamp(0.74rem, 0.78vw, 0.79rem);
   font-weight: 800;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
   transition: all 0.28s ease;
   font-family: 'Poppins', sans-serif;
   box-shadow: 0 4px 14px rgba(0, 0, 102, 0.22);
@@ -366,17 +370,20 @@
 .hero-btn-outline {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 20px;
+  justify-content: center;
+  gap: 7px;
+  padding: 11px clamp(10px, 1vw, 15px);
   background: #ffffff;
   color: #000066;
   border: 1.5px solid rgba(0, 0, 102, 0.3);
   border-radius: 8px;
-  font-size: 0.8rem;
+  font-size: clamp(0.74rem, 0.78vw, 0.79rem);
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
   transition: all 0.28s ease;
   font-family: 'Poppins', sans-serif;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
@@ -554,6 +561,7 @@
     margin: 0 auto 24px;
   }
   .hero-cta-group {
+    flex-wrap: wrap;
     justify-content: center;
   }
   .hero-title {
