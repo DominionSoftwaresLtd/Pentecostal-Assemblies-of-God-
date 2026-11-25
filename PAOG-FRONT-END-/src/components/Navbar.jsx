@@ -120,28 +120,6 @@ const Navbar = () => {
                                 <i className="fas fa-phone"></i>
                                 +254 720 140 213
                             </span>
-                            <span className="top-bar-divider top-bar-hide-sm">|</span>
-                            <span className="top-bar-hide-sm">
-                                <i className="fas fa-map-marker-alt"></i>
-                                P.O. Box 213-60113, Kiritiri, Mbeere
-                            </span>
-                        </div>
-
-                        {/* Top Bar Center - Live Check-In Pill & Service Time */}
-                        <div className="top-bar-center">
-                            <Link 
-                                to={currentUser ? "/dashboard" : "/check-in"} 
-                                className="top-bar-checkin-link"
-                                title="Live church attendance check-in"
-                            >
-                                <span className="top-bar-pulse-dot"></span>
-                                <span>Live Service Check-In Open &rarr;</span>
-                            </Link>
-                            <span className="top-bar-divider top-bar-hide-sm" style={{ margin: '0 10px', opacity: 0.5 }}>|</span>
-                            <span className="top-bar-service-time top-bar-hide-sm" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#ffedd5', fontSize: '0.8rem', fontWeight: 600 }}>
-                                <i className="fas fa-clock" style={{ color: '#fbbf24' }}></i>
-                                Sun: 8:00 AM &amp; 10:30 AM
-                            </span>
                         </div>
 
                         <div className="top-bar-right">
