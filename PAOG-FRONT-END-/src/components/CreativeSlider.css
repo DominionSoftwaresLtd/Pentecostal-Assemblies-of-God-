@@ -636,8 +636,7 @@
     width: 100%;
     margin-top: 0; /* Starts cleanly below the header line — Bishop head never tucked behind oval header */
     height: auto;
-    min-height: calc(100vh - var(--header-total, 116px) - var(--ticker-height, 46px));
-    min-height: calc(100svh - var(--header-total, 116px) - var(--ticker-height, 46px));
+    min-height: auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -645,6 +644,7 @@
     overflow-x: hidden;
     overflow-y: visible;
     background: #ffffff;
+    padding-bottom: 2px;
   }
 
   /* Top Portion: Bishop Clement Simba starting cleanly below the oval header line */
@@ -691,7 +691,7 @@
     display: block;
   }
 
-  /* Lower Portion: Church Name, Description & Action Cards filling down toward ticker */
+  /* Lower Portion: Church Name, Description & Action Cards sitting cleanly right above ticker */
   .hero-wording-showcase {
     position: relative;
     inset: auto;
@@ -702,14 +702,14 @@
     width: 100%;
     max-width: 100%;
     transform: none;
-    padding: 0 16px 18px;
+    padding: 0 16px 6px;
     margin-top: -20px; /* Smooth seamless blend right below Bishop's faded photo */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     z-index: 10;
-    flex: 1 0 auto;
+    flex: 0 0 auto;
     background: linear-gradient(to bottom, transparent 0%, #ffffff 24px, #ffffff 100%);
   }
 
@@ -765,15 +765,15 @@
     padding-left: 0;
     border-top: 1.5px solid rgba(180, 83, 9, 0.35);
     padding-top: 8px;
-    margin: 0 auto 14px;
+    margin: 0 auto 12px;
     max-width: 95%;
   }
 
-  /* Action Cards Conveyor on Mobile */
+  /* Action Cards Conveyor on Mobile — snugly positioned right above scrolling ticker */
   .hero-cta-wrapper {
     width: 100%;
     max-width: 460px;
-    margin: 0 auto 8px;
+    margin: 0 auto 4px;
     padding: 2px 0;
   }
 
@@ -839,7 +839,7 @@
   }
 
   .hero-wording-showcase {
-    padding: 0 12px 14px;
+    padding: 0 12px 4px;
     margin-top: -18px;
   }
 
@@ -855,8 +855,12 @@
   .hero-desc {
     font-size: 0.76rem;
     line-height: 1.45;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     padding-top: 6px;
+  }
+
+  .hero-cta-wrapper {
+    margin: 0 auto 2px;
   }
 
   .hero-creative-card {
