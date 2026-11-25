@@ -223,14 +223,6 @@ const Navbar = () => {
                                 </li>
 
                                 {/* Mobile-only items */}
-                                {hasActiveSession && (
-                                    <li className="mobile-only-nav-item">
-                                        <Link to={currentUser ? "/dashboard" : "/check-in"} onClick={closeAll} className="mobile-nav-btn" style={{ background: '#f0fdf4', border: '1.5px solid #10B981', color: '#166534', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10B981', animation: 'pulse 1.8s infinite' }}></span>
-                                            Service Check-In Open
-                                        </Link>
-                                    </li>
-                                )}
                                 {!currentUser ? (
                                     <li className="mobile-only-nav-item">
                                         <Link to="/login" onClick={closeAll} className="mobile-nav-btn login-btn">
@@ -253,11 +245,6 @@ const Navbar = () => {
                                         </li>
                                     </>
                                 )}
-                                <li className="mobile-only-nav-item">
-                                    <Link to="/donate" onClick={closeAll} className="mobile-nav-btn donate-btn">
-                                        <i className="fas fa-heart"></i> Give / Donate
-                                    </Link>
-                                </li>
                             </ul>
                         </nav>
 
