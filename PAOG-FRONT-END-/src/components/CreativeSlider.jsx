@@ -169,11 +169,6 @@ const CreativeSlider = () => {
       {/* FAR RIGHT: Permanent Flagship Headquarters Identity */}
       <div className="hero-wording-showcase">
         <div className="hero-text-card active">
-          <div className="hero-prestige-kicker">
-            <i className="fas fa-cross"></i>
-            <span>EPISCOPAL DISTRICT HEADQUARTERS</span>
-          </div>
-
           <h1 className="hero-title">
             <span className="hero-title-main">PENTECOSTAL ASSEMBLIES OF GOD</span>
             <span className="hero-title-sub">Ngungo Assembly — Mbeere Headquarters</span>
