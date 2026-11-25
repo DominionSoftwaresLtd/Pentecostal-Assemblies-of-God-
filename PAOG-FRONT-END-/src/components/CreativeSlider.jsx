@@ -77,6 +77,27 @@ const slides = [
   },
 ];
 
+const HERO_CARDS = [
+  {
+    id: 'assemblies',
+    title: 'District Assemblies',
+    link: '/assemblies',
+    items: ['Ngungo Headquarters', "Kiamachang'a Assembly", 'Rwika Assembly']
+  },
+  {
+    id: 'departments',
+    title: 'Church Departments',
+    link: '/departments',
+    items: ['Youth Fellowship', 'Women of Faith', 'Men of Honor']
+  },
+  {
+    id: 'about',
+    title: 'About Our Church',
+    link: '/about',
+    items: ['Bishop Clement Simba', 'Mbeere District Seat', 'Holy Spirit Revival']
+  },
+];
+
 const AUTO_INTERVAL = 8000;
 
 const CreativeSlider = () => {
@@ -180,17 +201,19 @@ const CreativeSlider = () => {
 
           <div className="hero-cta-wrapper">
             <div className="hero-cta-track">
-              {[
-                { id: 'about-1', label: 'About Our Church', link: '/about' },
-                { id: 'assemblies-1', label: 'District Assemblies', link: '/assemblies' },
-                { id: 'departments-1', label: 'Church Departments', link: '/departments' },
-                { id: 'about-2', label: 'About Our Church', link: '/about' },
-                { id: 'assemblies-2', label: 'District Assemblies', link: '/assemblies' },
-                { id: 'departments-2', label: 'Church Departments', link: '/departments' },
-              ].map(btn => (
-                <div key={btn.id} className="hero-cta-item">
-                  <Link to={btn.link} className="hero-carousel-btn">
-                    {btn.label}
+              {[...HERO_CARDS, ...HERO_CARDS].map((card, idx) => (
+                <div key={`${card.id}-${idx}`} className="hero-cta-item">
+                  <Link to={card.link} className="hero-creative-card">
+                    <span className="hero-card-title">{card.title}</span>
+                    <div className="hero-card-roller">
+                      <div className="hero-card-roll-track">
+                        {[...card.items, card.items[0]].map((subItem, sIdx) => (
+                          <div key={sIdx} className="hero-card-roll-item">
+                            {subItem}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </Link>
                 </div>
               ))}
