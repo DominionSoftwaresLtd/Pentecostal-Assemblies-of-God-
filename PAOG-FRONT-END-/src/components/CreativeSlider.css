@@ -231,71 +231,76 @@
   font-family: 'Poppins', sans-serif;
 }
 
+/* Prestige Kicker Tag */
+.hero-prestige-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(180, 83, 9, 0.07);
+  border: 1px solid rgba(180, 83, 9, 0.25);
+  color: #b45309;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 50px;
+  margin-bottom: 14px;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 1px 4px rgba(180, 83, 9, 0.06);
+}
+
+.hero-prestige-kicker i {
+  font-size: 0.72rem;
+  color: #b45309;
+}
+
 /* Grand Hero Headline in Deep Church Navy */
 .hero-title {
-  font-size: clamp(1.85rem, 3.1vw, 2.95rem);
-  font-weight: 850;
-  line-height: 1.15;
-  color: #000066;
-  margin-bottom: 14px;
-  font-family: 'Playfair Display', serif;
+  margin-bottom: 16px;
   text-shadow: none;
-  white-space: pre-line;
+}
+
+.hero-title-main {
+  display: block;
+  font-size: clamp(1.75rem, 2.75vw, 2.85rem);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #000066;
+  line-height: 1.14;
+  font-family: 'Playfair Display', Georgia, serif;
 }
 
 .hero-title-sub {
   display: block;
-  font-size: clamp(1.15rem, 1.85vw, 1.65rem);
+  font-size: clamp(1.15rem, 1.75vw, 1.6rem);
   color: #b45309;
   font-weight: 750;
-  margin-top: 6px;
+  margin-top: 8px;
   font-family: 'Poppins', sans-serif;
   letter-spacing: -0.01em;
+  line-height: 1.25;
 }
 
-/* Description in Rich Readable Charcoal */
+/* Description in Rich Readable Charcoal with subtle left accent line */
 .hero-desc {
-  font-size: 1rem;
-  color: #334155;
-  line-height: 1.65;
-  margin-bottom: 20px;
+  font-size: 0.98rem;
+  color: #475569;
+  line-height: 1.72;
+  margin-bottom: 24px;
   font-weight: 500;
-  max-width: 620px;
+  max-width: 600px;
   font-family: 'Poppins', sans-serif;
   text-shadow: none;
-}
-
-/* Identity highlights pills */
-.hero-identity-pills {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-bottom: 28px;
-}
-
-.hero-identity-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #f1f5f9;
-  border: 1px solid #cbd5e1;
-  padding: 6px 14px;
-  border-radius: 50px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: #000066;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-}
-
-.hero-identity-pill i {
-  color: #b45309;
-  font-size: 0.85rem;
+  border-left: 3px solid rgba(180, 83, 9, 0.45);
+  padding-left: 14px;
 }
 
 /* Action Buttons */
 .hero-cta-group {
   display: flex;
-  gap: 14px;
+  gap: 10px;
   flex-wrap: wrap;
   align-items: center;
 }
@@ -303,19 +308,20 @@
 .hero-btn-primary {
   display: inline-flex;
   align-items: center;
-  padding: 13px 28px;
+  gap: 8px;
+  padding: 12px 22px;
   background: linear-gradient(135deg, #000066 0%, #001f7a 100%);
   color: #ffffff;
   border: 1.5px solid #000066;
-  border-radius: 6px;
-  font-size: 0.84rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   text-decoration: none;
   transition: all 0.28s ease;
   font-family: 'Poppins', sans-serif;
-  box-shadow: 0 6px 20px rgba(0, 0, 102, 0.28);
+  box-shadow: 0 4px 14px rgba(0, 0, 102, 0.22);
 }
 
 .hero-btn-primary:hover {
@@ -323,25 +329,26 @@
   color: #ffffff;
   border-color: #b45309;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(180, 83, 9, 0.35);
+  box-shadow: 0 6px 18px rgba(180, 83, 9, 0.35);
 }
 
 .hero-btn-outline {
   display: inline-flex;
   align-items: center;
-  padding: 13px 26px;
+  gap: 8px;
+  padding: 12px 20px;
   background: #ffffff;
   color: #000066;
-  border: 2px solid #000066;
-  border-radius: 6px;
-  font-size: 0.84rem;
+  border: 1.5px solid rgba(0, 0, 102, 0.3);
+  border-radius: 8px;
+  font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   text-decoration: none;
   transition: all 0.28s ease;
   font-family: 'Poppins', sans-serif;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
 }
 
 .hero-btn-outline:hover {
@@ -349,7 +356,7 @@
   border-color: #000066;
   color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 102, 0.22);
+  box-shadow: 0 4px 14px rgba(0, 0, 102, 0.2);
 }
 
 /* ── Bottom Navigation Controls ── */

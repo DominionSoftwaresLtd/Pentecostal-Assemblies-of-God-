@@ -169,8 +169,13 @@ const CreativeSlider = () => {
       {/* FAR RIGHT: Permanent Flagship Headquarters Identity */}
       <div className="hero-wording-showcase">
         <div className="hero-text-card active">
+          <div className="hero-prestige-kicker">
+            <i className="fas fa-cross"></i>
+            <span>EPISCOPAL DISTRICT HEADQUARTERS</span>
+          </div>
+
           <h1 className="hero-title">
-            Pentecostal Assemblies of God
+            <span className="hero-title-main">PENTECOSTAL ASSEMBLIES OF GOD</span>
             <span className="hero-title-sub">Ngungo Assembly — Mbeere Headquarters</span>
           </h1>
           
@@ -180,12 +185,16 @@ const CreativeSlider = () => {
 
           <div className="hero-cta-group">
             <Link to="/about" className="hero-btn-primary">
-              About Our Church <i className="fas fa-arrow-right" style={{ fontSize: '0.72rem', marginLeft: '6px' }}></i>
+              <i className="fas fa-church" style={{ fontSize: '0.8rem' }}></i>
+              About Our Church
+              <i className="fas fa-arrow-right" style={{ fontSize: '0.72rem', marginLeft: '4px' }}></i>
             </Link>
             <Link to="/assemblies" className="hero-btn-outline">
-              District Assemblies Circuit
+              <i className="fas fa-sitemap" style={{ fontSize: '0.8rem' }}></i>
+              District Assemblies
             </Link>
             <Link to="/departments" className="hero-btn-outline">
+              <i className="fas fa-users" style={{ fontSize: '0.8rem' }}></i>
               Church Departments
             </Link>
           </div>
