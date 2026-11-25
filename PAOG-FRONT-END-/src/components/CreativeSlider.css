@@ -246,7 +246,7 @@
   line-height: 1.14;
   font-family: 'Playfair Display', Georgia, serif;
   
-  /* Celestial Golden Shimmer Gradient */
+  /* Celestial Golden Shimmer Gradient (Rests in Pure Navy, Sweeps on Card Shift) */
   background: linear-gradient(
     115deg,
     #000066 0%,
@@ -259,21 +259,26 @@
     #000066 100%
   );
   background-size: 260% 100%;
+  background-position: 100% 0;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: #000066; /* Fallback */
   
-  /* Entrance animation + Periodic celestial light wave */
-  animation: titleEntrance 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards,
-             divineShimmer 7.5s ease-in-out infinite 1.2s;
+  /* Entrance animation */
+  animation: titleEntrance 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes divineShimmer {
-  0%, 25% {
+/* Synchronized Celestial Golden Shimmer Sweep (Fires when Cards Shift to Next Box) */
+.hero-title-main.shimmer-pass {
+  animation: divineLightPass 0.65s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes divineLightPass {
+  0% {
     background-position: 100% 0;
   }
-  65%, 100% {
+  100% {
     background-position: -60% 0;
   }
 }
@@ -390,6 +395,39 @@
   height: 2px;
   background: linear-gradient(90deg, transparent, #f59e0b, transparent);
   opacity: 0.6;
+}
+
+/* Synchronized Light Sheen on Cards Pad during Sideways Shift */
+.hero-creative-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 15%,
+    rgba(255, 255, 255, 0.15) 35%,
+    rgba(254, 240, 138, 0.40) 50%,
+    rgba(255, 255, 255, 0.15) 65%,
+    transparent 85%
+  );
+  transform: translateX(-120%);
+  pointer-events: none;
+  opacity: 0;
+  border-radius: inherit;
+}
+
+.hero-cta-track.shifting .hero-creative-card::after {
+  opacity: 1;
+  animation: cardPadSheenSweep 0.65s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes cardPadSheenSweep {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
 }
 
 .hero-creative-card:hover {

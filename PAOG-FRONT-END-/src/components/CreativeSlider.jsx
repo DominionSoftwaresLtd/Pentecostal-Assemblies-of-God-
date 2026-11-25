@@ -238,7 +238,9 @@ const CreativeSlider = () => {
       <div className="hero-wording-showcase">
         <div className="hero-text-card active">
           <h1 className="hero-title">
-            <span className="hero-title-main">PENTECOSTAL ASSEMBLIES OF GOD</span>
+            <span className={`hero-title-main ${isShifting ? 'shimmer-pass' : ''}`}>
+              PENTECOSTAL ASSEMBLIES OF GOD
+            </span>
             <span className="hero-title-sub">Ngungo Assembly — Mbeere Headquarters</span>
           </h1>
           
@@ -247,7 +249,7 @@ const CreativeSlider = () => {
           </p>
 
           <div 
-            className="hero-cta-wrapper"
+            className={`hero-cta-wrapper ${isShifting ? 'shifting-pad' : ''}`}
             onMouseEnter={() => { isCtaHoveredRef.current = true; }}
             onMouseLeave={() => { isCtaHoveredRef.current = false; }}
           >
