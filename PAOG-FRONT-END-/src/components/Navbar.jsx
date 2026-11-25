@@ -111,15 +111,15 @@ const Navbar = () => {
                 <div className="container">
                     <div className="top-bar-content">
                         <div className="top-bar-left">
-                            <span>
+                            <span className="top-bar-email-wrap">
                                 <i className="fas fa-envelope"></i>
                                 <span className="top-bar-email-full">info@pagngungo.co.ke</span>
                             </span>
-                            <span className="top-bar-divider">|</span>
-                            <span>
-                                <i className="fas fa-phone"></i>
-                                +254 720 140 213
-                            </span>
+                            <span className="top-bar-divider top-bar-email-wrap">|</span>
+                            <a href="tel:+254720140213" className="top-bar-phone-wrap">
+                                <i className="fas fa-phone-alt"></i>
+                                <span>+254 720 140 213</span>
+                            </a>
                         </div>
 
                         <div className="top-bar-right">
@@ -149,7 +149,9 @@ const Navbar = () => {
                             <Link to="/">
                                 <img src={logoImg} alt="PAG Ngungo Assembly" className="logo-img" />
                                 <div className="logo-name">
-                                    <span className="logo-name-top">PAG — NGUNGO ASSEMBLY</span>
+                                    <span className="logo-name-top">
+                                        PAG — NGUNGO <span className="logo-assembly-word">ASSEMBLY</span>
+                                    </span>
                                     <span className="logo-name-bottom">MBEERE DISTRICT HEADQUARTERS</span>
                                 </div>
                             </Link>
