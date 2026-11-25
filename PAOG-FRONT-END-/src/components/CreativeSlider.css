@@ -616,21 +616,221 @@
 }
 
 /* ── Responsive Adaptations ── */
-@media (max-width: 1200px) {
+
+/* 1. Small Laptops & Tablets Landscape (901px – 1200px) */
+@media (min-width: 901px) and (max-width: 1200px) {
   .hero-bishop-full-presence {
-    width: 48vw;
+    width: 46vw;
     min-width: 380px;
   }
   .hero-wording-showcase {
-    right: clamp(20px, 4vw, 50px);
-    width: clamp(400px, 46vw, 580px);
+    left: 46vw;
+    right: 0;
+    width: 54vw;
+    padding: 0 clamp(20px, 3.5vw, 48px);
   }
-  .hero-title {
-    font-size: clamp(1.85rem, 3.2vw, 2.7rem);
+  .hero-title-main {
+    font-size: clamp(1.75rem, 2.7vw, 2.4rem);
+    line-height: 1.14;
+  }
+  .hero-title-sub {
+    font-size: clamp(1.02rem, 1.5vw, 1.35rem);
+    margin-top: 8px;
+  }
+  .hero-desc {
+    font-size: clamp(0.85rem, 1.2vw, 0.94rem);
+    line-height: 1.62;
+    margin-bottom: 18px;
+    max-width: 500px;
+  }
+  .hero-creative-card {
+    height: 56px;
+    padding: 6px 6px;
+  }
+  .hero-card-title {
+    font-size: clamp(0.66rem, 0.85vw, 0.74rem);
+  }
+  .hero-card-roll-item {
+    font-size: clamp(0.58rem, 0.75vw, 0.65rem);
   }
 }
 
-@media (max-width: 900px) {
+/* 2. Tablets Portrait & Foldables (601px – 900px) */
+@media (min-width: 601px) and (max-width: 900px) {
+  .creative-hero {
+    position: relative;
+    width: 100%;
+    margin-top: 0;
+    height: auto;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: visible;
+    background: #ffffff;
+    padding-bottom: 8px;
+  }
+
+  .hero-bishop-full-presence {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    max-width: 100%;
+    height: clamp(300px, 42vh, 420px);
+    flex-shrink: 0;
+    opacity: 1;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 68%,
+      rgba(0, 0, 0, 0.88) 80%,
+      rgba(0, 0, 0, 0.3) 92%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 68%,
+      rgba(0, 0, 0, 0.88) 80%,
+      rgba(0, 0, 0, 0.3) 92%,
+      transparent 100%
+    );
+  }
+
+  .hero-bishop-full-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 10%;
+    display: block;
+  }
+
+  .hero-wording-showcase {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    max-width: 100%;
+    transform: none;
+    padding: 0 24px 14px;
+    margin-top: -24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    z-index: 10;
+    flex: 0 0 auto;
+    background: linear-gradient(to bottom, transparent 0%, #ffffff 28px, #ffffff 100%);
+  }
+
+  .hero-text-card {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    transform: none !important;
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .hero-text-card.active {
+    transform: none !important;
+  }
+
+  .hero-title {
+    margin-bottom: 8px;
+    text-shadow: none;
+  }
+
+  .hero-title-main {
+    font-size: clamp(1.6rem, 3.8vw, 2.2rem);
+    line-height: 1.15;
+    letter-spacing: 0.03em;
+    color: #000066;
+    display: inline-block;
+  }
+
+  .hero-title-sub {
+    font-size: clamp(1rem, 2.4vw, 1.25rem);
+    color: #b45309;
+    font-weight: 700;
+    margin-top: 6px;
+    line-height: 1.25;
+  }
+
+  .hero-desc {
+    font-size: clamp(0.84rem, 1.9vw, 0.94rem);
+    line-height: 1.58;
+    color: #475569;
+    border: none;
+    padding: 0;
+    margin: 4px auto 14px;
+    max-width: 540px;
+  }
+
+  .hero-cta-wrapper {
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto 6px;
+    padding: 2px 0;
+  }
+
+  .hero-cta-item {
+    padding: 0 4px;
+  }
+
+  .hero-creative-card {
+    height: 62px;
+    padding: 6px 4px;
+    border-radius: 9px;
+  }
+
+  .hero-card-title {
+    font-size: clamp(0.62rem, 1.5vw, 0.72rem);
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    white-space: normal;
+    line-height: 1.15;
+    word-break: break-word;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-card-roller {
+    height: 16px;
+    line-height: 16px;
+    margin-top: 3px;
+  }
+
+  .hero-card-roll-item {
+    height: 16px;
+    line-height: 16px;
+    font-size: clamp(0.56rem, 1.4vw, 0.64rem);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 2px;
+  }
+}
+
+/* 3. Mobile Phones & Compact Screens (<= 600px) */
+@media (max-width: 600px) {
   .creative-hero {
     position: relative;
     width: 100%;
