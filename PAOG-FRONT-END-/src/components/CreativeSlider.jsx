@@ -77,12 +77,6 @@ const slides = [
   },
 ];
 
-const ROTATING_BUTTONS = [
-  { id: 'about', label: 'About Our Church', link: '/about' },
-  { id: 'assemblies', label: 'District Assemblies', link: '/assemblies' },
-  { id: 'departments', label: 'Church Departments', link: '/departments' },
-];
-
 const AUTO_INTERVAL = 8000;
 
 const CreativeSlider = () => {
@@ -91,39 +85,6 @@ const CreativeSlider = () => {
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
   const autoRef = useRef(null);
-
-  // Rotating Action Buttons State
-  const [buttons, setButtons] = useState(ROTATING_BUTTONS);
-  const [isButtonShifting, setIsButtonShifting] = useState(false);
-  const isButtonHoveredRef = useRef(false);
-
-  const completeShift = () => {
-    setIsButtonShifting(shifting => {
-      if (shifting) {
-        setButtons(prev => [prev[1], prev[2], prev[0]]);
-        return false;
-      }
-      return false;
-    });
-  };
-
-  useEffect(() => {
-    const btnInterval = setInterval(() => {
-      if (!isButtonHoveredRef.current) {
-        setIsButtonShifting(true);
-      }
-    }, 3600);
-    return () => clearInterval(btnInterval);
-  }, []);
-
-  useEffect(() => {
-    if (isButtonShifting) {
-      const fallback = setTimeout(() => {
-        completeShift();
-      }, 720);
-      return () => clearTimeout(fallback);
-    }
-  }, [isButtonShifting]);
 
   const startAuto = () => {
     clearInterval(autoRef.current);
@@ -217,32 +178,22 @@ const CreativeSlider = () => {
             The apostolic headquarters church presiding over 8 Mbeere District assemblies and Kyuso Circuit, Kitui County. Anchored in the Holy Spirit, sound biblical doctrine, transformative worship, and community discipleship under the leadership of Bishop Rev. Clement Simba.
           </p>
 
-          <div 
-            className="hero-cta-wrapper"
-            onMouseEnter={() => { isButtonHoveredRef.current = true; }}
-            onMouseLeave={() => { isButtonHoveredRef.current = false; }}
-          >
-            <div 
-              className={`hero-cta-track ${isButtonShifting ? 'shifting' : ''}`}
-              onTransitionEnd={(e) => {
-                if (e.propertyName === 'transform') {
-                  completeShift();
-                }
-              }}
-            >
-              {[...buttons, buttons[0]].map((btn, index) => {
-                const isPrimary = isButtonShifting ? index === 1 : index === 0;
-                return (
-                  <div key={`${btn.id}-${index}`} className="hero-cta-item">
-                    <Link
-                      to={btn.link}
-                      className={isPrimary ? 'hero-btn-primary' : 'hero-btn-outline'}
-                    >
-                      {btn.label}
-                    </Link>
-                  </div>
-                );
-              })}
+          <div className="hero-cta-wrapper">
+            <div className="hero-cta-track">
+              {[
+                { id: 'about-1', label: 'About Our Church', link: '/about' },
+                { id: 'assemblies-1', label: 'District Assemblies', link: '/assemblies' },
+                { id: 'departments-1', label: 'Church Departments', link: '/departments' },
+                { id: 'about-2', label: 'About Our Church', link: '/about' },
+                { id: 'assemblies-2', label: 'District Assemblies', link: '/assemblies' },
+                { id: 'departments-2', label: 'Church Departments', link: '/departments' },
+              ].map(btn => (
+                <div key={btn.id} className="hero-cta-item">
+                  <Link to={btn.link} className="hero-carousel-btn">
+                    {btn.label}
+                  </Link>
+                </div>
+              ))}
             </div>
           </div>
         </div>

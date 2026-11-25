@@ -339,34 +339,50 @@
 
 .hero-cta-track {
   display: flex;
-  gap: 10px;
-  width: 100%;
+  width: 200%;
   will-change: transform;
+  animation: smoothButtonCycle 11s cubic-bezier(0.25, 1, 0.5, 1) infinite;
 }
 
-.hero-cta-track.shifting {
-  transform: translateX(calc(-1 * (100% + 10px) / 3));
-  transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
+.hero-cta-wrapper:hover .hero-cta-track {
+  animation-play-state: paused;
 }
 
-.hero-cta-track:not(.shifting) {
-  transform: translateX(0);
-  transition: none;
+@keyframes smoothButtonCycle {
+  /* Step 1: Items 1, 2, 3 visible (hold still for ~3s) */
+  0%, 25% {
+    transform: translateX(0);
+  }
+  /* Slide 1 -> 2: First goes to last, second comes first, third comes second */
+  33.333%, 58.333% {
+    transform: translateX(-16.666667%);
+  }
+  /* Slide 2 -> 3: Next rotation */
+  66.667%, 91.667% {
+    transform: translateX(-33.333333%);
+  }
+  /* Seamless loop back to origin */
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .hero-cta-item {
-  flex: 0 0 calc((100% - 20px) / 3);
-  min-width: 0;
-  display: flex;
+  width: 16.666667%;
+  flex: 0 0 16.666667%;
+  box-sizing: border-box;
+  padding: 0 5px;
 }
 
-.hero-btn-primary,
-.hero-btn-outline {
+.hero-carousel-btn {
   width: 100%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 12px 10px;
+  background: linear-gradient(135deg, #000066 0%, #001f7a 100%);
+  color: #ffffff;
+  border: 1.5px solid #000066;
   border-radius: 8px;
   font-size: clamp(0.74rem, 0.78vw, 0.8rem);
   font-weight: 750;
@@ -374,40 +390,18 @@
   text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
-  transition: background 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease, transform 0.28s ease;
   font-family: 'Poppins', sans-serif;
   text-align: center;
   box-sizing: border-box;
-}
-
-.hero-btn-primary {
-  background: linear-gradient(135deg, #000066 0%, #001f7a 100%);
-  color: #ffffff;
-  border: 1.5px solid #000066;
   box-shadow: 0 4px 14px rgba(0, 0, 102, 0.22);
+  transition: all 0.28s ease;
 }
 
-.hero-btn-primary:hover {
+.hero-carousel-btn:hover {
   background: linear-gradient(135deg, #b45309 0%, #d97706 100%);
-  color: #ffffff;
   border-color: #b45309;
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(180, 83, 9, 0.35);
-}
-
-.hero-btn-outline {
-  background: #ffffff;
-  color: #000066;
-  border: 1.5px solid rgba(0, 0, 102, 0.3);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
-}
-
-.hero-btn-outline:hover {
-  background: #000066;
-  border-color: #000066;
-  color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(0, 0, 102, 0.2);
 }
 
 /* ── Bottom Navigation Controls ── */
