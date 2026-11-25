@@ -82,19 +82,19 @@ const HERO_CARDS = [
     id: 'assemblies',
     title: 'District Assemblies',
     link: '/assemblies',
-    items: ['Ngungo Headquarters', "Kiamachang'a Assembly", 'Rwika Assembly']
+    items: ['Ngungo Headquarters', "Kiamachang'a Assembly", 'Rwika Assembly', 'Kyuso Circuit']
   },
   {
     id: 'departments',
     title: 'Church Departments',
     link: '/departments',
-    items: ['Youth Fellowship', 'Women of Faith', 'Men of Honor']
+    items: ['Youth Fellowship', 'Women of Faith', 'Men of Honor', 'Sunday School']
   },
   {
     id: 'ministries',
     title: 'Church Ministries',
     link: '/ministries',
-    items: ['Praise & Worship', 'Instrumentalist Band', 'Sanctuary Choir']
+    items: ['Praise & Worship', 'Instrumentalist Band', 'Sanctuary Choir', 'Intercessory Prayer']
   },
 ];
 
@@ -207,7 +207,7 @@ const CreativeSlider = () => {
                     <span className="hero-card-title">{card.title}</span>
                     <div className="hero-card-roller">
                       <div className="hero-card-roll-track">
-                        {[...card.items, card.items[0]].map((subItem, sIdx) => (
+                        {card.items.map((subItem, sIdx) => (
                           <div key={sIdx} className="hero-card-roll-item">
                             {subItem}
                           </div>

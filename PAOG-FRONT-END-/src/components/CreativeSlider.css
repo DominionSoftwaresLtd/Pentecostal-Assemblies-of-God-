@@ -328,7 +328,7 @@
   padding-left: 14px;
 }
 
-/* Rotating Action Cards Carousel with Upward Rolling Sub-Items */
+/* Rotating Action Cards Carousel with Continuous Slow-Motion Reel */
 .hero-cta-wrapper {
   position: relative;
   width: 100%;
@@ -341,7 +341,7 @@
   display: flex;
   width: 200%;
   will-change: transform;
-  animation: smoothButtonCycle 19.5s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+  animation: smoothButtonCycle 24s cubic-bezier(0.25, 1, 0.5, 1) infinite;
 }
 
 .hero-cta-wrapper:hover .hero-cta-track,
@@ -350,16 +350,16 @@
 }
 
 @keyframes smoothButtonCycle {
-  /* Box 1: Hold still for 5.6s while vertical items roll upwards */
-  0%, 28.7% {
+  /* Box 1: Holds still for 7.2s while all items roll up in slow motion */
+  0%, 30.0% {
     transform: translateX(0);
   }
-  /* Slide 1 -> 2: Shift sideways over 0.9s */
-  33.333%, 62.0% {
+  /* Slide 1 -> 2: Shifts sideways over 0.8s */
+  33.333%, 63.333% {
     transform: translateX(-16.666667%);
   }
-  /* Slide 2 -> 3: Shift sideways over 0.9s */
-  66.667%, 95.3% {
+  /* Slide 2 -> 3: Shifts sideways over 0.8s */
+  66.667%, 96.667% {
     transform: translateX(-33.333333%);
   }
   /* Seamless loop back to origin */
@@ -377,13 +377,13 @@
 
 .hero-creative-card {
   width: 100%;
-  height: 56px;
+  height: 58px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 6px 8px;
+  padding: 7px 8px;
   background: linear-gradient(135deg, #000066 0%, #001f7a 100%);
   color: #ffffff;
   border: 1.5px solid rgba(0, 0, 102, 0.4);
@@ -426,41 +426,40 @@
 }
 
 .hero-card-roller {
-  height: 17px;
-  line-height: 17px;
+  height: 18px;
+  line-height: 18px;
   overflow: hidden;
   margin-top: 3px;
   width: 100%;
+  position: relative;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 82%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 82%, transparent 100%);
 }
 
 .hero-card-roll-track {
   display: flex;
   flex-direction: column;
-  animation: rollUpItems 6.5s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+  animation: rollUpItems 8s cubic-bezier(0.35, 0, 0.25, 1) infinite;
 }
 
 @keyframes rollUpItems {
-  /* Item 1 visible for ~1.6s */
-  0%, 24% {
+  /* Item 1 visible at start */
+  0%, 15% {
     transform: translateY(0);
   }
-  /* Roll up to Item 2, visible for ~1.6s */
-  30%, 54% {
-    transform: translateY(-25%);
-  }
-  /* Roll up to Item 3, visible for ~1.6s */
-  60%, 84% {
-    transform: translateY(-50%);
-  }
-  /* Roll up to Item 1 clone right before the horizontal shift */
-  90%, 100% {
+  /* Continuous, silky slow-motion clock reel rolling through items 2, 3, all the way to 4 */
+  77.5%, 90% {
     transform: translateY(-75%);
+  }
+  /* Resets back to item 1 during the horizontal shift */
+  98%, 100% {
+    transform: translateY(0);
   }
 }
 
 .hero-card-roll-item {
-  height: 17px;
-  line-height: 17px;
+  height: 18px;
+  line-height: 18px;
   font-size: clamp(0.63rem, 0.67vw, 0.69rem);
   font-weight: 600;
   color: #fde68a;
