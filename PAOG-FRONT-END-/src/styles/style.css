@@ -8713,25 +8713,37 @@ p {
 }
 
 .org-node {
-    border: 1px solid #ccc;
-    padding: 8px 18px;
+    border: 1px solid #cbd5e1;
+    padding: 8px 14px;
     text-decoration: none;
-    color: #333;
-    font-size: 0.85rem;
-    font-weight: 600;
+    color: #1e293b;
+    font-size: 0.82rem;
+    font-weight: 700;
     display: inline-block;
-    border-radius: 4px;
-    background: #fff;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.org-node:hover {
+    border-color: #2563EB;
+    color: #2563EB;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
 }
 
 .org-node-root {
-    background: var(--primary-color);
-    color: #fff;
-    border-color: var(--primary-color);
-    padding: 12px 25px;
+    background: linear-gradient(135deg, #000033 0%, #000066 100%);
+    color: #ffffff !important;
+    border: 1.5px solid #3b82f6 !important;
+    padding: 12px 24px;
     font-size: 0.95rem;
-    box-shadow: 0 4px 10px rgba(32, 58, 67, 0.2);
+    font-weight: 800;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 102, 0.25);
+    white-space: nowrap;
 }
 
 .org-node-highlight {
