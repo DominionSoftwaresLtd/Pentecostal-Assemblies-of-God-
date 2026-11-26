@@ -16,6 +16,8 @@ import Leadership from './pages/Leadership';
 import Assemblies from './pages/Assemblies';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 import QuickCheckIn from './pages/QuickCheckIn';
 import MemberDashboard from './pages/MemberDashboard';
 
@@ -80,6 +82,8 @@ function App() {
           <Route path="/assemblies" element={<Assemblies />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/check-in" element={<QuickCheckIn />} />
           <Route path="/dashboard" element={<MemberDashboard />} />
           <Route path="/member-dashboard" element={<MemberDashboard />} />
