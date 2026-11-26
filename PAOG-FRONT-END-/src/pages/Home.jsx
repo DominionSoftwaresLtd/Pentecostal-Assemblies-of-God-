@@ -186,132 +186,81 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* About Section — Redesigned */}
+            {/* About Section — Dignified Pastoral Redesign */}
             <section className="about-section-v2">
                 <div className="container">
                     <div className="about-v2-grid">
                         <div className="about-v2-text-side">
-                            <div className="about-v2-eyebrow"><span>Who We Are</span></div>
-                            <h2 className="about-v2-heading">
-                                Pentecostal Assemblies of God —<br />
-                                <em>Ngungo Assembly</em>
+                            <span className="about-v2-eyebrow-text">Pentecostal Assemblies of God</span>
+                            <h2 className="about-v2-heading-modern">
+                                Welcome to <em>Ngungo Assembly</em>
                             </h2>
-                            <p className="about-v2-desc">
-                                Pentecostal Assemblies of God - Ngungo Assembly proudly serves as the Headquarter Church for Mbeere District.
-                                We are a Christ-centered community grounded in sound biblical doctrine, Holy Spirit empowerment, and passionate evangelism.
+                            <p className="about-v2-desc-modern">
+                                Rooted in the Holy Spirit and sound biblical doctrine, PAG Ngungo Assembly serves as the district headquarters and spiritual covering for Pentecostal Assemblies of God across Mbeere District and Kyuso Circuit.
                             </p>
-                            <p className="about-v2-desc">
-                                As the district headquarter church, Ngungo coordinates, nurtures, and provides episcopal guidance to assemblies across
-                                Mbeere District (including Kiamachang'a, Rwika, Kathera, Ngangari, Mugaari, Muumoni, and Gikuru) as well as our circuit assemblies
-                                in Kyuso, Kitui County (Marisi, Matooni, and Kyuso Assembly).
+                            <p className="about-v2-desc-modern">
+                                Under the apostolic leadership of Bishop Rev. Clement Simba, our fellowship is dedicated to transformative worship, fervent prayer, compassionate outreach, and raising mature disciples of Jesus Christ.
                             </p>
-                            <div className="about-v2-pills">
-                                <div className="about-v2-pill"><i className="fas fa-bible"></i> Bible-Based Preaching</div>
-                                <div className="about-v2-pill"><i className="fas fa-fire"></i> Spirit-Filled Worship</div>
-                                <div className="about-v2-pill"><i className="fas fa-users"></i> District Fellowship</div>
+
+                            <div className="about-v2-pillars-grid">
+                                <div className="about-v2-pillar-item">
+                                    <div className="about-v2-pillar-title">
+                                        <i className="fas fa-bible"></i> Biblical Truth
+                                    </div>
+                                    <p className="about-v2-pillar-sub">Sound biblical exposition and grounded doctrine for all ages.</p>
+                                </div>
+                                <div className="about-v2-pillar-item">
+                                    <div className="about-v2-pillar-title">
+                                        <i className="fas fa-fire"></i> Spirit-Filled
+                                    </div>
+                                    <p className="about-v2-pillar-sub">Passionate praise, fervent prayer, and Holy Spirit revival.</p>
+                                </div>
+                                <div className="about-v2-pillar-item">
+                                    <div className="about-v2-pillar-title">
+                                        <i className="fas fa-users"></i> United Family
+                                    </div>
+                                    <p className="about-v2-pillar-sub">Nurturing families, youth, and vibrant district fellowship.</p>
+                                </div>
                             </div>
-                            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '16px' }}>
-                                <Link to="/about" className="btn btn-primary">Read More About Us</Link>
-                                <Link to="/assemblies" className="btn btn-secondary">Explore District Assemblies</Link>
+
+                            <div className="about-v2-actions">
+                                <Link to="/about" className="btn btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 24px', borderRadius: '10px', fontWeight: 700 }}>
+                                    Learn More About Us <i className="fas fa-arrow-right"></i>
+                                </Link>
+                                <Link to="/assemblies" className="btn btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 22px', borderRadius: '10px', fontWeight: 700 }}>
+                                    District Assemblies
+                                </Link>
                             </div>
                         </div>
-                        <div className="about-v2-photo-side">
-                            <div style={{
-                                background: 'linear-gradient(145deg, #0f172a 0%, #1e293b 60%, #090d16 100%)',
-                                borderRadius: '18px',
-                                padding: '24px 22px',
-                                color: '#ffffff',
-                                border: '2px solid rgba(232, 125, 30, 0.4)',
-                                boxShadow: '0 16px 36px rgba(0,0,0,0.18)',
-                                position: 'relative',
-                                overflow: 'hidden'
-                            }}>
-                                <div style={{
-                                    position: 'absolute',
-                                    top: '-20px',
-                                    right: '-20px',
-                                    width: '120px',
-                                    height: '120px',
-                                    background: 'radial-gradient(circle, rgba(232,125,30,0.25) 0%, transparent 70%)',
-                                    borderRadius: '50%'
-                                }}></div>
 
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '16px' }}>
-                                    <div style={{
-                                        width: '56px',
-                                        height: '56px',
-                                        borderRadius: '14px',
-                                        background: 'rgba(232,125,30,0.15)',
-                                        border: '1.5px solid #E87D1E',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        color: '#E87D1E',
-                                        fontSize: '1.6rem'
-                                    }}>
-                                        <i className="fas fa-church"></i>
-                                    </div>
+                        <div className="about-v2-photo-side">
+                            <div className="about-pastoral-card">
+                                <div className="about-pastoral-top">
                                     <img
-                                        src={logoImg}
-                                        alt="PAG Ngungo Assembly Logo"
-                                        style={{
-                                            width: '60px',
-                                            height: '60px',
-                                            objectFit: 'contain',
-                                            borderRadius: '50%',
-                                            background: '#ffffff',
-                                            padding: '4px',
-                                            boxShadow: '0 4px 14px rgba(0,0,0,0.3)',
-                                            border: '2px solid #E87D1E',
-                                            flexShrink: 0
-                                        }}
+                                        src={bishopPhoto}
+                                        alt="Bishop Rev. Clement Simba"
+                                        className="about-pastoral-avatar"
                                     />
                                     <div>
-                                        <span style={{ fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '1.5px', color: '#E87D1E', fontWeight: 800 }}>Headquarter Church</span>
-                                        <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: '#f8fafc' }}>Mbeere District HQ</h3>
+                                        <span className="about-pastoral-badge">Pastoral Leadership</span>
+                                        <h3 className="about-pastoral-name">Bishop Rev. Clement Simba</h3>
+                                        <p className="about-pastoral-title">District Overseer • Mbeere District</p>
                                     </div>
                                 </div>
 
-                                <p style={{ fontSize: '0.92rem', color: '#cbd5e1', lineHeight: '1.65', marginBottom: '16px' }}>
-                                    Pentecostal Assemblies of God - Ngungo Assembly serves as the episcopal and administrative center for 8 Mbeere assemblies and the Kyuso circuit in Kitui County.
-                                </p>
-
-                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px', marginBottom: '16px' }}>
-                                    <div style={{ background: 'rgba(255,255,255,0.05)', padding: '12px 14px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.08)' }}>
-                                        <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#E87D1E' }}>8</div>
-                                        <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Mbeere Assemblies</div>
-                                    </div>
-                                    <div style={{ background: 'rgba(255,255,255,0.05)', padding: '12px 14px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.08)' }}>
-                                        <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#3b82f6' }}>3</div>
-                                        <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Kyuso Circuit Arms</div>
-                                    </div>
+                                <div className="about-pastoral-quote">
+                                    <p>
+                                        "We welcome you to fellowship with us in Spirit and Truth. Here, lives are transformed by the Gospel, families are anchored in faith, and the name of the Lord is exalted."
+                                    </p>
                                 </div>
 
-                                <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.86rem', color: '#f1f5f9' }}>
-                                    <span><i className="fas fa-crown" style={{ color: '#E87D1E', marginRight: '6px' }}></i> Presiding Bishop</span>
-                                    <strong style={{ color: '#ffffff' }}>Rev. Clement Simba</strong>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                                        <img
-                                            src={bishopPhoto}
-                                            alt="Bishop Rev. Clement Simba"
-                                            style={{
-                                                width: '46px',
-                                                height: '46px',
-                                                borderRadius: '50%',
-                                                objectFit: 'cover',
-                                                objectPosition: 'top',
-                                                border: '2px solid #E87D1E',
-                                                boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
-                                                flexShrink: 0
-                                            }}
-                                        />
-                                        <div>
-                                            <div style={{ fontSize: '0.74rem', textTransform: 'uppercase', letterSpacing: '0.5px', color: '#E87D1E', fontWeight: 800 }}>Presiding Bishop &amp; Overseer</div>
-                                            <strong style={{ color: '#ffffff', fontSize: '0.94rem' }}>Rev. Clement Simba</strong>
-                                        </div>
+                                <div className="about-pastoral-footer">
+                                    <div className="about-pastoral-role">
+                                        <i className="fas fa-church"></i>
+                                        <span>Seat of District Administration</span>
                                     </div>
-                                    <Link to="/leadership" style={{ color: '#E87D1E', fontSize: '0.82rem', fontWeight: 700, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                                        Profile &rarr;
+                                    <Link to="/leadership" className="about-pastoral-link">
+                                        Meet Leadership <i className="fas fa-chevron-right" style={{ fontSize: '0.75rem' }}></i>
                                     </Link>
                                 </div>
                             </div>

@@ -7600,196 +7600,227 @@ p {
 }
 
 /* =====================================================
-   HOME REDESIGN â€” About Section v2
+   HOME REDESIGN — About Section v2 (Pastoral & Authentic)
    ===================================================== */
 .about-section-v2 {
-    padding: 36px 0 24px;
-    background: #fff;
+    padding: 40px 0 30px;
+    background: #ffffff;
     position: relative;
     overflow: hidden;
 }
-.about-section-v2::before {
-    content: '';
-    position: absolute;
-    top: -80px;
-    right: -80px;
-    width: 480px;
-    height: 480px;
-    background: radial-gradient(circle, rgba(230,126,34,0.06) 0%, transparent 68%);
-    pointer-events: none;
-}
 .about-v2-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 48px;
     align-items: center;
 }
 .about-v2-text-side {
-    text-align: center;
+    text-align: left;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
 }
-.about-v2-eyebrow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    margin-bottom: 22px;
-}
-.about-v2-eyebrow::before,
-.about-v2-eyebrow::after {
-    content: '';
-    display: block;
-    width: 44px;
-    height: 3px;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-    border-radius: 2px;
-    flex-shrink: 0;
-}
-.about-v2-eyebrow::after {
-    background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
-}
-.about-v2-eyebrow span {
-    color: var(--primary-color);
-    font-size: 0.75rem;
+.about-v2-eyebrow-text {
+    font-size: 0.82rem;
     font-weight: 700;
-    letter-spacing: 3px;
     text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #E87D1E;
+    margin-bottom: 10px;
+    display: inline-block;
 }
-.about-v2-heading {
-    font-size: clamp(1.9rem, 3.2vw, 2.7rem);
+.about-v2-heading-modern {
+    font-size: clamp(2rem, 3.2vw, 2.75rem);
     font-family: var(--font-secondary);
-    color: #0d1b2a;
+    color: #000066;
+    font-weight: 700;
     line-height: 1.22;
-    margin-bottom: 26px;
+    margin-bottom: 20px;
 }
-.about-v2-heading em {
-    color: var(--primary-color);
+.about-v2-heading-modern em {
+    color: #E87D1E;
     font-style: normal;
 }
-.about-v2-desc {
-    color: #5a5a6a;
-    font-size: 0.97rem;
-    line-height: 1.82;
+.about-v2-desc-modern {
+    color: #4a5568;
+    font-size: 1rem;
+    line-height: 1.78;
     margin-bottom: 14px;
 }
-.about-v2-pills {
+.about-v2-pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 24px 0 32px;
+    width: 100%;
+}
+.about-v2-pillar-item {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 14px 16px;
+    transition: all 0.25s ease;
+}
+.about-v2-pillar-item:hover {
+    border-color: #cbd5e1;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 102, 0.06);
+}
+.about-v2-pillar-title {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #000066;
+    margin-bottom: 6px;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 11px;
-    margin: 28px 0 34px;
-}
-
-@media (max-width: 768px) {
-    .about-v2-pills {
-        display: none !important;
-    }
-    .about-section-v2 {
-        padding: 40px 0 40px !important;
-    }
-    .vision-mission-v2 {
-        padding: 50px 0 !important;
-    }
-}
-.about-v2-pill {
-    display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: #fef6ec;
-    border: 1.5px solid rgba(230,126,34,0.22);
-    border-radius: 50px;
-    padding: 9px 20px;
+}
+.about-v2-pillar-title i {
+    color: #E87D1E;
+    font-size: 0.85rem;
+}
+.about-v2-pillar-sub {
     font-size: 0.82rem;
-    font-weight: 600;
-    color: #333;
-    transition: all 0.28s ease;
+    color: #64748b;
+    line-height: 1.45;
+    margin: 0;
 }
-.about-v2-pill:hover {
-    background: var(--primary-color);
-    border-color: var(--primary-color);
-    color: #fff;
+.about-v2-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    align-items: center;
 }
-.about-v2-pill:hover i { color: #fff; }
-.about-v2-pill i {
-    color: var(--primary-color);
-    font-size: 0.82rem;
-    transition: color 0.28s ease;
-}
-/* Photo side */
+
+/* Pastoral Card */
 .about-v2-photo-side {
     position: relative;
-}
-.about-v2-photo-wrap {
-    position: relative;
-    padding: 18px 18px 50px 0;
-}
-.about-v2-photo-main {
     width: 100%;
-    height: 460px;
-    object-fit: cover;
-    border-radius: 22px;
-    display: block;
-    box-shadow: 0 30px 70px rgba(0,0,0,0.16);
 }
-.about-v2-photo-accent {
-    position: absolute;
-    bottom: 0;
-    right: -16px;
-    width: 175px;
-    height: 175px;
-    border-radius: 18px;
-    object-fit: cover;
-    box-shadow: 0 16px 40px rgba(0,0,0,0.22);
-    border: 5px solid #fff;
-    z-index: 2;
+.about-pastoral-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 28px 24px;
+    box-shadow: 0 16px 40px -8px rgba(0, 0, 102, 0.08), 0 4px 16px rgba(0, 0, 0, 0.03);
+    position: relative;
+    overflow: hidden;
 }
-.about-v2-badge {
+.about-pastoral-card::before {
+    content: '';
     position: absolute;
     top: 0;
+    left: 0;
     right: 0;
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-    color: #fff;
-    border-radius: 50%;
-    width: 108px;
-    height: 108px;
+    height: 4px;
+    background: linear-gradient(90deg, #000066, #E87D1E);
+}
+.about-pastoral-top {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-size: 0.78rem;
-    font-weight: 600;
-    line-height: 1.3;
-    box-shadow: 0 10px 30px rgba(211,84,0,0.45);
-    z-index: 3;
+    gap: 16px;
+    margin-bottom: 20px;
 }
-.about-v2-badge strong {
-    font-size: 1.55rem;
-    display: block;
-    line-height: 1;
+.about-pastoral-avatar {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top center;
+    border: 3px solid #f1f5f9;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    flex-shrink: 0;
+}
+.about-pastoral-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #E87D1E;
+    background: rgba(232, 125, 30, 0.1);
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 6px;
+}
+.about-pastoral-name {
+    font-size: 1.18rem;
     font-weight: 800;
+    color: #000066;
+    margin: 0 0 3px 0;
+    font-family: var(--font-secondary);
+    line-height: 1.25;
 }
-.about-v2-deco-ring {
-    position: absolute;
-    bottom: 10px;
-    left: -28px;
-    width: 110px;
-    height: 110px;
-    border: 8px solid rgba(230,126,34,0.13);
-    border-radius: 50%;
-    z-index: 0;
+.about-pastoral-title {
+    font-size: 0.82rem;
+    color: #64748b;
+    font-weight: 600;
+    margin: 0;
 }
-.about-v2-deco-dot {
-    position: absolute;
-    top: 55px;
-    left: -14px;
-    width: 18px;
-    height: 18px;
-    background: var(--secondary-color);
-    border-radius: 50%;
-    opacity: 0.6;
+.about-pastoral-quote {
+    background: #f8fafc;
+    border-left: 3px solid #E87D1E;
+    border-radius: 0 10px 10px 0;
+    padding: 16px 18px;
+    margin-bottom: 20px;
+    font-style: italic;
+    color: #334155;
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+.about-pastoral-quote p {
+    margin: 0;
+}
+.about-pastoral-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    border-top: 1px solid #f1f5f9;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.about-pastoral-role {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #000066;
+}
+.about-pastoral-role i {
+    color: #E87D1E;
+    font-size: 0.85rem;
+}
+.about-pastoral-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #000066;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.about-pastoral-link:hover {
+    color: #E87D1E;
+}
+
+@media (max-width: 992px) {
+    .about-v2-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+    }
+}
+
+@media (max-width: 680px) {
+    .about-v2-pillars-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    .about-section-v2 {
+        padding: 30px 0 25px !important;
+    }
 }
 
 /* =====================================================
