@@ -109,19 +109,18 @@ const Home = () => {
                         <ul>
                             <li>
                                 <Link to="/assemblies" className="org-node org-node-root">
-                                    <i className="fas fa-crown" style={{ marginRight: '8px', color: '#f59e0b' }}></i>
                                     PAG Ngungo Assembly — Mbeere District HQ
                                 </Link>
                                 <ul>
-                                    <li><Link to="/assemblies" className="org-node"><i className="fas fa-church" style={{ marginRight: '6px', color: '#2563EB' }}></i>Kiamachang'a Assembly</Link></li>
-                                    <li><Link to="/assemblies" className="org-node"><i className="fas fa-church" style={{ marginRight: '6px', color: '#2563EB' }}></i>Rwika Assembly</Link></li>
-                                    <li><Link to="/assemblies" className="org-node"><i className="fas fa-church" style={{ marginRight: '6px', color: '#2563EB' }}></i>Kathera Assembly</Link></li>
-                                    <li><Link to="/assemblies" className="org-node"><i className="fas fa-church" style={{ marginRight: '6px', color: '#2563EB' }}></i>Ngangari Assembly</Link></li>
-                                    <li><Link to="/assemblies" className="org-node"><i className="fas fa-church" style={{ marginRight: '6px', color: '#2563EB' }}></i>Mugaari Assembly</Link></li>
-                                    <li><Link to="/assemblies" className="org-node"><i className="fas fa-church" style={{ marginRight: '6px', color: '#2563EB' }}></i>Muumoni Assembly</Link></li>
-                                    <li><Link to="/assemblies" className="org-node"><i className="fas fa-church" style={{ marginRight: '6px', color: '#2563EB' }}></i>Gikuru Assembly</Link></li>
-                                    <li><Link to="/assemblies" className="org-node"><i className="fas fa-church" style={{ marginRight: '6px', color: '#2563EB' }}></i>Marisi Assembly (Kyuso)</Link></li>
-                                    <li><Link to="/assemblies" className="org-node"><i className="fas fa-church" style={{ marginRight: '6px', color: '#2563EB' }}></i>Matooni Assembly (Kyuso)</Link></li>
+                                    <li><Link to="/assemblies" className="org-node">Kiamachang'a</Link></li>
+                                    <li><Link to="/assemblies" className="org-node">Rwika</Link></li>
+                                    <li><Link to="/assemblies" className="org-node">Kathera</Link></li>
+                                    <li><Link to="/assemblies" className="org-node">Ngangari</Link></li>
+                                    <li><Link to="/assemblies" className="org-node">Mugaari</Link></li>
+                                    <li><Link to="/assemblies" className="org-node">Muumoni</Link></li>
+                                    <li><Link to="/assemblies" className="org-node">Gikuru</Link></li>
+                                    <li><Link to="/assemblies" className="org-node">Marisi</Link></li>
+                                    <li><Link to="/assemblies" className="org-node">Matooni</Link></li>
                                 </ul>
                             </li>
                         </ul>
