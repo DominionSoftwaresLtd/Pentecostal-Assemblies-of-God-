@@ -7,28 +7,12 @@ import bishopPhoto from '../assets/Bishop Clement Simba Overseer.jpg';
 const Home = () => {
     // Testimonials Slider State
     const [currentTestimonial, setCurrentTestimonial] = useState(0);
-    const [newsItems, setNewsItems] = useState([]);
 
     const testimonials = [
         { quote: "Worshipping at Pentecostal Assemblies of God - Ngungo Assembly has brought tremendous spiritual growth and unity to our family. The preaching is biblical, anointed, and life-changing.", author: "Elder Patrick Kinyua", location: "Ngungo Assembly", initials: "PK", color: "#e67e22" },
         { quote: "The Youth Department every Saturday from 4:00 PM to 6:00 PM has provided a space where we discover our God-given musical talents, study Scripture, and fellowship in Christ.", author: "Mary Mwende", location: "Mbeere District", initials: "MM", color: "#2980b9" },
         { quote: "As the headquarter church for Mbeere District, Ngungo Assembly brings all regional assemblies together in unity, revival, and spiritual leadership under Bishop Clement Simba.", author: "Deacon Samuel Mutisya", location: "Kyuso Circuit", initials: "SM", color: "#27ae60" }
     ];
-
-    useEffect(() => {
-        const fetchNews = async () => {
-            try {
-                const res = await fetch('/api/news');
-                if (res.ok) {
-                    const data = await res.json();
-                    if (Array.isArray(data) && data.length > 0) {
-                        setNewsItems(data);
-                    }
-                }
-            } catch { }
-        };
-        fetchNews();
-    }, []);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -419,94 +403,6 @@ const Home = () => {
                             <Link to="/donate" className="btn btn-primary"><i className="fas fa-mobile-screen-button"></i> Give via M-Pesa</Link>
                             <Link to="/contact" className="btn btn-secondary">Contact Church Office</Link>
                         </div>
-                    </div>
-                </div>
-            </section>
-            {/* Latest News Section */}
-            <section className="news-section section">
-                <div className="container">
-                    <div className="section-header">
-                        <span className="section-subtitle">News &amp; Updates</span>
-                        <h2 className="section-title">Latest From The Field</h2>
-                    </div>
-                    <div className="news-grid">
-                        {newsItems.length > 0 ? (
-                            newsItems.slice(0, 4).map((item, idx) => {
-                                const cardColors = [
-                                    { grad: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)', accent: '#E87D1E', icon: 'fas fa-church' },
-                                    { grad: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 100%)', accent: '#6366f1', icon: 'fas fa-sitemap' },
-                                    { grad: 'linear-gradient(135deg, #042f2e 0%, #115e59 100%)', accent: '#14b8a6', icon: 'fas fa-fire' },
-                                    { grad: 'linear-gradient(135deg, #451a03 0%, #78350f 100%)', accent: '#f59e0b', icon: 'fas fa-heart' }
-                                ];
-                                const style = cardColors[idx % cardColors.length];
-
-                                return (
-                                    <div className="news-card" key={item._id || idx}>
-                                        <div className="news-image" style={{ background: style.grad, display: 'flex', alignItems: 'center', justifyContent: 'center', height: '170px', position: 'relative' }}>
-                                            <i className={style.icon} style={{ fontSize: '2.8rem', color: style.accent, opacity: 0.9 }}></i>
-                                            <div className="news-category" style={{ position: 'absolute', top: '12px', left: '12px' }}>{item.category || 'Mbeere District'}</div>
-                                        </div>
-                                        <div className="news-content">
-                                            <div className="news-date">{item.date || 'Recent Announcement'}</div>
-                                            <h3>{item.title}</h3>
-                                            <p>{item.summary}</p>
-                                            <Link to="/programs" className="news-link">Read More <i className="fas fa-arrow-right"></i></Link>
-                                        </div>
-                                    </div>
-                                );
-                            })
-                        ) : (
-                            <>
-                                <div className="news-card">
-                                    <div className="news-image" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '170px', position: 'relative' }}>
-                                        <i className="fas fa-church" style={{ fontSize: '2.8rem', color: '#E87D1E' }}></i>
-                                        <div className="news-category" style={{ position: 'absolute', top: '12px', left: '12px' }}>District HQ</div>
-                                    </div>
-                                    <div className="news-content">
-                                        <div className="news-date">November 2026 — Ngungo</div>
-                                        <h3>Ngungo Assembly: Serving as Mbeere District Headquarters</h3>
-                                        <p>Pentecostal Assemblies of God - Ngungo Assembly continues to spearhead spiritual revival, pastoral training, and church coordination across Mbeere District.</p>
-                                        <Link to="/about" className="news-link">Read More <i className="fas fa-arrow-right"></i></Link>
-                                    </div>
-                                </div>
-                                <div className="news-card">
-                                    <div className="news-image" style={{ background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '170px', position: 'relative' }}>
-                                        <i className="fas fa-sitemap" style={{ fontSize: '2.8rem', color: '#6366f1' }}></i>
-                                        <div className="news-category" style={{ position: 'absolute', top: '12px', left: '12px' }}>Assemblies</div>
-                                    </div>
-                                    <div className="news-content">
-                                        <div className="news-date">October 2026 — Mbeere</div>
-                                        <h3>Mbeere District Assemblies Leadership Convocation</h3>
-                                        <p>Pastors and leaders from all 8 Mbeere assemblies and Kyuso circuit gathered at Ngungo HQ for prayer, strategic visioning, and district development.</p>
-                                        <Link to="/assemblies" className="news-link">Read More <i className="fas fa-arrow-right"></i></Link>
-                                    </div>
-                                </div>
-                                <div className="news-card">
-                                    <div className="news-image" style={{ background: 'linear-gradient(135deg, #042f2e 0%, #115e59 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '170px', position: 'relative' }}>
-                                        <i className="fas fa-fire" style={{ fontSize: '2.8rem', color: '#14b8a6' }}></i>
-                                        <div className="news-category" style={{ position: 'absolute', top: '12px', left: '12px' }}>Youth Ministry</div>
-                                    </div>
-                                    <div className="news-content">
-                                        <div className="news-date">Weekly — Saturday 4:00 PM</div>
-                                        <h3>Youth Fellowship &amp; Talent Ministry</h3>
-                                        <p>The Youth Department invites all young people every Saturday from 4:00 PM to 6:00 PM for explosive praise, worship, instrumental training, and biblical life skills.</p>
-                                        <Link to="/ministries#youth" className="news-link">Read More <i className="fas fa-arrow-right"></i></Link>
-                                    </div>
-                                </div>
-                                <div className="news-card">
-                                    <div className="news-image" style={{ background: 'linear-gradient(135deg, #451a03 0%, #78350f 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '170px', position: 'relative' }}>
-                                        <i className="fas fa-heart" style={{ fontSize: '2.8rem', color: '#f59e0b' }}></i>
-                                        <div className="news-category" style={{ position: 'absolute', top: '12px', left: '12px' }}>Departments</div>
-                                    </div>
-                                    <div className="news-content">
-                                        <div className="news-date">Weekly Fellowships — Ngungo</div>
-                                        <h3>Women Department Prayer &amp; Empowerment</h3>
-                                        <p>PAG Women Department continues to unite mothers and sisters in fervent prayer intercession, family welfare, and community compassionate care.</p>
-                                        <Link to="/ministries#women" className="news-link">Read More <i className="fas fa-arrow-right"></i></Link>
-                                    </div>
-                                </div>
-                            </>
-                        )}
                     </div>
                 </div>
             </section>
