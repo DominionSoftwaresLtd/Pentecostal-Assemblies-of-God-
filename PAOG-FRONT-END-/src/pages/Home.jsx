@@ -302,14 +302,19 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Statistics Section */}
+            {/* Impact / Kingdom Fruit Section — Dignified & Natural Church Presentation */}
             <section className="stats-section" ref={statsRef}>
-                <div className="stats-overlay"></div>
+                <div className="stats-glow-backdrop"></div>
                 <div className="container">
-                    <div className="section-header light">
-                        <span className="section-subtitle">Our Impact</span>
-                        <h2 className="section-title">The Numbers Speak</h2>
+                    <div className="stats-header-dignified">
+                        <span className="stats-eyebrow">God's Faithfulness &amp; Fruit</span>
+                        <h2 className="stats-heading">Lives Transformed &amp; Kingdom Harvest</h2>
+                        <p className="stats-scripture">
+                            "Neither he who plants nor he who waters is anything, but only God, who makes things grow." 
+                            <span> — 1 Corinthians 3:7</span>
+                        </p>
                     </div>
+
                     <div className="stats-grid">
                         <div className="stat-item">
                             <div className="stat-icon">
@@ -318,29 +323,35 @@ const Home = () => {
                             <div className="stat-content">
                                 <div className="stat-number">
                                     {statsVisible ? stats.souls : 0}
-                                    {statsVisible && stats.souls >= 445 ? '+' : ''}
+                                    <span className="stat-plus">{statsVisible && stats.souls >= 445 ? '+' : ''}</span>
                                 </div>
                                 <div className="stat-label">Souls Won to Christ</div>
+                                <div className="stat-hint">Gospel decisions &amp; additions to God's Kingdom</div>
                             </div>
                         </div>
+
                         <div className="stat-item">
                             <div className="stat-icon">
                                 <i className="fas fa-globe-africa"></i>
                             </div>
                             <div className="stat-content">
                                 <div className="stat-number">{statsVisible ? stats.missions : 0}</div>
-                                <div className="stat-label">Mission Trips</div>
+                                <div className="stat-label">Missions &amp; Outreaches</div>
+                                <div className="stat-hint">Frontline rural and regional evangelism crusades</div>
                             </div>
                         </div>
+
                         <div className="stat-item">
                             <div className="stat-icon">
                                 <i className="fas fa-map-marked-alt"></i>
                             </div>
                             <div className="stat-content">
                                 <div className="stat-number">{statsVisible ? stats.counties : 0}</div>
-                                <div className="stat-label">Counties in Kenya</div>
+                                <div className="stat-label">Counties Reached</div>
+                                <div className="stat-hint">Growing ministry footprint across Kenya</div>
                             </div>
                         </div>
+
                         <div className="stat-item">
                             <div className="stat-icon">
                                 <i className="fas fa-graduation-cap"></i>
@@ -348,6 +359,7 @@ const Home = () => {
                             <div className="stat-content">
                                 <div className="stat-number">{statsVisible ? stats.schools : 0}</div>
                                 <div className="stat-label">Schools Ministered</div>
+                                <div className="stat-hint">Youth, high school, and student discipleship</div>
                             </div>
                         </div>
                     </div>
