@@ -302,149 +302,106 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Departments & Ministries Showcase — Separated & Distinguished */}
-            <section className="section" style={{ backgroundColor: '#f4f6fb', padding: '70px 0' }}>
+            {/* Church Departments & Sanctuary Ministries — Authentic & Professional Wing Redesign */}
+            <section className="church-wings-section">
                 <div className="container">
-                    <div className="section-header" style={{ textAlign: 'center', marginBottom: '46px' }}>
-                        <span style={{
-                            display: 'inline-block',
-                            fontSize: '0.82rem',
-                            fontWeight: 800,
-                            textTransform: 'uppercase',
-                            letterSpacing: '1.5px',
-                            color: '#000066',
-                            background: 'rgba(0, 0, 102, 0.08)',
-                            padding: '6px 16px',
-                            borderRadius: '20px',
-                            marginBottom: '10px'
-                        }}>
-                            Pillars of the Church
-                        </span>
-                        <h2 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#000066', margin: '0 0 12px' }}>
-                            Church Departments &amp; Sanctuary Ministries
-                        </h2>
-                        <p style={{ maxWidth: '720px', margin: '0 auto', color: '#64748b', fontSize: '1rem', lineHeight: 1.6 }}>
-                            Nurturing every believer from childhood to mature leadership through our four foundational departments, 
-                            and exalting God through four dedicated sanctuary worship ministries.
+                    <div className="church-wings-header">
+                        <span className="church-wings-eyebrow">Pillars of Ministry</span>
+                        <h2 className="church-wings-title">Church Departments &amp; Sanctuary Ministries</h2>
+                        <p className="church-wings-subtitle">
+                            Nurturing every believer from childhood to mature leadership through our foundational departments, 
+                            and exalting God through dedicated sanctuary worship ministries.
                         </p>
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '32px' }}>
+                    <div className="church-wings-grid">
                         
-                        {/* ── CARD 1: FOUR CHURCH DEPARTMENTS ── */}
-                        <div style={{
-                            background: '#ffffff',
-                            borderRadius: '20px',
-                            border: '2px solid rgba(0, 0, 102, 0.14)',
-                            boxShadow: '0 12px 36px rgba(0, 0, 102, 0.08)',
-                            overflow: 'hidden',
-                            display: 'flex',
-                            flexDirection: 'column'
-                        }}>
-                            <div style={{
-                                background: 'linear-gradient(135deg, #000045 0%, #000066 100%)',
-                                padding: '24px 28px',
-                                color: '#ffffff',
-                                borderBottom: '3px solid #fbbf24'
-                            }}>
-                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                    <span style={{ background: 'rgba(251, 191, 36, 0.25)', color: '#fbbf24', fontSize: '0.74rem', fontWeight: 800, textTransform: 'uppercase', padding: '3px 10px', borderRadius: '12px' }}>
-                                        Four Pillars
-                                    </span>
-                                    <span style={{ fontSize: '0.84rem', color: '#cbd5e1' }}>Fellowship &amp; Nurture</span>
+                        {/* ── WING 1: CHURCH DEPARTMENTS ── */}
+                        <div className="church-wing-col church-wing-departments">
+                            <div className="church-wing-header">
+                                <div className="church-wing-icon-box wing-icon-amber">
+                                    <i className="fas fa-users"></i>
                                 </div>
-                                <h3 style={{ margin: '8px 0 4px', fontSize: '1.45rem', fontWeight: 800, color: '#ffffff' }}>
-                                    Church Departments
-                                </h3>
-                                <p style={{ margin: 0, fontSize: '0.88rem', color: '#e2e8f0' }}>
-                                    Equipping women, men, youth, and children for spiritual growth.
-                                </p>
+                                <div className="church-wing-header-text">
+                                    <span className="church-wing-category">Fellowship &amp; Nurture</span>
+                                    <h3 className="church-wing-heading">Church Departments</h3>
+                                    <p className="church-wing-desc">Equipping women, men, youth, and children for spiritual growth and community impact.</p>
+                                </div>
                             </div>
 
-                            <div style={{ padding: '24px 28px', flex: 1, display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                            <div className="church-wing-list">
                                 {[
-                                    { icon: 'female', title: 'Women Department', time: 'Weekly Prayer & Intercession', desc: 'Mothers fellowship, prayer chains, and community compassion.', link: '/departments#women' },
-                                    { icon: 'male', title: 'Men Department', time: 'Monthly Brotherhood Breakfast', desc: 'Godly fatherhood, leadership integrity, and church projects.', link: '/departments#men' },
-                                    { icon: 'bolt', title: 'Youth Department', time: 'Saturdays 4:00 PM – 6:00 PM', desc: 'Worship, talent discovery, life skills, and mentorship.', link: '/departments#youth' },
-                                    { icon: 'child', title: 'Sunday School', time: 'Sundays 8:00 AM – 10:00 AM', desc: 'Biblical foundation, memory verses, and child discipleship.', link: '/departments#sundayschool' },
+                                    { icon: 'female', title: 'Women Department (WWK)', time: 'Weekly Prayer & Intercession', desc: 'Mothers fellowship, prayer chains, and compassionate community outreach.', link: '/departments#women' },
+                                    { icon: 'male', title: 'Men Department', time: 'Monthly Brotherhood Breakfast', desc: 'Godly fatherhood, leadership integrity, mentorship, and church development.', link: '/departments#men' },
+                                    { icon: 'fire', title: 'Youth Department', time: 'Saturdays 4:00 PM – 6:00 PM', desc: 'Passionate worship, talent development, biblical life skills, and discipleship.', link: '/departments#youth' },
+                                    { icon: 'child', title: 'Sunday School', time: 'Sundays 8:00 AM – 10:00 AM', desc: 'Foundational scripture teaching, memory verses, and dedicated child discipleship.', link: '/departments#sundayschool' },
                                 ].map((d, idx) => (
-                                    <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '14px', paddingBottom: '14px', borderBottom: idx < 3 ? '1px solid #f1f5f9' : 'none' }}>
-                                        <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(0, 0, 102, 0.06)', color: '#000066', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: '1rem' }}>
+                                    <Link to={d.link} key={idx} className="church-wing-item">
+                                        <div className="church-wing-item-icon">
                                             <i className={`fas fa-${d.icon}`}></i>
                                         </div>
-                                        <div style={{ flex: 1 }}>
-                                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-                                                <h4 style={{ margin: 0, fontSize: '0.98rem', fontWeight: 700, color: '#000066' }}>{d.title}</h4>
-                                                <span style={{ fontSize: '0.72rem', color: '#64748b', fontWeight: 600 }}>{d.time}</span>
+                                        <div className="church-wing-item-content">
+                                            <div className="church-wing-item-top">
+                                                <h4 className="church-wing-item-title">{d.title}</h4>
+                                                <span className="church-wing-item-badge">{d.time}</span>
                                             </div>
-                                            <p style={{ margin: '3px 0 0', fontSize: '0.84rem', color: '#475569', lineHeight: 1.5 }}>{d.desc}</p>
+                                            <p className="church-wing-item-desc">{d.desc}</p>
                                         </div>
-                                    </div>
+                                        <div className="church-wing-item-arrow">
+                                            <i className="fas fa-chevron-right"></i>
+                                        </div>
+                                    </Link>
                                 ))}
                             </div>
 
-                            <div style={{ padding: '16px 28px 24px', borderTop: '1px solid #f1f5f9' }}>
-                                <Link to="/departments" className="btn btn-primary" style={{ width: '100%', textAlign: 'center', display: 'block', padding: '12px', fontSize: '0.92rem', borderRadius: '10px' }}>
-                                    Explore All 4 Departments &rarr;
+                            <div className="church-wing-footer">
+                                <Link to="/departments" className="btn btn-secondary church-wing-btn">
+                                    Explore All 4 Departments <i className="fas fa-arrow-right"></i>
                                 </Link>
                             </div>
                         </div>
 
-                        {/* ── CARD 2: FOUR SANCTUARY MINISTRIES ── */}
-                        <div style={{
-                            background: '#ffffff',
-                            borderRadius: '20px',
-                            border: '2px solid rgba(0, 0, 102, 0.14)',
-                            boxShadow: '0 12px 36px rgba(0, 0, 102, 0.08)',
-                            overflow: 'hidden',
-                            display: 'flex',
-                            flexDirection: 'column'
-                        }}>
-                            <div style={{
-                                background: 'linear-gradient(135deg, #000033 0%, #000066 100%)',
-                                padding: '24px 28px',
-                                color: '#ffffff',
-                                borderBottom: '3px solid #38bdf8'
-                            }}>
-                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                    <span style={{ background: 'rgba(56, 189, 248, 0.25)', color: '#38bdf8', fontSize: '0.74rem', fontWeight: 800, textTransform: 'uppercase', padding: '3px 10px', borderRadius: '12px' }}>
-                                        Sanctuary Arms
-                                    </span>
-                                    <span style={{ fontSize: '0.84rem', color: '#cbd5e1' }}>Worship &amp; Service</span>
+                        {/* ── WING 2: SANCTUARY MINISTRIES ── */}
+                        <div className="church-wing-col church-wing-sanctuary">
+                            <div className="church-wing-header">
+                                <div className="church-wing-icon-box wing-icon-navy">
+                                    <i className="fas fa-music"></i>
                                 </div>
-                                <h3 style={{ margin: '8px 0 4px', fontSize: '1.45rem', fontWeight: 800, color: '#ffffff' }}>
-                                    Sanctuary Ministries
-                                </h3>
-                                <p style={{ margin: 0, fontSize: '0.88rem', color: '#e2e8f0' }}>
-                                    Corporate worship, instrumental band, choir, and protocol.
-                                </p>
+                                <div className="church-wing-header-text">
+                                    <span className="church-wing-category">Worship &amp; Sacred Service</span>
+                                    <h3 className="church-wing-heading">Sanctuary Ministries</h3>
+                                    <p className="church-wing-desc">Dedicated ministries exalting God through praise, skilled instrumentation, and order.</p>
+                                </div>
                             </div>
 
-                            <div style={{ padding: '24px 28px', flex: 1, display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                            <div className="church-wing-list">
                                 {[
-                                    { icon: 'microphone', title: 'Praise and Worship', time: 'Sunday Services & Vigils', desc: 'Anointed song ministers creating an atmosphere of Holy Spirit revival.', link: '/ministries#worship' },
-                                    { icon: 'guitar', title: 'Instrumentalist Ministry', time: 'Keyboards, Drums & Guitars', desc: 'Skilled musicians serving with technical acoustics and excellence.', link: '/ministries#instrumentalists' },
-                                    { icon: 'users', title: 'Sanctuary Choir', time: 'Choral Anthems & Hymns', desc: 'Multi-part harmonies, cantatas, and festive praise presentations.', link: '/ministries#choir' },
-                                    { icon: 'door-open', title: 'Ushering & Protocol', time: 'Every Service & Convocations', desc: 'Warm hospitable reception, sanctuary reverence, and seating order.', link: '/ministries#ushering' },
+                                    { icon: 'microphone-lines', title: 'Praise and Worship', time: 'Sunday Services & Vigils', desc: 'Anointed song ministers ushering the congregation into Holy Spirit encounters.', link: '/ministries#worship' },
+                                    { icon: 'guitar', title: 'Instrumentalist Ministry', time: 'Keyboards, Drums & Guitars', desc: 'Skilled instrumentalists serving with acoustical excellence and spiritual devotion.', link: '/ministries#instrumentalists' },
+                                    { icon: 'church', title: 'Sanctuary Choir', time: 'Choral Anthems & Hymns', desc: 'Inspiring multi-part choral harmonies, sacred hymns, and festive presentations.', link: '/ministries#choir' },
+                                    { icon: 'door-open', title: 'Ushering & Protocol', time: 'Every Service & Convocations', desc: 'Warm hospitality, orderly sanctuary atmosphere, and gracious visitor reception.', link: '/ministries#ushering' },
                                 ].map((m, idx) => (
-                                    <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '14px', paddingBottom: '14px', borderBottom: idx < 3 ? '1px solid #f1f5f9' : 'none' }}>
-                                        <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(0, 0, 102, 0.06)', color: '#000066', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: '1rem' }}>
+                                    <Link to={m.link} key={idx} className="church-wing-item">
+                                        <div className="church-wing-item-icon">
                                             <i className={`fas fa-${m.icon}`}></i>
                                         </div>
-                                        <div style={{ flex: 1 }}>
-                                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-                                                <h4 style={{ margin: 0, fontSize: '0.98rem', fontWeight: 700, color: '#000066' }}>{m.title}</h4>
-                                                <span style={{ fontSize: '0.72rem', color: '#64748b', fontWeight: 600 }}>{m.time}</span>
+                                        <div className="church-wing-item-content">
+                                            <div className="church-wing-item-top">
+                                                <h4 className="church-wing-item-title">{m.title}</h4>
+                                                <span className="church-wing-item-badge">{m.time}</span>
                                             </div>
-                                            <p style={{ margin: '3px 0 0', fontSize: '0.84rem', color: '#475569', lineHeight: 1.5 }}>{m.desc}</p>
+                                            <p className="church-wing-item-desc">{m.desc}</p>
                                         </div>
-                                    </div>
+                                        <div className="church-wing-item-arrow">
+                                            <i className="fas fa-chevron-right"></i>
+                                        </div>
+                                    </Link>
                                 ))}
                             </div>
 
-                            <div style={{ padding: '16px 28px 24px', borderTop: '1px solid #f1f5f9' }}>
-                                <Link to="/ministries" className="btn btn-primary" style={{ width: '100%', textAlign: 'center', display: 'block', padding: '12px', fontSize: '0.92rem', borderRadius: '10px' }}>
-                                    Explore All 4 Ministries &rarr;
+                            <div className="church-wing-footer">
+                                <Link to="/ministries" className="btn btn-primary church-wing-btn">
+                                    Explore All 4 Ministries <i className="fas fa-arrow-right"></i>
                                 </Link>
                             </div>
                         </div>

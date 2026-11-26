@@ -7899,7 +7899,297 @@ p {
 }
 
 /* =====================================================
-   HOME REDESIGN â€” Ministries v2
+   HOME REDESIGN — Church Departments & Sanctuary Ministries
+   ===================================================== */
+.church-wings-section {
+    background: #f8fafc;
+    padding: 68px 0 76px;
+    position: relative;
+    border-top: 1px solid #eef2f6;
+    border-bottom: 1px solid #eef2f6;
+}
+
+.church-wings-header {
+    text-align: center;
+    margin-bottom: 46px;
+}
+
+.church-wings-eyebrow {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #E87D1E;
+    background: rgba(232, 125, 30, 0.09);
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+}
+
+.church-wings-title {
+    font-size: clamp(2rem, 3.2vw, 2.7rem);
+    font-family: var(--font-secondary);
+    font-weight: 800;
+    color: #000066;
+    line-height: 1.22;
+    margin: 0 0 14px;
+}
+
+.church-wings-subtitle {
+    max-width: 720px;
+    margin: 0 auto;
+    color: #556274;
+    font-size: 1.02rem;
+    line-height: 1.7;
+}
+
+.church-wings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: stretch;
+}
+
+.church-wing-col {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 102, 0.05), 0 2px 8px rgba(0, 0, 0, 0.02);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.church-wing-col:hover {
+    box-shadow: 0 16px 40px -8px rgba(0, 0, 102, 0.09), 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.church-wing-departments::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #E87D1E;
+}
+
+.church-wing-sanctuary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #000066;
+}
+
+.church-wing-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 26px 26px 18px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.church-wing-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.wing-icon-amber {
+    background: rgba(232, 125, 30, 0.12);
+    color: #E87D1E;
+}
+
+.wing-icon-navy {
+    background: rgba(0, 0, 102, 0.09);
+    color: #000066;
+}
+
+.church-wing-header-text {
+    flex: 1;
+}
+
+.church-wing-category {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #64748b;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.church-wing-heading {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #000066;
+    margin: 0 0 4px;
+    font-family: var(--font-secondary);
+}
+
+.church-wing-desc {
+    margin: 0;
+    font-size: 0.88rem;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+.church-wing-list {
+    padding: 16px 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.church-wing-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    text-decoration: none;
+    background: transparent;
+    border: 1px solid transparent;
+    transition: all 0.22s ease;
+}
+
+.church-wing-item:hover {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+    transform: translateX(4px);
+}
+
+.church-wing-item-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #f1f5f9;
+    color: #000066;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+    transition: all 0.22s ease;
+}
+
+.church-wing-item:hover .church-wing-item-icon {
+    background: #000066;
+    color: #ffffff;
+}
+
+.church-wing-departments .church-wing-item:hover .church-wing-item-icon {
+    background: #E87D1E;
+    color: #ffffff;
+}
+
+.church-wing-item-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.church-wing-item-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 3px;
+}
+
+.church-wing-item-title {
+    font-size: 0.96rem;
+    font-weight: 700;
+    color: #000066;
+    margin: 0;
+    transition: color 0.2s ease;
+}
+
+.church-wing-item:hover .church-wing-item-title {
+    color: #000045;
+}
+
+.church-wing-item-badge {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #64748b;
+    background: #f1f5f9;
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
+.church-wing-item-desc {
+    font-size: 0.83rem;
+    color: #64748b;
+    line-height: 1.45;
+    margin: 0;
+}
+
+.church-wing-item-arrow {
+    color: #cbd5e1;
+    font-size: 0.8rem;
+    transition: all 0.22s ease;
+    padding-left: 4px;
+}
+
+.church-wing-item:hover .church-wing-item-arrow {
+    color: #E87D1E;
+    transform: translateX(3px);
+}
+
+.church-wing-footer {
+    padding: 16px 24px 22px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.church-wing-btn {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.92rem;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+@media (max-width: 900px) {
+    .church-wings-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+    .church-wings-section {
+        padding: 50px 0 60px;
+    }
+    .church-wing-header {
+        padding: 22px 20px 16px;
+    }
+    .church-wing-list {
+        padding: 12px 14px;
+    }
+    .church-wing-footer {
+        padding: 14px 18px 20px;
+    }
+}
+
+/* =====================================================
+   HOME REDESIGN — Ministries v2
    ===================================================== */
 .ministries-v2 {
     background: #fff;
