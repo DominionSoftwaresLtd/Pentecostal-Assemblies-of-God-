@@ -7603,7 +7603,7 @@ p {
    HOME REDESIGN â€” About Section v2
    ===================================================== */
 .about-section-v2 {
-    padding: 40px 0 100px;
+    padding: 36px 0 24px;
     background: #fff;
     position: relative;
     overflow: hidden;
@@ -7621,7 +7621,7 @@ p {
 .about-v2-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    gap: 40px;
     align-items: center;
 }
 .about-v2-text-side {
@@ -7797,7 +7797,7 @@ p {
    ===================================================== */
 .vision-mission-v2 {
     background: #0d1b2a;
-    padding: 100px 0;
+    padding: 55px 0 65px;
     position: relative;
     overflow: hidden;
 }
@@ -7812,7 +7812,7 @@ p {
 }
 .vm-v2-header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 36px;
 }
 .vm-v2-verse {
     font-family: var(--font-secondary);

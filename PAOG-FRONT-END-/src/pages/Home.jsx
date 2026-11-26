@@ -218,11 +218,11 @@ const Home = () => {
                         <div className="about-v2-photo-side">
                             <div style={{
                                 background: 'linear-gradient(145deg, #0f172a 0%, #1e293b 60%, #090d16 100%)',
-                                borderRadius: '20px',
-                                padding: '36px 30px',
+                                borderRadius: '18px',
+                                padding: '24px 22px',
                                 color: '#ffffff',
                                 border: '2px solid rgba(232, 125, 30, 0.4)',
-                                boxShadow: '0 20px 45px rgba(0,0,0,0.2)',
+                                boxShadow: '0 16px 36px rgba(0,0,0,0.18)',
                                 position: 'relative',
                                 overflow: 'hidden'
                             }}>
@@ -236,7 +236,7 @@ const Home = () => {
                                     borderRadius: '50%'
                                 }}></div>
 
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '20px' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '16px' }}>
                                     <div style={{
                                         width: '56px',
                                         height: '56px',
@@ -272,11 +272,11 @@ const Home = () => {
                                     </div>
                                 </div>
 
-                                <p style={{ fontSize: '0.92rem', color: '#cbd5e1', lineHeight: '1.65', marginBottom: '24px' }}>
+                                <p style={{ fontSize: '0.92rem', color: '#cbd5e1', lineHeight: '1.65', marginBottom: '16px' }}>
                                     Pentecostal Assemblies of God - Ngungo Assembly serves as the episcopal and administrative center for 8 Mbeere assemblies and the Kyuso circuit in Kitui County.
                                 </p>
 
-                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px', marginBottom: '24px' }}>
+                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px', marginBottom: '16px' }}>
                                     <div style={{ background: 'rgba(255,255,255,0.05)', padding: '12px 14px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.08)' }}>
                                         <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#E87D1E' }}>8</div>
                                         <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Mbeere Assemblies</div>
