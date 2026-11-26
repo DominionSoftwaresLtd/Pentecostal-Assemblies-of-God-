@@ -105,7 +105,7 @@ const Footer = () => {
                                 target="_blank" 
                                 rel="noopener noreferrer"
                                 style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.875rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '5px', transition: 'color 0.3s ease' }}
-                                onMouseEnter={e => e.currentTarget.style.color = '#E87D1E'}
+                                onMouseEnter={e => e.currentTarget.style.color = '#3B82F6'}
                                 onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.6)'}
                                 title="Dominion Softwares Ltd - Custom Software & Web Engineering"
                             >

@@ -199,7 +199,7 @@ const Contact = () => {
             {/* Info Column */}
             <div className="contact-info-col">
               <h2 className="section-title">
-                {currentDept ? currentDept.title : 'Get in Touch'}
+                {currentDept ? currentDept.title : 'Connect With Us'}
               </h2>
               <p className="lead">
                 {currentDept
@@ -217,6 +217,7 @@ const Contact = () => {
                     <a href="tel:+254720140213">+254 720 140 213</a>
                   </div>
                 </div>
+
                 <div className="contact-detail-item">
                   <div className="contact-detail-icon">
                     <i className="fas fa-envelope"></i>
@@ -228,7 +229,21 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Department Shortcut Chips if on General Contact */}
+              {/* Order of Services Box */}
+              <div style={{ marginTop: '22px', padding: '16px 18px', background: '#f8fafc', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+                <h4 style={{ margin: '0 0 8px', color: '#1e293b', fontSize: '0.95rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <i className="fas fa-clock" style={{ color: '#E87D1E' }}></i> Order of Services
+                </h4>
+                <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.84rem', color: '#475569', lineHeight: '1.7' }}>
+                  <li><strong>Sunday English Service:</strong> 8:00 AM – 10:00 AM</li>
+                  <li><strong>Sunday Main Service:</strong> 10:30 AM – 1:30 PM</li>
+                  <li><strong>Sunday School:</strong> 8:00 AM – 10:00 AM</li>
+                  <li><strong>Friday Fellowship:</strong> 7:00 PM – 9:00 PM</li>
+                  <li><strong>Youth Fellowship:</strong> Saturday 4:00 PM – 6:00 PM</li>
+                </ul>
+              </div>
+
+              {/* Department Shortcut Chips */}
               {!currentDept && (
                 <div style={{ marginTop: '28px', padding: '18px', background: '#fff9f0', borderRadius: '12px', border: '1px solid #fed7aa' }}>
                   <h4 style={{ margin: '0 0 10px', color: '#1e293b', fontSize: '0.95rem', fontWeight: 700 }}>Looking for a specific department or ministry?</h4>
@@ -245,34 +260,6 @@ const Contact = () => {
                   </div>
                 </div>
               )}
-
-              <div className="contact-social" style={{ marginTop: '24px' }}>
-                <h4>Follow Our Ministries</h4>
-                <div className="contact-social-links">
-                  <a
-                    href="https://www.youtube.com/@KingdomEnlightenmentMinistries"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="social-btn youtube"
-                  >
-                    <i className="fab fa-youtube"></i> YouTube
-                  </a>
-                  <a
-                    href="https://www.tiktok.com/@kingdom_enlightment"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="social-btn tiktok"
-                  >
-                    <i className="fab fa-tiktok"></i> TikTok
-                  </a>
-                  <a href="https://www.facebook.com/share/1EXQmKx4QE/" target="_blank" rel="noopener noreferrer" className="social-btn facebook">
-                    <i className="fab fa-facebook-f"></i> Facebook
-                  </a>
-                  <a href="#" className="social-btn instagram">
-                    <i className="fab fa-instagram"></i> Instagram
-                  </a>
-                </div>
-              </div>
             </div>
 
             {/* Form Column */}

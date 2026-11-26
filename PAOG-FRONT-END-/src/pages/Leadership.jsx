@@ -196,9 +196,7 @@ const Leadership = () => {
           setLeaders(data.leaders.sort((a, b) => (Number(a.order) || 99) - (Number(b.order) || 99)));
         }
       } catch (err) {
-        console.warn('Leadership API unavailable, using static fallback.', err);
-      } finally {
-        setLoading(false);
+        console.warn('Leadership API unavailable, using fallback.', err);
       }
     };
     fetchLeaders();

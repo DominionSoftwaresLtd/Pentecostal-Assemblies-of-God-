@@ -264,7 +264,7 @@ const Navbar = () => {
                                         <span style={{ color: '#1e293b', fontWeight: 700, fontSize: '0.88rem', maxWidth: '110px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                                             {currentUser.name?.split(' ')[0]}
                                         </span>
-                                        <i className={`fas fa-chevron-${userMenuOpen ? 'up' : 'down'}`} style={{ color: '#E87D1E', fontSize: '0.7rem' }}></i>
+                                        <i className={`fas fa-chevron-${userMenuOpen ? 'up' : 'down'}`} style={{ color: '#2563EB', fontSize: '0.7rem' }}></i>
                                     </button>
 
                                     {userMenuOpen && (

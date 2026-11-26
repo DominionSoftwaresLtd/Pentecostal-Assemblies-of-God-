@@ -176,6 +176,70 @@ const Home = () => {
                 </div>
             </section>
 
+            {/* Order of Services Featured Grid */}
+            <section className="section" style={{ background: '#f8fafc', padding: '50px 0' }} id="order-of-services">
+                <div className="container">
+                    <div className="section-header" style={{ textAlign: 'center', marginBottom: '35px' }}>
+                        <span className="section-subtitle" style={{ color: '#2563EB', fontWeight: 700 }}>Worship With Us</span>
+                        <h2 className="section-title">Order of Services</h2>
+                        <p className="section-description" style={{ maxWidth: '650px', margin: '0 auto' }}>
+                            Join us at Pentecostal Assemblies of God - Ngungo Assembly for life-transforming worship encounters and fellowships.
+                        </p>
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: '18px' }}>
+                        <div style={{ background: '#fff', borderRadius: '12px', padding: '22px 18px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)', position: 'relative', overflow: 'hidden' }}>
+                            <div style={{ width: '4px', height: '100%', background: '#2563EB', position: 'absolute', left: 0, top: 0 }}></div>
+                            <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: '#2563EB', letterSpacing: '0.5px' }}>Sunday Morning</span>
+                            <h3 style={{ fontSize: '1.15rem', margin: '8px 0 6px', color: '#1e293b' }}>English Service</h3>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#475569', fontSize: '0.92rem', fontWeight: 600 }}>
+                                <i className="fas fa-clock" style={{ color: '#2563EB' }}></i> 8:00 AM – 10:00 AM
+                            </div>
+                            <p style={{ fontSize: '0.85rem', color: '#64748b', marginTop: '8px', marginBottom: 0 }}>Spirit-filled exposition, hymns and contemporary worship in English.</p>
+                        </div>
+
+                        <div style={{ background: '#fff', borderRadius: '12px', padding: '22px 18px', border: '2px solid #2563EB', boxShadow: '0 10px 15px -3px rgba(37,99,235,0.1)', position: 'relative', overflow: 'hidden' }}>
+                            <span style={{ background: '#2563EB', color: '#fff', padding: '3px 8px', borderRadius: '4px', fontSize: '0.7rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Main Service</span>
+                            <h3 style={{ fontSize: '1.2rem', margin: '8px 0 6px', color: '#1e293b' }}>Main Worship Service</h3>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#1e293b', fontSize: '0.95rem', fontWeight: 700 }}>
+                                <i className="fas fa-clock" style={{ color: '#2563EB' }}></i> 10:30 AM – 1:30 PM
+                            </div>
+                            <p style={{ fontSize: '0.85rem', color: '#64748b', marginTop: '8px', marginBottom: 0 }}>High praise, anointed preaching by Bishop Clement Simba, choir, and intercessory prayer.</p>
+                        </div>
+
+                        <div style={{ background: '#fff', borderRadius: '12px', padding: '22px 18px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)', position: 'relative', overflow: 'hidden' }}>
+                            <div style={{ width: '4px', height: '100%', background: '#10B981', position: 'absolute', left: 0, top: 0 }}></div>
+                            <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: '#10B981', letterSpacing: '0.5px' }}>Every Sunday</span>
+                            <h3 style={{ fontSize: '1.15rem', margin: '8px 0 6px', color: '#1e293b' }}>Sunday School</h3>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#475569', fontSize: '0.92rem', fontWeight: 600 }}>
+                                <i className="fas fa-clock" style={{ color: '#10B981' }}></i> 8:00 AM – 10:00 AM
+                            </div>
+                            <p style={{ fontSize: '0.85rem', color: '#64748b', marginTop: '8px', marginBottom: 0 }}>Biblical foundations, interactive storytelling, and memory verses for all children.</p>
+                        </div>
+
+                        <div style={{ background: '#fff', borderRadius: '12px', padding: '22px 18px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)', position: 'relative', overflow: 'hidden' }}>
+                            <div style={{ width: '4px', height: '100%', background: '#6366f1', position: 'absolute', left: 0, top: 0 }}></div>
+                            <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: '#6366f1', letterSpacing: '0.5px' }}>Every Friday</span>
+                            <h3 style={{ fontSize: '1.15rem', margin: '8px 0 6px', color: '#1e293b' }}>Friday Fellowship</h3>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#475569', fontSize: '0.92rem', fontWeight: 600 }}>
+                                <i className="fas fa-clock" style={{ color: '#6366f1' }}></i> 7:00 PM – 9:00 PM
+                            </div>
+                            <p style={{ fontSize: '0.85rem', color: '#64748b', marginTop: '8px', marginBottom: 0 }}>Fervent evening prayers, interceding for families, our community, and the nation.</p>
+                        </div>
+
+                        <div style={{ background: '#fff', borderRadius: '12px', padding: '22px 18px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)', position: 'relative', overflow: 'hidden' }}>
+                            <div style={{ width: '4px', height: '100%', background: '#ec4899', position: 'absolute', left: 0, top: 0 }}></div>
+                            <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: '#ec4899', letterSpacing: '0.5px' }}>Every Saturday</span>
+                            <h3 style={{ fontSize: '1.15rem', margin: '8px 0 6px', color: '#1e293b' }}>Youth Fellowship</h3>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#475569', fontSize: '0.92rem', fontWeight: 600 }}>
+                                <i className="fas fa-clock" style={{ color: '#ec4899' }}></i> 4:00 PM – 6:00 PM
+                            </div>
+                            <p style={{ fontSize: '0.85rem', color: '#64748b', marginTop: '8px', marginBottom: 0 }}>Dynamic youth ministry, mentorship, discussions, and spiritual empowerment.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* About Section — Redesigned */}
             <section className="about-section-v2">
                 <div className="container">
@@ -581,15 +645,23 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* CTA Section */}
+            {/* CTA Section - Giving & Stewardship */}
             <section className="cta-section">
                 <div className="container">
                     <div className="cta-content">
-                        <h2>Partner With Us In Reaching The Lost</h2>
-                        <p>Your prayers and generous giving enable us to continue spreading the Gospel and transforming lives.</p>
+                        <span style={{ display: 'inline-block', background: 'rgba(255,255,255,0.18)', padding: '5px 14px', borderRadius: '30px', fontSize: '0.82rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: '12px' }}>
+                            <i className="fas fa-hand-holding-dollar"></i> Giving &amp; Stewardship
+                        </span>
+                        <h2>Support God's Work &amp; District Growth</h2>
+                        <p style={{ fontSize: '1.2rem', margin: '10px 0 6px', fontWeight: 600 }}>
+                            M-Pesa Paybill: <strong style={{ color: '#fff', textDecoration: 'underline' }}>4136387</strong> &bull; Account: <strong style={{ color: '#fff' }}>YOUR NAME</strong>
+                        </p>
+                        <p style={{ fontSize: '0.95rem', opacity: 0.9, maxWidth: '680px', margin: '0 auto 20px' }}>
+                            Your faithful tithes, offerings, and building gifts empower the work of God at Ngungo Assembly and across all Mbeere District sister assemblies. Overseer: Bishop Rev Clement Simba &bull; P.O. Box 213-60113 Kiritiri, Mbeere &bull; Tel: 0720140213
+                        </p>
                         <div className="cta-buttons">
-                            <Link to="/donate" className="btn btn-primary">Give Now</Link>
-                            <Link to="/contact" className="btn btn-secondary">Get Involved</Link>
+                            <Link to="/donate" className="btn btn-primary"><i className="fas fa-mobile-screen-button"></i> Give via M-Pesa</Link>
+                            <Link to="/contact" className="btn btn-secondary">Contact Church Office</Link>
                         </div>
                     </div>
                 </div>

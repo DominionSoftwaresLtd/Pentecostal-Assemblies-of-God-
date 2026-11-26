@@ -135,7 +135,7 @@ const Signup = () => {
         localStorage.setItem('kemt_current_user', JSON.stringify(userData));
         localStorage.setItem('kemt_admin_user', JSON.stringify(userData));
         fireAuthChange();
-        setSuccessMsg('Welcome to KEMT! Account created successfully.');
+        setSuccessMsg('Welcome to PAOG Ngungo Assembly! Account created successfully.');
         setTimeout(() => navigate('/'), 1500);
       }
     } catch {
@@ -209,7 +209,7 @@ const Signup = () => {
         localStorage.setItem('kemt_current_user', JSON.stringify(userData));
         localStorage.setItem('kemt_admin_user', JSON.stringify(userData));
         fireAuthChange();
-        setSuccessMsg('Account created! Welcome to the KEMT family. Redirecting…');
+        setSuccessMsg('Account created! Welcome to the PAOG Ngungo Assembly family. Redirecting…');
         setTimeout(() => navigate('/'), 1600);
       }
     } catch {
@@ -232,7 +232,7 @@ const Signup = () => {
               Almost There!
             </span>
             <h2 style={{ color: '#1e293b', margin: '0 0 6px', fontSize: '1.5rem', fontWeight: 800 }}>Complete Your Profile</h2>
-            <p style={{ color: '#64748b', margin: 0, fontSize: '0.86rem' }}>We need a few more details to set up your KEMT membership.</p>
+            <p style={{ color: '#64748b', margin: 0, fontSize: '0.86rem' }}>We need a few more details to set up your PAOG church membership.</p>
           </div>
 
           {error && (
