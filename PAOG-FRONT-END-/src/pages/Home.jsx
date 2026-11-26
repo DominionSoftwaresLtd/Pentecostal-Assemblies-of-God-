@@ -129,54 +129,58 @@ const Home = () => {
             </section>
 
             
-            {/* Order of Services Showcase */}
-            <section style={{ background: '#f8fafc', padding: '36px 0', borderBottom: '1px solid #e2e8f0' }}>
+            {/* Natural, Elegant Worship Schedule */}
+            <section className="worship-schedule-section">
                 <div className="container">
-                    <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-                        <span style={{ color: '#e67e22', fontWeight: 800, textTransform: 'uppercase', fontSize: '0.82rem', letterSpacing: '0.05em' }}>
-                            Weekly Fellowship Timetable
-                        </span>
-                        <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#1e293b', margin: '4px 0 6px' }}>
-                            Join Our Weekly Services
-                        </h2>
-                        <p style={{ color: '#64748b', fontSize: '0.95rem', margin: 0 }}>
-                            Worship with us at Pentecostal Assemblies of God - Ngungo Assembly Sanctuary (Mbeere District Headquarters)
-                        </p>
+                    <div className="worship-schedule-header">
+                        <span className="worship-schedule-eyebrow">Service Times</span>
+                        <h2 className="worship-schedule-title">Weekly Worship Schedule</h2>
                     </div>
 
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))',
-                        gap: '14px'
-                    }}>
-                        <div style={{ background: '#ffffff', borderRadius: '12px', padding: '20px 16px', borderTop: '4px solid #f59e0b', boxShadow: '0 4px 14px rgba(0,0,0,0.04)', textAlign: 'center' }}>
-                            <div style={{ color: '#b45309', fontWeight: 800, fontSize: '0.8rem', textTransform: 'uppercase' }}>Sunday 8:00 AM – 10:00 AM</div>
-                            <h3 style={{ fontSize: '1.15rem', color: '#1e293b', margin: '8px 0 4px', fontWeight: 800 }}>Sunday School</h3>
-                            <p style={{ fontSize: '0.82rem', color: '#64748b', margin: 0 }}>Nurturing children &amp; youth with foundational Bible teachings &amp; memory verses.</p>
+                    <div className="worship-schedule-grid">
+                        <div className="worship-card">
+                            <span className="worship-card-day">Sunday</span>
+                            <h3 className="worship-card-name">Sunday School</h3>
+                            <div className="worship-card-time">
+                                <i className="far fa-clock"></i> 8:00 AM – 10:00 AM
+                            </div>
+                            <span className="worship-card-pill">All Ages</span>
                         </div>
 
-                        <div style={{ background: '#ffffff', borderRadius: '12px', padding: '20px 16px', borderTop: '4px solid #3b82f6', boxShadow: '0 4px 14px rgba(0,0,0,0.04)', textAlign: 'center' }}>
-                            <div style={{ color: '#1d4ed8', fontWeight: 800, fontSize: '0.8rem', textTransform: 'uppercase' }}>Sunday 8:00 AM – 10:00 AM</div>
-                            <h3 style={{ fontSize: '1.15rem', color: '#1e293b', margin: '8px 0 4px', fontWeight: 800 }}>English Service</h3>
-                            <p style={{ fontSize: '0.82rem', color: '#64748b', margin: 0 }}>Early morning worship, Bible exegesis, and spiritual empowerment for all.</p>
+                        <div className="worship-card">
+                            <span className="worship-card-day">Sunday</span>
+                            <h3 className="worship-card-name">English Service</h3>
+                            <div className="worship-card-time">
+                                <i className="far fa-clock"></i> 8:00 AM – 10:00 AM
+                            </div>
+                            <span className="worship-card-pill">Morning Worship</span>
                         </div>
 
-                        <div style={{ background: '#ffffff', borderRadius: '12px', padding: '20px 16px', borderTop: '4px solid #10b981', boxShadow: '0 4px 14px rgba(0,0,0,0.04)', textAlign: 'center' }}>
-                            <div style={{ color: '#15803d', fontWeight: 800, fontSize: '0.8rem', textTransform: 'uppercase' }}>Sunday 10:30 AM – 1:30 PM</div>
-                            <h3 style={{ fontSize: '1.15rem', color: '#1e293b', margin: '8px 0 4px', fontWeight: 800 }}>Main Service</h3>
-                            <p style={{ fontSize: '0.82rem', color: '#64748b', margin: 0 }}>Our flagship celebration service with Praise &amp; Worship, Choir, and the Word of God.</p>
+                        <div className="worship-card worship-card-featured">
+                            <span className="worship-card-day">Sunday • Main</span>
+                            <h3 className="worship-card-name">Main Service</h3>
+                            <div className="worship-card-time">
+                                <i className="far fa-clock"></i> 10:30 AM – 1:30 PM
+                            </div>
+                            <span className="worship-card-pill">Bishop Clement Simba</span>
                         </div>
 
-                        <div style={{ background: '#ffffff', borderRadius: '12px', padding: '20px 16px', borderTop: '4px solid #a855f7', boxShadow: '0 4px 14px rgba(0,0,0,0.04)', textAlign: 'center' }}>
-                            <div style={{ color: '#7e22ce', fontWeight: 800, fontSize: '0.8rem', textTransform: 'uppercase' }}>Friday 7:00 PM – 9:00 PM</div>
-                            <h3 style={{ fontSize: '1.15rem', color: '#1e293b', margin: '8px 0 4px', fontWeight: 800 }}>Friday Fellowship</h3>
-                            <p style={{ fontSize: '0.82rem', color: '#64748b', margin: 0 }}>Midweek fervent prayer, intercession, deliverance, and divine encounters.</p>
+                        <div className="worship-card">
+                            <span className="worship-card-day">Friday</span>
+                            <h3 className="worship-card-name">Friday Fellowship</h3>
+                            <div className="worship-card-time">
+                                <i className="far fa-clock"></i> 7:00 PM – 9:00 PM
+                            </div>
+                            <span className="worship-card-pill">Prayer &amp; Revival</span>
                         </div>
 
-                        <div style={{ background: '#ffffff', borderRadius: '12px', padding: '20px 16px', borderTop: '4px solid #f43f5e', boxShadow: '0 4px 14px rgba(0,0,0,0.04)', textAlign: 'center' }}>
-                            <div style={{ color: '#be123c', fontWeight: 800, fontSize: '0.8rem', textTransform: 'uppercase' }}>Saturday 4:00 PM – 6:00 PM</div>
-                            <h3 style={{ fontSize: '1.15rem', color: '#1e293b', margin: '8px 0 4px', fontWeight: 800 }}>Youth Fellowship</h3>
-                            <p style={{ fontSize: '0.82rem', color: '#64748b', margin: 0 }}>Empowering young people through music, instrumentals, seminars &amp; fellowship.</p>
+                        <div className="worship-card">
+                            <span className="worship-card-day">Saturday</span>
+                            <h3 className="worship-card-name">Youth Fellowship</h3>
+                            <div className="worship-card-time">
+                                <i className="far fa-clock"></i> 4:00 PM – 6:00 PM
+                            </div>
+                            <span className="worship-card-pill">Teens &amp; Young Adults</span>
                         </div>
                     </div>
                 </div>

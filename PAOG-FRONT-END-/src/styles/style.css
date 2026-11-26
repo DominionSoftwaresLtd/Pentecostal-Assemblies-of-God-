@@ -8853,6 +8853,145 @@ p {
         font-size: 0.85rem !important;
     }
 }
+
+/* ========================================================
+   Natural, Elegant Worship Schedule (Service Times)
+   ======================================================== */
+.worship-schedule-section {
+    background: #fbfcfe;
+    padding: 38px 0 44px 0;
+    border-bottom: 1px solid #e2e8f0;
+    position: relative;
+}
+
+.worship-schedule-header {
+    text-align: center;
+    margin-bottom: 26px;
+}
+
+.worship-schedule-eyebrow {
+    color: #E87D1E;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    display: inline-block;
+    margin-bottom: 4px;
+}
+
+.worship-schedule-title {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: #000066;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.worship-schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    align-items: stretch;
+}
+
+@media (max-width: 1024px) {
+    .worship-schedule-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 12px;
+    }
+}
+
+.worship-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 102, 0.04);
+    position: relative;
+    text-align: center;
+}
+
+.worship-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 102, 0.08);
+    border-color: #cbd5e1;
+}
+
+/* Featured: Main Service Card */
+.worship-card-featured {
+    background: linear-gradient(145deg, #000044 0%, #000066 100%);
+    border: 1.5px solid #3b82f6;
+    box-shadow: 0 8px 26px rgba(0, 0, 102, 0.18);
+    color: #ffffff;
+}
+
+.worship-card-featured:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 102, 0.28);
+    border-color: #60a5fa;
+}
+
+.worship-card-day {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #E87D1E;
+    margin-bottom: 6px;
+}
+
+.worship-card-featured .worship-card-day {
+    color: #fbbf24;
+}
+
+.worship-card-name {
+    font-size: 1.12rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 10px 0;
+    line-height: 1.25;
+}
+
+.worship-card-featured .worship-card-name {
+    color: #ffffff;
+}
+
+.worship-card-time {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: #f1f5f9;
+    color: #1e293b;
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+}
+
+.worship-card-featured .worship-card-time {
+    background: rgba(255, 255, 255, 0.12);
+    color: #f8fafc;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.worship-card-pill {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.worship-card-featured .worship-card-pill {
+    color: #93c5fd;
+}
+
 /* Gallery Branches - Professional Separation */
 .gallery-branches-container {
     display: flex;
