@@ -102,6 +102,28 @@ const Home = () => {
                 </div>
             </div>
 
+            {/* Ministry Structure - Tree Diagram */}
+            <section className="ministry-structure-tree">
+                <div className="container org-tree-container">
+                    <div className="org-tree">
+                        <ul>
+                            <li>
+                                <div className="org-node org-node-root">
+                                    PAG Ngungo Assembly — Mbeere District HQ
+                                </div>
+                                <ul>
+                                    <li><div className="org-node org-node-highlight">8 Mbeere Assemblies</div></li>
+                                    <li><div className="org-node">Kyuso Circuit (Kitui)</div></li>
+                                    <li><div className="org-node">4 Church Departments</div></li>
+                                    <li><div className="org-node">Sanctuary Ministries</div></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            
             {/* Order of Services Showcase */}
             <section style={{ background: '#f8fafc', padding: '36px 0', borderBottom: '1px solid #e2e8f0' }}>
                 <div className="container">
@@ -151,27 +173,6 @@ const Home = () => {
                             <h3 style={{ fontSize: '1.15rem', color: '#1e293b', margin: '8px 0 4px', fontWeight: 800 }}>Youth Fellowship</h3>
                             <p style={{ fontSize: '0.82rem', color: '#64748b', margin: 0 }}>Empowering young people through music, instrumentals, seminars &amp; fellowship.</p>
                         </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Ministry Structure - Tree Diagram */}
-            <section className="ministry-structure-tree">
-                <div className="container org-tree-container">
-                    <div className="org-tree">
-                        <ul>
-                            <li>
-                                <div className="org-node org-node-root">
-                                    PAG Ngungo Assembly — Mbeere District HQ
-                                </div>
-                                <ul>
-                                    <li><div className="org-node org-node-highlight">8 Mbeere Assemblies</div></li>
-                                    <li><div className="org-node">Kyuso Circuit (Kitui)</div></li>
-                                    <li><div className="org-node">4 Church Departments</div></li>
-                                    <li><div className="org-node">Sanctuary Ministries</div></li>
-                                </ul>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </section>
@@ -343,379 +344,355 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Ministries & Departments — Redesigned */}
-            <section className="ministries-v2">
-                <div className="container ministries-split">
-                    <div className="ministries-left">
-                        <span className="section-subtitle">Pillars of Ministry</span>
-                        <h2 className="section-title">Departments &amp; Ministries</h2>
-                        <p className="section-description">
-                            At Pentecostal Assemblies of God - Ngungo Assembly, every believer is nurtured and equipped to serve through dedicated departmental arms and sanctuary ministries.
-                            {/* Departments & Ministries Showcase — Separated & Distinguished */}
-                            <section className="section" style={{ backgroundColor: '#f4f6fb', padding: '70px 0' }}>
-                                <div className="container">
-                                    <div className="section-header" style={{ textAlign: 'center', marginBottom: '46px' }}>
-                                        <span style={{
-                                            display: 'inline-block',
-                                            fontSize: '0.82rem',
-                                            fontWeight: 800,
-                                            textTransform: 'uppercase',
-                                            letterSpacing: '1.5px',
-                                            color: '#000066',
-                                            background: 'rgba(0, 0, 102, 0.08)',
-                                            padding: '6px 16px',
-                                            borderRadius: '20px',
-                                            marginBottom: '10px'
-                                        }}>
-                                            Pillars of the Church
-                                        </span>
-                                        <h2 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#000066', margin: '0 0 12px' }}>
-                                            Church Departments &amp; Sanctuary Ministries
-                                        </h2>
-                                        <p style={{ maxWidth: '720px', margin: '0 auto', color: '#64748b', fontSize: '1rem', lineHeight: 1.6 }}>
-                                            Nurturing every believer from childhood to mature leadership through our four foundational departments,
-                                            and exalting God through four dedicated sanctuary worship ministries.
-                                        </p>
-                                        <div style={{ marginTop: '20px' }}>
-                                            <Link to="/ministries" className="btn btn-primary" style={{ display: 'inline-block' }}>
-                                                View All Departments &rarr;
-                                            </Link>
+            {/* Departments & Ministries Showcase — Separated & Distinguished */}
+            <section className="section" style={{ backgroundColor: '#f4f6fb', padding: '70px 0' }}>
+                <div className="container">
+                    <div className="section-header" style={{ textAlign: 'center', marginBottom: '46px' }}>
+                        <span style={{
+                            display: 'inline-block',
+                            fontSize: '0.82rem',
+                            fontWeight: 800,
+                            textTransform: 'uppercase',
+                            letterSpacing: '1.5px',
+                            color: '#000066',
+                            background: 'rgba(0, 0, 102, 0.08)',
+                            padding: '6px 16px',
+                            borderRadius: '20px',
+                            marginBottom: '10px'
+                        }}>
+                            Pillars of the Church
+                        </span>
+                        <h2 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#000066', margin: '0 0 12px' }}>
+                            Church Departments &amp; Sanctuary Ministries
+                        </h2>
+                        <p style={{ maxWidth: '720px', margin: '0 auto', color: '#64748b', fontSize: '1rem', lineHeight: 1.6 }}>
+                            Nurturing every believer from childhood to mature leadership through our four foundational departments, 
+                            and exalting God through four dedicated sanctuary worship ministries.
+                        </p>
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '32px' }}>
+                        
+                        {/* ── CARD 1: FOUR CHURCH DEPARTMENTS ── */}
+                        <div style={{
+                            background: '#ffffff',
+                            borderRadius: '20px',
+                            border: '2px solid rgba(0, 0, 102, 0.14)',
+                            boxShadow: '0 12px 36px rgba(0, 0, 102, 0.08)',
+                            overflow: 'hidden',
+                            display: 'flex',
+                            flexDirection: 'column'
+                        }}>
+                            <div style={{
+                                background: 'linear-gradient(135deg, #000045 0%, #000066 100%)',
+                                padding: '24px 28px',
+                                color: '#ffffff',
+                                borderBottom: '3px solid #fbbf24'
+                            }}>
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                    <span style={{ background: 'rgba(251, 191, 36, 0.25)', color: '#fbbf24', fontSize: '0.74rem', fontWeight: 800, textTransform: 'uppercase', padding: '3px 10px', borderRadius: '12px' }}>
+                                        Four Pillars
+                                    </span>
+                                    <span style={{ fontSize: '0.84rem', color: '#cbd5e1' }}>Fellowship &amp; Nurture</span>
+                                </div>
+                                <h3 style={{ margin: '8px 0 4px', fontSize: '1.45rem', fontWeight: 800, color: '#ffffff' }}>
+                                    Church Departments
+                                </h3>
+                                <p style={{ margin: 0, fontSize: '0.88rem', color: '#e2e8f0' }}>
+                                    Equipping women, men, youth, and children for spiritual growth.
+                                </p>
+                            </div>
+
+                            <div style={{ padding: '24px 28px', flex: 1, display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                                {[
+                                    { icon: 'female', title: 'Women Department', time: 'Weekly Prayer & Intercession', desc: 'Mothers fellowship, prayer chains, and community compassion.', link: '/departments#women' },
+                                    { icon: 'male', title: 'Men Department', time: 'Monthly Brotherhood Breakfast', desc: 'Godly fatherhood, leadership integrity, and church projects.', link: '/departments#men' },
+                                    { icon: 'bolt', title: 'Youth Department', time: 'Saturdays 4:00 PM – 6:00 PM', desc: 'Worship, talent discovery, life skills, and mentorship.', link: '/departments#youth' },
+                                    { icon: 'child', title: 'Sunday School', time: 'Sundays 8:00 AM – 10:00 AM', desc: 'Biblical foundation, memory verses, and child discipleship.', link: '/departments#sundayschool' },
+                                ].map((d, idx) => (
+                                    <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '14px', paddingBottom: '14px', borderBottom: idx < 3 ? '1px solid #f1f5f9' : 'none' }}>
+                                        <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(0, 0, 102, 0.06)', color: '#000066', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: '1rem' }}>
+                                            <i className={`fas fa-${d.icon}`}></i>
+                                        </div>
+                                        <div style={{ flex: 1 }}>
+                                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+                                                <h4 style={{ margin: 0, fontSize: '0.98rem', fontWeight: 700, color: '#000066' }}>{d.title}</h4>
+                                                <span style={{ fontSize: '0.72rem', color: '#64748b', fontWeight: 600 }}>{d.time}</span>
+                                            </div>
+                                            <p style={{ margin: '3px 0 0', fontSize: '0.84rem', color: '#475569', lineHeight: 1.5 }}>{d.desc}</p>
                                         </div>
                                     </div>
-                                    <div className="ministries-right">
-                                        {[
-                                            { icon: 'female', title: 'Women Department', desc: 'Nurturing women in prayer, family life, mutual fellowship, and charitable outreach in church and community.', link: '/ministries#women' },
-                                            { icon: 'male', title: 'Men Department', desc: 'Equipping godly men to lead with integrity, spiritual strength, and dedication in their homes and church.', link: '/ministries#men' },
-                                            { icon: 'users', title: 'Youth Department', desc: 'Vibrant youth fellowship meeting every Saturday from 4:00 PM – 6:00 PM for worship, talent, and life mentorship.', link: '/ministries#youth' },
-                                            { icon: 'child', title: 'Sunday School Department', desc: 'Sundays 8:00 AM – 10:00 AM; teaching children foundational biblical truths, memory verses, and love for Christ.', link: '/ministries#sundayschool' },
-                                            { icon: 'microphone', title: 'Praise and Worship', desc: 'Anointed vocal ministers leading the congregation into deep, Spirit-led worship and celebration.', link: '/ministries#worship' },
-                                            { icon: 'guitar', title: 'Instrumentalist Ministry', desc: 'Skilled musicians serving on keyboards, drums, guitars, and audio systems with musical excellence.', link: '/ministries#instrumentalists' },
-                                            { icon: 'music', title: 'Choir Ministry', desc: 'Harmonious choral anthems, special festive presentations, and uplifting revival praise music.', link: '/ministries#choir' },
-                                            { icon: 'door-open', title: 'Ushering Ministry', desc: 'Extending warm hospitality, greeting visitors, and maintaining reverent order in all sanctuary services.', link: '/ministries#ushering' },
-                                        ].map((m, i) => (
-                                            <div className="ministry-list-item" key={i}>
-                                                <div className="ministry-list-icon">
-                                                    <i className={`fas fa-${m.icon}`}></i>
+                                ))}
+                            </div>
 
-                                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '32px' }}>
+                            <div style={{ padding: '16px 28px 24px', borderTop: '1px solid #f1f5f9' }}>
+                                <Link to="/departments" className="btn btn-primary" style={{ width: '100%', textAlign: 'center', display: 'block', padding: '12px', fontSize: '0.92rem', borderRadius: '10px' }}>
+                                    Explore All 4 Departments &rarr;
+                                </Link>
+                            </div>
+                        </div>
 
-                                                        {/* ── CARD 1: FOUR CHURCH DEPARTMENTS ── */}
-                                                        <div style={{
-                                                            background: '#ffffff',
-                                                            borderRadius: '20px',
-                                                            border: '2px solid rgba(0, 0, 102, 0.14)',
-                                                            boxShadow: '0 12px 36px rgba(0, 0, 102, 0.08)',
-                                                            overflow: 'hidden',
-                                                            display: 'flex',
-                                                            flexDirection: 'column'
-                                                        }}>
-                                                            <div style={{
-                                                                background: 'linear-gradient(135deg, #000045 0%, #000066 100%)',
-                                                                padding: '24px 28px',
-                                                                color: '#ffffff',
-                                                                borderBottom: '3px solid #fbbf24'
-                                                            }}>
-                                                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                                                    <span style={{ background: 'rgba(251, 191, 36, 0.25)', color: '#fbbf24', fontSize: '0.74rem', fontWeight: 800, textTransform: 'uppercase', padding: '3px 10px', borderRadius: '12px' }}>
-                                                                        Four Pillars
-                                                                    </span>
-                                                                    <span style={{ fontSize: '0.84rem', color: '#cbd5e1' }}>Fellowship &amp; Nurture</span>
-                                                                </div>
-                                                                <div className="ministry-list-content">
-                                                                    <h3>{m.title}</h3>
-                                                                    <p>{m.desc}</p>
-                                                                    <Link to={m.link} className="ministry-link-inline">Learn More <i className="fas fa-arrow-right"></i></Link>
-                                                                    <h3 style={{ margin: '8px 0 4px', fontSize: '1.45rem', fontWeight: 800, color: '#ffffff' }}>
-                                                                        Church Departments
-                                                                    </h3>
-                                                                    <p style={{ margin: 0, fontSize: '0.88rem', color: '#e2e8f0' }}>
-                                                                        Equipping women, men, youth, and children for spiritual growth.
-                                                                    </p>
-                                                                </div>
+                        {/* ── CARD 2: FOUR SANCTUARY MINISTRIES ── */}
+                        <div style={{
+                            background: '#ffffff',
+                            borderRadius: '20px',
+                            border: '2px solid rgba(0, 0, 102, 0.14)',
+                            boxShadow: '0 12px 36px rgba(0, 0, 102, 0.08)',
+                            overflow: 'hidden',
+                            display: 'flex',
+                            flexDirection: 'column'
+                        }}>
+                            <div style={{
+                                background: 'linear-gradient(135deg, #000033 0%, #000066 100%)',
+                                padding: '24px 28px',
+                                color: '#ffffff',
+                                borderBottom: '3px solid #38bdf8'
+                            }}>
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                    <span style={{ background: 'rgba(56, 189, 248, 0.25)', color: '#38bdf8', fontSize: '0.74rem', fontWeight: 800, textTransform: 'uppercase', padding: '3px 10px', borderRadius: '12px' }}>
+                                        Sanctuary Arms
+                                    </span>
+                                    <span style={{ fontSize: '0.84rem', color: '#cbd5e1' }}>Worship &amp; Service</span>
+                                </div>
+                                <h3 style={{ margin: '8px 0 4px', fontSize: '1.45rem', fontWeight: 800, color: '#ffffff' }}>
+                                    Sanctuary Ministries
+                                </h3>
+                                <p style={{ margin: 0, fontSize: '0.88rem', color: '#e2e8f0' }}>
+                                    Corporate worship, instrumental band, choir, and protocol.
+                                </p>
+                            </div>
 
-                                                                <div style={{ padding: '24px 28px', flex: 1, display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                                                                    {[
-                                                                        { icon: 'female', title: 'Women Department', time: 'Weekly Prayer & Intercession', desc: 'Mothers fellowship, prayer chains, and community compassion.', link: '/departments#women' },
-                                                                        { icon: 'male', title: 'Men Department', time: 'Monthly Brotherhood Breakfast', desc: 'Godly fatherhood, leadership integrity, and church projects.', link: '/departments#men' },
-                                                                        { icon: 'bolt', title: 'Youth Department', time: 'Saturdays 4:00 PM – 6:00 PM', desc: 'Worship, talent discovery, life skills, and mentorship.', link: '/departments#youth' },
-                                                                        { icon: 'child', title: 'Sunday School', time: 'Sundays 8:00 AM – 10:00 AM', desc: 'Biblical foundation, memory verses, and child discipleship.', link: '/departments#sundayschool' },
-                                                                    ].map((d, idx) => (
-                                                                        <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '14px', paddingBottom: '14px', borderBottom: idx < 3 ? '1px solid #f1f5f9' : 'none' }}>
-                                                                            <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(0, 0, 102, 0.06)', color: '#000066', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: '1rem' }}>
-                                                                                <i className={`fas fa-${d.icon}`}></i>
-                                                                            </div>
-                                                                            <div style={{ flex: 1 }}>
-                                                                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-                                                                                    <h4 style={{ margin: 0, fontSize: '0.98rem', fontWeight: 700, color: '#000066' }}>{d.title}</h4>
-                                                                                    <span style={{ fontSize: '0.72rem', color: '#64748b', fontWeight: 600 }}>{d.time}</span>
-                                                                                </div>
-                                                                                <p style={{ margin: '3px 0 0', fontSize: '0.84rem', color: '#475569', lineHeight: 1.5 }}>{d.desc}</p>
-                                                                            </div>
-                                                                        </div>
-                                                                    ))}
-                                                                </div>
+                            <div style={{ padding: '24px 28px', flex: 1, display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                                {[
+                                    { icon: 'microphone', title: 'Praise and Worship', time: 'Sunday Services & Vigils', desc: 'Anointed song ministers creating an atmosphere of Holy Spirit revival.', link: '/ministries#worship' },
+                                    { icon: 'guitar', title: 'Instrumentalist Ministry', time: 'Keyboards, Drums & Guitars', desc: 'Skilled musicians serving with technical acoustics and excellence.', link: '/ministries#instrumentalists' },
+                                    { icon: 'users', title: 'Sanctuary Choir', time: 'Choral Anthems & Hymns', desc: 'Multi-part harmonies, cantatas, and festive praise presentations.', link: '/ministries#choir' },
+                                    { icon: 'door-open', title: 'Ushering & Protocol', time: 'Every Service & Convocations', desc: 'Warm hospitable reception, sanctuary reverence, and seating order.', link: '/ministries#ushering' },
+                                ].map((m, idx) => (
+                                    <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '14px', paddingBottom: '14px', borderBottom: idx < 3 ? '1px solid #f1f5f9' : 'none' }}>
+                                        <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(0, 0, 102, 0.06)', color: '#000066', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: '1rem' }}>
+                                            <i className={`fas fa-${m.icon}`}></i>
+                                        </div>
+                                        <div style={{ flex: 1 }}>
+                                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+                                                <h4 style={{ margin: 0, fontSize: '0.98rem', fontWeight: 700, color: '#000066' }}>{m.title}</h4>
+                                                <span style={{ fontSize: '0.72rem', color: '#64748b', fontWeight: 600 }}>{m.time}</span>
+                                            </div>
+                                            <p style={{ margin: '3px 0 0', fontSize: '0.84rem', color: '#475569', lineHeight: 1.5 }}>{m.desc}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
 
-                                                                <div style={{ padding: '16px 28px 24px', borderTop: '1px solid #f1f5f9' }}>
-                                                                    <Link to="/departments" className="btn btn-primary" style={{ width: '100%', textAlign: 'center', display: 'block', padding: '12px', fontSize: '0.92rem', borderRadius: '10px' }}>
-                                                                        Explore All 4 Departments &rarr;
-                                                                    </Link>
-                                                                </div>
-                                                            </div>
+                            <div style={{ padding: '16px 28px 24px', borderTop: '1px solid #f1f5f9' }}>
+                                <Link to="/ministries" className="btn btn-primary" style={{ width: '100%', textAlign: 'center', display: 'block', padding: '12px', fontSize: '0.92rem', borderRadius: '10px' }}>
+                                    Explore All 4 Ministries &rarr;
+                                </Link>
+                            </div>
+                        </div>
 
-                                                            {/* ── CARD 2: FOUR SANCTUARY MINISTRIES ── */}
-                                                            <div style={{
-                                                                background: '#ffffff',
-                                                                borderRadius: '20px',
-                                                                border: '2px solid rgba(0, 0, 102, 0.14)',
-                                                                boxShadow: '0 12px 36px rgba(0, 0, 102, 0.08)',
-                                                                overflow: 'hidden',
-                                                                display: 'flex',
-                                                                flexDirection: 'column'
-                                                            }}>
-                                                                <div style={{
-                                                                    background: 'linear-gradient(135deg, #000033 0%, #000066 100%)',
-                                                                    padding: '24px 28px',
-                                                                    color: '#ffffff',
-                                                                    borderBottom: '3px solid #38bdf8'
-                                                                }}>
-                                                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                                                        <span style={{ background: 'rgba(56, 189, 248, 0.25)', color: '#38bdf8', fontSize: '0.74rem', fontWeight: 800, textTransform: 'uppercase', padding: '3px 10px', borderRadius: '12px' }}>
-                                                                            Sanctuary Arms
-                                                                        </span>
-                                                                        <span style={{ fontSize: '0.84rem', color: '#cbd5e1' }}>Worship &amp; Service</span>
-                                                                    </div>
-                                                                    <h3 style={{ margin: '8px 0 4px', fontSize: '1.45rem', fontWeight: 800, color: '#ffffff' }}>
-                                                                        Sanctuary Ministries
-                                                                    </h3>
-                                                                    <p style={{ margin: 0, fontSize: '0.88rem', color: '#e2e8f0' }}>
-                                                                        Corporate worship, instrumental band, choir, and protocol.
-                                                                    </p>
-                                                                </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Statistics Section */}
+            <section className="stats-section" ref={statsRef}>
+                <div className="stats-overlay"></div>
+                <div className="container">
+                    <div className="section-header light">
+                        <span className="section-subtitle">Our Impact</span>
+                        <h2 className="section-title">The Numbers Speak</h2>
+                    </div>
+                    <div className="stats-grid">
+                        <div className="stat-item">
+                            <div className="stat-icon">
+                                <i className="fas fa-heart"></i>
+                            </div>
+                            <div className="stat-content">
+                                <div className="stat-number">
+                                    {statsVisible ? stats.souls : 0}
+                                    {statsVisible && stats.souls >= 445 ? '+' : ''}
+                                </div>
+                                <div className="stat-label">Souls Won to Christ</div>
+                            </div>
+                        </div>
+                        <div className="stat-item">
+                            <div className="stat-icon">
+                                <i className="fas fa-globe-africa"></i>
+                            </div>
+                            <div className="stat-content">
+                                <div className="stat-number">{statsVisible ? stats.missions : 0}</div>
+                                <div className="stat-label">Mission Trips</div>
+                            </div>
+                        </div>
+                        <div className="stat-item">
+                            <div className="stat-icon">
+                                <i className="fas fa-map-marked-alt"></i>
+                            </div>
+                            <div className="stat-content">
+                                <div className="stat-number">{statsVisible ? stats.counties : 0}</div>
+                                <div className="stat-label">Counties in Kenya</div>
+                            </div>
+                        </div>
+                        <div className="stat-item">
+                            <div className="stat-icon">
+                                <i className="fas fa-graduation-cap"></i>
+                            </div>
+                            <div className="stat-content">
+                                <div className="stat-number">{statsVisible ? stats.schools : 0}</div>
+                                <div className="stat-label">Schools Ministered</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            {/* Testimonials Section */}
+            <section className="testimonials-section section">
+                <div className="container">
+                    <div className="section-header">
+                        <span className="section-subtitle">Testimonies</span>
+                        <h2 className="section-title">Lives Transformed</h2>
+                    </div>
+                    <div className="testimonials-slider">
+                        {testimonials.map((testimonial, index) => (
+                            <div key={index} className={`testimonial-card ${index === currentTestimonial ? 'active' : ''}`}>
+                                <div className="testimonial-content">
+                                    <div className="quote-icon"><i className="fas fa-quote-left"></i></div>
+                                    <p>"{testimonial.quote}"</p>
+                                </div>
+                                <div className="testimonial-author">
+                                    <div className="author-image" style={{ background: `linear-gradient(135deg, ${testimonial.color}dd, ${testimonial.color}99)`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 700, fontSize: '1.1rem', fontFamily: 'Poppins, sans-serif', letterSpacing: '0.5px' }}>
+                                        {testimonial.initials}
+                                    </div>
+                                    <div className="author-info">
+                                        <h4>{testimonial.author}</h4>
+                                        <span>{testimonial.location}</span>
+                                    </div>
+                                </div>
+                            </div>
                         ))}
+                    </div>
+                    <div className="testimonial-dots">
+                        {testimonials.map((_, index) => (
+                            <div key={index} className={`dot ${index === currentTestimonial ? 'active' : ''}`} onClick={() => setCurrentTestimonial(index)}></div>
+                        ))}
+                    </div>
+                </div>
+            </section>
 
-                                                                <div style={{ padding: '24px 28px', flex: 1, display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                                                                    {[
-                                                                        { icon: 'microphone', title: 'Praise and Worship', time: 'Sunday Services & Vigils', desc: 'Anointed song ministers creating an atmosphere of Holy Spirit revival.', link: '/ministries#worship' },
-                                                                        { icon: 'guitar', title: 'Instrumentalist Ministry', time: 'Keyboards, Drums & Guitars', desc: 'Skilled musicians serving with technical acoustics and excellence.', link: '/ministries#instrumentalists' },
-                                                                        { icon: 'users', title: 'Sanctuary Choir', time: 'Choral Anthems & Hymns', desc: 'Multi-part harmonies, cantatas, and festive praise presentations.', link: '/ministries#choir' },
-                                                                        { icon: 'door-open', title: 'Ushering & Protocol', time: 'Every Service & Convocations', desc: 'Warm hospitable reception, sanctuary reverence, and seating order.', link: '/ministries#ushering' },
-                                                                    ].map((m, idx) => (
-                                                                        <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '14px', paddingBottom: '14px', borderBottom: idx < 3 ? '1px solid #f1f5f9' : 'none' }}>
-                                                                            <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(0, 0, 102, 0.06)', color: '#000066', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: '1rem' }}>
-                                                                                <i className={`fas fa-${m.icon}`}></i>
-                                                                            </div>
-                                                                            <div style={{ flex: 1 }}>
-                                                                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-                                                                                    <h4 style={{ margin: 0, fontSize: '0.98rem', fontWeight: 700, color: '#000066' }}>{m.title}</h4>
-                                                                                    <span style={{ fontSize: '0.72rem', color: '#64748b', fontWeight: 600 }}>{m.time}</span>
-                                                                                </div>
-                                                                                <p style={{ margin: '3px 0 0', fontSize: '0.84rem', color: '#475569', lineHeight: 1.5 }}>{m.desc}</p>
-                                                                            </div>
-                                                                        </div>
-                                                                    ))}
-                                                                </div>
+            {/* CTA Section - Giving & Stewardship */}
+            <section className="cta-section">
+                <div className="container">
+                    <div className="cta-content">
+                        <span style={{ display: 'inline-block', background: 'rgba(255,255,255,0.18)', padding: '5px 14px', borderRadius: '30px', fontSize: '0.82rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: '12px' }}>
+                            <i className="fas fa-hand-holding-dollar"></i> Giving &amp; Stewardship
+                        </span>
+                        <h2>Support God's Work &amp; District Growth</h2>
+                        <p style={{ fontSize: '1.2rem', margin: '10px 0 6px', fontWeight: 600 }}>
+                            M-Pesa Paybill: <strong style={{ color: '#fff', textDecoration: 'underline' }}>4136387</strong> &bull; Account: <strong style={{ color: '#fff' }}>YOUR NAME</strong>
+                        </p>
+                        <p style={{ fontSize: '0.95rem', opacity: 0.9, maxWidth: '680px', margin: '0 auto 20px' }}>
+                            Your faithful tithes, offerings, and building gifts empower the work of God at Ngungo Assembly and across all Mbeere District sister assemblies. Overseer: Bishop Rev Clement Simba &bull; P.O. Box 213-60113 Kiritiri, Mbeere &bull; Tel: 0720140213
+                        </p>
+                        <div className="cta-buttons">
+                            <Link to="/donate" className="btn btn-primary"><i className="fas fa-mobile-screen-button"></i> Give via M-Pesa</Link>
+                            <Link to="/contact" className="btn btn-secondary">Contact Church Office</Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {/* Latest News Section */}
+            <section className="news-section section">
+                <div className="container">
+                    <div className="section-header">
+                        <span className="section-subtitle">News &amp; Updates</span>
+                        <h2 className="section-title">Latest From The Field</h2>
+                    </div>
+                    <div className="news-grid">
+                        {newsItems.length > 0 ? (
+                            newsItems.slice(0, 4).map((item, idx) => {
+                                const cardColors = [
+                                    { grad: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)', accent: '#E87D1E', icon: 'fas fa-church' },
+                                    { grad: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 100%)', accent: '#6366f1', icon: 'fas fa-sitemap' },
+                                    { grad: 'linear-gradient(135deg, #042f2e 0%, #115e59 100%)', accent: '#14b8a6', icon: 'fas fa-fire' },
+                                    { grad: 'linear-gradient(135deg, #451a03 0%, #78350f 100%)', accent: '#f59e0b', icon: 'fas fa-heart' }
+                                ];
+                                const style = cardColors[idx % cardColors.length];
 
-                                                                <div style={{ padding: '16px 28px 24px', borderTop: '1px solid #f1f5f9' }}>
-                                                                    <Link to="/ministries" className="btn btn-primary" style={{ width: '100%', textAlign: 'center', display: 'block', padding: '12px', fontSize: '0.92rem', borderRadius: '10px' }}>
-                                                                        Explore All 4 Ministries &rarr;
-                                                                    </Link>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </section>
-
-                                                {/* Statistics Section */}
-                                                <section className="stats-section" ref={statsRef}>
-                                                    <div className="stats-overlay"></div>
-                                                    <div className="container">
-                                                        <div className="section-header light">
-                                                            <span className="section-subtitle">Our Impact</span>
-                                                            <h2 className="section-title">The Numbers Speak</h2>
-                                                        </div>
-                                                        <div className="stats-grid">
-                                                            <div className="stat-item">
-                                                                <div className="stat-icon">
-                                                                    <i className="fas fa-heart"></i>
-                                                                </div>
-                                                                <div className="stat-content">
-                                                                    <div className="stat-number">
-                                                                        {statsVisible ? stats.souls : 0}
-                                                                        {statsVisible && stats.souls >= 445 ? '+' : ''}
-                                                                    </div>
-                                                                    <div className="stat-label">Souls Won to Christ</div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="stat-item">
-                                                                <div className="stat-icon">
-                                                                    <i className="fas fa-globe-africa"></i>
-                                                                </div>
-                                                                <div className="stat-content">
-                                                                    <div className="stat-number">{statsVisible ? stats.missions : 0}</div>
-                                                                    <div className="stat-label">Mission Trips</div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="stat-item">
-                                                                <div className="stat-icon">
-                                                                    <i className="fas fa-map-marked-alt"></i>
-                                                                </div>
-                                                                <div className="stat-content">
-                                                                    <div className="stat-number">{statsVisible ? stats.counties : 0}</div>
-                                                                    <div className="stat-label">Counties in Kenya</div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="stat-item">
-                                                                <div className="stat-icon">
-                                                                    <i className="fas fa-graduation-cap"></i>
-                                                                </div>
-                                                                <div className="stat-content">
-                                                                    <div className="stat-number">{statsVisible ? stats.schools : 0}</div>
-                                                                    <div className="stat-label">Schools Ministered</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </section>
-
-
-                                                {/* Testimonials Section */}
-                                                <section className="testimonials-section section">
-                                                    <div className="container">
-                                                        <div className="section-header">
-                                                            <span className="section-subtitle">Testimonies</span>
-                                                            <h2 className="section-title">Lives Transformed</h2>
-                                                        </div>
-                                                        <div className="testimonials-slider">
-                                                            {testimonials.map((testimonial, index) => (
-                                                                <div key={index} className={`testimonial-card ${index === currentTestimonial ? 'active' : ''}`}>
-                                                                    <div className="testimonial-content">
-                                                                        <div className="quote-icon"><i className="fas fa-quote-left"></i></div>
-                                                                        <p>"{testimonial.quote}"</p>
-                                                                    </div>
-                                                                    <div className="testimonial-author">
-                                                                        <div className="author-image" style={{ background: `linear-gradient(135deg, ${testimonial.color}dd, ${testimonial.color}99)`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 700, fontSize: '1.1rem', fontFamily: 'Poppins, sans-serif', letterSpacing: '0.5px' }}>
-                                                                            {testimonial.initials}
-                                                                        </div>
-                                                                        <div className="author-info">
-                                                                            <h4>{testimonial.author}</h4>
-                                                                            <span>{testimonial.location}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            ))}
-                                                        </div>
-                                                        <div className="testimonial-dots">
-                                                            {testimonials.map((_, index) => (
-                                                                <div key={index} className={`dot ${index === currentTestimonial ? 'active' : ''}`} onClick={() => setCurrentTestimonial(index)}></div>
-                                                            ))}
-                                                        </div>
-                                                    </div>
-                                                </section>
-
-                                                {/* CTA Section */}
-                                                <section className="cta-section">
-                                                    <div className="container">
-                                                        <div className="cta-content">
-                                                            <h2>Partner With Us In Reaching The Lost</h2>
-                                                            <p>Your prayers and generous giving enable us to continue spreading the Gospel and transforming lives.</p>
-                                                            <div className="cta-buttons">
-                                                                <Link to="/donate" className="btn btn-primary">Give Now</Link>
-                                                                <Link to="/contact" className="btn btn-secondary">Get Involved</Link>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </section>
-                                                {/* Latest News Section */}
-                                                <section className="news-section section">
-                                                    <div className="container">
-                                                        <div className="section-header">
-                                                            <span className="section-subtitle">News &amp; Updates</span>
-                                                            <h2 className="section-title">Latest From The Field</h2>
-                                                        </div>
-                                                        <div className="news-grid">
-                                                            {newsItems.length > 0 ? (
-                                                                newsItems.slice(0, 4).map((item, idx) => {
-                                                                    const cardColors = [
-                                                                        { grad: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)', accent: '#E87D1E', icon: 'fas fa-church' },
-                                                                        { grad: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 100%)', accent: '#6366f1', icon: 'fas fa-sitemap' },
-                                                                        { grad: 'linear-gradient(135deg, #042f2e 0%, #115e59 100%)', accent: '#14b8a6', icon: 'fas fa-fire' },
-                                                                        { grad: 'linear-gradient(135deg, #451a03 0%, #78350f 100%)', accent: '#f59e0b', icon: 'fas fa-heart' }
-                                                                    ];
-                                                                    const style = cardColors[idx % cardColors.length];
-
-                                                                    return (
-                                                                        <div className="news-card" key={item._id || idx}>
-                                                                            <div className="news-image" style={{ background: style.grad, display: 'flex', alignItems: 'center', justifyContent: 'center', height: '170px', position: 'relative' }}>
-                                                                                <i className={style.icon} style={{ fontSize: '2.8rem', color: style.accent, opacity: 0.9 }}></i>
-                                                                                <div className="news-category" style={{ position: 'absolute', top: '12px', left: '12px' }}>{item.category || 'Mbeere District'}</div>
-                                                                            </div>
-                                                                            <div className="news-content">
-                                                                                <div className="news-date">{item.date || 'Recent Announcement'}</div>
-                                                                                <h3>{item.title}</h3>
-                                                                                <p>{item.summary}</p>
-                                                                                <Link to="/programs" className="news-link">Read More <i className="fas fa-arrow-right"></i></Link>
-                                                                            </div>
-                                                                        </div>
-                                                                    );
-                                                                })
-                                                            ) : (
-                                                                <>
-                                                                    <div className="news-card">
-                                                                        <div className="news-image" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '170px', position: 'relative' }}>
-                                                                            <i className="fas fa-church" style={{ fontSize: '2.8rem', color: '#E87D1E' }}></i>
-                                                                            <div className="news-category" style={{ position: 'absolute', top: '12px', left: '12px' }}>District HQ</div>
-                                                                        </div>
-                                                                        <div className="news-content">
-                                                                            <div className="news-date">November 2026 — Ngungo</div>
-                                                                            <h3>Ngungo Assembly: Serving as Mbeere District Headquarters</h3>
-                                                                            <p>Pentecostal Assemblies of God - Ngungo Assembly continues to spearhead spiritual revival, pastoral training, and church coordination across Mbeere District.</p>
-                                                                            <Link to="/about" className="news-link">Read More <i className="fas fa-arrow-right"></i></Link>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="news-card">
-                                                                        <div className="news-image" style={{ background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '170px', position: 'relative' }}>
-                                                                            <i className="fas fa-sitemap" style={{ fontSize: '2.8rem', color: '#6366f1' }}></i>
-                                                                            <div className="news-category" style={{ position: 'absolute', top: '12px', left: '12px' }}>Assemblies</div>
-                                                                        </div>
-                                                                        <div className="news-content">
-                                                                            <div className="news-date">October 2026 — Mbeere</div>
-                                                                            <h3>Mbeere District Assemblies Leadership Convocation</h3>
-                                                                            <p>Pastors and leaders from all 8 Mbeere assemblies and Kyuso circuit gathered at Ngungo HQ for prayer, strategic visioning, and district development.</p>
-                                                                            <Link to="/assemblies" className="news-link">Read More <i className="fas fa-arrow-right"></i></Link>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="news-card">
-                                                                        <div className="news-image" style={{ background: 'linear-gradient(135deg, #042f2e 0%, #115e59 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '170px', position: 'relative' }}>
-                                                                            <i className="fas fa-fire" style={{ fontSize: '2.8rem', color: '#14b8a6' }}></i>
-                                                                            <div className="news-category" style={{ position: 'absolute', top: '12px', left: '12px' }}>Youth Ministry</div>
-                                                                        </div>
-                                                                        <div className="news-content">
-                                                                            <div className="news-date">Weekly — Saturday 4:00 PM</div>
-                                                                            <h3>Youth Fellowship &amp; Talent Ministry</h3>
-                                                                            <p>The Youth Department invites all young people every Saturday from 4:00 PM to 6:00 PM for explosive praise, worship, instrumental training, and biblical life skills.</p>
-                                                                            <Link to="/ministries#youth" className="news-link">Read More <i className="fas fa-arrow-right"></i></Link>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="news-card">
-                                                                        <div className="news-image" style={{ background: 'linear-gradient(135deg, #451a03 0%, #78350f 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '170px', position: 'relative' }}>
-                                                                            <i className="fas fa-heart" style={{ fontSize: '2.8rem', color: '#f59e0b' }}></i>
-                                                                            <div className="news-category" style={{ position: 'absolute', top: '12px', left: '12px' }}>Departments</div>
-                                                                        </div>
-                                                                        <div className="news-content">
-                                                                            <div className="news-date">Weekly Fellowships — Ngungo</div>
-                                                                            <h3>Women Department Prayer &amp; Empowerment</h3>
-                                                                            <p>PAG Women Department continues to unite mothers and sisters in fervent prayer intercession, family welfare, and community compassionate care.</p>
-                                                                            <Link to="/ministries#women" className="news-link">Read More <i className="fas fa-arrow-right"></i></Link>
-                                                                        </div>
-                                                                    </div>
-                                                                </>
-                                                            )}
-                                                        </div>
-                                                    </div>
-                                                </section>
-                                            </main>
-                                        );
+                                return (
+                                    <div className="news-card" key={item._id || idx}>
+                                        <div className="news-image" style={{ background: style.grad, display: 'flex', alignItems: 'center', justifyContent: 'center', height: '170px', position: 'relative' }}>
+                                            <i className={style.icon} style={{ fontSize: '2.8rem', color: style.accent, opacity: 0.9 }}></i>
+                                            <div className="news-category" style={{ position: 'absolute', top: '12px', left: '12px' }}>{item.category || 'Mbeere District'}</div>
+                                        </div>
+                                        <div className="news-content">
+                                            <div className="news-date">{item.date || 'Recent Announcement'}</div>
+                                            <h3>{item.title}</h3>
+                                            <p>{item.summary}</p>
+                                            <Link to="/programs" className="news-link">Read More <i className="fas fa-arrow-right"></i></Link>
+                                        </div>
+                                    </div>
+                                );
+                            })
+                        ) : (
+                            <>
+                                <div className="news-card">
+                                    <div className="news-image" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '170px', position: 'relative' }}>
+                                        <i className="fas fa-church" style={{ fontSize: '2.8rem', color: '#E87D1E' }}></i>
+                                        <div className="news-category" style={{ position: 'absolute', top: '12px', left: '12px' }}>District HQ</div>
+                                    </div>
+                                    <div className="news-content">
+                                        <div className="news-date">November 2026 — Ngungo</div>
+                                        <h3>Ngungo Assembly: Serving as Mbeere District Headquarters</h3>
+                                        <p>Pentecostal Assemblies of God - Ngungo Assembly continues to spearhead spiritual revival, pastoral training, and church coordination across Mbeere District.</p>
+                                        <Link to="/about" className="news-link">Read More <i className="fas fa-arrow-right"></i></Link>
+                                    </div>
+                                </div>
+                                <div className="news-card">
+                                    <div className="news-image" style={{ background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '170px', position: 'relative' }}>
+                                        <i className="fas fa-sitemap" style={{ fontSize: '2.8rem', color: '#6366f1' }}></i>
+                                        <div className="news-category" style={{ position: 'absolute', top: '12px', left: '12px' }}>Assemblies</div>
+                                    </div>
+                                    <div className="news-content">
+                                        <div className="news-date">October 2026 — Mbeere</div>
+                                        <h3>Mbeere District Assemblies Leadership Convocation</h3>
+                                        <p>Pastors and leaders from all 8 Mbeere assemblies and Kyuso circuit gathered at Ngungo HQ for prayer, strategic visioning, and district development.</p>
+                                        <Link to="/assemblies" className="news-link">Read More <i className="fas fa-arrow-right"></i></Link>
+                                    </div>
+                                </div>
+                                <div className="news-card">
+                                    <div className="news-image" style={{ background: 'linear-gradient(135deg, #042f2e 0%, #115e59 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '170px', position: 'relative' }}>
+                                        <i className="fas fa-fire" style={{ fontSize: '2.8rem', color: '#14b8a6' }}></i>
+                                        <div className="news-category" style={{ position: 'absolute', top: '12px', left: '12px' }}>Youth Ministry</div>
+                                    </div>
+                                    <div className="news-content">
+                                        <div className="news-date">Weekly — Saturday 4:00 PM</div>
+                                        <h3>Youth Fellowship &amp; Talent Ministry</h3>
+                                        <p>The Youth Department invites all young people every Saturday from 4:00 PM to 6:00 PM for explosive praise, worship, instrumental training, and biblical life skills.</p>
+                                        <Link to="/ministries#youth" className="news-link">Read More <i className="fas fa-arrow-right"></i></Link>
+                                    </div>
+                                </div>
+                                <div className="news-card">
+                                    <div className="news-image" style={{ background: 'linear-gradient(135deg, #451a03 0%, #78350f 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '170px', position: 'relative' }}>
+                                        <i className="fas fa-heart" style={{ fontSize: '2.8rem', color: '#f59e0b' }}></i>
+                                        <div className="news-category" style={{ position: 'absolute', top: '12px', left: '12px' }}>Departments</div>
+                                    </div>
+                                    <div className="news-content">
+                                        <div className="news-date">Weekly Fellowships — Ngungo</div>
+                                        <h3>Women Department Prayer &amp; Empowerment</h3>
+                                        <p>PAG Women Department continues to unite mothers and sisters in fervent prayer intercession, family welfare, and community compassionate care.</p>
+                                        <Link to="/ministries#women" className="news-link">Read More <i className="fas fa-arrow-right"></i></Link>
+                                    </div>
+                                </div>
+                            </>
+                        )}
+                    </div>
+                </div>
+            </section>
+        </main>
+    );
 };
 
-                                        export default Home;
+export default Home;
