@@ -294,52 +294,156 @@ const Navbar = () => {
                                 <div ref={userMenuRef} className="user-profile-pill-wrapper" style={{ position: 'relative' }}>
                                     <button
                                         onClick={() => setUserMenuOpen(!userMenuOpen)}
-                                        style={{
-                                            display: 'inline-flex',
-                                            alignItems: 'center',
-                                            gap: '8px',
-                                            padding: '3px 12px 3px 3px',
-                                            borderRadius: '50px',
-                                            border: '1.5px solid #E87D1E',
-                                            background: 'rgba(255, 255, 255, 0.12)',
-                                            cursor: 'pointer',
-                                            fontFamily: 'inherit',
-                                            transition: 'all 0.2s ease',
-                                            marginRight: '6px'
-                                        }}
-                                        onMouseEnter={e => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)'}
-                                        onMouseLeave={e => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.12)'}
+                                        className="user-avatar-btn"
+                                        title={`${currentUser.name} — Click to view profile menu`}
+                                        aria-label="User profile menu"
                                     >
-                                        <span style={{ width: '30px', height: '30px', borderRadius: '50%', background: '#E87D1E', color: '#fff', fontWeight: 800, fontSize: '0.78rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                                        <span className="user-avatar-monogram">
                                             {getInitials(currentUser.name)}
                                         </span>
-                                        <span style={{ color: '#ffffff', fontWeight: 700, fontSize: '0.86rem', maxWidth: '100px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                        <span className="user-avatar-status-dot" title="Active Account"></span>
+                                        <span className="user-avatar-name">
                                             {currentUser.name?.split(' ')[0]}
                                         </span>
-                                        <i className={`fas fa-chevron-${userMenuOpen ? 'up' : 'down'}`} style={{ color: 'rgba(255, 255, 255, 0.85)', fontSize: '0.68rem' }}></i>
+                                        <i className={`fas fa-chevron-${userMenuOpen ? 'up' : 'down'} user-avatar-chevron`}></i>
                                     </button>
 
                                     {userMenuOpen && (
-                                        <div style={{ position: 'absolute', top: 'calc(100% + 10px)', right: 0, background: '#fff', borderRadius: '12px', boxShadow: '0 12px 32px rgba(0,0,0,0.14)', border: '1px solid #e2e8f0', padding: '8px', minWidth: '220px', zIndex: 9999 }}>
-                                            <div style={{ padding: '10px 12px 12px', borderBottom: '1px solid #f1f5f9', marginBottom: '6px' }}>
-                                                <div style={{ fontWeight: 800, color: '#1e293b', fontSize: '0.92rem' }}>{currentUser.name}</div>
-                                                <div style={{ fontSize: '0.78rem', color: '#94a3b8', marginTop: '2px' }}>{currentUser.email}</div>
-                                                <span style={{ display: 'inline-block', marginTop: '6px', padding: '2px 10px', borderRadius: '20px', background: isAdmin ? 'rgba(232,125,30,0.12)' : '#f0fdf4', color: isAdmin ? '#E87D1E' : '#166534', fontSize: '0.72rem', fontWeight: 700 }}>
-                                                    {isAdmin ? '⚡ Administrator' : '✅ Member'}
-                                                </span>
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: 'calc(100% + 12px)',
+                                            right: 0,
+                                            background: '#ffffff',
+                                            borderRadius: '16px',
+                                            boxShadow: '0 20px 50px -4px rgba(0, 0, 50, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.06)',
+                                            border: '1px solid #e2e8f0',
+                                            padding: '8px',
+                                            minWidth: '240px',
+                                            zIndex: 9999,
+                                            animation: 'fadeIn 0.2s ease'
+                                        }}>
+                                            <div style={{
+                                                padding: '12px 14px',
+                                                background: 'linear-gradient(135deg, #000044 0%, #000066 100%)',
+                                                borderRadius: '12px',
+                                                color: '#fff',
+                                                marginBottom: '8px'
+                                            }}>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                                    <span style={{
+                                                        width: '36px',
+                                                        height: '36px',
+                                                        borderRadius: '50%',
+                                                        background: 'linear-gradient(135deg, #E87D1E 0%, #f59e0b 100%)',
+                                                        color: '#fff',
+                                                        fontWeight: 800,
+                                                        fontSize: '0.85rem',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'center',
+                                                        flexShrink: 0,
+                                                        boxShadow: '0 2px 8px rgba(0,0,0,0.3)'
+                                                    }}>
+                                                        {getInitials(currentUser.name)}
+                                                    </span>
+                                                    <div style={{ overflow: 'hidden' }}>
+                                                        <div style={{ fontWeight: 800, color: '#ffffff', fontSize: '0.92rem', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
+                                                            {currentUser.name}
+                                                        </div>
+                                                        <div style={{ fontSize: '0.74rem', color: '#cbd5e1', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                                            {currentUser.email}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style={{ marginTop: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                                    <span style={{
+                                                        display: 'inline-flex',
+                                                        alignItems: 'center',
+                                                        gap: '4px',
+                                                        padding: '2px 8px',
+                                                        borderRadius: '20px',
+                                                        background: isAdmin ? 'rgba(232,125,30,0.25)' : 'rgba(16, 185, 129, 0.25)',
+                                                        color: isAdmin ? '#ffa347' : '#6ee7b7',
+                                                        fontSize: '0.7rem',
+                                                        fontWeight: 700,
+                                                        border: isAdmin ? '1px solid rgba(232,125,30,0.4)' : '1px solid rgba(16, 185, 129, 0.4)'
+                                                    }}>
+                                                        {isAdmin ? '⚡ Administrator' : '✅ Active Member'}
+                                                    </span>
+                                                </div>
                                             </div>
-                                            <Link to="/ministries" onClick={() => setUserMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '9px 12px', borderRadius: '8px', color: '#1e293b', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 600, transition: 'background 0.15s' }} onMouseEnter={e => e.currentTarget.style.background = '#f8fafc'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
+
+                                            <Link
+                                                to="/ministries"
+                                                onClick={() => setUserMenuOpen(false)}
+                                                style={{
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    gap: '10px',
+                                                    padding: '9px 12px',
+                                                    borderRadius: '8px',
+                                                    color: '#1e293b',
+                                                    textDecoration: 'none',
+                                                    fontSize: '0.86rem',
+                                                    fontWeight: 600,
+                                                    transition: 'background 0.15s'
+                                                }}
+                                                onMouseEnter={e => e.currentTarget.style.background = '#f8fafc'}
+                                                onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                                            >
                                                 <i className="fas fa-users" style={{ color: '#3b82f6', width: '16px', textAlign: 'center' }}></i>
                                                 My Departments
                                             </Link>
+
                                             {isAdmin && (
-                                                <Link to="/admin" onClick={() => setUserMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '9px 12px', borderRadius: '8px', color: '#334155', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 600 }} onMouseEnter={e => e.currentTarget.style.background = '#f8fafc'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
+                                                <Link
+                                                    to="/admin"
+                                                    onClick={() => setUserMenuOpen(false)}
+                                                    style={{
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        gap: '10px',
+                                                        padding: '9px 12px',
+                                                        borderRadius: '8px',
+                                                        color: '#E87D1E',
+                                                        textDecoration: 'none',
+                                                        fontSize: '0.86rem',
+                                                        fontWeight: 700,
+                                                        background: 'rgba(232, 125, 30, 0.06)',
+                                                        marginTop: '2px',
+                                                        transition: 'background 0.15s'
+                                                    }}
+                                                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(232, 125, 30, 0.12)'}
+                                                    onMouseLeave={e => e.currentTarget.style.background = 'rgba(232, 125, 30, 0.06)'}
+                                                >
                                                     <i className="fas fa-tachometer-alt" style={{ color: '#E87D1E', width: '16px', textAlign: 'center' }}></i>
-                                                    Admin Panel
+                                                    Admin Command Center
                                                 </Link>
                                             )}
+
                                             <div style={{ marginTop: '6px', borderTop: '1px solid #f1f5f9', paddingTop: '6px' }}>
-                                                <button onClick={handleSignOut} style={{ width: '100%', display: 'flex', alignItems: 'center', gap: '10px', padding: '10px 12px', borderRadius: '8px', background: '#fef2f2', border: '1px solid #fecaca', color: '#dc2626', fontSize: '0.88rem', fontWeight: 700, cursor: 'pointer', textAlign: 'left', transition: 'all 0.2s', fontFamily: 'inherit' }} onMouseEnter={e => { e.currentTarget.style.background = '#dc2626'; e.currentTarget.style.color = '#fff'; }} onMouseLeave={e => { e.currentTarget.style.background = '#fef2f2'; e.currentTarget.style.color = '#dc2626'; }}>
+                                                <button
+                                                    onClick={handleSignOut}
+                                                    style={{
+                                                        width: '100%',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        gap: '10px',
+                                                        padding: '9px 12px',
+                                                        borderRadius: '8px',
+                                                        background: '#fef2f2',
+                                                        border: '1px solid #fecaca',
+                                                        color: '#dc2626',
+                                                        fontSize: '0.85rem',
+                                                        fontWeight: 700,
+                                                        cursor: 'pointer',
+                                                        textAlign: 'left',
+                                                        transition: 'all 0.2s',
+                                                        fontFamily: 'inherit'
+                                                    }}
+                                                    onMouseEnter={e => { e.currentTarget.style.background = '#dc2626'; e.currentTarget.style.color = '#fff'; }}
+                                                    onMouseLeave={e => { e.currentTarget.style.background = '#fef2f2'; e.currentTarget.style.color = '#dc2626'; }}
+                                                >
                                                     <i className="fas fa-sign-out-alt" style={{ width: '16px', textAlign: 'center' }}></i>
                                                     Sign Out
                                                 </button>

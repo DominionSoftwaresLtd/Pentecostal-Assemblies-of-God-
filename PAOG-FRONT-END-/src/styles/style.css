@@ -517,21 +517,21 @@ p {
 .main-nav {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
     margin-left: auto;
 }
 
 .nav-menu {
     display: flex;
-    gap: 2px;
+    gap: 1px;
     align-items: center;
 }
 
 .nav-menu > li > a {
     display: block;
-    padding: 0.45em 1.05em;
+    padding: 0.4em 0.82em;
     font-weight: 600;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     /* Always white — pill is always dark */
     color: rgba(255, 255, 255, 0.85);
     position: relative;
@@ -643,7 +643,93 @@ p {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-right: 6px;
+    margin-right: 2px;
+    flex-shrink: 0;
+}
+
+/* ── Luxury Anointed Monogram Avatar Trigger ── */
+.user-avatar-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2.5px 8px 2.5px 2.5px;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1.5px solid rgba(232, 125, 30, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    flex-shrink: 0;
+}
+
+.user-avatar-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #ffa347;
+    box-shadow: 0 0 16px rgba(232, 125, 30, 0.45);
+    transform: translateY(-1px);
+}
+
+.user-avatar-monogram {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #E87D1E 0%, #d97706 100%);
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 0.74rem;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(232, 125, 30, 0.35);
+}
+
+.user-avatar-name {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.8rem;
+    max-width: 65px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+}
+
+.user-avatar-chevron {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.62rem;
+    transition: transform 0.2s ease;
+}
+
+.user-avatar-btn:hover .user-avatar-chevron {
+    color: #ffffff;
+}
+
+.user-avatar-status-dot {
+    position: absolute;
+    bottom: 2px;
+    left: 21px;
+    width: 7.5px;
+    height: 7.5px;
+    border-radius: 50%;
+    background: #10b981;
+    border: 1.5px solid #000044;
+    box-shadow: 0 0 6px #10b981;
+}
+
+@media (max-width: 1240px) {
+    .user-avatar-name {
+        display: none !important;
+    }
+    .user-avatar-btn {
+        padding: 2.5px 5px 2.5px 2.5px;
+        gap: 3px;
+    }
 }
 
 .nav-buttons .btn {
