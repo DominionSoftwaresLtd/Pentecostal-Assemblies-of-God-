@@ -99,7 +99,6 @@ const Footer = () => {
                         <div className="footer-links">
                             <a href="#">Privacy Policy</a>
                             <a href="#">Terms of Service</a>
-                            <Link to="/login">Sign In</Link>
                             <a 
                                 href="https://dominionsoftwares.org" 
                                 target="_blank" 

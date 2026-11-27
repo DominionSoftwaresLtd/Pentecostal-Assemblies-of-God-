@@ -1748,22 +1748,26 @@ p {
 
 .footer-bottom-content {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
+    justify-content: center;
+    text-align: center;
+    gap: 12px;
 }
 
 .footer-bottom p {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.65);
     font-size: 0.875rem;
     margin: 0;
+    text-align: center;
+    line-height: 1.6;
 }
 
 .footer-links {
     display: flex;
     align-items: center;
-    gap: 20px;
+    justify-content: center;
+    gap: 22px;
     flex-wrap: wrap;
 }
 
