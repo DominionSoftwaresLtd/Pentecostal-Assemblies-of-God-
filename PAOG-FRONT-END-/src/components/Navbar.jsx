@@ -301,7 +301,6 @@ const Navbar = () => {
                                         <span className="user-avatar-monogram">
                                             {getInitials(currentUser.name)}
                                         </span>
-                                        <span className="user-avatar-status-dot" title="Active Account"></span>
                                         <span className="user-avatar-name">
                                             {currentUser.name?.split(' ')[0]}
                                         </span>
