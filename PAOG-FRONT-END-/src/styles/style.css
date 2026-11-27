@@ -1843,7 +1843,8 @@ p {
     }
 
     .mobile-menu-toggle {
-        margin-left: 14px;
+        margin-left: 12px;
+        margin-right: 6px;
         order: 4;
     }
 
@@ -1928,36 +1929,40 @@ p {
         display: flex;
         flex-direction: column;
         position: absolute;
-        top: 100%;
+        top: calc(100% + 8px);
         left: auto;
-        right: 0;
-        width: 80vw;
-        max-width: 280px;
-        max-height: calc(100vh - 80px);
+        right: 10px;
+        width: 68vw;
+        max-width: 220px;
+        max-height: calc(100vh - 90px);
         overflow-y: auto;
-        background-color: #fff;
-        padding: 6px 0 16px;
-        box-shadow: -4px 8px 24px rgba(0,0,0,0.18);
+        background-color: #ffffff;
+        padding: 10px 0 12px;
+        box-shadow: 0 18px 45px -6px rgba(0, 0, 60, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.06);
         z-index: 1010 !important;
+        border-radius: 16px;
+        border: 1px solid rgba(0, 0, 102, 0.08);
         border-top: 3px solid var(--primary-color);
-        border-radius: 0 0 0 10px;
         pointer-events: auto !important;
     }
 
     .main-nav.active .nav-menu > li {
-        border-bottom: 1px solid #f0f0f0;
+        border-bottom: none !important;
         pointer-events: auto !important;
     }
 
     .main-nav.active .nav-menu > li:last-child {
-        border-bottom: none;
+        border-bottom: none !important;
     }
 
     .main-nav.active .nav-menu > li > a {
-        padding: 12px 16px;
-        font-size: 0.88rem;
+        padding: 9px 14px;
+        margin: 2px 8px;
+        border-radius: 8px;
+        font-size: 0.84rem;
         font-weight: 600;
-        color: var(--text-color);
+        letter-spacing: 0.03em;
+        color: #1e293b;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1970,7 +1975,7 @@ p {
         pointer-events: auto !important;
         position: relative;
         z-index: 1012 !important;
-        transition: background-color 0.15s ease, color 0.15s ease;
+        transition: all 0.18s ease;
     }
 
     .main-nav.active .dropdown > a i {
@@ -1982,31 +1987,40 @@ p {
     }
 
     .main-nav.active .nav-menu > li > a:hover {
-        background-color: #fff9f0;
+        background-color: #f1f5f9;
         color: var(--primary-color);
+    }
+
+    .main-nav.active .nav-menu > li > a.active {
+        background-color: #fff7ed;
+        color: var(--primary-color);
+        font-weight: 700;
     }
 
     .main-nav.active .mobile-only-nav-item {
         display: block !important;
-        margin-top: 8px;
+        margin-top: 6px;
     }
 
     .mobile-nav-btn {
         display: flex;
         align-items: center;
-        gap: 10px;
-        padding: 10px 18px;
+        justify-content: center;
+        gap: 8px;
+        padding: 9px 14px;
         font-weight: 700;
-        font-size: 0.9rem;
-        border-radius: 8px;
+        font-size: 0.82rem;
+        letter-spacing: 0.03em;
+        border-radius: 50px;
         text-decoration: none;
         transition: var(--transition);
-        margin: 4px 12px;
+        margin: 6px 10px 2px;
     }
 
     .mobile-nav-btn.login-btn {
-        background-color: var(--primary-color);
+        background-color: #000066;
         color: #ffffff !important;
+        box-shadow: 0 4px 14px rgba(0, 0, 102, 0.28);
     }
 
     .mobile-nav-btn.signup-btn {
@@ -5559,7 +5573,7 @@ p {
 @media (max-width: 600px) {
     /* Header layout - clean alignment without text or button overlap */
     .header-content {
-        padding: 6px 0 !important;
+        padding: 6px 10px 6px 10px !important;
         gap: 6px !important;
         align-items: center !important;
         justify-content: space-between !important;
@@ -5568,7 +5582,7 @@ p {
     }
 
     .mobile-menu-toggle {
-        margin: 0 !important;
+        margin: 0 4px 0 8px !important;
         padding: 0 !important;
         order: 4 !important;
         background: linear-gradient(135deg, var(--primary-color), #d35400) !important;
@@ -9679,6 +9693,7 @@ p {
     .mobile-menu-toggle {
         width: 34px !important;
         height: 34px !important;
+        margin: 0 4px 0 6px !important;
     }
 }
 
