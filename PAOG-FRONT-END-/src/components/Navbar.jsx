@@ -251,7 +251,7 @@ const Navbar = () => {
                                     </NavLink>
                                 </li>
 
-                                {/* Mobile-only items */}
+                                 {/* Mobile-only items */}
                                 {!currentUser ? (
                                     <li className="mobile-only-nav-item">
                                         <Link to="/login" onClick={(e) => handleNav(e, '/login')} className="mobile-nav-btn login-btn">
@@ -260,6 +260,17 @@ const Navbar = () => {
                                     </li>
                                 ) : (
                                     <>
+                                        <li className="mobile-only-nav-item">
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '10px 14px', background: '#f8fafc', borderRadius: '12px', margin: '4px 8px 6px', border: '1px solid #e2e8f0' }}>
+                                                <span style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#E87D1E', color: '#fff', fontWeight: 800, fontSize: '0.78rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                                                    {getInitials(currentUser.name)}
+                                                </span>
+                                                <div style={{ overflow: 'hidden', textAlign: 'left' }}>
+                                                    <div style={{ fontWeight: 700, fontSize: '0.86rem', color: '#1e293b', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>{currentUser.name}</div>
+                                                    <div style={{ fontSize: '0.72rem', color: '#64748b' }}>{isAdmin ? '⚡ Administrator' : '✅ Member'}</div>
+                                                </div>
+                                            </div>
+                                        </li>
                                         {isAdmin && (
                                             <li className="mobile-only-nav-item">
                                                 <Link to="/admin" onClick={(e) => handleNav(e, '/admin')} className="mobile-nav-btn" style={{ color: '#E87D1E' }}>
@@ -268,7 +279,7 @@ const Navbar = () => {
                                             </li>
                                         )}
                                         <li className="mobile-only-nav-item">
-                                            <button onClick={() => { closeAll(); handleSignOut(); }} style={{ background: 'none', border: '2px solid #dc2626', borderRadius: '6px', cursor: 'pointer', width: '100%', textAlign: 'left', padding: '10px 16px', color: '#dc2626', fontWeight: 700, fontSize: '0.95rem', fontFamily: 'inherit' }}>
+                                            <button onClick={() => { closeAll(); handleSignOut(); }} style={{ background: 'none', border: '2px solid #dc2626', borderRadius: '50px', cursor: 'pointer', width: 'calc(100% - 16px)', margin: '6px 8px 4px', textAlign: 'center', padding: '9px 16px', color: '#dc2626', fontWeight: 700, fontSize: '0.84rem', fontFamily: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
                                                 <i className="fas fa-sign-out-alt"></i> Sign Out
                                             </button>
                                         </li>
@@ -283,17 +294,29 @@ const Navbar = () => {
                                 <div ref={userMenuRef} className="user-profile-pill-wrapper" style={{ position: 'relative' }}>
                                     <button
                                         onClick={() => setUserMenuOpen(!userMenuOpen)}
-                                        style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '5px 14px 5px 5px', borderRadius: '50px', border: '2px solid #E87D1E', background: 'rgba(232,125,30,0.07)', cursor: 'pointer', fontFamily: 'inherit', transition: 'all 0.2s ease' }}
-                                        onMouseEnter={e => e.currentTarget.style.background = 'rgba(232,125,30,0.14)'}
-                                        onMouseLeave={e => e.currentTarget.style.background = 'rgba(232,125,30,0.07)'}
+                                        style={{
+                                            display: 'inline-flex',
+                                            alignItems: 'center',
+                                            gap: '8px',
+                                            padding: '3px 12px 3px 3px',
+                                            borderRadius: '50px',
+                                            border: '1.5px solid #E87D1E',
+                                            background: 'rgba(255, 255, 255, 0.12)',
+                                            cursor: 'pointer',
+                                            fontFamily: 'inherit',
+                                            transition: 'all 0.2s ease',
+                                            marginRight: '6px'
+                                        }}
+                                        onMouseEnter={e => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)'}
+                                        onMouseLeave={e => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.12)'}
                                     >
-                                        <span style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#E87D1E', color: '#fff', fontWeight: 800, fontSize: '0.8rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                                        <span style={{ width: '30px', height: '30px', borderRadius: '50%', background: '#E87D1E', color: '#fff', fontWeight: 800, fontSize: '0.78rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                                             {getInitials(currentUser.name)}
                                         </span>
-                                        <span style={{ color: '#1e293b', fontWeight: 700, fontSize: '0.88rem', maxWidth: '110px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                        <span style={{ color: '#ffffff', fontWeight: 700, fontSize: '0.86rem', maxWidth: '100px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                                             {currentUser.name?.split(' ')[0]}
                                         </span>
-                                        <i className={`fas fa-chevron-${userMenuOpen ? 'up' : 'down'}`} style={{ color: '#2563EB', fontSize: '0.7rem' }}></i>
+                                        <i className={`fas fa-chevron-${userMenuOpen ? 'up' : 'down'}`} style={{ color: 'rgba(255, 255, 255, 0.85)', fontSize: '0.68rem' }}></i>
                                     </button>
 
                                     {userMenuOpen && (
