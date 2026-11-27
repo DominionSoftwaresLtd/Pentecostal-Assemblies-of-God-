@@ -267,7 +267,7 @@ const Navbar = () => {
                                                 </span>
                                                 <div style={{ overflow: 'hidden', textAlign: 'left' }}>
                                                     <div style={{ fontWeight: 700, fontSize: '0.86rem', color: '#1e293b', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>{currentUser.name}</div>
-                                                    <div style={{ fontSize: '0.72rem', color: '#64748b' }}>{isAdmin ? '⚡ Administrator' : '✅ Member'}</div>
+                                                    <div style={{ fontSize: '0.72rem', color: '#64748b', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>{isAdmin ? '⚡ Administrator' : currentUser.email}</div>
                                                 </div>
                                             </div>
                                         </li>
@@ -333,15 +333,15 @@ const Navbar = () => {
                                                         width: '36px',
                                                         height: '36px',
                                                         borderRadius: '50%',
-                                                        background: 'linear-gradient(135deg, #E87D1E 0%, #f59e0b 100%)',
-                                                        color: '#fff',
+                                                        background: '#ffffff',
+                                                        color: '#000044',
                                                         fontWeight: 800,
                                                         fontSize: '0.85rem',
                                                         display: 'flex',
                                                         alignItems: 'center',
                                                         justifyContent: 'center',
                                                         flexShrink: 0,
-                                                        boxShadow: '0 2px 8px rgba(0,0,0,0.3)'
+                                                        boxShadow: '0 2px 8px rgba(0,0,0,0.25)'
                                                     }}>
                                                         {getInitials(currentUser.name)}
                                                     </span>
@@ -354,22 +354,24 @@ const Navbar = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div style={{ marginTop: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                                    <span style={{
-                                                        display: 'inline-flex',
-                                                        alignItems: 'center',
-                                                        gap: '4px',
-                                                        padding: '2px 8px',
-                                                        borderRadius: '20px',
-                                                        background: isAdmin ? 'rgba(232,125,30,0.25)' : 'rgba(16, 185, 129, 0.25)',
-                                                        color: isAdmin ? '#ffa347' : '#6ee7b7',
-                                                        fontSize: '0.7rem',
-                                                        fontWeight: 700,
-                                                        border: isAdmin ? '1px solid rgba(232,125,30,0.4)' : '1px solid rgba(16, 185, 129, 0.4)'
-                                                    }}>
-                                                        {isAdmin ? '⚡ Administrator' : '✅ Active Member'}
-                                                    </span>
-                                                </div>
+                                                {isAdmin && (
+                                                    <div style={{ marginTop: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                                        <span style={{
+                                                            display: 'inline-flex',
+                                                            alignItems: 'center',
+                                                            gap: '4px',
+                                                            padding: '2px 8px',
+                                                            borderRadius: '20px',
+                                                            background: 'rgba(232,125,30,0.25)',
+                                                            color: '#ffa347',
+                                                            fontSize: '0.7rem',
+                                                            fontWeight: 700,
+                                                            border: '1px solid rgba(232,125,30,0.4)'
+                                                        }}>
+                                                            ⚡ Administrator
+                                                        </span>
+                                                    </div>
+                                                )}
                                             </div>
 
                                             <Link
