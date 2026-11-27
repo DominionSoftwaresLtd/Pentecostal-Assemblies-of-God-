@@ -188,7 +188,7 @@ const ForgotPassword = () => {
                   <label>Email address</label>
                   <div className="auth-input-wrap">
                     <span className="auth-input-icon"><Mail size={15} /></span>
-                    <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="you@example.com" autoComplete="email" />
+                    <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="info@pagngungo.co.ke" autoComplete="email" />
                   </div>
                 </div>
                 <button type="submit" className="auth-submit-btn" disabled={loading}>

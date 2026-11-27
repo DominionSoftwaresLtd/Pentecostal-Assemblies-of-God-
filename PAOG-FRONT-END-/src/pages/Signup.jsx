@@ -156,7 +156,7 @@ const Signup = () => {
                   <label>Email *</label>
                   <div className="auth-input-wrap">
                     <span className="auth-input-icon"><Mail size={15} /></span>
-                    <input type="email" required value={googleUser?.email || ''} onChange={e => setGoogleUser({ ...googleUser, email: e.target.value })} placeholder="your@email.com" />
+                    <input type="email" required value={googleUser?.email || ''} onChange={e => setGoogleUser({ ...googleUser, email: e.target.value })} placeholder="member@pagngungo.co.ke" />
                   </div>
                 </div>
               </div>
@@ -232,7 +232,7 @@ const Signup = () => {
               <label>Email Address *</label>
               <div className="auth-input-wrap">
                 <span className="auth-input-icon"><Mail size={15} /></span>
-                <input type="email" name="email" required value={formData.email} onChange={handleChange} placeholder="you@example.com" />
+                <input type="email" name="email" required value={formData.email} onChange={handleChange} placeholder="member@pagngungo.co.ke" />
               </div>
             </div>
             <div className="auth-row-2">

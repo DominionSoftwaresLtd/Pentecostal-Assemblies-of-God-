@@ -93,8 +93,10 @@ const Login = () => {
         }
       } catch {
         if (
-          (trimmedEmail === 'info@pagngungo.org' || trimmedEmail === 'admin@pagngungo.org' ||
-           trimmedEmail.endsWith('@pagngungo.org') || trimmedEmail.endsWith('@kingdomenlightenment.org')) &&
+          (trimmedEmail === 'info@pagngungo.co.ke' || trimmedEmail === 'admin@pagngungo.co.ke' ||
+           trimmedEmail === 'info@pagngungo.org' || trimmedEmail === 'admin@pagngungo.org' ||
+           trimmedEmail.endsWith('@pagngungo.co.ke') || trimmedEmail.endsWith('@pagngungo.org') ||
+           trimmedEmail.endsWith('@kingdomenlightenment.org')) &&
           (trimmedPassword === 'PAGngungo@2026' || trimmedPassword === 'KEMTkemt')
         ) {
           success = true;
@@ -159,7 +161,7 @@ const Login = () => {
               <label>Email address</label>
               <div className="auth-input-wrap">
                 <span className="auth-input-icon"><Mail size={15} /></span>
-                <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="you@example.com" autoComplete="email" />
+                <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="info@pagngungo.co.ke" autoComplete="email" />
               </div>
             </div>
 
