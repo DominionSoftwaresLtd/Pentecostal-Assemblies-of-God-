@@ -9,12 +9,20 @@ const Navbar = () => {
     const [userMenuOpen, setUserMenuOpen] = useState(false);
     const [hasActiveSession, setHasActiveSession] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth <= 992 : false);
     const userMenuRef = useRef(null);
     const navigate = useNavigate();
     const location = useLocation();
 
     const isHome = location.pathname === '/';
     const heroMode = isHome && !scrolled;
+
+    // Window resize listener to sync mobile vs desktop dropdown behavior
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth <= 992);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     // Scroll listener — adds shadow + shrinks header
     useEffect(() => {
@@ -166,39 +174,138 @@ const Navbar = () => {
                                     </NavLink>
                                 </li>
                                 <li className={`dropdown ${openDropdown === 'about' ? 'active' : ''}`}>
-                                    <NavLink to="/about" onClick={() => toggleDropdown('about')}>
-                                        About Us <i className="fas fa-chevron-down"></i>
-                                    </NavLink>
+                                    <div className="nav-dropdown-trigger">
+                                        <NavLink 
+                                            to="/about" 
+                                            className={({ isActive }) => isActive ? 'active' : ''}
+                                            onClick={(e) => {
+                                                if (isMobile) {
+                                                    e.preventDefault();
+                                                    toggleDropdown('about');
+                                                } else {
+                                                    closeAll();
+                                                }
+                                            }}
+                                        >
+                                            About Us
+                                        </NavLink>
+                                        <button
+                                            type="button"
+                                            className="dropdown-chevron-btn"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                                toggleDropdown('about');
+                                            }}
+                                            aria-label="Toggle About Us submenu"
+                                            aria-expanded={openDropdown === 'about'}
+                                        >
+                                            <i className={`fas fa-chevron-${openDropdown === 'about' ? 'up' : 'down'}`}></i>
+                                        </button>
+                                    </div>
                                     <ul className="dropdown-menu">
-                                        <li><Link to="/about#who-we-are" onClick={closeAll}>Who We Are</Link></li>
-                                        <li><Link to="/about#district-hq" onClick={closeAll}>District Headquarters</Link></li>
-                                        <li><Link to="/about#order-of-services" onClick={closeAll}>Order of Services</Link></li>
-                                        <li><Link to="/about#vision-mission" onClick={closeAll}>Vision &amp; Mission</Link></li>
-                                        <li><Link to="/about#statement-of-faith" onClick={closeAll}>Statement of Faith</Link></li>
+                                        {isMobile && (
+                                            <li className="dropdown-overview-item">
+                                                <Link to="/about" onClick={closeAll}>
+                                                    <i className="fas fa-landmark"></i> About Us (Overview)
+                                                </Link>
+                                            </li>
+                                        )}
+                                        <li><Link to="/about#who-we-are" onClick={closeAll}><i className="fas fa-church"></i> Who We Are</Link></li>
+                                        <li><Link to="/about#district-hq" onClick={closeAll}><i className="fas fa-sitemap"></i> District Headquarters</Link></li>
+                                        <li><Link to="/about#order-of-services" onClick={closeAll}><i className="fas fa-clock"></i> Order of Services</Link></li>
+                                        <li><Link to="/about#vision-mission" onClick={closeAll}><i className="fas fa-bullseye"></i> Vision &amp; Mission</Link></li>
+                                        <li><Link to="/about#statement-of-faith" onClick={closeAll}><i className="fas fa-bible"></i> Statement of Faith</Link></li>
                                     </ul>
                                 </li>
                                 <li className={`dropdown ${openDropdown === 'departments' ? 'active' : ''}`}>
-                                    <NavLink to="/departments" onClick={() => toggleDropdown('departments')}>
-                                        Departments <i className="fas fa-chevron-down"></i>
-                                    </NavLink>
+                                    <div className="nav-dropdown-trigger">
+                                        <NavLink 
+                                            to="/departments" 
+                                            className={({ isActive }) => isActive ? 'active' : ''}
+                                            onClick={(e) => {
+                                                if (isMobile) {
+                                                    e.preventDefault();
+                                                    toggleDropdown('departments');
+                                                } else {
+                                                    closeAll();
+                                                }
+                                            }}
+                                        >
+                                            Departments
+                                        </NavLink>
+                                        <button
+                                            type="button"
+                                            className="dropdown-chevron-btn"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                                toggleDropdown('departments');
+                                            }}
+                                            aria-label="Toggle Departments submenu"
+                                            aria-expanded={openDropdown === 'departments'}
+                                        >
+                                            <i className={`fas fa-chevron-${openDropdown === 'departments' ? 'up' : 'down'}`}></i>
+                                        </button>
+                                    </div>
                                     <ul className="dropdown-menu">
+                                        {isMobile && (
+                                            <li className="dropdown-overview-item">
+                                                <Link to="/departments" onClick={closeAll}>
+                                                    <i className="fas fa-th-large"></i> All Departments (Overview)
+                                                </Link>
+                                            </li>
+                                        )}
                                         <li className="dropdown-group-label">Four Pillars</li>
-                                        <li><Link to="/departments#women" onClick={closeAll}>Women Department</Link></li>
-                                        <li><Link to="/departments#men" onClick={closeAll}>Men Department</Link></li>
-                                        <li><Link to="/departments#youth" onClick={closeAll}>Youth Department</Link></li>
-                                        <li><Link to="/departments#sundayschool" onClick={closeAll}>Sunday School</Link></li>
+                                        <li><Link to="/departments#women" onClick={closeAll}><i className="fas fa-female"></i> Women Department</Link></li>
+                                        <li><Link to="/departments#men" onClick={closeAll}><i className="fas fa-male"></i> Men Department</Link></li>
+                                        <li><Link to="/departments#youth" onClick={closeAll}><i className="fas fa-fire"></i> Youth Department</Link></li>
+                                        <li><Link to="/departments#sundayschool" onClick={closeAll}><i className="fas fa-child"></i> Sunday School</Link></li>
                                     </ul>
                                 </li>
                                 <li className={`dropdown ${openDropdown === 'ministries' ? 'active' : ''}`}>
-                                    <NavLink to="/ministries" onClick={() => toggleDropdown('ministries')}>
-                                        Ministries <i className="fas fa-chevron-down"></i>
-                                    </NavLink>
+                                    <div className="nav-dropdown-trigger">
+                                        <NavLink 
+                                            to="/ministries" 
+                                            className={({ isActive }) => isActive ? 'active' : ''}
+                                            onClick={(e) => {
+                                                if (isMobile) {
+                                                    e.preventDefault();
+                                                    toggleDropdown('ministries');
+                                                } else {
+                                                    closeAll();
+                                                }
+                                            }}
+                                        >
+                                            Ministries
+                                        </NavLink>
+                                        <button
+                                            type="button"
+                                            className="dropdown-chevron-btn"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                                toggleDropdown('ministries');
+                                            }}
+                                            aria-label="Toggle Ministries submenu"
+                                            aria-expanded={openDropdown === 'ministries'}
+                                        >
+                                            <i className={`fas fa-chevron-${openDropdown === 'ministries' ? 'up' : 'down'}`}></i>
+                                        </button>
+                                    </div>
                                     <ul className="dropdown-menu">
+                                        {isMobile && (
+                                            <li className="dropdown-overview-item">
+                                                <Link to="/ministries" onClick={closeAll}>
+                                                    <i className="fas fa-music"></i> All Ministries (Overview)
+                                                </Link>
+                                            </li>
+                                        )}
                                         <li className="dropdown-group-label">Sanctuary Arms</li>
-                                        <li><Link to="/ministries#worship" onClick={closeAll}>Praise &amp; Worship</Link></li>
-                                        <li><Link to="/ministries#instrumentalists" onClick={closeAll}>Instrumentalists</Link></li>
-                                        <li><Link to="/ministries#choir" onClick={closeAll}>Sanctuary Choir</Link></li>
-                                        <li><Link to="/ministries#ushering" onClick={closeAll}>Ushering &amp; Protocol</Link></li>
+                                        <li><Link to="/ministries#worship" onClick={closeAll}><i className="fas fa-microphone-lines"></i> Praise &amp; Worship</Link></li>
+                                        <li><Link to="/ministries#instrumentalists" onClick={closeAll}><i className="fas fa-guitar"></i> Instrumentalists</Link></li>
+                                        <li><Link to="/ministries#choir" onClick={closeAll}><i className="fas fa-church"></i> Sanctuary Choir</Link></li>
+                                        <li><Link to="/ministries#ushering" onClick={closeAll}><i className="fas fa-door-open"></i> Ushering &amp; Protocol</Link></li>
                                     </ul>
                                 </li>
                                 <li>
