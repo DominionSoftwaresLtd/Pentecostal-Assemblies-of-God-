@@ -388,8 +388,8 @@ p {
 .menu-backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.35);
-    z-index: 998;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 995;
     animation: fadeIn 0.2s ease;
 }
 
@@ -402,12 +402,16 @@ p {
     background: transparent;
     box-shadow: none;
     padding: 10px 0;
+    position: relative;
+    z-index: 1001;
 }
 
 .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    z-index: 1002;
     /* ── THE FLOATING PILL ── */
     background: rgba(0, 0, 68, 0.94);
     border-radius: 100px;
@@ -1934,13 +1938,15 @@ p {
         background-color: #fff;
         padding: 6px 0 16px;
         box-shadow: -4px 8px 24px rgba(0,0,0,0.18);
-        z-index: 1001;
+        z-index: 1010 !important;
         border-top: 3px solid var(--primary-color);
         border-radius: 0 0 0 10px;
+        pointer-events: auto !important;
     }
 
     .main-nav.active .nav-menu > li {
         border-bottom: 1px solid #f0f0f0;
+        pointer-events: auto !important;
     }
 
     .main-nav.active .nav-menu > li:last-child {
@@ -1956,11 +1962,14 @@ p {
         align-items: center;
         justify-content: center;
         text-align: center;
-        cursor: pointer;
-        touch-action: manipulation;
-        -webkit-tap-highlight-color: transparent;
+        cursor: pointer !important;
+        touch-action: manipulation !important;
+        -webkit-tap-highlight-color: transparent !important;
         user-select: none;
         -webkit-user-select: none;
+        pointer-events: auto !important;
+        position: relative;
+        z-index: 1012 !important;
         transition: background-color 0.15s ease, color 0.15s ease;
     }
 
@@ -5554,6 +5563,8 @@ p {
         gap: 6px !important;
         align-items: center !important;
         justify-content: space-between !important;
+        position: relative !important;
+        z-index: 1002 !important;
     }
 
     .mobile-menu-toggle {

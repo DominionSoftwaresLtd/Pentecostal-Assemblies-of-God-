@@ -99,7 +99,6 @@ const Navbar = () => {
         }
         if (e && e.preventDefault) {
             e.preventDefault();
-            e.stopPropagation();
         }
         
         closeAll();
@@ -116,6 +115,7 @@ const Navbar = () => {
             }
         }
         navigate(path);
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     };
 
     const getInitials = (name) => {
@@ -126,10 +126,11 @@ const Navbar = () => {
     const isAdmin = currentUser && (currentUser.isAdmin || currentUser.role === 'Super Admin');
 
     return (
-        <div className={`site-header-wrapper${scrolled ? ' scrolled' : ''}${heroMode ? ' hero-mode' : ''}`}>
+        <>
             {mobileMenuOpen && (
-                <div className="menu-backdrop" onClick={toggleMobileMenu}></div>
+                <div className="menu-backdrop" onClick={closeAll}></div>
             )}
+            <div className={`site-header-wrapper${scrolled ? ' scrolled' : ''}${heroMode ? ' hero-mode' : ''}`}>
 
             {/* ── Refined Top Bar ── */}
             <div className="top-bar">
@@ -337,6 +338,7 @@ const Navbar = () => {
                 </div>
             </header>
         </div>
+        </>
     );
 };
 
