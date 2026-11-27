@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect, useCallback } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { CATEGORIES, galleryAlbums as initialStaticAlbums } from '../data/galleryData';
 
 // Helper to resolve image paths across all devices & hosts
@@ -17,7 +17,7 @@ const Gallery = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeShortcut, setActiveShortcut] = useState('');
-  
+
   // Initialize with cached database albums for instant display
   const [dbAlbums, setDbAlbums] = useState(() => {
     try {
@@ -31,11 +31,11 @@ const Gallery = () => {
   // Fetch albums uploaded via admin
   const fetchDbAlbums = async () => {
     try {
-      const apiUrl = import.meta.env.VITE_API_URL 
+      const apiUrl = import.meta.env.VITE_API_URL
         ? `${import.meta.env.VITE_API_URL.replace(/\/$/, '')}/api/gallery?_t=${Date.now()}`
         : `/api/gallery?_t=${Date.now()}`;
 
-      const res = await fetch(apiUrl, { 
+      const res = await fetch(apiUrl, {
         cache: 'no-store',
         headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' }
       });
@@ -111,8 +111,8 @@ const Gallery = () => {
     let result = galleryAlbums;
     if (searchQuery.trim() !== '') {
       const q = searchQuery.toLowerCase();
-      result = result.filter(album => 
-        album.title.toLowerCase().includes(q) || 
+      result = result.filter(album =>
+        album.title.toLowerCase().includes(q) ||
         album.date.toLowerCase().includes(q)
       );
     }
@@ -206,8 +206,8 @@ const Gallery = () => {
 
   const renderAlbumCard = (album) => {
     const isGooglePhotos = album.photosLink && (
-      album.photosLink.includes('photos.app.goo.gl') || 
-      album.photosLink.includes('photos.google.com') || 
+      album.photosLink.includes('photos.app.goo.gl') ||
+      album.photosLink.includes('photos.google.com') ||
       album.photosLink.includes('drive.google.com')
     );
 
@@ -261,7 +261,7 @@ const Gallery = () => {
         <div className="gallery-card-v2__content">
           <h3 className="gallery-card-v2__title">{album.title.toUpperCase()}</h3>
           <p className="gallery-card-v2__date">{album.date}</p>
-          <button 
+          <button
             className="gallery-card-v2__btn"
             onClick={(e) => {
               e.stopPropagation();
@@ -304,9 +304,9 @@ const Gallery = () => {
                 <div className="gallery-header-controls">
                   <div className="gallery-search-bar">
                     <i className="fas fa-search gallery-search-icon"></i>
-                    <input 
-                      type="text" 
-                      placeholder="Search by name or date..." 
+                    <input
+                      type="text"
+                      placeholder="Search by name or date..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       className="gallery-search-input"
@@ -320,14 +320,14 @@ const Gallery = () => {
 
                   {!searchQuery && (
                     <div className="gallery-branch-shortcuts-compact">
-                      <button 
-                        onClick={() => scrollToSection('kemt-section')} 
+                      <button
+                        onClick={() => scrollToSection('kemt-section')}
                         className={`branch-shortcut-btn-compact ${activeShortcut === 'kemt-section' ? 'active-shortcut' : ''}`}
                       >
                         <i className="fas fa-church"></i> Ngungo Assembly
                       </button>
-                      <button 
-                        onClick={() => scrollToSection('kesip-section')} 
+                      <button
+                        onClick={() => scrollToSection('kesip-section')}
                         className={`branch-shortcut-btn-compact ${activeShortcut === 'kesip-section' ? 'active-shortcut' : ''}`}
                       >
                         <i className="fas fa-network-wired"></i> District Assemblies
@@ -396,14 +396,14 @@ const Gallery = () => {
             </>
           ) : (
             <div className="album-detail-view">
-              <button 
-                className="album-back-btn" 
+              <button
+                className="album-back-btn"
                 onClick={closeAlbum}
                 aria-label="Back to Albums"
               >
                 <i className="fas fa-arrow-left"></i> Back to Albums
               </button>
-              
+
               <div className="album-detail-header">
                 <h2>{selectedAlbum.title}</h2>
                 <div className="album-meta">
@@ -415,8 +415,8 @@ const Gallery = () => {
 
               <div className="album-photos-grid">
                 {selectedAlbum.photos.map((photo, index) => (
-                  <div 
-                    key={index} 
+                  <div
+                    key={index}
                     className="album-photo-item"
                     onClick={() => openLightbox(selectedAlbum, index)}
                     tabIndex={0}
@@ -427,9 +427,9 @@ const Gallery = () => {
                       }
                     }}
                   >
-                    <img 
-                      src={photo} 
-                      alt={`${selectedAlbum.title} - photo ${index + 1}`} 
+                    <img
+                      src={photo}
+                      alt={`${selectedAlbum.title} - photo ${index + 1}`}
                       loading="lazy"
                     />
                     <div className="photo-item-overlay">
@@ -497,8 +497,8 @@ const Gallery = () => {
                 <span className="gallery-lightbox__counter">
                   {lightboxItem.index + 1} of {lightboxItem.set.length}
                 </span>
-                <a 
-                  href={lightboxItem.item.src} 
+                <a
+                  href={lightboxItem.item.src}
                   download={`kemt-photo-${lightboxItem.index + 1}.jpg`}
                   className="gallery-lightbox__download"
                   onClick={(e) => e.stopPropagation()}
