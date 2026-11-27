@@ -88,6 +88,14 @@ const Navbar = () => {
         setOpenDropdown(openDropdown === name ? null : name);
     };
 
+    const handleDropdownToggle = (e, name) => {
+        if (mobileMenuOpen || (typeof window !== 'undefined' && window.innerWidth <= 1024)) {
+            e.preventDefault();
+            e.stopPropagation();
+            setOpenDropdown(prev => prev === name ? null : name);
+        }
+    };
+
     const closeAll = () => {
         setMobileMenuOpen(false);
         setOpenDropdown(null);
@@ -166,10 +174,11 @@ const Navbar = () => {
                                     </NavLink>
                                 </li>
                                 <li className={`dropdown ${openDropdown === 'about' ? 'active' : ''}`}>
-                                    <NavLink to="/about" onClick={() => toggleDropdown('about')}>
-                                        About Us <i className="fas fa-chevron-down"></i>
+                                    <NavLink to="/about" onClick={(e) => handleDropdownToggle(e, 'about')}>
+                                        About Us <i className={`fas fa-chevron-${openDropdown === 'about' ? 'up' : 'down'}`}></i>
                                     </NavLink>
                                     <ul className="dropdown-menu">
+                                        <li><Link to="/about" onClick={closeAll}>About PAG Ngungo</Link></li>
                                         <li><Link to="/about#who-we-are" onClick={closeAll}>Who We Are</Link></li>
                                         <li><Link to="/about#district-hq" onClick={closeAll}>District Headquarters</Link></li>
                                         <li><Link to="/about#order-of-services" onClick={closeAll}>Order of Services</Link></li>
@@ -178,10 +187,11 @@ const Navbar = () => {
                                     </ul>
                                 </li>
                                 <li className={`dropdown ${openDropdown === 'departments' ? 'active' : ''}`}>
-                                    <NavLink to="/departments" onClick={() => toggleDropdown('departments')}>
-                                        Departments <i className="fas fa-chevron-down"></i>
+                                    <NavLink to="/departments" onClick={(e) => handleDropdownToggle(e, 'departments')}>
+                                        Departments <i className={`fas fa-chevron-${openDropdown === 'departments' ? 'up' : 'down'}`}></i>
                                     </NavLink>
                                     <ul className="dropdown-menu">
+                                        <li><Link to="/departments" onClick={closeAll}>All Departments</Link></li>
                                         <li className="dropdown-group-label">Four Pillars</li>
                                         <li><Link to="/departments#women" onClick={closeAll}>Women Department</Link></li>
                                         <li><Link to="/departments#men" onClick={closeAll}>Men Department</Link></li>
@@ -190,10 +200,11 @@ const Navbar = () => {
                                     </ul>
                                 </li>
                                 <li className={`dropdown ${openDropdown === 'ministries' ? 'active' : ''}`}>
-                                    <NavLink to="/ministries" onClick={() => toggleDropdown('ministries')}>
-                                        Ministries <i className="fas fa-chevron-down"></i>
+                                    <NavLink to="/ministries" onClick={(e) => handleDropdownToggle(e, 'ministries')}>
+                                        Ministries <i className={`fas fa-chevron-${openDropdown === 'ministries' ? 'up' : 'down'}`}></i>
                                     </NavLink>
                                     <ul className="dropdown-menu">
+                                        <li><Link to="/ministries" onClick={closeAll}>All Ministries</Link></li>
                                         <li className="dropdown-group-label">Sanctuary Arms</li>
                                         <li><Link to="/ministries#worship" onClick={closeAll}>Praise &amp; Worship</Link></li>
                                         <li><Link to="/ministries#instrumentalists" onClick={closeAll}>Instrumentalists</Link></li>

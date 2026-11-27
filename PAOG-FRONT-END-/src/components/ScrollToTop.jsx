@@ -5,13 +5,23 @@ const ScrollToTop = () => {
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    // If there is no hash anchor, scroll directly to the very top of the page
     if (!hash) {
       window.scrollTo({
         top: 0,
         left: 0,
         behavior: 'instant',
       });
+    } else {
+      const id = hash.replace('#', '');
+      const scroll = () => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      };
+      scroll();
+      const t = setTimeout(scroll, 150);
+      return () => clearTimeout(t);
     }
   }, [pathname, hash]);
 

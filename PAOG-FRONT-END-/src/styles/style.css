@@ -572,7 +572,8 @@ p {
     opacity: 0.7;
 }
 
-.dropdown:hover > a i {
+.dropdown:hover > a i,
+.dropdown.active > a i {
     transform: rotate(180deg);
     opacity: 1;
 }
@@ -2033,7 +2034,7 @@ p {
     }
 
     .main-nav.active .dropdown.active .dropdown-menu {
-        display: block;
+        display: block !important;
     }
 
     .about-content,
