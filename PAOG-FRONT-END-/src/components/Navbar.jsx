@@ -88,17 +88,34 @@ const Navbar = () => {
         setOpenDropdown(openDropdown === name ? null : name);
     };
 
-    const handleDropdownToggle = (e, name) => {
-        if (mobileMenuOpen || (typeof window !== 'undefined' && window.innerWidth <= 1024)) {
-            e.preventDefault();
-            e.stopPropagation();
-            setOpenDropdown(prev => prev === name ? null : name);
-        }
-    };
-
     const closeAll = () => {
         setMobileMenuOpen(false);
         setOpenDropdown(null);
+    };
+
+    const handleNav = (e, path) => {
+        if (e && (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1)) {
+            return;
+        }
+        if (e && e.preventDefault) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        closeAll();
+        
+        if (path.includes('#')) {
+            const [targetPath, hash] = path.split('#');
+            const currentPath = location.pathname;
+            if (currentPath === targetPath || (targetPath === '' && currentPath === '/')) {
+                const el = document.getElementById(hash);
+                if (el) {
+                    el.scrollIntoView({ behavior: 'smooth' });
+                    return;
+                }
+            }
+        }
+        navigate(path);
     };
 
     const getInitials = (name) => {
@@ -154,7 +171,7 @@ const Navbar = () => {
 
                         {/* Logo */}
                         <div className="logo">
-                            <Link to="/">
+                            <Link to="/" onClick={(e) => handleNav(e, '/')}>
                                 <img src={logoImg} alt="PAG Ngungo Assembly" className="logo-img" />
                                 <div className="logo-name">
                                     <span className="logo-name-top">
@@ -169,66 +186,66 @@ const Navbar = () => {
                         <nav className={`main-nav ${mobileMenuOpen ? 'active' : ''}`} aria-label="Main navigation">
                             <ul className="nav-menu">
                                 <li>
-                                    <NavLink to="/" className={({ isActive }) => isActive ? 'active' : ''} onClick={closeAll}>
+                                    <NavLink to="/" className={({ isActive }) => isActive ? 'active' : ''} onClick={(e) => handleNav(e, '/')}>
                                         Home
                                     </NavLink>
                                 </li>
-                                <li className={`dropdown ${openDropdown === 'about' ? 'active' : ''}`}>
-                                    <NavLink to="/about" onClick={(e) => handleDropdownToggle(e, 'about')}>
-                                        About Us <i className={`fas fa-chevron-${openDropdown === 'about' ? 'up' : 'down'}`}></i>
+                                <li className="dropdown">
+                                    <NavLink to="/about" className={({ isActive }) => isActive ? 'active' : ''} onClick={(e) => handleNav(e, '/about')}>
+                                        About Us <i className="fas fa-chevron-down"></i>
                                     </NavLink>
                                     <ul className="dropdown-menu">
-                                        <li><Link to="/about" onClick={closeAll}>About PAG Ngungo</Link></li>
-                                        <li><Link to="/about#who-we-are" onClick={closeAll}>Who We Are</Link></li>
-                                        <li><Link to="/about#district-hq" onClick={closeAll}>District Headquarters</Link></li>
-                                        <li><Link to="/about#order-of-services" onClick={closeAll}>Order of Services</Link></li>
-                                        <li><Link to="/about#vision-mission" onClick={closeAll}>Vision &amp; Mission</Link></li>
-                                        <li><Link to="/about#statement-of-faith" onClick={closeAll}>Statement of Faith</Link></li>
+                                        <li><Link to="/about" onClick={(e) => handleNav(e, '/about')}>About PAG Ngungo</Link></li>
+                                        <li><Link to="/about#who-we-are" onClick={(e) => handleNav(e, '/about#who-we-are')}>Who We Are</Link></li>
+                                        <li><Link to="/about#district-hq" onClick={(e) => handleNav(e, '/about#district-hq')}>District Headquarters</Link></li>
+                                        <li><Link to="/about#order-of-services" onClick={(e) => handleNav(e, '/about#order-of-services')}>Order of Services</Link></li>
+                                        <li><Link to="/about#vision-mission" onClick={(e) => handleNav(e, '/about#vision-mission')}>Vision &amp; Mission</Link></li>
+                                        <li><Link to="/about#statement-of-faith" onClick={(e) => handleNav(e, '/about#statement-of-faith')}>Statement of Faith</Link></li>
                                     </ul>
                                 </li>
-                                <li className={`dropdown ${openDropdown === 'departments' ? 'active' : ''}`}>
-                                    <NavLink to="/departments" onClick={(e) => handleDropdownToggle(e, 'departments')}>
-                                        Departments <i className={`fas fa-chevron-${openDropdown === 'departments' ? 'up' : 'down'}`}></i>
+                                <li className="dropdown">
+                                    <NavLink to="/departments" className={({ isActive }) => isActive ? 'active' : ''} onClick={(e) => handleNav(e, '/departments')}>
+                                        Departments <i className="fas fa-chevron-down"></i>
                                     </NavLink>
                                     <ul className="dropdown-menu">
-                                        <li><Link to="/departments" onClick={closeAll}>All Departments</Link></li>
+                                        <li><Link to="/departments" onClick={(e) => handleNav(e, '/departments')}>All Departments</Link></li>
                                         <li className="dropdown-group-label">Four Pillars</li>
-                                        <li><Link to="/departments#women" onClick={closeAll}>Women Department</Link></li>
-                                        <li><Link to="/departments#men" onClick={closeAll}>Men Department</Link></li>
-                                        <li><Link to="/departments#youth" onClick={closeAll}>Youth Department</Link></li>
-                                        <li><Link to="/departments#sundayschool" onClick={closeAll}>Sunday School</Link></li>
+                                        <li><Link to="/departments#women" onClick={(e) => handleNav(e, '/departments#women')}>Women Department</Link></li>
+                                        <li><Link to="/departments#men" onClick={(e) => handleNav(e, '/departments#men')}>Men Department</Link></li>
+                                        <li><Link to="/departments#youth" onClick={(e) => handleNav(e, '/departments#youth')}>Youth Department</Link></li>
+                                        <li><Link to="/departments#sundayschool" onClick={(e) => handleNav(e, '/departments#sundayschool')}>Sunday School</Link></li>
                                     </ul>
                                 </li>
-                                <li className={`dropdown ${openDropdown === 'ministries' ? 'active' : ''}`}>
-                                    <NavLink to="/ministries" onClick={(e) => handleDropdownToggle(e, 'ministries')}>
-                                        Ministries <i className={`fas fa-chevron-${openDropdown === 'ministries' ? 'up' : 'down'}`}></i>
+                                <li className="dropdown">
+                                    <NavLink to="/ministries" className={({ isActive }) => isActive ? 'active' : ''} onClick={(e) => handleNav(e, '/ministries')}>
+                                        Ministries <i className="fas fa-chevron-down"></i>
                                     </NavLink>
                                     <ul className="dropdown-menu">
-                                        <li><Link to="/ministries" onClick={closeAll}>All Ministries</Link></li>
+                                        <li><Link to="/ministries" onClick={(e) => handleNav(e, '/ministries')}>All Ministries</Link></li>
                                         <li className="dropdown-group-label">Sanctuary Arms</li>
-                                        <li><Link to="/ministries#worship" onClick={closeAll}>Praise &amp; Worship</Link></li>
-                                        <li><Link to="/ministries#instrumentalists" onClick={closeAll}>Instrumentalists</Link></li>
-                                        <li><Link to="/ministries#choir" onClick={closeAll}>Sanctuary Choir</Link></li>
-                                        <li><Link to="/ministries#ushering" onClick={closeAll}>Ushering &amp; Protocol</Link></li>
+                                        <li><Link to="/ministries#worship" onClick={(e) => handleNav(e, '/ministries#worship')}>Praise &amp; Worship</Link></li>
+                                        <li><Link to="/ministries#instrumentalists" onClick={(e) => handleNav(e, '/ministries#instrumentalists')}>Instrumentalists</Link></li>
+                                        <li><Link to="/ministries#choir" onClick={(e) => handleNav(e, '/ministries#choir')}>Sanctuary Choir</Link></li>
+                                        <li><Link to="/ministries#ushering" onClick={(e) => handleNav(e, '/ministries#ushering')}>Ushering &amp; Protocol</Link></li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <NavLink to="/assemblies" className={({ isActive }) => isActive ? 'active' : ''} onClick={closeAll}>
+                                    <NavLink to="/assemblies" className={({ isActive }) => isActive ? 'active' : ''} onClick={(e) => handleNav(e, '/assemblies')}>
                                         Assemblies
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/leadership" className={({ isActive }) => isActive ? 'active' : ''} onClick={closeAll}>
+                                    <NavLink to="/leadership" className={({ isActive }) => isActive ? 'active' : ''} onClick={(e) => handleNav(e, '/leadership')}>
                                         Leadership
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/gallery" className={({ isActive }) => isActive ? 'active' : ''} onClick={closeAll}>
+                                    <NavLink to="/gallery" className={({ isActive }) => isActive ? 'active' : ''} onClick={(e) => handleNav(e, '/gallery')}>
                                         Gallery
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/contact" className={({ isActive }) => isActive ? 'active' : ''} onClick={closeAll}>
+                                    <NavLink to="/contact" className={({ isActive }) => isActive ? 'active' : ''} onClick={(e) => handleNav(e, '/contact')}>
                                         Contact
                                     </NavLink>
                                 </li>
@@ -236,7 +253,7 @@ const Navbar = () => {
                                 {/* Mobile-only items */}
                                 {!currentUser ? (
                                     <li className="mobile-only-nav-item">
-                                        <Link to="/login" onClick={closeAll} className="mobile-nav-btn login-btn">
+                                        <Link to="/login" onClick={(e) => handleNav(e, '/login')} className="mobile-nav-btn login-btn">
                                             <i className="fas fa-sign-in-alt"></i> Log In / Sign Up
                                         </Link>
                                     </li>
@@ -244,7 +261,7 @@ const Navbar = () => {
                                     <>
                                         {isAdmin && (
                                             <li className="mobile-only-nav-item">
-                                                <Link to="/admin" onClick={closeAll} className="mobile-nav-btn" style={{ color: '#E87D1E' }}>
+                                                <Link to="/admin" onClick={(e) => handleNav(e, '/admin')} className="mobile-nav-btn" style={{ color: '#E87D1E' }}>
                                                     <i className="fas fa-tachometer-alt"></i> Admin Panel
                                                 </Link>
                                             </li>

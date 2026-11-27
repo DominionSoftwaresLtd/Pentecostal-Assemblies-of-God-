@@ -1948,13 +1948,24 @@ p {
     }
 
     .main-nav.active .nav-menu > li > a {
-        padding: 11px 16px;
+        padding: 12px 16px;
         font-size: 0.88rem;
         font-weight: 600;
         color: var(--text-color);
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
+        text-align: center;
+        cursor: pointer;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        user-select: none;
+        -webkit-user-select: none;
+        transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    .main-nav.active .dropdown > a i {
+        display: none !important;
     }
 
     .main-nav.active .nav-menu > li > a::after {
@@ -2033,8 +2044,9 @@ p {
         padding-left: 40px;
     }
 
-    .main-nav.active .dropdown.active .dropdown-menu {
-        display: block !important;
+    .main-nav.active .dropdown.active .dropdown-menu,
+    .main-nav.active .dropdown-menu {
+        display: none !important;
     }
 
     .about-content,
